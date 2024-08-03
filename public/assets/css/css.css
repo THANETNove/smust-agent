@@ -20,3 +20,36 @@
     width: 100%;
     height: auto;
 }
+
+.boxUserProfile {
+    margin-top: 21px;
+    margin-bottom: 21px;
+    display: flex;
+    justify-content: center;
+
+
+}
+
+.userProfile {
+    width: 125px;
+    height: 69px;
+
+}
+
+.brokerage-work {
+    margin-top: 38px;
+    color: #030B2F;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.details-word {
+    color: #007BA7;
+    font-size: 12px;
+}
+
+.contract {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}

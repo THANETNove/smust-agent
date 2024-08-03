@@ -4,9 +4,7 @@
     <div class="login-box">
         <p class="p-login">ลงทะเบียน</p>
         <?php
-        $data = DB::table('provinces')
-            ->orderBy('name_th', 'ASC')
-            ->get();
+        $data = DB::table('provinces')->orderBy('name_th', 'ASC')->get();
         ?>
 
         <div class="form-login">
@@ -48,6 +46,7 @@
                     </div>
                 </div>
                 <p class="information">ข้อมูลของฉัน</p>
+               
 
                 <div class="row mb-3">
                     <div class="col-md-12 mb-3 input_box">

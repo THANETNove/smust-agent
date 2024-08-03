@@ -7,9 +7,7 @@
             <p class="error-message text-center mt-4"> {{ session('error') }}</p>
         @endif
         <?php
-        $data = DB::table('provinces')
-            ->orderBy('name_th', 'ASC')
-            ->get();
+        $data = DB::table('provinces')->orderBy('name_th', 'ASC')->get();
         ?>
 
         <div class="form-login">
@@ -51,7 +49,9 @@
                     </div>
                 </div>
                 <p class="information">ข้อมูลของฉัน</p>
-
+                <div class="boxUserProfile">
+                    <img class="userProfile" src="{{ URL::asset('/assets/image/welcome/userProfile.png') }}">
+                </div>
                 <div class="row mb-3">
                     <div class="col-md-12 mb-3 input_box">
                         <select class="form-select" name="prefix" aria-label="Default select example">
@@ -110,6 +110,7 @@
                         </div>
                     </div>
                 @endif
+
                 <div class="row mb-3">
                     <div class="col-md-12 mb-3 input_box">
                         <input id="id_card_number" type="text"
@@ -123,6 +124,10 @@
                         @enderror
                     </div>
                 </div>
+
+                <p class="brokerage-work">งานนายหน้าที่คุณสะดวกทำงาน</p>
+                <p class="details-word">ตรงนี้จะเป็นข้อมูลที่จะโชว์ขึ้นบนเว็บไซต์สาธารณะของเราใน “นามบัตรออนไลน์”</p>
+
                 <div class="row mb-3">
                     <div class="col-md-12 mb-3 input_box">
                         <select class="form-select" name="provinces" aria-label="Default select example">
@@ -138,6 +143,50 @@
                         @enderror
                     </div>
                 </div>
+                <p class="font-size-12-black mt-21">
+                    <img class="contract" src="{{ URL::asset('/assets/image/welcome/contract.png') }}">
+                    ประเภทสัญญา
+                </p>
+                <div class="flex-direction-row mb-3">
+                    <select class="form-select" aria-label="Default select example">
+                        <option value="เช่า" selected>เช่า</option>
+                        <option value="ขาย">ขาย</option>
+                        <option value="เช่า/ขาย">เช่า/ขาย</option>
+                    </select>
+
+
+                </div>
+
+
+                <p class="font-size-12-black">
+                    <img class="contract" src="{{ URL::asset('/assets/image/welcome/domain.png') }}">
+                    ประเภททรัพย์
+                </p>
+                <div class="flex-direction-row mb-3">
+                    <select class="form-select" aria-label="Default select example">
+                        <option value="บ้านเดี่ยว" selected>บ้านเดี่ยว</option>
+                        <option value="คอนโด">คอนโด</option>
+                        <option value="ทาวน์เฮ้าส์">ทาวน์เฮ้าส์</option>
+                        <option value="ที่ดิน">ที่ดิน</option>
+                        <option value="พาณิชย์">พาณิชย์</option>
+
+                    </select>
+                </div>
+                <p class="font-size-12-black">
+                    <img class="contract" src="{{ URL::asset('/assets/image/welcome/domain.png') }}">
+                    ลักษณะเฉพาะ
+                </p>
+                <div class="flex-direction-row">
+                    <select class="form-select" aria-label="Default select example">
+                        <option value="บ้านเดี่ยว" selected>บ้านเดี่ยว</option>
+                        <option value="คอนโด">คอนโด</option>
+                        <option value="ทาวน์เฮ้าส์">ทาวน์เฮ้าส์</option>
+                        <option value="ที่ดิน">ที่ดิน</option>
+                        <option value="พาณิชย์">พาณิชย์</option>
+
+                    </select>
+                </div>
+
 
 
                 {{-- <div class="row mb-0">
