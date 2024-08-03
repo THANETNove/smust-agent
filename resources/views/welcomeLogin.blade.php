@@ -11,8 +11,8 @@
             เข้าสู่ระบบ
         </a>
     </div>
-    
-    <img class="value"  src="{{ URL::asset('/assets/image/welcome/value.png') }}">
+
+    <img class="value" src="{{ URL::asset('/assets/image/welcome/value.png') }}">
     <img class="value" src="{{ URL::asset('/assets/image/welcome/frame.png') }}">
     <img class="value" src="{{ URL::asset('/assets/image/welcome/value_2.png') }}">
 @endsection

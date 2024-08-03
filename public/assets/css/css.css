@@ -1,0 +1,22 @@
+.information {
+    color: #030B2F;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 54px;
+}
+
+.btn-forgot {
+    margin-top: 16px;
+    text-decoration: underline;
+    color: #000;
+}
+
+.btn-forgot:hover {
+    cursor: pointer;
+}
+
+.forgotLine {
+    margin-top: 26px;
+    width: 100%;
+    height: auto;
+}

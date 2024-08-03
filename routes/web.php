@@ -5,6 +5,7 @@ use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\RegisterBrokerController;
 use App\Http\Controllers\RentSellHouseController;
 use App\Http\Controllers\UserBrokerController;
+use App\Http\Controllers\ForgotYourPasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,10 +23,24 @@ Route::get('/', function () {
 
     return view('welcome');
 });
+Route::get('/HomeLogin', function () {
+
+    return view('welcomeLogin');
+});
+
+Route::get('/HomeLogin', function () {
+
+    return view('welcomeLogin');
+});
+
+
+
 
 Auth::routes();
 // ส่วนของนายหน้า
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/reset-password', [ForgotYourPasswordController::class, 'index'])->name('reset-password');
+Route::post('/reset-check-password', [ForgotYourPasswordController::class, 'resetCheck'])->name('reset-check-password');
 Route::get('/get-districts/{id}', [HomeController::class, 'districts'])->name('get-districts');
 Route::get('/get-amphures/{id}', [HomeController::class, 'amphures'])->name('get-amphures');
 Route::get('/get-detall/{id}', [HomeController::class, 'show'])->name('get-detall');
@@ -51,5 +66,4 @@ Route::group(['middleware' => ['is_owner']], function () {
     Route::get('/change-admin/{id}', [OwnerController::class, 'changeAdmin'])->name('change-admin');
     Route::get('/cancel-admin/{id}', [OwnerController::class, 'cancelAdmin'])->name('cancel-admin');
     Route::post('/search-user', [OwnerController::class, 'index'])->name('search-user');
-
 });

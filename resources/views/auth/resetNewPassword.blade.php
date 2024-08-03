@@ -2,15 +2,16 @@
 
 @section('content')
     <div class="login-box">
-        <p class="p-login">เข้าสู่ระบบ</p>
+        <p class="p-login">รีเซ็ทรหัสผ่านใหม่</p>
 
         <div class="form-login">
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('reset-check-password') }}">
                 @csrf
+
 
                 <div class="row mb-3">
                     <div class="col-md-12 input_box">
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                        <input id="email" type="email" class="form-control  @error('email') is-invalid @enderror"
                             name="email" value="{{ old('email') }}" required autocomplete="email">
                         <label>อีเมล</label>
                         @error('email')
@@ -23,8 +24,8 @@
 
                 <div class="row mb-3">
                     <div class="col-md-12 input_box">
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                            name="password" value="{{ old('password') }}" required autocomplete="password">
+                        <input id="password" type="password" class="form-control  @error('password') is-invalid @enderror"
+                            name="password" required autocomplete="new-password">
                         <label>รหัสผ่าน</label>
                         @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -35,8 +36,18 @@
                 </div>
 
 
+                <div class="row mb-3">
+                    <div class="col-md-12 input_box">
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
+                            required autocomplete="new-password">
+                        <label>ยืนยันรหัสผ่าน</label>
+                    </div>
+                </div>
+
+
                 <div class="submit-box">
-                    <button type="submit" class="btn btn-register">
+                    <button type="submit" id="submitBtn" class="btn btn-register " disabled
+                        style="background-color: gray;">
                         เข้าสู่ระบบ
                     </button>
                 </div>
@@ -45,12 +56,11 @@
                 <a class="btn btn-link" href="{{ url('/') }}">
                     {{ __('go back home') }}
                 </a>
-                <p class="btn-forgot" id="forgotPasswordBtn" href="javascript:void(0);">
-                    {{ __('ลืมรหัสผ่าน') }}
-                </p>
-                <img class="forgotLine" id="forgotLineImage" src="{{ URL::asset('/assets/image/welcome/forgotLine.png') }}"
-                    style="display: none;">
+
             </div>
         </div>
     </div>
+
+
+    @include('auth.js')
 @endsection

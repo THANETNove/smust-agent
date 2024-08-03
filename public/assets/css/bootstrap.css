@@ -147,6 +147,10 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 37px;
+    padding-bottom: 67px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Add this line */
 }
 
 .smust-agent-logo {
@@ -230,7 +234,7 @@ p {
 }
 
 .btn-link {
-    margin-top: 16px;
+    margin-top: 8px;
 }
 
 .submit-box {
@@ -1464,4 +1468,9 @@ input[autofocus]:focus {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     min-height: 200px;
+}
+
+.value {
+    width: 100%;
+    height: auto;
 }

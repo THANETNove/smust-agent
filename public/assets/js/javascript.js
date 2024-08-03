@@ -73,4 +73,14 @@ $(document).ready(function () {
     });
 });
 
-/* ภาพ */
+
+
+document.getElementById('forgotPasswordBtn').addEventListener('click', function () {
+    var img = document.getElementById('forgotLineImage');
+    if (img.style.display === 'none') {
+        img.style.display = 'block';
+    } else {
+        img.style.display = 'none';
+    }
+});
+
