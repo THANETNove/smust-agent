@@ -33,6 +33,7 @@ class RegisterBrokerController extends Controller
     public function store(Request $request)
     {
 
+
         if (isset($request['code_admin'])) {
             $number = DB::table('users')
                 ->where('code', '!=', $request['code_admin'])
@@ -42,10 +43,9 @@ class RegisterBrokerController extends Controller
                 ->where('code', $request['code_admin'])
                 ->get(); // ใช้ exists() เพื่อตรวจสอบว่ามีข้อมูลหรือไม่
 
-                if (count($number) > 10 && $owner[0]->status != "3") {
-                    return redirect()->back()->with('error', "สมัครไม่สำเร็จ จำนวนที่เป็นสมาชิกของ Admin เเล้ว");
-                }
-
+            if (count($number) > 10 && $owner[0]->status != "3") {
+                return redirect()->back()->with('error', "สมัครไม่สำเร็จ จำนวนที่เป็นสมาชิกของ Admin เเล้ว");
+            }
         }
 
         $randomText = Str::random(10);
@@ -62,6 +62,14 @@ class RegisterBrokerController extends Controller
             'provinces' => ['required', 'string', 'max:255'],
         ]);
 
+        $filePath = NULL;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = date('i_d_m_Y') . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $filePath = '/assets/img/profile' . $filename;
+            $file->move(public_path('/img/profile'), $filename);
+        }
+
         User::create([
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
@@ -71,7 +79,11 @@ class RegisterBrokerController extends Controller
             'phone' => $request['phone'],
             'id_card_number' => $request['id_card_number'],
             'provinces' => $request['provinces'],
+            'contract_type' => $request['contract_type'],
+            'property_type' => $request['property_type'],
+            'characteristics' => $request['characteristics'],
             'code_admin' => $request['code_admin'],
+            'image' => $filePath, // Save file path to the database
             'code' => $code,
             'status' => "0",
         ]);

@@ -23,6 +23,10 @@ return new class extends Migration
             $table->string('id_card_number')->nullable();
             $table->string('provinces')->nullable();
             $table->string('status')->nullable();
+            $table->string('contract_type')->nullable();
+            $table->string('property_type')->nullable();
+            $table->string('characteristics')->nullable();
+            $table->string('image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

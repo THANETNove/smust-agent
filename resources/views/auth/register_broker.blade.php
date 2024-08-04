@@ -11,7 +11,7 @@
         ?>
 
         <div class="form-login">
-            <form method="POST" action="{{ route('add-register-broker') }}">
+            <form method="POST" action="{{ route('add-register-broker') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row mb-3">
@@ -49,8 +49,15 @@
                     </div>
                 </div>
                 <p class="information">ข้อมูลของฉัน</p>
-                <div class="boxUserProfile">
-                    <img class="userProfile" src="{{ URL::asset('/assets/image/welcome/userProfile.png') }}">
+                <div class="boxUserProfile" id="profileButton">
+                    <img id="userProfileImg" class="userProfile"
+                        src="{{ URL::asset('/assets/image/welcome/profile.png') }}">
+
+                    <div class="box-profile">
+                        ตั้งรูปโปรไฟล์
+                    </div>
+
+                    <input type="file" id="profileInput" name="image" accept="image/*" style="display: none;">
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12 mb-3 input_box">
@@ -148,7 +155,7 @@
                     ประเภทสัญญา
                 </p>
                 <div class="flex-direction-row mb-3">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" name="contract_type">
                         <option value="เช่า" selected>เช่า</option>
                         <option value="ขาย">ขาย</option>
                         <option value="เช่า/ขาย">เช่า/ขาย</option>
@@ -163,7 +170,7 @@
                     ประเภททรัพย์
                 </p>
                 <div class="flex-direction-row mb-3">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" name="property_type">
                         <option value="บ้านเดี่ยว" selected>บ้านเดี่ยว</option>
                         <option value="คอนโด">คอนโด</option>
                         <option value="ทาวน์เฮ้าส์">ทาวน์เฮ้าส์</option>
@@ -177,8 +184,8 @@
                     ลักษณะเฉพาะ
                 </p>
                 <div class="flex-direction-row">
-                    <select class="form-select" aria-label="Default select example">
-                        <option value="บ้านเดี่ยว" selected>ลักษณะเฉพาะ</option>
+                    <select class="form-select" name="characteristics" aria-label="Default select example">
+                        <option value="ลักษณะเฉพาะ" selected>ลักษณะเฉพาะ</option>
 
 
                     </select>
@@ -205,4 +212,21 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.getElementById('profileButton').addEventListener('click', function() {
+            document.getElementById('profileInput').click();
+        });
+
+        document.getElementById('profileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('userProfileImg').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 @endsection

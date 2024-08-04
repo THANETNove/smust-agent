@@ -29,8 +29,13 @@ class User extends Authenticatable
         'status',
         'id_card_number',
         'provinces',
+        'contract_type',
+        'property_type',
+        'characteristics',
+        'image'
 
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
