@@ -49,7 +49,7 @@ class HomeController extends Controller
         $dataHomeQuery->orderBy('rent_sell_home_details.id', 'DESC');
 
         // Use caching if possible for better performance
-        $dataCount = Cache::remember('dataHomeCount', 60, function () use ($dataHomeQuery) {
+        $dataCount = Cache::remember('dataHomeCount', 0, function () use ($dataHomeQuery) {
             return $dataHomeQuery->count();
         });
 
@@ -57,11 +57,11 @@ class HomeController extends Controller
             return $dataHomeQuery->paginate(100);
         });
 
-        $data = Cache::remember('provincesData', 60, function () {
+        $data = Cache::remember('provincesData', 0, function () {
             return DB::table('provinces')->orderBy('name_th', 'ASC')->get();
         });
 
-        $train_station = Cache::remember('trainStationData', 60, function () {
+        $train_station = Cache::remember('trainStationData', 0, function () {
             return DB::table('train_station')
                 ->select('train_station.id', 'train_station.station_name_th')
                 ->orderBy('station_name_th', 'ASC')
@@ -137,11 +137,11 @@ class HomeController extends Controller
             return $dataHomeQuery->paginate(100)->appends($request->all());
         });
 
-        $data = Cache::remember('provincesData', 60, function () {
+        $data = Cache::remember('provincesData', 0, function () {
             return DB::table('provinces')->orderBy('name_th', 'ASC')->get();
         });
 
-        $train_station = Cache::remember('trainStationData', 60, function () {
+        $train_station = Cache::remember('trainStationData', 0, function () {
             return DB::table('train_station')
                 ->select('train_station.id', 'train_station.station_name_th')
                 ->orderBy('station_name_th', 'ASC')
