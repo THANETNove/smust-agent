@@ -67,7 +67,7 @@ class RegisterBrokerController extends Controller
             $file = $request->file('image');
             $filename = date('i_d_m_Y') . '_' . time() . '.' . $file->getClientOriginalExtension();
             $filePath = '/assets/img/profile' . $filename;
-            $file->move(public_path('/assets/img/profile'), $filename);
+            $file->move(public_path('/assets/img/profile/'), $filename);
         }
 
         User::create([

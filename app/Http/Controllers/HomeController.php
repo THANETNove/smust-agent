@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
-use Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+
 
 
 class HomeController extends Controller
@@ -24,203 +26,166 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request)
+    public function index()
     {
 
+        $dataHomeQuery = DB::table('rent_sell_home_details')
+            ->where('rent_sell_home_details.status_home', 'on')
+            ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
+            ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
+            ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
+            ->select(
+                'rent_sell_home_details.*',
+                'provinces.name_th AS provinces_name_th',
+                'districts.name_th AS districts_name_th',
+                'amphures.name_th AS amphures_name_th'
+            );
 
-         $searchData = count($request->all());
-         $searchProperty_type = $request['property_type'];
-         $searchRent_sell = $request['rent_sell'];
-         $searchProvinces = $request['provinces'];
-         $searchAmphures = $request['amphures'];
-         $searchDistricts = $request['districts'];
-         $trainName = $request['train_name'];
+        // Apply authorization logic
+        $user = Auth::user();
+        $dataHomeQuery->where('code_admin', $user->code_admin);
 
+        $dataHomeQuery->orderBy('rent_sell_home_details.id', 'DESC');
 
-        $dataHome = DB::table('rent_sell_home_details');
+        // Use caching if possible for better performance
+        $dataCount = Cache::remember('dataHomeCount', 60, function () use ($dataHomeQuery) {
+            return $dataHomeQuery->count();
+        });
 
-        if( Auth::user()->status < 3){ //admin  นายหน้า
+        $dataHome = Cache::remember('dataHomePage', 60, function () use ($dataHomeQuery) {
+            return $dataHomeQuery->paginate(100);
+        });
 
-            if ($searchData > 0) {
+        $data = Cache::remember('provincesData', 60, function () {
+            return DB::table('provinces')->orderBy('name_th', 'ASC')->get();
+        });
 
+        $train_station = Cache::remember('trainStationData', 60, function () {
+            return DB::table('train_station')
+                ->select('train_station.id', 'train_station.station_name_th')
+                ->orderBy('station_name_th', 'ASC')
+                ->get();
+        });
 
-
-                $dataHome = $dataHome
-                            ->where('code_admin', Auth::user()->code_admin)
-                            ->where('rent_sell_home_details.status_home', 'on')
-                            ->leftJoin('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
-                            ->leftJoin('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
-                            ->leftJoin('districts', 'rent_sell_home_details.amphures', '=', 'districts.id');
-
-
-                        if ($trainName) {
-
-                            $dataHome->where('rent_sell_home_details.train_name', 'LIKE', "%$trainName%" );
-                        }else {
-
-                            if ($searchProperty_type) {
-                                $dataHome->where('rent_sell_home_details.property_type', $searchProperty_type);
-                            }
-
-                            if ($searchRent_sell) {
-                                $dataHome->where('rent_sell_home_details.rent_sell', $searchRent_sell);
-                            }
-
-                            if ($searchProvinces) {
-                                $dataHome->where('rent_sell_home_details.provinces', $searchProvinces);
-                            }
-
-                            if ($searchAmphures) {
-                                $dataHome->where('rent_sell_home_details.amphures', $searchAmphures);
-                            }
-
-                            if ($searchDistricts) {
-                                $dataHome->where('rent_sell_home_details.districts', $searchDistricts);
-                            }
-                        }
-
-                        $dataHome = $dataHome
-                            ->select(
-                                'rent_sell_home_details.*',
-                                'provinces.name_th AS provinces_name_th',
-                                'districts.name_th AS districts_name_th',
-                                'amphures.name_th AS amphures_name_th'
-                            )
-                            ->orderBy('rent_sell_home_details.id', 'DESC');
-
-
-
-            }else{
-
-                $dataHome =  $dataHome
-                ->where('code_admin', Auth::user()->code_admin)
-                ->where('rent_sell_home_details.status_home', 'on')
-                ->leftJoin('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
-                ->leftJoin('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id') //เขต/ ตำบล
-                ->leftJoin('districts', 'rent_sell_home_details.amphures', '=', 'districts.id') //เขต/ อำเภอ
-                ->select('rent_sell_home_details.*', 'provinces.name_th AS provinces_name_th',
-                'districts.name_th AS districts_name_th' ,'amphures.name_th AS amphures_name_th')
-                ->orderBy('rent_sell_home_details.id','DESC');
-
-            }
-
-        }else { // owner
-
-            if ($searchData > 0) {
-
-                $dataHome = $dataHome
-                ->where('rent_sell_home_details.status_home', 'on')
-                ->where('code_admin', Auth::user()->code_admin)
-                ->leftJoin('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
-                ->leftJoin('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
-                ->leftJoin('districts', 'rent_sell_home_details.amphures', '=', 'districts.id');
-
-
-            if ($trainName) {
-
-                $dataHome->where('rent_sell_home_details.train_name', 'LIKE', "%$trainName%" );
-            }else{
-
-                if ($searchProperty_type) {
-                    $dataHome->where('rent_sell_home_details.property_type', $searchProperty_type);
-                }
-
-                if ($searchRent_sell) {
-                    $dataHome->where('rent_sell_home_details.rent_sell', $searchRent_sell);
-                }
-
-                if ($searchProvinces) {
-                    $dataHome->where('rent_sell_home_details.provinces', $searchProvinces);
-                }
-
-                if ($searchAmphures) {
-                    $dataHome->where('rent_sell_home_details.amphures', $searchAmphures);
-                }
-
-                if ($searchDistricts) {
-                    $dataHome->where('rent_sell_home_details.districts', $searchDistricts);
-                }
-            }
-
-            $dataHome = $dataHome
-                ->select(
-                    'rent_sell_home_details.*',
-                    'provinces.name_th AS provinces_name_th',
-                    'districts.name_th AS districts_name_th',
-                    'amphures.name_th AS amphures_name_th'
-                )
-                ->orderBy('rent_sell_home_details.id', 'DESC');
-
-            }else{
-
-
-                $dataHome =  $dataHome
-                ->where('rent_sell_home_details.status_home', 'on')
-                ->where('code_admin', Auth::user()->code_admin)
-                ->leftJoin('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
-                ->leftJoin('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id') //เขต/ ตำบล
-                ->leftJoin('districts', 'rent_sell_home_details.amphures', '=', 'districts.id') //เขต/ อำเภอ
-                ->select('rent_sell_home_details.*', 'provinces.name_th AS provinces_name_th',
-                 'districts.name_th AS districts_name_th' ,'amphures.name_th AS amphures_name_th')
-                 ->orderBy('rent_sell_home_details.id','DESC');
-
-            }
-
-
-        }
-        $dataCount =  $dataHome->count();
-        $dataHome =  $dataHome->paginate(100);
-
-        $data = DB::table('provinces')->orderBy('name_th','ASC')->get();
-
-        $train_station = DB::table('train_station')->select('train_station.id', 'train_station.station_name_th')
-        ->orderBy('station_name_th','ASC')->get();
-
-
-        return view('home',['train_station' => $train_station, "data" =>  $data , 'dataHome' => $dataHome,'dataCount' => $dataCount]);
+        return view('home', [
+            'train_station' => $train_station,
+            'data' => $data,
+            'dataHome' => $dataHome,
+            'dataCount' => $dataCount
+        ]);
     }
+
+
+    public function indexSearchData(Request $request)
+    {
+
+        /*      $searchData = count($request->all());
+        $searchProperty_type = $request['property_type'];
+        $searchRent_sell = $request['rent_sell'];
+        $searchProvinces = $request['provinces'];
+        $searchAmphures = $request['amphures'];
+        $searchDistricts = $request['districts'];
+        $trainName = $request['train_name']; */
+
+        $dataHomeQuery = DB::table('rent_sell_home_details')
+            ->where('rent_sell_home_details.status_home', 'on')
+            ->leftJoin('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
+            ->leftJoin('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
+            ->leftJoin('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
+            ->select(
+                'rent_sell_home_details.*',
+                'provinces.name_th AS provinces_name_th',
+                'districts.name_th AS districts_name_th',
+                'amphures.name_th AS amphures_name_th'
+            );
+
+        if (Auth::user()->status < 3) { // admin or agent
+            $dataHomeQuery->where('code_admin', Auth::user()->code_admin);
+        } else { // owner
+            $dataHomeQuery->where('code_admin', Auth::user()->code_admin);
+        }
+
+        /*     if ($searchData > 0) {
+            if ($trainName) {
+                $dataHomeQuery->where('rent_sell_home_details.train_name', 'LIKE', "%$trainName%");
+            } else {
+                if ($searchProperty_type) {
+                    $dataHomeQuery->where('rent_sell_home_details.property_type', $searchProperty_type);
+                }
+                if ($searchRent_sell) {
+                    $dataHomeQuery->where('rent_sell_home_details.rent_sell', $searchRent_sell);
+                }
+                if ($searchProvinces) {
+                    $dataHomeQuery->where('rent_sell_home_details.provinces', $searchProvinces);
+                }
+                if ($searchAmphures) {
+                    $dataHomeQuery->where('rent_sell_home_details.amphures', $searchAmphures);
+                }
+                if ($searchDistricts) {
+                    $dataHomeQuery->where('rent_sell_home_details.districts', $searchDistricts);
+                }
+            }
+        } */
+
+        $dataHomeQuery->orderBy('rent_sell_home_details.id', 'DESC');
+        $dataCount = $dataHomeQuery->count();
+        $dataHome = $dataHomeQuery->paginate(100);
+
+        $data = DB::table('provinces')->orderBy('name_th', 'ASC')->get();
+
+        $train_station = DB::table('train_station')
+            ->select('train_station.id', 'train_station.station_name_th')
+            ->orderBy('station_name_th', 'ASC')
+            ->get();
+
+        return view('home', [
+            'train_station' => $train_station,
+            'data' => $data,
+            'dataHome' => $dataHome,
+            'dataCount' => $dataCount
+        ]);
+    }
+
 
     public function districts($id)
     {
 
         $data = DB::table('amphures')
-        ->where('amphures.province_id',$id)
-        ->orderBy('name_th','ASC')
-        ->get();
+            ->where('amphures.province_id', $id)
+            ->orderBy('name_th', 'ASC')
+            ->get();
 
         return response()->json($data);
-
     }
     public function amphures($id)
     {
 
 
         $data = DB::table('districts')
-        ->where('amphure_id', $id)
-        ->orderBy('name_th','ASC')
-        ->get();
+            ->where('amphure_id', $id)
+            ->orderBy('name_th', 'ASC')
+            ->get();
 
         return response()->json($data);
-
     }
     public function show($id)
     {
         $dataHome = DB::table('rent_sell_home_details')
-        ->where('rent_sell_home_details.id', $id)
-        ->leftJoin('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
-        ->leftJoin('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id') //เขต/ ตำบล
-        ->leftJoin('districts', 'rent_sell_home_details.amphures', '=', 'districts.id') //เขต/ อำเภอ
-        ->select('rent_sell_home_details.*', 'provinces.name_th AS provinces_name_th',
-        'districts.name_th AS districts_name_th' ,'amphures.name_th AS amphures_name_th')
-        ->orderBy('rent_sell_home_details.id','DESC')
-        ->get();
+            ->where('rent_sell_home_details.id', $id)
+            ->leftJoin('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
+            ->leftJoin('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id') //เขต/ ตำบล
+            ->leftJoin('districts', 'rent_sell_home_details.amphures', '=', 'districts.id') //เขต/ อำเภอ
+            ->select(
+                'rent_sell_home_details.*',
+                'provinces.name_th AS provinces_name_th',
+                'districts.name_th AS districts_name_th',
+                'amphures.name_th AS amphures_name_th'
+            )
+            ->orderBy('rent_sell_home_details.id', 'DESC')
+            ->get();
 
 
 
         return view('detall.detall', ['dataHome' => $dataHome]);
-
     }
-
-
-
 }
