@@ -10,11 +10,17 @@
 
                 <div class="row mb-3">
                     <div class="col-md-12 input_box">
-                        <select class="form-select" name="prefix" aria-label="Default select example" required>
+                        <select class="form-select @error('prefix') is-invalid @enderror" name="prefix"
+                            aria-label="Default select example" required>
                             <option disabled selected>คำนำหน้าชื่อ</option>
                             <option value="นาย">นาย</option>
                             <option value="นาง">นาง</option>
                         </select>
+                        @error('prefix')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
 
@@ -44,11 +50,10 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col input_box">
-                        <input id="contact_number" type="number"
-                            class="form-control @error('contact_number') is-invalid @enderror" name="contact_number"
-                            value="{{ old('contact_number') }}" required autocomplete="contact_number">
+                        <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror"
+                            name="phone" value="{{ old('phone') }}" required autocomplete="phone">
                         <label>เบอร์ติดต่อ</label>
-                        @error('contact_number')
+                        @error('phone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -57,11 +62,11 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col input_box">
-                        <input id="card_number" type="number"
-                            class="form-control @error('card_number') is-invalid @enderror" name="card_number"
-                            value="{{ old('card_number') }}" required autocomplete="card_number">
+                        <input id="id_card_number" type="number"
+                            class="form-control @error('id_card_number') is-invalid @enderror" name="id_card_number"
+                            value="{{ old('id_card_number') }}" required autocomplete="id_card_number">
                         <label>เลขบัตรประจำตัวประชาชน</label>
-                        @error('card_number')
+                        @error('id_card_number')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
