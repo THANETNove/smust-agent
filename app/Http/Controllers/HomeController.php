@@ -45,6 +45,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $dataHomeQuery->where('code_admin', $user->code_admin);
 
+
         $dataHomeQuery->orderBy('rent_sell_home_details.id', 'DESC');
 
         // Use caching if possible for better performance
@@ -52,7 +53,7 @@ class HomeController extends Controller
             return $dataHomeQuery->count();
         });
 
-        $dataHome = Cache::remember('dataHomePage', 60, function () use ($dataHomeQuery) {
+        $dataHome = Cache::remember('dataHomePage', 0, function () use ($dataHomeQuery) {
             return $dataHomeQuery->paginate(100);
         });
 
@@ -79,19 +80,12 @@ class HomeController extends Controller
     public function indexSearchData(Request $request)
     {
 
-        /*      $searchData = count($request->all());
-        $searchProperty_type = $request['property_type'];
-        $searchRent_sell = $request['rent_sell'];
-        $searchProvinces = $request['provinces'];
-        $searchAmphures = $request['amphures'];
-        $searchDistricts = $request['districts'];
-        $trainName = $request['train_name']; */
 
         $dataHomeQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.status_home', 'on')
-            ->leftJoin('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
-            ->leftJoin('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
-            ->leftJoin('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
+            ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
+            ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
+            ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
             ->select(
                 'rent_sell_home_details.*',
                 'provinces.name_th AS provinces_name_th',
@@ -99,13 +93,28 @@ class HomeController extends Controller
                 'amphures.name_th AS amphures_name_th'
             );
 
-        if (Auth::user()->status < 3) { // admin or agent
-            $dataHomeQuery->where('code_admin', Auth::user()->code_admin);
-        } else { // owner
-            $dataHomeQuery->where('code_admin', Auth::user()->code_admin);
-        }
+        // Apply authorization logic
+        $user = Auth::user();
+        $dataHomeQuery->where('code_admin', $user->code_admin);
 
-        /*     if ($searchData > 0) {
+        // Apply search filters
+
+
+        $dataHomeQuery->orderBy('rent_sell_home_details.id', 'DESC');
+
+        // Use caching if possible for better performance
+        $dataCount = Cache::remember('dataHomeCount', 60, function () use ($dataHomeQuery) {
+            return $dataHomeQuery->count();
+        });
+
+        $dataHome = Cache::remember('dataHomePage', 0, function () use ($dataHomeQuery, $request) {
+            $searchProperty_type = $request->input('property_type');
+            $searchRent_sell = $request->input('rent_sell');
+            $searchProvinces = $request->input('provinces');
+            $searchAmphures = $request->input('amphures');
+            $searchDistricts = $request->input('districts');
+            $trainName = $request->input('train_name');
+
             if ($trainName) {
                 $dataHomeQuery->where('rent_sell_home_details.train_name', 'LIKE', "%$trainName%");
             } else {
@@ -125,20 +134,21 @@ class HomeController extends Controller
                     $dataHomeQuery->where('rent_sell_home_details.districts', $searchDistricts);
                 }
             }
-        } */
+            return $dataHomeQuery->paginate(100)->appends($request->all());
+        });
 
-        $dataHomeQuery->orderBy('rent_sell_home_details.id', 'DESC');
-        $dataCount = $dataHomeQuery->count();
-        $dataHome = $dataHomeQuery->paginate(100);
+        $data = Cache::remember('provincesData', 60, function () {
+            return DB::table('provinces')->orderBy('name_th', 'ASC')->get();
+        });
 
-        $data = DB::table('provinces')->orderBy('name_th', 'ASC')->get();
+        $train_station = Cache::remember('trainStationData', 60, function () {
+            return DB::table('train_station')
+                ->select('train_station.id', 'train_station.station_name_th')
+                ->orderBy('station_name_th', 'ASC')
+                ->get();
+        });
 
-        $train_station = DB::table('train_station')
-            ->select('train_station.id', 'train_station.station_name_th')
-            ->orderBy('station_name_th', 'ASC')
-            ->get();
-
-        return view('home', [
+        return view('search_data', [
             'train_station' => $train_station,
             'data' => $data,
             'dataHome' => $dataHome,
