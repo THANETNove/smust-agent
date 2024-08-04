@@ -16,6 +16,7 @@ class ForgotYourPasswordController extends Controller
      */
     public function index()
     {
+
         return view('auth.resetPassword');
     }
 
@@ -107,7 +108,7 @@ class ForgotYourPasswordController extends Controller
         }
 
         if ($validator->fails()) {
-            return redirect()->route('reset-check-password', $id)->withErrors($validator)->withInput();
+            return redirect()->route('reset-check-passwordId', $id)->withErrors($validator)->withInput();
         }
 
 

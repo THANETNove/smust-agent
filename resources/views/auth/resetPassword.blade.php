@@ -86,7 +86,9 @@
                     {{ __('go back home') }}
                 </a>
                 @if ($errors->any())
-                    <img class="forgotLine" src="{{ URL::asset('/assets/image/welcome/forgotLine.png') }}">
+                    <a href="https://line.me/R/ti/p/@347zwznd?oat_content=url" target="_blank" rel="noopener noreferrer">
+                        <img class="forgotLine" src="{{ URL::asset('/assets/image/welcome/forgotLine.png') }}">
+                    </a>
                 @endif
 
             </div>

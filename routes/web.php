@@ -41,7 +41,7 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/reset-password', [ForgotYourPasswordController::class, 'index'])->name('reset-password');
 Route::post('/reset-check-password', [ForgotYourPasswordController::class, 'resetCheck'])->name('reset-check-password');
-Route::get('/reset-check-password/{id}', [ForgotYourPasswordController::class, 'edit'])->name('reset-check-password');
+Route::get('/reset-check-passwordId/{id}', [ForgotYourPasswordController::class, 'edit'])->name('reset-check-passwordId');
 Route::put('/reset-new-password/{id}', [ForgotYourPasswordController::class, 'store'])->name('reset-new-password');
 Route::get('/get-districts/{id}', [HomeController::class, 'districts'])->name('get-districts');
 Route::get('/get-amphures/{id}', [HomeController::class, 'amphures'])->name('get-amphures');

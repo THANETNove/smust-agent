@@ -6,7 +6,7 @@
         @if (session('message'))
             <p class="text-center mt-4" style="color: green"> {{ session('message') }}</p>
         @endif
- 
+
         <div class="form-login">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -51,8 +51,11 @@
                 <p class="btn-forgot" id="forgotPasswordBtn" href="javascript:void(0);">
                     {{ __('ลืมรหัสผ่าน') }}
                 </p>
-                <img class="forgotLine" id="forgotLineImage" src="{{ URL::asset('/assets/image/welcome/forgotLine.png') }}"
-                    style="display: none;">
+                <a href="https://line.me/R/ti/p/@347zwznd?oat_content=url" target="_blank" id="forgotLineImage"
+                    rel="noopener noreferrer" style="display: none;">
+                    <img class="forgotLine" src="{{ URL::asset('/assets/image/welcome/forgotLine.png') }}">
+                </a>
+
             </div>
         </div>
     </div>
