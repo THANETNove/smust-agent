@@ -53,7 +53,7 @@
                     <img id="userProfileImg" class="userProfile"
                         src="{{ URL::asset('/assets/image/welcome/profile.png') }}">
 
-                    <div class="box-profile">
+                    <div class="box-userProfile">
                         ตั้งรูปโปรไฟล์
                     </div>
 
