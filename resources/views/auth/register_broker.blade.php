@@ -178,11 +178,8 @@
                 </p>
                 <div class="flex-direction-row">
                     <select class="form-select" aria-label="Default select example">
-                        <option value="บ้านเดี่ยว" selected>บ้านเดี่ยว</option>
-                        <option value="คอนโด">คอนโด</option>
-                        <option value="ทาวน์เฮ้าส์">ทาวน์เฮ้าส์</option>
-                        <option value="ที่ดิน">ที่ดิน</option>
-                        <option value="พาณิชย์">พาณิชย์</option>
+                        <option value="บ้านเดี่ยว" selected>ลักษณะเฉพาะ</option>
+
 
                     </select>
                 </div>
