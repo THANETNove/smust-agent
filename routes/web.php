@@ -6,6 +6,7 @@ use App\Http\Controllers\RegisterBrokerController;
 use App\Http\Controllers\RentSellHouseController;
 use App\Http\Controllers\UserBrokerController;
 use App\Http\Controllers\ForgotYourPasswordController;
+use App\Http\Controllers\FreeTrialRightsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,6 +54,7 @@ Route::get('/register-broker/{id}', [RegisterBrokerController::class, 'index'])-
 Route::post('/add-register-broker', [RegisterBrokerController::class, 'store'])->name('add-register-broker');
 Route::get('/profile-user', [UserBrokerController::class, 'index'])->name('profile-user');
 Route::post('/add-code_admin', [UserBrokerController::class, 'store'])->name('add-code_admin');
+Route::get('/free-trial', [FreeTrialRightsController::class, 'index'])->name('/free-trial');
 
 //ส่วนของ admin
 Route::group(['middleware' => ['is_admin']], function () {

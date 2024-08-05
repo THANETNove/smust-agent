@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('property_type')->nullable();
             $table->string('characteristics')->nullable();
             $table->string('image')->nullable();
+            $table->string('plans')->nullable()->comment("แพลนของคุณ  ,0 = free1 = pro  ,2 = Premium");
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

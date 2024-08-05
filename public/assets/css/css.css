@@ -75,3 +75,98 @@
     height: 20px;
     margin-right: 8px;
 }
+
+
+
+.free-trial {
+    text-align: center;
+    margin-top: 32px;
+    color: #007BA7;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.container-box-free {
+    display: flex;
+    justify-content: center;
+
+    /* ทำให้ container เต็มหน้าจอในแนวตั้ง */
+}
+
+.container-box-step {
+    display: flex;
+    justify-content: center;
+    margin-top: 36px;
+
+    /* ทำให้ container เต็มหน้าจอในแนวตั้ง */
+}
+
+
+.box-free-image {
+
+    width: 128px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #B8D7E2;
+    background-color: #B8D7E2;
+    border-radius: 50px;
+}
+
+.free-image {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+
+}
+
+.free-text {
+    font-size: 11px;
+    color: #000000;
+}
+
+.free-step {
+    width: 332px;
+    height: 425px;
+}
+
+.day-free {
+    font-size: 14px;
+    margin-top: 48px;
+    text-align: center;
+    color: #7C7C7C;
+}
+
+.month-free {
+    font-size: 14px;
+    text-align: center;
+    color: #7C7C7C;
+}
+
+.month-299 {
+    color: #000000;
+    font-size: 14px;
+}
+
+.get-started {
+    margin-top: 12px;
+    background-color: #007BA7;
+    width: 300px;
+    height: 36px;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    font-size: 16px;
+    display: flex;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.plans-all {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 14px;
+    color: #000000;
+    margin-bottom: 65px;
+}

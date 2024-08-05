@@ -32,6 +32,7 @@ class User extends Authenticatable
         'contract_type',
         'property_type',
         'characteristics',
+        'plans',
         'image'
 
     ];
