@@ -185,7 +185,14 @@
                 </p>
                 <div class="flex-direction-row">
                     <select class="form-select" name="characteristics" aria-label="Default select example">
-                        <option value="ลักษณะเฉพาะ" selected>ลักษณะเฉพาะ</option>
+                        <option value="ผ่อนตรง" selected>ผ่อนตรง</option>
+                        <option value="ทรัพย์มือหนึ่ง">ทรัพย์มือหนึ่ง</option>
+                        <option value="เช่าออม">เช่าออม</option>
+                        <option value="ตกแต่งสวยเว่อร์">ตกแต่งสวยเว่อร์</option>
+                        <option value="เช่าระยะสั้นได้ (น้อยกว่า 6 เดือน)">เช่าระยะสั้นได้ (น้อยกว่า 6 เดือน)</option>
+                        <option value="ใกล้มหาวิทยาลัยดัง">ใกล้มหาวิทยาลัยดัง</option>
+                        <option value="ห้องเปล่า">ห้องเปล่า</option>
+                        <option value="ขายขาดทุน">ขายขาดทุน</option>
 
 
                     </select>
