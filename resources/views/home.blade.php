@@ -161,9 +161,11 @@
                     </a>
                 @endforeach
             </div>
+
         </div>
         <div class="mt-5">
             {!! $dataHome->links() !!}
+
         </div>
     </div>
 

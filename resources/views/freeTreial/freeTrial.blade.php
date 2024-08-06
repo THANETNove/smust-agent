@@ -21,7 +21,7 @@
         <p class="month-free">หลังจากนั้น <span class="month-299"> 299 บาทต่อเดือน</span></p>
 
         <div class="container-box-free">
-            <a href="/home" class="get-started">เริ่มต้นใช้งาน </a>
+            <a href="{{ url('/home') }}" class="get-started">เริ่มต้นใช้งาน </a>
         </div>
         <div class="container-box-free">
             <a class="plans-all" href="{{ url('/plans-all') }}">ดูแพลนทั้งหมด</a>
