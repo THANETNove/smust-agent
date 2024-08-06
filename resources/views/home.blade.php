@@ -3,66 +3,56 @@
 @section('content')
     <div class="home-background">
         <div class="home-head">
-            <div class="row">
-                <div class="col-1">
-                    <div class="box-ellipse ">
-                        @if (Auth::user()->image != null)
-                            <img class="ellipse" src="{{ URL::asset(Auth::user()->image) }}">
-                        @else
-                            <img class="ellipse" src="{{ URL::asset('/assets/image/home/3868_n.jpg') }}">
-                        @endif
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle nav-link-email" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a id="navbarDropdown" class="nav-link ml-r" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->email }}
-                            </a>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            @if (Auth::user()->status == '3')
-                                <a class="dropdown-item" href="{{ url('add-admin') }}">
-                                    เพิ่ม admin
-                                </a>
-                            @endif
-                            @if (Auth::user()->status > '0')
-                                <a class="dropdown-item" href="{{ url('profile-admin') }}">
-                                    profile
-                                </a>
-                            @endif
-                            @if (Auth::user()->status == '0')
-                                <a class="dropdown-item" href="{{ url('profile-user') }}">
-                                    profile
-                                </a>
-                            @endif
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-1">
+                        <div class="box-ellipse ">
+                            <img class="ellipse menu-image" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                                aria-controls="offcanvasExample" src="{{ URL::asset('/assets/image/welcome/menu.png') }}">
 
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
+
+
+                            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+                                aria-labelledby="offcanvasExampleLabel">
+                                <div class="offcanvas-header">
+                                    <h5 class="offcanvas-title" id="offcanvasExampleLabel"></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="offcanvas-body">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
+                                        {{ __('Logout') }}
+                                    </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
+                    @php
+                        $number = count($dataHome);
+                    @endphp
+                    <div class="col-12">
+                        <p class="p-login text-center mt-22">ทรัพย์ของฉัน ({{ $dataCount }}) </p>
+                    </div>
+
+                    <div class="col-12">
+                        {{--  <label for="exampleFormControlInput1" class="form-label">Email address</label> --}}
+                        <input type="email" class="form-control box-filter_alt" id="exampleFormControlInput1"
+                            placeholder="name@example.com">
+                    </div>
+
                 </div>
-                @php
-                    $number = count($dataHome);
-                @endphp
-                <div class="col-12">
-                    <p class="p-login text-center mt-22">ทรัพย์ของฉัน ({{ $dataCount }}) </p>
-                </div>
-                <div class="col-12">
-                    <button class="box-filter_alt" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <img class="filter_alt-img" src="{{ URL::asset('/assets/image/home/filter_alt.png') }}">กรอง
-                    </button>
-                </div>
+
             </div>
+
         </div>
+
         @if (session('message'))
             <p class="message-text text-center mt-4"> {{ session('message') }}</p>
         @endif

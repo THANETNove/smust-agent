@@ -63,6 +63,10 @@ p {
         margin-left: 56px !important;
     }
 
+    .nav-link-maun {
+        margin-left: 56px !important;
+    }
+
 
 
     .content-box {
@@ -569,7 +573,7 @@ input[autofocus]:focus {
 .dropdown-menu.show {
     display: block;
     margin-top: 8px !important;
-    margin-left: -32px !important;
+    margin-left: 35px !important;
 }
 
 
@@ -593,7 +597,7 @@ input[autofocus]:focus {
     display: flex;
     align-items: center;
     padding-left: 16px;
-    border-radius: 4px;
+    border-radius: 50px;
     margin-left: 16px;
     cursor: pointer;
     background-color: var(--white);
