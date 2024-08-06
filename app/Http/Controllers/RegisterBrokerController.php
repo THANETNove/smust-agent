@@ -66,7 +66,7 @@ class RegisterBrokerController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = date('i_d_m_Y') . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $filePath = '/assets/img/profile' . $filename;
+            $filePath = '/assets/img/profile/' . $filename;
             $file->move(public_path('/assets/img/profile/'), $filename);
         }
 
@@ -91,7 +91,7 @@ class RegisterBrokerController extends Controller
         $user = User::latest()->first(); // หรือ $user = User::orderBy('created_at', 'desc')->first();
         Auth::login($user);
 
-        return redirect('/home');
+        return redirect('/free-trial');
     }
 
     /**
