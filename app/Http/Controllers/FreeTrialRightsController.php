@@ -27,6 +27,11 @@ class FreeTrialRightsController extends Controller
 
         return view('freeTreial/freeTrial');
     }
+    public function plansAll()
+    {
+
+        return view('freeTreial/plansAll');
+    }
 
     /**
      * Show the form for creating a new resource.

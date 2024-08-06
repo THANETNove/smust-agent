@@ -55,6 +55,7 @@ Route::post('/add-register-broker', [RegisterBrokerController::class, 'store'])-
 Route::get('/profile-user', [UserBrokerController::class, 'index'])->name('profile-user');
 Route::post('/add-code_admin', [UserBrokerController::class, 'store'])->name('add-code_admin');
 Route::get('/free-trial', [FreeTrialRightsController::class, 'index'])->name('/free-trial');
+Route::get('/plans-all', [FreeTrialRightsController::class, 'plansAll'])->name('/plans-all');
 
 //ส่วนของ admin
 Route::group(['middleware' => ['is_admin']], function () {

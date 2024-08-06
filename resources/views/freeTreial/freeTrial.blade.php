@@ -24,7 +24,7 @@
             <a href="/home" class="get-started">เริ่มต้นใช้งาน </a>
         </div>
         <div class="container-box-free">
-            <a class="plans-all" href="/plans-all">ดูแพลนทั้งหมด</a>
+            <a class="plans-all" href="{{ url('/plans-all') }}">ดูแพลนทั้งหมด</a>
         </div>
     </div>
 @endsection
