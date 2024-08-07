@@ -242,6 +242,14 @@
     color: white;
 }
 
-.form-select {
-    
+.form-search {
+    position: relative !important;
+}
+
+.icon-search {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    margin-left: 16px;
+    margin-top: 8px;
 }

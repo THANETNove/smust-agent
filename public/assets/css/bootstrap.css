@@ -597,7 +597,7 @@ input[autofocus]:focus {
     display: flex;
     align-items: center;
     padding-left: 16px;
-    border-radius: 50px;
+    border-radius: 50px !important;
     margin-left: 16px;
     cursor: pointer;
     background-color: var(--white);
@@ -1368,6 +1368,7 @@ input[autofocus]:focus {
 
 .box-filter_alt {
     margin-top: 28px;
+    padding-left: 30px !important;
 }
 
 .mb-8 {

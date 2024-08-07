@@ -149,7 +149,7 @@ class HomeController extends Controller
                 ->get();
         });
 
-        return view('search_data', [
+        return view('home', [
             'train_station' => $train_station,
             'data' => $data,
             'dataHome' => $dataHome,

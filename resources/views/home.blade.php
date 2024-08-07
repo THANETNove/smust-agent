@@ -41,10 +41,10 @@
                         <p class="p-login text-center mt-22">ทรัพย์ของฉัน ({{ $dataCount }}) </p>
                     </div>
 
-                    <div class="col-12">
-                        {{--  <label for="exampleFormControlInput1" class="form-label">Email address</label> --}}
-                        <input type="email" class="form-control box-filter_alt" id="exampleFormControlInput1"
-                            placeholder="name@example.com">
+                    <div class="col-12 form-search">
+                        <img class="icon-search" src="{{ URL::asset('/assets/image/welcome/search.png') }}">
+                        <input type="text" class="form-control box-filter_alt" id="exampleFormControlInput1"
+                            placeholder="พิมพ์ค้นหา...">
                     </div>
 
                 </div>
