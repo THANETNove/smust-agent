@@ -250,6 +250,122 @@
     width: 30px;
     height: 30px;
     position: absolute;
-    margin-left: 16px;
+    margin-left: 25px;
+    margin-top: 35px;
+}
+
+.icon-menu-home {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.box-head-home {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 32px;
+}
+
+.box-search-home {
+    margin-top: -16px;
+    display: flex;
+
+
+}
+
+.box-filter-home {
     margin-top: 8px;
+    display: flex;
+    justify-content: space-around;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 12px;
+}
+
+.icon-filterData {
+    width: 75px;
+    height: 36px;
+}
+
+.vector-icon {
+    width: 28px;
+    height: 30px;
+}
+
+.icon-filter {
+    width: 98px;
+    height: 36px;
+}
+
+.icon-filterLove {
+    width: 109px;
+    height: 36px;
+}
+
+.box-number-count {
+    position: relative !important;
+}
+
+.number-count {
+    width: 22px;
+    height: 20px;
+    background-color: #E34234;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    color: #FFFFFF;
+    font-size: 12px;
+    border-radius: 50px;
+    margin-left: 15px;
+    margin-top: -8px;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link {
+    width: 195px;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+    width: 195px;
+    background-color: #80BDD0 !important;
+    border: var(--bs-border-width) solid #80BDD0 !important;
+
+
+}
+
+
+
+.nav-link-decoration,
+.nav-link-decoration2 {
+    display: none;
+}
+
+.nav-link.active+.nav-link-decoration,
+.nav-link.active+.nav-link-decoration2 {
+    display: block;
+}
+
+.nav-link-decoration {
+    margin-top: -5px;
+    width: 118px;
+    height: 5.8px;
+    background-color: #007BA7;
+    border-radius: 50px;
+    position: absolute;
+    left: 13%;
+    transform: translateX(-13%);
+}
+
+.nav-link-decoration2 {
+    margin-top: -5px;
+    width: 118px;
+    height: 5.8px;
+    background-color: #007BA7;
+    border-radius: 50px;
+    position: absolute;
+    right: 7%;
+    transform: translateX(-7%);
 }
