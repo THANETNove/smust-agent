@@ -73,7 +73,7 @@ p {
         padding: 0px 8px;
     }
 
-    .tab-pane {
+    .content-box .tab-pane {
         padding: 16px;
     }
 
@@ -102,7 +102,7 @@ p {
         padding: 0px 64px;
     }
 
-    .tab-pane {
+    .content-box .tab-pane {
         padding: 16px;
     }
 
@@ -132,7 +132,7 @@ p {
         justify-content: center;
     }
 
-    .tab-pane {
+    .content-box .tab-pane {
         padding: 24px;
     }
 
@@ -807,7 +807,15 @@ input[autofocus]:focus {
     min-height: 100vh;
 }
 
+.content-box .tab-pane {
+    background-color: var(--white);
+}
 
+.content-box .tab-content {
+    background-color: var(--white);
+    padding-bottom: 32px;
+
+}
 
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link {
