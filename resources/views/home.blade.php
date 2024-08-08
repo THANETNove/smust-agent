@@ -56,7 +56,7 @@
 
                 <div class="offcanvas offcanvas-start " tabindex="-1" id="offcanvasExample"
                     aria-labelledby="offcanvasExampleLabel">
-        
+
                     <div class="box-profile-image-home">
                         <div>
                             @if (Auth::user()->image)
@@ -95,9 +95,13 @@
                             หน้าหลัก: ทรัพย์ของฉัน
                         </p>
                         <p class="manu-bar-profile">
+                            <img class="icon-account-manu" src="{{ URL::asset('/assets/image/welcome/comment.png') }}">
+                            ทรัพย์ที่ลูกค้าต้องการ
+                        </p>
+                        <p class="manu-bar-profile">
                             <img class="icon-account-manu"
                                 src="{{ URL::asset('/assets/image/welcome/bar_chart_4_bars.png') }}">
-                            ทรัพย์ที่ลูกค้าต้องการ
+                            อัพเกรดแพลน
                         </p>
                         <div class="manu-bar-profile">
 
@@ -111,7 +115,7 @@
                                     src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}">
                             @endif
                             <input type="checkbox" id="toggle-menu" class="toggle-menu">
-                            <label for="toggle-menu" class="upgrade-plan">อัพเกรดแพลน
+                            <label for="toggle-menu" class="upgrade-plan">พรีเมียมฟีเจอร์
                                 <img class="icon-stat_minus_1"
                                     src="{{ URL::asset('/assets/image/welcome/stat_minus_1.png') }}">
 
