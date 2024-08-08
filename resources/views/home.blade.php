@@ -161,7 +161,7 @@
                                             </p>
                                         @endif
                                         @if ($home->sell_price && $home->rent_sell == 'ขาย')
-                                            <p class="price-new price-top-sell">฿ {{ $price_sell }}</p>
+                                            <p class="price-new price-top-sell">฿{{ $price_sell }}</p>
                                         @endif
 
                                         @if ($home->sell_price && $home->rent_sell == 'เช่า/ขาย')
@@ -257,7 +257,7 @@
                                         @if ($home->sell_price && $home->rent_sell == 'เช่า/ขาย')
                                             <p class="price-new price-top-2">฿ {{ number_format($home->rental_price) }}/m
                                             </p>
-                                            <p class="price-new price-top-sell2">฿ {{ $price_sell }}</p>
+                                            <p class="price-new price-top-sell2">฿{{ $price_sell }}</p>
                                         @endif
 
                                         @if ($home->rent_sell == 'เช่า')
