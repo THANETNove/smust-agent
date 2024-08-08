@@ -54,16 +54,119 @@
 
 
 
-                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+                <div class="offcanvas offcanvas-start " tabindex="-1" id="offcanvasExample"
                     aria-labelledby="offcanvasExampleLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasExampleLabel"></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        
+                    <div class="box-profile-image-home">
+                        <div>
+                            @if (Auth::user()->image)
+                                <img class="image-profile" src="{{ URL::asset(Auth::user()->image) }}">
+                            @else
+                                <img class="image-profile" src="{{ URL::asset('/assets/image/welcome/profile.png') }}">
+                            @endif
+
+                        </div>
+                        <div class="box-nam-profile">
+                            <p class="auto-name">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
+                            <p class="auto-email">{{ Auth::user()->email }} </p>
+
+                            @if (Auth::user()->plans == 0)
+                                <p class="auto-account">
+                                    <img class="icon-account" src="{{ URL::asset('/assets/image/welcome/iconFree.jpg') }}">
+                                    Free Trial Account
+                                </p>
+                            @elseif (Auth::user()->plans == 1)
+                                <p class="auto-account">
+                                    <img class="icon-account" src="{{ URL::asset('/assets/image/welcome/iconPro.jpg') }}">
+                                    Pro Account
+                                </p>
+                            @elseif (Auth::user()->plans == 2)
+                                <p class="auto-account">
+                                    <img class="icon-account"
+                                        src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}">
+                                    Premium Account
+                                </p>
+                            @endif
+                        </div>
                     </div>
+                    <div class="box-profile-manu">
+                        <p class="back-home" data-bs-dismiss="offcanvas" aria-label="Close">
+                            <img class="icon-account-manu" src="{{ URL::asset('/assets/image/welcome/home.png') }}">
+                            หน้าหลัก: ทรัพย์ของฉัน
+                        </p>
+                        <p class="manu-bar-profile">
+                            <img class="icon-account-manu"
+                                src="{{ URL::asset('/assets/image/welcome/bar_chart_4_bars.png') }}">
+                            ทรัพย์ที่ลูกค้าต้องการ
+                        </p>
+                        <div class="manu-bar-profile">
+
+                            @if (Auth::user()->plans == 0)
+                                <img class="icon-account-manu"
+                                    src="{{ URL::asset('/assets/image/welcome/iconFree.png') }}">
+                            @elseif (Auth::user()->plans == 1)
+                                <img class="icon-account-manu" src="{{ URL::asset('/assets/image/welcome/iconPro.jpg') }}">
+                            @elseif (Auth::user()->plans == 2)
+                                <img class="icon-account-manu"
+                                    src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}">
+                            @endif
+                            <input type="checkbox" id="toggle-menu" class="toggle-menu">
+                            <label for="toggle-menu" class="upgrade-plan">อัพเกรดแพลน
+                                <img class="icon-stat_minus_1"
+                                    src="{{ URL::asset('/assets/image/welcome/stat_minus_1.png') }}">
+
+                            </label>
+                            <ul class="menu-items">
+                                <li>
+                                    <p>
+                                        <img class="icon-account-manu"
+                                            src="{{ URL::asset('/assets/image/welcome/bookmark_manager.png') }}">
+                                        แก้ไขเว็บส่วนตัว
+                                        @if (Auth::user()->plans == 0)
+                                            <img class="icon-account-manu-2"
+                                                src="{{ URL::asset('/assets/image/welcome/iconFree.png') }}">
+                                        @elseif (Auth::user()->plans == 1)
+                                            <img class="icon-account-manu"
+                                                src="{{ URL::asset('/assets/image/welcome/iconPro.jpg') }}">
+                                        @elseif (Auth::user()->plans == 2)
+                                            <img class="icon-account-manu"
+                                                src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}">
+                                        @endif
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <img class="icon-account-manu"
+                                            src="{{ URL::asset('/assets/image/welcome/groups_2.png') }}">
+                                        หา co-agent ช่วยขาย
+                                        @if (Auth::user()->plans == 0)
+                                            <img class="icon-account-manu-2"
+                                                src="{{ URL::asset('/assets/image/welcome/iconFree.png') }}">
+                                        @elseif (Auth::user()->plans == 1)
+                                            <img class="icon-account-manu"
+                                                src="{{ URL::asset('/assets/image/welcome/iconPro.jpg') }}">
+                                        @elseif (Auth::user()->plans == 2)
+                                            <img class="icon-account-manu"
+                                                src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}">
+                                        @endif
+                                    </p>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                        <p class="manu-bar-profile">
+                            <img class="icon-account-manu" src="{{ URL::asset('/assets/image/welcome/settings.png') }}">
+                            ตั้งค่าโปรไฟล์
+                        </p>
+                    </div>
+
+
                     <div class="offcanvas-body">
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();">
+                            <img class="icon-account-manu" src="{{ URL::asset('/assets/image/welcome/logout.png') }}">
                             {{ __('Logout') }}
                         </a>
 
