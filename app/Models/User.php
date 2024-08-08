@@ -33,7 +33,10 @@ class User extends Authenticatable
         'property_type',
         'characteristics',
         'plans',
-        'image'
+        'image',
+        'card_image',
+        'line_id',
+        'facebook',
 
     ];
 
