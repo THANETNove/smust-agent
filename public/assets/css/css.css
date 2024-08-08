@@ -5,6 +5,23 @@
     margin-top: 54px;
 }
 
+.information-setup {
+    margin-bottom: 16px;
+    color: #030B2F;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+.card_number-setup {
+    margin-top: 20px;
+    margin-bottom: 16px;
+    color: #030B2F;
+    font-size: 16px;
+    font-weight: bold;
+
+}
+
 .btn-forgot {
     margin-top: 16px;
     text-decoration: underline;
@@ -551,7 +568,6 @@
 }
 
 .box-setup-profile {
-    padding-top: 14px;
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 55px;
@@ -563,8 +579,29 @@
 }
 
 .box-profile-setup {
+    margin-top: -16px;
+}
+
+.card_image {
+    width: 100%;
+    height: 179px;
+    background-color: #F4F5F5;
     display: flex;
     justify-content: center;
-    margin-top: 64px;
-    margin-left: 24px;
+    align-items: center;
+    position: relative;
+}
+
+
+
+.group78 {
+    position: absolute;
+    width: 102px;
+    height: 63;
+}
+
+.contact-setup {
+    margin-top: -18px;
+    color: #808080;
+    font-size: 12px;
 }
