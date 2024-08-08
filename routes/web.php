@@ -7,6 +7,7 @@ use App\Http\Controllers\RentSellHouseController;
 use App\Http\Controllers\UserBrokerController;
 use App\Http\Controllers\ForgotYourPasswordController;
 use App\Http\Controllers\FreeTrialRightsController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +57,7 @@ Route::get('/profile-user', [UserBrokerController::class, 'index'])->name('profi
 Route::post('/add-code_admin', [UserBrokerController::class, 'store'])->name('add-code_admin');
 Route::get('/free-trial', [FreeTrialRightsController::class, 'index'])->name('/free-trial');
 Route::get('/plans-all', [FreeTrialRightsController::class, 'plansAll'])->name('/plans-all');
+Route::get('/edit-profile', [ProfileController::class, 'index'])->name('/edit-profile');
 
 //ส่วนของ admin
 Route::group(['middleware' => ['is_admin']], function () {

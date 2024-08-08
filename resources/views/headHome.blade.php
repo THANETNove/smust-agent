@@ -30,33 +30,6 @@
             </div>
         </div>
 
-
-        {{--   <ul class="nav nav-tabs">
-            <li class="nav-item me-2" role="presentation">
-                <button class="" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
-                    type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home
-
-                </button>
-                <div class="nav-link-decoration"></div>
-
-            </li>
-            <li class="nav-item ms-2 container-right" role="presentation">
-                <button class="" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
-                    type="button" role="tab" aria-controls="profile-tab-pane"
-                    aria-selected="false">Profile</button>
-                <div class="nav-link-decoration2"></div>
-            </li>
-        </ul>
- --}}
-
-        {{--  <div class="box-nav-link-home ">
-            <div class="box-link-manu-home active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
-                type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
-                home
-            </div>
-            <div class="box-link-manu-home " id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
-                type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">profile</div>
-        </div> --}}
         <div class="box-nav-link-home nav nav-tabs" id="myTab" role="tablist">
             <div class="box-link-manu-home active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
                 type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
@@ -112,14 +85,13 @@
                     <img class="icon-account-manu" src="{{ URL::asset('/assets/image/welcome/comment.png') }}">
                     ทรัพย์ที่ลูกค้าต้องการ
                 </p>
-                <p class="manu-bar-profile">
-                    <a href="{{ url('/plans-all') }}" class="no-underline">
+                <a href="{{ url('/plans-all') }}" class="no-underline">
+                    <p class="manu-bar-profile">
                         <img class="icon-account-manu"
                             src="{{ URL::asset('/assets/image/welcome/bar_chart_4_bars.png') }}">
                         อัพเกรดแพลน
-                    </a>
-
-                </p>
+                    </p>
+                </a>
                 <div class="manu-bar-profile">
 
                     @if (Auth::user()->plans == 0)
@@ -174,10 +146,15 @@
                     </ul>
 
                 </div>
-                <p class="manu-bar-profile">
-                    <img class="icon-account-manu" src="{{ URL::asset('/assets/image/welcome/settings.png') }}">
-                    ตั้งค่าโปรไฟล์
-                </p>
+                <a href="{{ url('/edit-profile') }}" class="no-underline">
+                    <p class="manu-bar-profile">
+
+                        <img class="icon-account-manu" src="{{ URL::asset('/assets/image/welcome/settings.png') }}">
+                        ตั้งค่าโปรไฟล์
+
+                    </p>
+                </a>
+
             </div>
 
 

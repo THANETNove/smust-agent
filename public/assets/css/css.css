@@ -63,6 +63,18 @@
     cursor: pointer;
 }
 
+.box-edit-profile {
+    margin-top: 42px;
+    margin-left: 54px;
+    background-color: #ffffff;
+    position: absolute;
+    width: auto;
+    height: auto;
+    display: flex;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
 .box-profile-image-home {
     width: 100%;
     margin-top: 48px;
@@ -528,6 +540,7 @@
 }
 
 .free-trial-box-nav {
+    padding-bottom: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -535,4 +548,23 @@
     width: 339px;
     height: 46px;
     margin-top: 24px;
+}
+
+.box-setup-profile {
+    padding-top: 14px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 55px;
+}
+
+.Frame584 {
+    width: 20px;
+    height: 20px;
+}
+
+.box-profile-setup {
+    display: flex;
+    justify-content: center;
+    margin-top: 64px;
+    margin-left: 24px;
 }
