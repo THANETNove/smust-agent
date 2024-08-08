@@ -7,7 +7,7 @@
             <p class="message-text text-center mt-4"> {{ session('message') }}</p>
         @endif
 
-        <div class="col-12">
+     {{--    <div class="col-12">
             @if (Auth::user()->status != '0')
                 @if (Auth::user()->status < 3)
                     @if ($number < 101)
@@ -17,7 +17,7 @@
                     <a href="{{ url('/create-content') }}" class="box-call ml-16">เพิ่ม</a>
                 @endif
             @endif
-        </div>
+        </div> --}}
 
 
 

@@ -113,9 +113,12 @@
                     ทรัพย์ที่ลูกค้าต้องการ
                 </p>
                 <p class="manu-bar-profile">
-                    <img class="icon-account-manu"
-                        src="{{ URL::asset('/assets/image/welcome/bar_chart_4_bars.png') }}">
-                    อัพเกรดแพลน
+                    <a href="{{ url('/plans-all') }}" class="no-underline">
+                        <img class="icon-account-manu"
+                            src="{{ URL::asset('/assets/image/welcome/bar_chart_4_bars.png') }}">
+                        อัพเกรดแพลน
+                    </a>
+
                 </p>
                 <div class="manu-bar-profile">
 
