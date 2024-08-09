@@ -7,7 +7,7 @@
 
     <div class="box-free-trial">
         <div class="free-trial-box-nav">
-            <a href="javascript:void(0);" onclick="goBack()">
+            <a href="{{ url('/home') }}">
                 <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
             </a>
             <p class="free-trial">
@@ -103,11 +103,9 @@
 
                     </div>
 
-                    {{--          <input type="file" id="card_numberInput" class="@error('card_image') is-invalid @enderror"
-                        name="card_image" accept="image/*" value="{{ Auth::user()->card_image }}" style="display: none;"> --}}
-                    <input type="hidden" name="existing_image" value="{{ Auth::user()->card_image }}">
                     <input type="file" id="card_numberInput" class="@error('card_image') is-invalid @enderror"
                         name="card_image" accept="image/*" style="display: none;">
+
                     @error('card_image')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -236,9 +234,6 @@
 
     </div>
     <script>
-        function goBack() {
-            window.history.back();
-        }
         document.getElementById('card_imageButton').addEventListener('click', function() {
             document.getElementById('card_numberInput').click();
         });
