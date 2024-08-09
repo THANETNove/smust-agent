@@ -7,9 +7,17 @@
 
     <div class="box-free-trial">
         <div class="free-trial-box-nav">
-            <a href="{{ url('/home') }}">
-                <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
-            </a>
+
+            @if (session('success'))
+                <a href="{{ url('/home') }}">
+                    <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
+                </a>
+            @else
+                <a href="javascript:void(0);" onclick="goBack()">
+                    <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
+                </a>
+            @endif
+
             <p class="free-trial">
                 ตั้งค่าโปรไฟล์
             </p>
@@ -234,6 +242,9 @@
 
     </div>
     <script>
+        function goBack() {
+            window.history.back();
+        }
         document.getElementById('card_imageButton').addEventListener('click', function() {
             document.getElementById('card_numberInput').click();
         });

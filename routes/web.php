@@ -8,6 +8,7 @@ use App\Http\Controllers\UserBrokerController;
 use App\Http\Controllers\ForgotYourPasswordController;
 use App\Http\Controllers\FreeTrialRightsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AssetsCustomersWantController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,6 +60,7 @@ Route::get('/free-trial', [FreeTrialRightsController::class, 'index'])->name('/f
 Route::get('/plans-all', [FreeTrialRightsController::class, 'plansAll'])->name('/plans-all');
 Route::get('/edit-profile', [ProfileController::class, 'index'])->name('/edit-profile');
 Route::put('/new-setup-profile/{id}', [ProfileController::class, 'update'])->name('new-setup-profile');
+Route::get('/assets-customer', [AssetsCustomersWantController::class, 'index'])->name('assets-customer');
 
 //ส่วนของ admin
 Route::group(['middleware' => ['is_admin']], function () {
