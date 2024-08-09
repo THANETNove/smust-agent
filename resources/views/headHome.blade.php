@@ -94,13 +94,9 @@
                 </a>
                 <div class="manu-bar-profile">
 
-                    @if (Auth::user()->plans == 0)
-                        <img class="icon-account-manu" src="{{ URL::asset('/assets/image/welcome/iconFree.png') }}">
-                    @elseif (Auth::user()->plans == 1)
-                        <img class="icon-account-manu" src="{{ URL::asset('/assets/image/welcome/iconPro.jpg') }}">
-                    @elseif (Auth::user()->plans == 2)
-                        <img class="icon-account-manu" src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}">
-                    @endif
+
+                    <img class="icon-account-manu" src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}">
+
                     <input type="checkbox" id="toggle-menu" class="toggle-menu">
                     <label for="toggle-menu" class="upgrade-plan">พรีเมียมฟีเจอร์
                         <img class="icon-stat_minus_1"
@@ -109,38 +105,26 @@
                     </label>
                     <ul class="menu-items">
                         <li>
-                            <p>
-                                <img class="icon-account-manu"
-                                    src="{{ URL::asset('/assets/image/welcome/bookmark_manager.png') }}">
-                                แก้ไขเว็บส่วนตัว
-                                @if (Auth::user()->plans == 0)
-                                    <img class="icon-account-manu-2"
-                                        src="{{ URL::asset('/assets/image/welcome/iconFree.png') }}">
-                                @elseif (Auth::user()->plans == 1)
+                            <a @if (Auth::user()->plans == 2) href="" @endif>
+                                <p>
                                     <img class="icon-account-manu"
-                                        src="{{ URL::asset('/assets/image/welcome/iconPro.jpg') }}">
-                                @elseif (Auth::user()->plans == 2)
+                                        src="{{ URL::asset('/assets/image/welcome/bookmark_manager.png') }}">
+                                    แก้ไขเว็บส่วนตัว
                                     <img class="icon-account-manu"
                                         src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}">
-                                @endif
-                            </p>
+                                </p>
+                            </a>
                         </li>
                         <li>
-                            <p>
-                                <img class="icon-account-manu"
-                                    src="{{ URL::asset('/assets/image/welcome/groups_2.png') }}">
-                                หา co-agent ช่วยขาย
-                                @if (Auth::user()->plans == 0)
-                                    <img class="icon-account-manu-2"
-                                        src="{{ URL::asset('/assets/image/welcome/iconFree.png') }}">
-                                @elseif (Auth::user()->plans == 1)
+                            <a @if (Auth::user()->plans == 2) href="" @endif>
+                                <p>
                                     <img class="icon-account-manu"
-                                        src="{{ URL::asset('/assets/image/welcome/iconPro.jpg') }}">
-                                @elseif (Auth::user()->plans == 2)
+                                        src="{{ URL::asset('/assets/image/welcome/groups_2.png') }}">
+                                    หา co-agent ช่วยขาย
                                     <img class="icon-account-manu"
                                         src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}">
-                                @endif
-                            </p>
+                                </p>
+                            </a>
                         </li>
 
                     </ul>

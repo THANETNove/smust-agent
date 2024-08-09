@@ -514,7 +514,10 @@
 }
 
 .manu-bar-profile .menu-items li {
-    padding: 8px 16px;
+    padding-top: 8px;
+    padding-bottom: 4px;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 .manu-bar-profile .menu-items li a {
@@ -523,7 +526,10 @@
 }
 
 .manu-bar-profile .menu-items li:hover {
-    background-color: #ddd;
+    background-color: #BDE3FF;
+    width: 300px;
+    border-radius: 4px;
+
 }
 
 .manu-bar-profile .toggle-menu:checked~.menu-items {
