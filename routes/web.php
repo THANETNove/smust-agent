@@ -58,6 +58,7 @@ Route::post('/add-code_admin', [UserBrokerController::class, 'store'])->name('ad
 Route::get('/free-trial', [FreeTrialRightsController::class, 'index'])->name('/free-trial');
 Route::get('/plans-all', [FreeTrialRightsController::class, 'plansAll'])->name('/plans-all');
 Route::get('/edit-profile', [ProfileController::class, 'index'])->name('/edit-profile');
+Route::put('/new-setup-profile/{id}', [ProfileController::class, 'update'])->name('new-setup-profile');
 
 //ส่วนของ admin
 Route::group(['middleware' => ['is_admin']], function () {
