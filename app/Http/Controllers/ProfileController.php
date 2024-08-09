@@ -49,25 +49,30 @@ class ProfileController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
-
-        /*     $validated = $request->validate([
-            'card_image' => ['required', 'image', 'image:jpg,png,jpeg,webp'],
-            'facebook' => ['nullable', 'url']
-
-        ]);
- */
-
         $member =  User::find($id);
+
+
+        $validated = $request->validate([
+            'card_image' => [
+                $member->card_image ? 'sometimes' : 'required',
+                'image',
+                'mimes:jpg,png,jpeg,webp'
+            ],
+            'facebook' => ['nullable', 'url']
+        ]);
+
 
         if ($request->hasFile('image')) {
 
-            /*   $existingImagePath = public_path($member->image);
+            if ($member->image !==  null) {
+                $existingImagePath = public_path($member->image);
 
-            if (file_exists($existingImagePath)) {
-                unlink($existingImagePath);
+                if (file_exists($existingImagePath)) {
+                    unlink($existingImagePath);
+                }
             }
- */
+
+
             $file = $request->file('image');
             $filename = date('i_d_m_Y') . '_' . time() . '.' . $file->getClientOriginalExtension();
             $filePath = '/assets/img/profile/' . $filename;
@@ -76,45 +81,32 @@ class ProfileController extends Controller
         }
         if ($request->hasFile('card_image')) {
 
-          /*   $existingImagePath2 = public_path($member->card_image);
+            if ($member->card_image) {
+                $existingImagePath2 = public_path($member->card_image);
 
-            if (file_exists($existingImagePath2)) {
-                unlink($existingImagePath2);
+                if (file_exists($existingImagePath2)) {
+                    unlink($existingImagePath2);
+                }
             }
- */
 
             $file2 = $request->file('card_image');
             $filename2 = date('i_d_m_Y') . '_' . time() . '.' . $file2->getClientOriginalExtension();
             $filePathCard = '/assets/img/card_image/' . $filename2;
             $file2->move(public_path('/assets/img/card_image/'), $filename2);
-            $member->image = $filePathCard;
+            $member->card_image = $filePathCard;
         }
-
-        dd("aa");
-        /*   $dateImg = [];
-        if ($request->hasFile('image')) {
-
-
-            $img = json_decode($member->image);
-
-            foreach ($img as $image) {
-                $image_path = public_path() . '/img/product/' . $image;
-                if (file_exists($image_path)) {
-                    // ถ้ามีไฟล์อยู่จริง จึงลบ
-                    unlink($image_path);
-                }
-            }
-
-            $imagefile = $request->file('image');
-            foreach ($imagefile as $image) {
-                $data =   $image->move(public_path() . '/img/product', $randomText . "" . $image->getClientOriginalName());
-                $dateImg[] =  $randomText . "" . $image->getClientOriginalName();
-            }
-            $member->image = json_encode($dateImg);
-        }
+        $member->phone = $request['phone'];
+        $member->id_card_number = $request['id_card_number'];
+        $member->line_id = $request['line_id'];
+        $member->facebook = $request['facebook'];
+        $member->provinces = $request['provinces'];
+        $member->contract_type = $request['contract_type'];
+        $member->property_type = $request['property_type'];
+        $member->characteristics = $request['characteristics'];
 
 
-        $member->save(); */
+        $member->save();
+        return redirect()->back()->with('success', 'ข้อมูลถูกบันทึกเรียบร้อยแล้ว');
     }
 
     /**

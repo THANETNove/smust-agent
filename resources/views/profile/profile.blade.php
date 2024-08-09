@@ -13,6 +13,11 @@
             <p class="free-trial">
                 ตั้งค่าโปรไฟล์
             </p>
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
         </div>
         <form method="POST" action="{{ route('new-setup-profile', Auth::user()->id) }}" enctype="multipart/form-data">
             @csrf
@@ -87,10 +92,20 @@
                     </div>
                     <p class="card_number-setup">อัปโหลดรูปบัตรประชาชน <span style="color: red;"> *</span> </p>
                     <div class="card_image" id="card_imageButton">
-                        <img id="card_numberImg" class="card_image">
+                        @if (Auth::user()->card_image)
+                            <img id="card_numberImg" class="card_image" height="100%" width="100%"
+                                src="{{ URL::asset(Auth::user()->card_image) }}">
+                        @else
+                            <img id="card_numberImg" class="card_image">
+                        @endif
+
                         <img class="group78" src="{{ URL::asset('/assets/image/welcome/Group78.png') }}">
 
                     </div>
+
+                    {{--          <input type="file" id="card_numberInput" class="@error('card_image') is-invalid @enderror"
+                        name="card_image" accept="image/*" value="{{ Auth::user()->card_image }}" style="display: none;"> --}}
+                    <input type="hidden" name="existing_image" value="{{ Auth::user()->card_image }}">
                     <input type="file" id="card_numberInput" class="@error('card_image') is-invalid @enderror"
                         name="card_image" accept="image/*" style="display: none;">
                     @error('card_image')
