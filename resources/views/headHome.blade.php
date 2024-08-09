@@ -31,11 +31,11 @@
         <div class="box-nav-link-home nav nav-tabs" id="myTab" role="tablist">
             <div class="box-link-manu-home active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
                 type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
-                Home
+                ส่วนเจ้าของ
             </div>
             <div class="box-link-manu-home" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
                 type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
-                Profile
+                ส่วนโคเอเจ้นท์
             </div>
         </div>
 
