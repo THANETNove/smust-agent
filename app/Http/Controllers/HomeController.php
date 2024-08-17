@@ -44,7 +44,7 @@ class HomeController extends Controller
 
         // Apply authorization logic
         $user = Auth::user();
-        $dataHomeQuery->where('code_admin', $user->code_admin);
+        //$dataHomeQuery->where('code_admin', $user->code_admin);
 
 
         $dataHomeQuery->orderBy('rent_sell_home_details.id', 'DESC');
