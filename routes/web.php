@@ -61,6 +61,7 @@ Route::get('/plans-all', [FreeTrialRightsController::class, 'plansAll'])->name('
 Route::get('/edit-profile', [ProfileController::class, 'index'])->name('/edit-profile');
 Route::put('/new-setup-profile/{id}', [ProfileController::class, 'update'])->name('new-setup-profile');
 Route::get('/assets-customer', [AssetsCustomersWantController::class, 'index'])->name('assets-customer');
+Route::get('/create-assets-customer', [AssetsCustomersWantController::class, 'create'])->name('create-assets-customer');
 
 //ส่วนของ admin
 Route::group(['middleware' => ['is_admin']], function () {

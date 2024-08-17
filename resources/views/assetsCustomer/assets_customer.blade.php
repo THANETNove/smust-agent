@@ -45,8 +45,10 @@
                 </div>
                 <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
                     tabindex="0">
-                    <div class="row">
-                        profile
+                    <div>
+                        <a href="{{ url('create-assets-customer') }}">
+                            <img class="icon-frame648" src="{{ URL::asset('/assets/image/welcome/frame648.png') }}">
+                        </a>
                     </div>
                 </div>
             </div>

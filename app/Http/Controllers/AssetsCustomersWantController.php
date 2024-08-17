@@ -31,7 +31,7 @@ class AssetsCustomersWantController extends Controller
      */
     public function create()
     {
-        //
+        return view('assetsCustomer.create_assets_customer');
     }
 
     /**
