@@ -98,8 +98,14 @@ class AssetsCustomersWantController extends Controller
         $member->districts = $request['districts'];
         $member->amphures = $request['amphures'];
         if ($request->has('station') && $request['station'] != 'null') {
+            $train = DB::table('train_station')
+                ->where('id', $request['station'])
+                ->get();
+
+            $member->station_name = $train[0]->station_name_th;
             $member->station = $request['station'];
         } else {
+            $member->station_name = NULL;
             $member->station = NULL; // หรือกำหนดค่าอื่นตามที่คุณต้องการ
         }
         if ($request->has('options')) {

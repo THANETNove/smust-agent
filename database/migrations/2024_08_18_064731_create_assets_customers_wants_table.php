@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('provinces')->nullable()->comment('จังหวัด');
             $table->string('districts')->nullable()->comment('อำเภอเขต');
             $table->string('amphures')->nullable()->comment('เเขวง');
-            $table->string('station')->nullable()->comment('รถไฟ');
+            $table->string('station')->nullable()->comment('รหัสรถไฟ');
+            $table->string('station_name')->nullable()->comment('ชื่อรถไฟ');
             $table->text('options')->nullable()->comment('ลักษณะพิเศษ');
             $table->text('message_customer')->nullable()->comment('ข้อความจากลูกค้า');
             $table->string('status')->nullable()->comment('0 ปิด ,1=เปิด');

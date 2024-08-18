@@ -18,6 +18,7 @@ class AssetsCustomersWant extends Model
         'districts',
         'amphures',
         'station',
+        'station_name',
         'options',
         'message_customer',
         'status',
