@@ -51,8 +51,8 @@ class AssetsCustomersWantController extends Controller
             ->orderBy('assets_customers_wants.created_at', 'DESC');
 
         // Clone the query for each condition
-        $wants = (clone $wantsData)->whereNull('assets_customers_wants.user_id')->paginate(1);
-        $wants2 = (clone $wantsData)->whereNotNull('assets_customers_wants.user_id')->paginate(1);
+        $wants2 = (clone $wantsData)->whereNull('assets_customers_wants.user_id')->paginate(1);
+        $wants = (clone $wantsData)->whereNotNull('assets_customers_wants.user_id')->paginate(1);
 
 
 
