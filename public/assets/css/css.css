@@ -718,3 +718,53 @@ p {
     height: 36px;
     max-width: 360px;
 }
+
+.box-free-customer {
+    padding-left: 21px;
+    padding-right: 21px;
+}
+
+.contract-type {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+}
+
+.co-agent {
+    margin-top: 26px;
+    color: #030B2F;
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+.filter-box-input2 {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #F9F9F9;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 57px;
+    height: 36px;
+}
+
+.filter-box-input2 input[type="radio"] {
+    display: none;
+    /* Hide the radio buttons */
+}
+
+
+
+.filter-box-input2.selected {
+    background-color: #007BA7;
+    color: #FFFFFF;
+}
+
+.price-range {
+    font-size: 16px;
+    color: #030B2F;
+    font-weight: bold;
+}
