@@ -76,9 +76,11 @@ class AssetsCustomersWantController extends Controller
      */
     public function store(Request $request)
     {
-        $options = $_POST['options']; // $options จะเป็น array ที่มีค่าที่ผู้ใช้เลือก
-
-
+        if (isset($_POST['options'])) {
+            $options = $_POST['options']; // $options จะเป็น array ที่มีค่าที่ผู้ใช้เลือก
+        } else {
+            $options = NULL; // กำหนดค่าเป็น array ว่างถ้าคีย์ 'options' ไม่มีอยู่
+        }
         $member = new AssetsCustomersWant;
 
 
