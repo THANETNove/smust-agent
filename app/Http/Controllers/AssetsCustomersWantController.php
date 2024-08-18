@@ -27,13 +27,12 @@ class AssetsCustomersWantController extends Controller
     public function index()
     {
 
-        $wants = DB::table('assets_customers_wants')
+        $wantsData = DB::table('assets_customers_wants')
             ->leftJoin('users', 'assets_customers_wants.user_id', '=', 'users.id')
             ->leftJoin('provinces', 'assets_customers_wants.provinces', '=', 'provinces.id')
             ->leftJoin('amphures', 'assets_customers_wants.districts', '=', 'amphures.id')
             ->leftJoin('districts', 'assets_customers_wants.amphures', '=', 'districts.id')
             ->leftJoin('train_station', 'assets_customers_wants.station', '=', 'train_station.id') // เชื่อมกับตาราง train_station
-
             ->select(
                 'assets_customers_wants.*',
                 'users.first_name',
@@ -49,12 +48,18 @@ class AssetsCustomersWantController extends Controller
                 'train_station.station_code',
                 'train_station.station_name_th'
             )
-            ->orderBy('assets_customers_wants.created_at', 'DESC')
-            ->paginate(100);
+            ->orderBy('assets_customers_wants.created_at', 'DESC');
+
+        // Clone the query for each condition
+        $wants = (clone $wantsData)->whereNull('assets_customers_wants.user_id')->paginate(1);
+        $wants2 = (clone $wantsData)->whereNotNull('assets_customers_wants.user_id')->paginate(1);
 
 
 
-        return view('assetsCustomer.assets_customer', compact('wants'));
+
+
+
+        return view('assetsCustomer.assets_customer', compact('wants', 'wants2'));
     }
 
     /**

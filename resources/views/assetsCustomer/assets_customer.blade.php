@@ -245,6 +245,10 @@
                                 @endif
                             @endforeach
                         </div>
+
+                    </div>
+                    <div class="mt-5">
+                        {!! $wants->links() !!}
                     </div>
                 </div>
                 <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
@@ -258,11 +262,11 @@
                         $lastDisplayedDate = null;
                     @endphp
                     <div class="margin-wants-box">
-                        @foreach ($wants as $wan)
-                            @if ($wan->user_id)
+                        @foreach ($wants2 as $wan2)
+                            @if ($wan2->user_id)
                                 <div>
                                     @php
-                                        $createdAt = \Carbon\Carbon::parse($wan->created_at);
+                                        $createdAt = \Carbon\Carbon::parse($wan2->created_at);
                                         $now = \Carbon\Carbon::now();
 
                                         if ($createdAt->isToday()) {
@@ -297,16 +301,16 @@
                                                     ];
                                                 @endphp
 
-                                                @if (isset($propertyImages[$wan->property_type]))
+                                                @if (isset($propertyImages[$wan2->property_type]))
                                                     <img class="icon-cottage"
-                                                        src="{{ URL::asset($propertyImages[$wan->property_type]) }}">
+                                                        src="{{ URL::asset($propertyImages[$wan2->property_type]) }}">
                                                 @endif
 
-                                                <p class="icon-cottage-text">{{ $wan->property_type }}</p>
+                                                <p class="icon-cottage-text">{{ $wan2->property_type }}</p>
                                             </div>
 
 
-                                            @if ($wan->sale_rent == 'sale')
+                                            @if ($wan2->sale_rent == 'sale')
                                                 <div class="ass-box-sale">
                                                     ขาย
                                                 </div>
@@ -322,32 +326,32 @@
                                                 <img class="icon-cottage"
                                                     src="{{ URL::asset('/assets/image/welcome/pajamas_sort-lowest.png') }}">
 
-                                                <span class="ass-price_start">{{ number_format($wan->price_start) }} -
-                                                    {{ number_format($wan->price_end) }}</span>
+                                                <span class="ass-price_start">{{ number_format($wan2->price_start) }} -
+                                                    {{ number_format($wan2->price_end) }}</span>
                                             </div>
                                             <div>
                                                 <img class="icon-cottage"
                                                     src="{{ URL::asset('/assets/image/welcome/location_on.png') }}">
-                                                <span class="station_name_th">{{ $wan->provinces_name_th }}
-                                                    {{ $wan->districts_name_th }} {{ $wan->amphures_name_th }}</span>
+                                                <span class="station_name_th">{{ $wan2->provinces_name_th }}
+                                                    {{ $wan2->districts_name_th }} {{ $wan2->amphures_name_th }}</span>
                                             </div>
                                             <div>
                                                 @php
                                                     // ตรวจสอบสีเพื่อตรวจว่าเป็น BTS หรือ MRT
                                                     $prefix = '';
-                                                    if (in_array($wan->line_code, ['Light green', 'Dark green'])) {
+                                                    if (in_array($wan2->line_code, ['Light green', 'Dark green'])) {
                                                         $prefix = 'BTS';
-                                                    } elseif (in_array($wan->line_code, ['Blue', 'Purple'])) {
+                                                    } elseif (in_array($wan2->line_code, ['Blue', 'Purple'])) {
                                                         $prefix = 'MRT';
-                                                    } elseif (in_array($wan->line_code, ['ARL'])) {
+                                                    } elseif (in_array($wan2->line_code, ['ARL'])) {
                                                         $prefix = 'ARL';
                                                     }
                                                 @endphp
-                                                @if ($wan->station_name_th)
+                                                @if ($wan2->station_name_th)
                                                     <img class="icon-cottage"
                                                         src="{{ URL::asset('/assets/image/home/directions_subway.png') }}">
                                                     <span class="station_name_th">{{ $prefix }}
-                                                        {{ $wan->station_name_th }}
+                                                        {{ $wan2->station_name_th }}
                                                     </span>
                                                 @endif
 
@@ -355,7 +359,7 @@
                                             <div class="row-ass mt-2">
 
                                                 @php
-                                                    $optionsArray = json_decode($wan->options, true); // แปลง JSON string เป็น array
+                                                    $optionsArray = json_decode($wan2->options, true); // แปลง JSON string เป็น array
                                                 @endphp
 
                                                 @if (is_array($optionsArray))
@@ -368,7 +372,7 @@
                                             <div class="row ">
 
                                                 <div>
-                                                    <p class="message_customer">{{ $wan->message_customer }}</p>
+                                                    <p class="message_customer">{{ $wan2->message_customer }}</p>
                                                 </div>
 
                                             </div>
@@ -376,9 +380,9 @@
                                             <div class="ass-user">
                                                 <div class="row-ass">
 
-                                                    @if ($wan->user_id)
+                                                    @if ($wan2->user_id)
                                                         <img class="icon-cottage-user"
-                                                            src="{{ URL::asset($wan->image) }}">
+                                                            src="{{ URL::asset($wan2->image) }}">
                                                     @else
                                                         <img class="icon-cottage"
                                                             src="{{ URL::asset('/assets/image/welcome/Frame360.png') }}">
@@ -387,15 +391,15 @@
 
                                                     <div class="box-dan-name">
                                                         <p class="dan-name">
-                                                            @if ($wan->user_id)
-                                                                {{ $wan->first_name }} {{ $wan->last_name }}
+                                                            @if ($wan2->user_id)
+                                                                {{ $wan->first_name }} {{ $wan2->last_name }}
                                                             @else
                                                                 Dan
                                                             @endif
 
                                                         </p>
                                                         @php
-                                                            $createdAt = \Carbon\Carbon::parse($wan->created_at);
+                                                            $createdAt = \Carbon\Carbon::parse($wan2->created_at);
                                                             $now = \Carbon\Carbon::now();
 
                                                             if ($createdAt->diffInDays($now) < 1) {
@@ -422,24 +426,24 @@
                                                     </div>
                                                 </div>
                                                 <div style="margin-right: 16px">
-                                                    @if ($wan->user_id)
-                                                        @if ($wan->line_id)
-                                                            <a href="{{ $wan->line_id }}" class="no-underline"
+                                                    @if ($wan2->user_id)
+                                                        @if ($wan2->line_id)
+                                                            <a href="{{ $wan2->line_id }}" class="no-underline"
                                                                 target="_blank" rel="noopener noreferrer">
                                                                 <img class="ass-icon-line"
                                                                     src="{{ URL::asset('/assets/image/home/line.png') }}">
                                                             </a>
                                                         @endif
 
-                                                        @if ($wan->facebook_id)
-                                                            <a href="{{ $wan->facebook_id }}" target="_blank"
+                                                        @if ($wan2->facebook_id)
+                                                            <a href="{{ $wan2->facebook_id }}" target="_blank"
                                                                 rel="noopener noreferrer" class="no-underline">
                                                                 <img class="ass-icon-line"
                                                                     src="{{ URL::asset('/assets/image/home/facbook.png') }}">
                                                             </a>
                                                         @endif
-                                                        @if ($wan->phone)
-                                                            <a href="tel:{{ $wan->phone }}" rel="noopener noreferrer"
+                                                        @if ($wan2->phone)
+                                                            <a href="tel:{{ $wan2->phone }}" rel="noopener noreferrer"
                                                                 class="no-underline">
                                                                 <img class="ass-icon-line"
                                                                     src="{{ URL::asset('/assets/image/home/thone.png') }}">
@@ -455,9 +459,15 @@
                                 </div>
                             @endif
                         @endforeach
+
+                    </div>
+                    <div class="mt-5">
+                        {!! $wants2->links() !!}
                     </div>
 
+
                 </div>
+
             </div>
 
 
