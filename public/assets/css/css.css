@@ -439,6 +439,7 @@
 }
 
 .auto-name {
+    margin-top: 16px;
     color: #000000;
     font-size: 14px;
     font-weight: bold;
@@ -664,7 +665,7 @@
 
 
 
-p {
+.filter-box p {
     margin: 0;
     color: #000;
     /* Text color */

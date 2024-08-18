@@ -137,7 +137,7 @@
                         <div class="col-md-12 input_box">
                             <input type="url" name="facebook"
                                 class="form-control @error('facebook') is-invalid @enderror" name="facebook"
-                                value="{{ Auth::user()->facebook }}" autocomplete="Facebook">
+                                value="{{ Auth::user()->facebook_id }}" autocomplete="Facebook">
 
                             <label>Facebook </label>
                             @error('facebook')

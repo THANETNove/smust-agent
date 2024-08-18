@@ -76,7 +76,7 @@ class ProfileController extends Controller
 
         if ($request->hasFile('image')) {
 
-            if ($member->image !==  null) {
+            if ($member->image) {
                 $existingImagePath = public_path($member->image);
 
                 if (file_exists($existingImagePath)) {
