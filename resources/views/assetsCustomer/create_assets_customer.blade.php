@@ -40,9 +40,9 @@
                         <select class="form-select select-color" name="property_type" aria-label="Default select example">
                             <option selected value="บ้านเดี่ยว">บ้านเดี่ยว</option>
                             <option value="คอนโด">คอนโด </option>
-                            <option value="ทาวน์เฮ้าส์ (ADD)">ทาวน์เฮ้าส์ (ADD)</option>
-                            <option value="ที่ดิน (ADD)">ที่ดิน (ADD)</option>
-                            <option value="พาณิชย์ (ADD)">พาณิชย์ (ADD)</option>
+                            <option value="ทาวน์เฮ้าส์">ทาวน์เฮ้าส์</option>
+                            <option value="ที่ดิน">ที่ดิน</option>
+                            <option value="พาณิชย์">พาณิชย์</option>
                         </select>
                         @error('id_card_number')
                             <span class="invalid-feedback" role="alert">
@@ -89,7 +89,7 @@
                                     $prefix = 'ARL';
                                 }
                             @endphp
-                            <option value="{{ $station->station_name_th }}">
+                            <option value="{{ $station->id }}">
                                 {{ $prefix }} {{ $station->station_name_th }}
                             </option>
                         @endforeach

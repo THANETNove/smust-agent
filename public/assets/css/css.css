@@ -776,8 +776,153 @@
 
 .wants-box {
     width: 358px;
-    height: 228px;
+    height: "100%";
     background-color: #FFFFFF;
     border-radius: 10px;
     margin-bottom: 16px;
+    padding: 16px;
+}
+
+.wants-box-icon {
+    width: "100%";
+    height: 50px;
+}
+
+.ass-box-icon {
+    width: 56px;
+    height: 56px;
+    background-color: #B8D7E2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    flex-direction: column;
+    padding-top: 8px;
+}
+
+.icon-cottage {
+    width: 20px;
+    height: 20px;
+}
+
+.icon-cottage-user {
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+}
+
+.icon-cottage-text {
+    font-size: 12px;
+    color: #000000;
+    text-align: center;
+}
+
+.ass-box-sale {
+    background-color: #FAA631;
+    width: 56px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    margin-top: 8px;
+    color: #FFFFFF;
+    font-size: 12px;
+}
+
+.ass-box-rent {
+    background-color: #007BA7;
+    width: 56px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    margin-top: 8px;
+    color: #FFFFFF;
+    font-size: 12px;
+}
+
+.ass-price_start {
+    font-size: 14px;
+    font-weight: 700;
+    color: #007BA7;
+}
+
+.special-characteristics {
+    font-size: 12px;
+    height: 25px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #B8D7E2;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 2.5px;
+    padding-bottom: 2.5px;
+    border-radius: 6px;
+    color: #014158;
+    margin-right: 8px;
+    margin-bottom: 8px;
+
+}
+
+.message_customer {
+    color: #000000;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.station_name_th {
+    font-size: 12px;
+    font-weight: 400;
+    color: #424862;
+}
+
+.ass-hr {
+
+    color: inherit;
+    border: 0;
+    border-top: var(--bs-border-width) solid;
+    opacity: .25;
+    width: 90% !important;
+    color: #B8D7E2;
+    margin-bottom: 12px;
+}
+
+.ass-user {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ass-icon-line {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.row-ass {
+    display: flex;
+    flex-wrap: wrap;
+    /* เพื่อให้รายการสามารถขึ้นบรรทัดใหม่ได้ */
+    gap: 2px;
+    /* เว้นช่องว่างระหว่างรายการ */
+}
+
+.box-dan-name {
+    margin-left: 8px;
+}
+
+.dan-name {
+    font-size: 12px;
+    font-weight: 400px;
+    color: #030B2F;
+}
+
+.dan-time {
+    margin-top: -10px;
+    font-size: 12px;
+    font-weight: 400px;
+    color: #7C7C7C;
 }

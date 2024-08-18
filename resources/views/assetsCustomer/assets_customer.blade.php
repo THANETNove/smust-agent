@@ -53,7 +53,154 @@
 
                     <div class="margin-wants-box">
                         @foreach ($wants as $wan)
-                            <div class="wants-box"></div>
+                            <div class="wants-box">
+                                <div class="row-box">
+                                    <div class="col-2 wants-box-icon">
+                                        <div class="ass-box-icon">
+                                            @php
+                                                $propertyImages = [
+                                                    'บ้าน' => '/assets/image/welcome/cottage.png',
+                                                    'บ้านเดี่ยว' => '/assets/image/welcome/cottage.png',
+                                                    'คอนโด' => '/assets/image/welcome/location_city.png',
+                                                    'ทาวน์เฮ้าส์' => '/assets/image/welcome/fluent_.png',
+                                                    'ที่ดิน' => '/assets/image/welcome/group_49.png',
+                                                    'พาณิชย์' => '/assets/image/welcome/location_city.png',
+                                                ];
+                                            @endphp
+
+                                            @if (isset($propertyImages[$wan->property_type]))
+                                                <img class="icon-cottage"
+                                                    src="{{ URL::asset($propertyImages[$wan->property_type]) }}">
+                                            @endif
+
+                                            <p class="icon-cottage-text">{{ $wan->property_type }}</p>
+                                        </div>
+
+
+                                        @if ($wan->sale_rent == 'sale')
+                                            <div class="ass-box-sale">
+                                                ขาย
+                                            </div>
+                                        @else
+                                            <div class="ass-box-rent">
+                                                เช่า
+                                            </div>
+                                        @endif
+
+                                    </div>
+                                    <div class="col-10">
+                                        <div>
+                                            <img class="icon-cottage"
+                                                src="{{ URL::asset('/assets/image/welcome/pajamas_sort-lowest.png') }}">
+
+                                            <span class="ass-price_start">{{ number_format($wan->price_start) }} -
+                                                {{ number_format($wan->price_end) }}</span>
+                                        </div>
+                                        <div>
+                                            <img class="icon-cottage"
+                                                src="{{ URL::asset('/assets/image/welcome/location_on.png') }}">
+                                            <span class="station_name_th">{{ $wan->provinces_name_th }}
+                                                {{ $wan->districts_name_th }} {{ $wan->amphures_name_th }}</span>
+                                        </div>
+                                        <div>
+                                            @php
+                                                // ตรวจสอบสีเพื่อตรวจว่าเป็น BTS หรือ MRT
+                                                $prefix = '';
+                                                if (in_array($wan->line_code, ['Light green', 'Dark green'])) {
+                                                    $prefix = 'BTS';
+                                                } elseif (in_array($wan->line_code, ['Blue', 'Purple'])) {
+                                                    $prefix = 'MRT';
+                                                } elseif (in_array($wan->line_code, ['ARL'])) {
+                                                    $prefix = 'ARL';
+                                                }
+                                            @endphp
+                                            <img class="icon-cottage"
+                                                src="{{ URL::asset('/assets/image/home/directions_subway.png') }}">
+                                            <span class="station_name_th">{{ $prefix }} {{ $wan->station_name_th }}
+                                            </span>
+                                        </div>
+                                        <div class="row-ass mt-2">
+
+                                            @php
+                                                $optionsArray = json_decode($wan->options, true); // แปลง JSON string เป็น array
+                                            @endphp
+
+                                            @if (is_array($optionsArray))
+                                                @foreach ($optionsArray as $op)
+                                                    <div class="special-characteristics">#{{ $op }}</div>
+                                                @endforeach
+                                            @endif
+
+                                        </div>
+                                        <div class="row ">
+
+                                            <div>
+                                                <p class="message_customer">{{ $wan->message_customer }}</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="ass-hr"></div>
+                                        <div class="ass-user">
+                                            <div class="row-ass">
+
+                                                @if ($wan->user_id)
+                                                    <img class="icon-cottage-user" src="{{ URL::asset($wan->image) }}">
+                                                @else
+                                                    <img class="icon-cottage"
+                                                        src="{{ URL::asset('/assets/image/welcome/Frame360.png') }}">
+                                                @endif
+
+
+                                                <div class="box-dan-name">
+                                                    <p class="dan-name">
+                                                        @if ($wan->user_id)
+                                                            {{ $wan->first_name }} {{ $wan->last_name }}
+                                                        @else
+                                                            Dan
+                                                        @endif
+
+                                                    </p>
+                                                    @php
+                                                        $createdAt = \Carbon\Carbon::parse($wan->created_at);
+                                                        $now = \Carbon\Carbon::now();
+
+                                                        if ($createdAt->diffInDays($now) < 1) {
+                                                            $hoursDiff = $createdAt->diffInHours($now);
+                                                            if ($hoursDiff == 0) {
+                                                                $minutesDiff = $createdAt->diffInMinutes($now);
+                                                                $displayTime = $minutesDiff . ' นาทีที่ผ่านมา'; // เช่น "15 นาทีที่ผ่านมา"
+                                                            } else {
+                                                                $displayTime = $hoursDiff . ' ชั่วโมงก่อน'; // เช่น "6 ชั่วโมงก่อน"
+                                                            }
+                                                        } else {
+                                                            $displayTime = $createdAt
+                                                                ->locale('th')
+                                                                ->translatedFormat('d F Y'); // แสดงวันที่ในรูปแบบ 27 กุมภาพันธ์ 2024
+                                                        }
+                                                    @endphp
+
+                                                    <p class="dan-time">
+                                                        {{ $displayTime }}
+                                                    </p>
+
+
+
+                                                </div>
+                                            </div>
+                                            <div style="margin-right: 16px">
+                                                <img class="ass-icon-line"
+                                                    src="{{ URL::asset('/assets/image/home/line.png') }}">
+                                                <img class="ass-icon-line"
+                                                    src="{{ URL::asset('/assets/image/home/facbook.png') }}">
+                                                <img class="ass-icon-line"
+                                                    src="{{ URL::asset('/assets/image/home/thone.png') }}">
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     </div>
 

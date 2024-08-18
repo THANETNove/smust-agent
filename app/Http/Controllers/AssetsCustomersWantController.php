@@ -28,10 +28,30 @@ class AssetsCustomersWantController extends Controller
     {
 
         $wants = DB::table('assets_customers_wants')
-            ->leftJoin('users', 'assets_customers_wants.user_id', 'users.id')
-            ->select('assets_customers_wants.*', 'users.first_name','users.last_name','users.phone','users.phone')
+            ->leftJoin('users', 'assets_customers_wants.user_id', '=', 'users.id')
+            ->leftJoin('provinces', 'assets_customers_wants.provinces', '=', 'provinces.id')
+            ->leftJoin('amphures', 'assets_customers_wants.districts', '=', 'amphures.id')
+            ->leftJoin('districts', 'assets_customers_wants.amphures', '=', 'districts.id')
+            ->leftJoin('train_station', 'assets_customers_wants.station', '=', 'train_station.id') // เชื่อมกับตาราง train_station
+
+            ->select(
+                'assets_customers_wants.*',
+                'users.first_name',
+                'users.last_name',
+                'users.phone',
+                'users.image',
+                'users.line_id',
+                'users.facebook_id',
+                'provinces.name_th AS provinces_name_th',
+                'districts.name_th AS districts_name_th',
+                'amphures.name_th AS amphures_name_th',
+                'train_station.line_code',
+                'train_station.station_code',
+                'train_station.station_name_th'
+            )
             ->orderBy('assets_customers_wants.id', 'DESC')
             ->paginate(100);
+
 
 
         return view('assetsCustomer.assets_customer', compact('wants'));
