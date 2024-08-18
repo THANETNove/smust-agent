@@ -28,6 +28,7 @@ class AssetsCustomersWantController extends Controller
     {
 
         $wantsData = DB::table('assets_customers_wants')
+            ->where('assets_customers_wants.status', 1)
             ->leftJoin('users', 'assets_customers_wants.user_id', '=', 'users.id')
             ->leftJoin('provinces', 'assets_customers_wants.provinces', '=', 'provinces.id')
             ->leftJoin('amphures', 'assets_customers_wants.districts', '=', 'amphures.id')
@@ -51,8 +52,8 @@ class AssetsCustomersWantController extends Controller
             ->orderBy('assets_customers_wants.created_at', 'DESC');
 
         // Clone the query for each condition
-        $wants2 = (clone $wantsData)->whereNull('assets_customers_wants.user_id')->paginate(1);
-        $wants = (clone $wantsData)->whereNotNull('assets_customers_wants.user_id')->paginate(1);
+        $wants = (clone $wantsData)->whereNull('assets_customers_wants.user_id')->paginate(100);
+        $wants2 = (clone $wantsData)->whereNotNull('assets_customers_wants.user_id')->paginate(100);
 
 
 
