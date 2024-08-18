@@ -502,7 +502,7 @@
                         </div>
                     </div>
 
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select mt-4" aria-label="Default select example">
                         <option selected>Open this select menu</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -595,7 +595,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary col-12 mt-3"> <span> <img class="icon-search-box"
+                    <button type="button" class="btn btn-primary col-12 mt-4 mb-3"> <span> <img class="icon-search-box"
                                 src="{{ URL::asset('/assets/image/welcome/search-box.png') }}"></span>คันหา</button>
 
                 </div>
