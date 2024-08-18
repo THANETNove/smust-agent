@@ -392,7 +392,7 @@
                                                     <div class="box-dan-name">
                                                         <p class="dan-name">
                                                             @if ($wan2->user_id)
-                                                                {{ $wan->first_name }} {{ $wan2->last_name }}
+                                                                {{ $wan2->first_name }} {{ $wan2->last_name }}
                                                             @else
                                                                 Dan
                                                             @endif
@@ -635,5 +635,41 @@
             // Add 'selected' class to the clicked element's parent
             element.closest('.filter-box-input').classList.add('selected');
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // อ่านค่าแท็บที่ถูกเลือกจาก localStorage
+            const activeTab = localStorage.getItem('activeTab');
+
+
+
+            // ถ้ามีค่าแท็บที่ถูกเลือกใน localStorage
+            if (activeTab) {
+                // เอาคลาส active ออกจากแท็บทั้งหมด
+                document.querySelectorAll('.box-link-manu-home').forEach(tab => {
+                    tab.classList.remove('active');
+                    tab.setAttribute('aria-selected', 'false');
+                });
+
+                // เพิ่มคลาส active ให้กับแท็บที่ถูกเลือกใน localStorage
+                const selectedTab = document.getElementById(activeTab);
+                selectedTab.classList.add('active');
+                selectedTab.setAttribute('aria-selected', 'true');
+
+                // แสดง pane ที่ตรงกับแท็บที่ถูกเลือก
+                const selectedPane = document.querySelector(selectedTab.getAttribute('data-bs-target'));
+                document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('show', 'active'));
+                selectedPane.classList.add('show', 'active');
+            }
+
+            // เพิ่ม Event Listener ให้กับแท็บทั้งหมด
+            document.querySelectorAll('.box-link-manu-home').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // เก็บ ID ของแท็บที่ถูกเลือกลงใน localStorage
+                    localStorage.setItem('activeTab', this.id);
+                });
+            });
+
+
+        });
     </script>
 @endsection
