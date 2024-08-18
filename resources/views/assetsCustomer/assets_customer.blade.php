@@ -49,13 +49,18 @@
                                     @php
                                         $createdAt = \Carbon\Carbon::parse($wan->created_at);
                                         $now = \Carbon\Carbon::now();
+                                        $diffInDays = $createdAt->diffInDays($now);
 
                                         if ($createdAt->isToday()) {
                                             $displayText = 'วันนี้';
                                         } elseif ($createdAt->isYesterday()) {
                                             $displayText = 'เมื่อวาน';
+                                        } elseif ($diffInDays <= 7) {
+                                            $displayText = 'สัปดาห์นี้';
+                                        } elseif ($diffInDays <= 30) {
+                                            $displayText = 'เดือนนี้';
                                         } else {
-                                            $displayText = $createdAt->locale('th')->translatedFormat('d F Y');
+                                            $displayText = 'เกิน 1 เดือน';
                                         }
 
                                         // ตรวจสอบว่ากลุ่มวันที่นี้ได้แสดงผลไปแล้วหรือยัง
@@ -262,13 +267,18 @@
                                 @php
                                     $createdAt = \Carbon\Carbon::parse($wan2->created_at);
                                     $now = \Carbon\Carbon::now();
+                                    $diffInDays = $createdAt->diffInDays($now);
 
                                     if ($createdAt->isToday()) {
                                         $displayText = 'วันนี้';
                                     } elseif ($createdAt->isYesterday()) {
                                         $displayText = 'เมื่อวาน';
+                                    } elseif ($diffInDays <= 7) {
+                                        $displayText = 'สัปดาห์นี้';
+                                    } elseif ($diffInDays <= 30) {
+                                        $displayText = 'เดือนนี้';
                                     } else {
-                                        $displayText = $createdAt->locale('th')->translatedFormat('d F Y');
+                                        $displayText = 'เกิน 1 เดือน';
                                     }
 
                                     // ตรวจสอบว่ากลุ่มวันที่นี้ได้แสดงผลไปแล้วหรือยัง
