@@ -210,12 +210,31 @@
                                                         </div>
                                                     </div>
                                                     <div style="margin-right: 16px">
-                                                        <img class="ass-icon-line"
-                                                            src="{{ URL::asset('/assets/image/home/line.png') }}">
-                                                        <img class="ass-icon-line"
-                                                            src="{{ URL::asset('/assets/image/home/facbook.png') }}">
-                                                        <img class="ass-icon-line"
-                                                            src="{{ URL::asset('/assets/image/home/thone.png') }}">
+                                                        @if (is_null($wan->user_id))
+                                                            @if ($wan->webLine)
+                                                                <a href="{{ $wan->webLine }}" class="no-underline"
+                                                                    target="_blank" rel="noopener noreferrer">
+                                                                    <img class="ass-icon-line"
+                                                                        src="{{ URL::asset('/assets/image/home/line.png') }}">
+                                                                </a>
+                                                            @endif
+
+                                                            @if ($wan->webFacebook)
+                                                                <a href="{{ $wan->webFacebook }}" target="_blank"
+                                                                    rel="noopener noreferrer" class="no-underline">
+                                                                    <img class="ass-icon-line"
+                                                                        src="{{ URL::asset('/assets/image/home/facbook.png') }}">
+                                                                </a>
+                                                            @endif
+                                                            @if ($wan->webPhone)
+                                                                <a href="tel:{{ $wan->webPhone }}"
+                                                                    rel="noopener noreferrer" class="no-underline">
+                                                                    <img class="ass-icon-line"
+                                                                        src="{{ URL::asset('/assets/image/home/thone.png') }}">
+                                                                </a>
+                                                            @endif
+                                                        @endif
+
                                                     </div>
 
 
@@ -403,14 +422,32 @@
                                                     </div>
                                                 </div>
                                                 <div style="margin-right: 16px">
-                                                    <img class="ass-icon-line"
-                                                        src="{{ URL::asset('/assets/image/home/line.png') }}">
-                                                    <img class="ass-icon-line"
-                                                        src="{{ URL::asset('/assets/image/home/facbook.png') }}">
-                                                    <img class="ass-icon-line"
-                                                        src="{{ URL::asset('/assets/image/home/thone.png') }}">
-                                                </div>
+                                                    @if ($wan->user_id)
+                                                        @if ($wan->line_id)
+                                                            <a href="{{ $wan->line_id }}" class="no-underline"
+                                                                target="_blank" rel="noopener noreferrer">
+                                                                <img class="ass-icon-line"
+                                                                    src="{{ URL::asset('/assets/image/home/line.png') }}">
+                                                            </a>
+                                                        @endif
 
+                                                        @if ($wan->facebook_id)
+                                                            <a href="{{ $wan->facebook_id }}" target="_blank"
+                                                                rel="noopener noreferrer" class="no-underline">
+                                                                <img class="ass-icon-line"
+                                                                    src="{{ URL::asset('/assets/image/home/facbook.png') }}">
+                                                            </a>
+                                                        @endif
+                                                        @if ($wan->phone)
+                                                            <a href="tel:{{ $wan->phone }}" rel="noopener noreferrer"
+                                                                class="no-underline">
+                                                                <img class="ass-icon-line"
+                                                                    src="{{ URL::asset('/assets/image/home/thone.png') }}">
+                                                            </a>
+                                                        @endif
+                                                    @endif
+
+                                                </div>
 
                                             </div>
                                         </div>

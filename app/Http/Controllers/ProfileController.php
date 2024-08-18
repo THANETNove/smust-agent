@@ -70,6 +70,7 @@ class ProfileController extends Controller
                 'image',
                 'mimes:jpg,png,jpeg,webp'
             ],
+            'line_id' => ['nullable', 'url'],
             'facebook' => ['nullable', 'url']
         ]);
 
