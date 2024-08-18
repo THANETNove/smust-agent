@@ -36,7 +36,7 @@ class User extends Authenticatable
         'image',
         'card_image',
         'line_id',
-        'facebook',
+        'facebook_id',
 
     ];
 

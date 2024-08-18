@@ -110,7 +110,7 @@ class ProfileController extends Controller
         $member->phone = $request['phone'];
         $member->id_card_number = $request['id_card_number'];
         $member->line_id = $request['line_id'];
-        $member->facebook = $request['facebook'];
+        $member->facebook_id = $request['facebook'];
         $member->provinces = $request['provinces'];
         $member->contract_type = $request['contract_type'];
         $member->property_type = $request['property_type'];

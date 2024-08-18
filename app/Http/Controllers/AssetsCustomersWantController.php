@@ -26,7 +26,15 @@ class AssetsCustomersWantController extends Controller
      */
     public function index()
     {
-        return view('assetsCustomer.assets_customer');
+
+        $wants = DB::table('assets_customers_wants')
+            ->leftJoin('users', 'assets_customers_wants.user_id', 'users.id')
+            ->select('assets_customers_wants.*', 'users.first_name','users.last_name','users.phone','users.phone')
+            ->orderBy('assets_customers_wants.id', 'DESC')
+            ->paginate(100);
+
+
+        return view('assetsCustomer.assets_customer', compact('wants'));
     }
 
     /**

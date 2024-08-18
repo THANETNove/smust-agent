@@ -768,3 +768,15 @@ p {
     color: #030B2F;
     font-weight: bold;
 }
+
+.margin-wants-box {
+    margin-top: 16px;
+}
+
+.wants-box {
+    width: 358px;
+    height: 228px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}

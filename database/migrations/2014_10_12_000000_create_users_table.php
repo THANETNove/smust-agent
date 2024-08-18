@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('plans')->nullable();
             $table->string('card_image')->nullable();
             $table->string('line_id')->nullable();
+            $table->string('facebook_id')->nullable();
             $table->text('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

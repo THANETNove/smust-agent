@@ -45,11 +45,18 @@
                 </div>
                 <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
                     tabindex="0">
-                    <div>
+                    <div class="">
                         <a href="{{ url('create-assets-customer') }}">
                             <img class="icon-frame648" src="{{ URL::asset('/assets/image/welcome/frame648.png') }}">
                         </a>
                     </div>
+
+                    <div class="margin-wants-box">
+                        @foreach ($wants as $wan)
+                            <div class="wants-box"></div>
+                        @endforeach
+                    </div>
+
                 </div>
             </div>
 
