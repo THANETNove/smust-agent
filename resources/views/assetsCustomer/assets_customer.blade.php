@@ -50,9 +50,33 @@
                             <img class="icon-frame648" src="{{ URL::asset('/assets/image/welcome/frame648.png') }}">
                         </a>
                     </div>
-
+                    @php
+                        $lastDisplayedDate = null;
+                    @endphp
                     <div class="margin-wants-box">
                         @foreach ($wants as $wan)
+                            <div>
+                                @php
+                                    $createdAt = \Carbon\Carbon::parse($wan->created_at);
+                                    $now = \Carbon\Carbon::now();
+
+                                    if ($createdAt->isToday()) {
+                                        $displayText = 'วันนี้';
+                                    } elseif ($createdAt->isYesterday()) {
+                                        $displayText = 'เมื่อวาน';
+                                    } else {
+                                        $displayText = $createdAt->locale('th')->translatedFormat('d F Y');
+                                    }
+
+                                    // ตรวจสอบว่ากลุ่มวันที่นี้ได้แสดงผลไปแล้วหรือยัง
+                                    if ($lastDisplayedDate !== $displayText) {
+                                        echo '<div class="ass-hr-wants"><span>' . $displayText . '</span></div>';
+                                        $lastDisplayedDate = $displayText;
+                                    }
+                                @endphp
+
+                            </div>
+
                             <div class="wants-box">
                                 <div class="row-box">
                                     <div class="col-2 wants-box-icon">

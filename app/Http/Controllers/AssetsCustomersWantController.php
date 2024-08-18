@@ -49,7 +49,7 @@ class AssetsCustomersWantController extends Controller
                 'train_station.station_code',
                 'train_station.station_name_th'
             )
-            ->orderBy('assets_customers_wants.id', 'DESC')
+            ->orderBy('assets_customers_wants.created_at', 'DESC')
             ->paginate(100);
 
 

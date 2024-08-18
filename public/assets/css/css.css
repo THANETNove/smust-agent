@@ -926,3 +926,36 @@
     font-weight: 400px;
     color: #7C7C7C;
 }
+
+.ass-hr-wants {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+
+    margin-bottom: 12px;
+    position: relative;
+    color: #007BA7;
+}
+
+.ass-hr-wants::before,
+.ass-hr-wants::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background-color: #007BA7;
+}
+
+.ass-hr-wants::before {
+    margin-right: 15px;
+    /* ระยะห่างระหว่างเส้นกับข้อความ */
+}
+
+.ass-hr-wants::after {
+    margin-left: 15px;
+    /* ระยะห่างระหว่างเส้นกับข้อความ */
+}
+
+.ass-hr-wants>span {
+    white-space: nowrap;
+}
