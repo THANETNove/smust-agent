@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\AssetsCustomersWant;
+use Illuminate\Support\Facades\Auth;
 
 class AssetsCustomersWantController extends Controller
 {
@@ -31,7 +34,13 @@ class AssetsCustomersWantController extends Controller
      */
     public function create()
     {
-        return view('assetsCustomer.create_assets_customer');
+
+        $train = DB::table('train_station')
+            ->get();
+        $train = DB::table('train_station')
+            ->get();
+
+        return view('assetsCustomer.create_assets_customer', compact('train'));
     }
 
     /**
@@ -39,7 +48,44 @@ class AssetsCustomersWantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $options = $_POST['options']; // $options จะเป็น array ที่มีค่าที่ผู้ใช้เลือก
+
+
+        $member = new AssetsCustomersWant;
+
+
+        $member->sale_rent = $request['sale_rent'];
+        $member->property_type = $request['property_type'];
+        $member->price_start = $request['price_start'];
+        $member->price_end = $request['price_end'];
+        $member->provinces = $request['provinces'];
+        $member->districts = $request['districts'];
+        $member->amphures = $request['amphures'];
+        if ($request->has('station') && $request['station'] != 'null') {
+            $member->station = $request['station'];
+        } else {
+            $member->station = NULL; // หรือกำหนดค่าอื่นตามที่คุณต้องการ
+        }
+        if ($request->has('options')) {
+            $member->options = json_encode($options);
+        } else {
+            $member->options = NULL; // หรือกำหนดค่าอื่นตามที่คุณต้องการ
+        }
+
+        $member->message_customer = $request['message_customer'];
+        $member->status = 1;
+        if (Auth::check()) {
+            $member->user_id = Auth::user()->id;
+        } else {
+            $member->user_id = NULL;
+            $member->webName = $request['webName'];
+            $member->webPhone = $request['webPhone'];
+            $member->webLine = $request['webLine'];
+            $member->webFacebook = $request['webFacebook'];
+        }
+
+        $member->save();
+        return redirect('assets-customer')->with('message', "บันทึกสำเร็จ");
     }
 
     /**

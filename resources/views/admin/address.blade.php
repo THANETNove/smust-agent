@@ -4,6 +4,20 @@
         $("#provinces-id").change(function() {
             var selectedProvinceId = $(this).val();
 
+
+            console.log("selectedProvinceId", selectedProvinceId);
+
+            const stationSelect = document.getElementById('station-select');
+
+            if (selectedProvinceId == '1') {
+                stationSelect.style.display = 'block';
+            } else {
+                const station = document.getElementById('station');
+                stationSelect.style.display = 'none';
+                station.value = 'null';
+            }
+
+
             // ตรวจสอบว่าเลือก "จังหวัด" ให้ค่าไม่ใช่ค่าเริ่มต้น
             if (selectedProvinceId !== "0") {
                 // ใช้ Ajax เรียกเส้นทางใน Laravel เพื่อดึงข้อมูลแขวง/อำเภอ
@@ -21,7 +35,7 @@
                         );
 
                         $.each(res, function(index, district) {
-                            console.log("district", district);
+
 
                             districtsSelect.append(
                                 $("<option>", {
@@ -55,7 +69,7 @@
                         );
 
                         $.each(res, function(index, data) {
-                            console.log("data", data.zip_code);
+
                             amphuresSelect.append(
                                 $("<option>", {
                                     value: data.id,

@@ -1,3 +1,7 @@
+@php
+
+    $data = DB::table('provinces')->orderBy('name_th', 'ASC')->get();
+@endphp
 <select class="select-address select-address form-select font-size-12-black" name="provinces" id="provinces-id"
     aria-label="Default select example">
     <option selected disabled>จังหวัด</option>
@@ -13,3 +17,5 @@
     aria-label="Default select example">
     <option selected disabled>แขวง/ตำบล</option>
 </select>
+
+@include('admin.address')
