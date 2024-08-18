@@ -138,10 +138,14 @@
                                                     $prefix = 'ARL';
                                                 }
                                             @endphp
-                                            <img class="icon-cottage"
-                                                src="{{ URL::asset('/assets/image/home/directions_subway.png') }}">
-                                            <span class="station_name_th">{{ $prefix }} {{ $wan->station_name_th }}
-                                            </span>
+                                            @if ($wan->station_name_th)
+                                                <img class="icon-cottage"
+                                                    src="{{ URL::asset('/assets/image/home/directions_subway.png') }}">
+                                                <span class="station_name_th">{{ $prefix }}
+                                                    {{ $wan->station_name_th }}
+                                                </span>
+                                            @endif
+
                                         </div>
                                         <div class="row-ass mt-2">
 
