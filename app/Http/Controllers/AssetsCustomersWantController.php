@@ -24,8 +24,10 @@ class AssetsCustomersWantController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+
+
 
         $wantsData = DB::table('assets_customers_wants')
             ->where('assets_customers_wants.status', 1)
@@ -50,10 +52,41 @@ class AssetsCustomersWantController extends Controller
                 'train_station.station_name_th'
             )
             ->orderBy('assets_customers_wants.created_at', 'DESC');
+        if ($request->all()) {
+
+            if ($request->area_station == "area") {
+                if ($request->has('provinces')) {
+                    $wantsData->where('assets_customers_wants.provinces', $request->input('provinces'));
+                }
+                if ($request->has('districts')) {
+                    $wantsData->where('assets_customers_wants.districts', $request->input('districts'));
+                }
+                if ($request->has('amphures')) {
+                    $wantsData->where('assets_customers_wants.amphures', $request->input('amphures'));
+                }
+            } else {
+                if ($request->has('stations')) {
+                    $wantsData->where('assets_customers_wants.station_name', $request->input('stations'));
+                }
+            }
+
+            if ($request->has('sale_rent') && $request->input('sale_rent') !== 'sale_rent') {
+                $wantsData->where('assets_customers_wants.sale_rent', $request->input('sale_rent'));
+            }
+
+            if ($request->has('options') && !empty($request->input('options'))) {
+                foreach ($request->input('options') as $option) {
+                    $wantsData->whereRaw('JSON_CONTAINS(assets_customers_wants.options, ?)', [json_encode($option)]);
+                }
+            }
+        }
+
+        $wants = (clone $wantsData)->whereNull('assets_customers_wants.user_id')->paginate(1)->appends($request->all());
+        $wants2 = (clone $wantsData)->whereNotNull('assets_customers_wants.user_id')->paginate(1)->appends($request->all());
+
 
         // Clone the query for each condition
-        $wants = (clone $wantsData)->whereNull('assets_customers_wants.user_id')->paginate(100);
-        $wants2 = (clone $wantsData)->whereNotNull('assets_customers_wants.user_id')->paginate(100);
+
 
 
 

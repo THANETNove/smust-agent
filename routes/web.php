@@ -63,6 +63,7 @@ Route::put('/new-setup-profile/{id}', [ProfileController::class, 'update'])->nam
 Route::get('/assets-customer', [AssetsCustomersWantController::class, 'index'])->name('assets-customer');
 Route::get('/create-assets-customer', [AssetsCustomersWantController::class, 'create'])->name('create-assets-customer');
 Route::post('/co-agent-store', [AssetsCustomersWantController::class, 'store'])->name('co-agent-store');
+Route::post('/assets-customer', [AssetsCustomersWantController::class, 'index'])->name('assets-customer');
 
 //ส่วนของ admin
 Route::group(['middleware' => ['is_admin']], function () {

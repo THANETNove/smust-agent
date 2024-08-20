@@ -25,9 +25,13 @@
         if (selectedType == 'area') {
             document.querySelector('.id-address').style.display = 'block';
             document.querySelector('.id-trainStation').style.display = 'none';
+            document.getElementById('area-station').value = "area";
+
         } else {
             document.querySelector('.id-address').style.display = 'none';
             document.querySelector('.id-trainStation').style.display = 'block';
+            document.getElementById('area-station').value = "station";
+
         }
 
     }

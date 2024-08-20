@@ -488,123 +488,71 @@
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <p>เลือกทำเลจาก</p>
+                <form method="POST" action="{{ route('assets-customer') }}">
+                    @csrf
 
-                    <div class="row-box">
-                        <div class="filter-box" data-type="area" onclick="toggleSelection(this)">
-                            <img class="icon-location" src="{{ URL::asset('/assets/image/welcome/location_on.png') }}">
-                            <p>ย่าน</p>
+                    <div class="modal-body">
+                        <p>เลือกทำเลจาก</p>
+
+                        <div class="row-box">
+                            <div class="filter-box selected" data-type="area" onclick="toggleSelection(this)">
+                                <img class="icon-location"
+                                    src="{{ URL::asset('/assets/image/welcome/location_on.png') }}">
+                                <p>ย่าน</p>
+                            </div>
+                            <div class="filter-box" data-type="station" onclick="toggleSelection(this)">
+                                <img class="icon-location" src="{{ URL::asset('/assets/image/welcome/train.png') }}">
+                                <p>สถานีรถไฟฟ้า</p>
+                            </div>
                         </div>
-                        <div class="filter-box" data-type="station" onclick="toggleSelection(this)">
-                            <img class="icon-location" src="{{ URL::asset('/assets/image/welcome/train.png') }}">
-                            <p>สถานีรถไฟฟ้า</p>
+
+                        <div class="mt-4">
+                            <input type="text" id="area-station" name="area_station" value="area"
+                                style="display: none">
+                            <div class="id-address">
+                                @include('layouts.address')
+                            </div>
+
+                            <div class="id-trainStation" style="display: none">
+                                @include('assetsCustomer.trainStation')
+                            </div>
+
                         </div>
+                        <p style="margin-top: 12px">ประเภทสัญญา</p>
+                        <div class="row-box">
+                            <div class="filter-box-input form-check" data-type="area">
+                                <input class="form-check-input" type="radio" name="sale_rent" value="rent"
+                                    id="filterArea" onclick="toggleSelectionBox(this)">
+                                <label class="form-check-label" for="filterArea">
+
+                                    เช่า
+                                </label>
+                            </div>
+                            <div class="filter-box-input form-check" data-type="station">
+                                <input class="form-check-input" type="radio" name="sale_rent" value="sale"
+                                    id="filterStation" onclick="toggleSelectionBox(this)">
+                                <label class="form-check-label" for="filterStation">
+
+                                    ซื้อ
+                                </label>
+                            </div>
+                            <div class="filter-box-input form-check" data-type="all">
+                                <input class="form-check-input" type="radio" name="sale_rent" id="filterAll"
+                                    value="sale_rent" onclick="toggleSelectionBox(this)">
+                                <label class="form-check-label" for="filterAll">
+
+                                    ทั้งหมด
+                                </label>
+                            </div>
+                        </div>
+                        <p style="margin-top: 12px">ลักษณะพิเศษ</p>
+                        @include('assetsCustomer.optionsJs')
+                        <button type="submit" class="btn btn-primary col-12 mt-4 mb-3"> <span> <img
+                                    class="icon-search-box"
+                                    src="{{ URL::asset('/assets/image/welcome/search-box.png') }}"></span>คันหา</button>
+
                     </div>
-
-                    <div class="mt-4">
-
-                        <div class="id-address">
-                            @include('layouts.address')
-                        </div>
-
-                        <div class="id-trainStation" style="display: none">
-                            @include('assetsCustomer.trainStation')
-                        </div>
-
-                    </div>
-                    <p style="margin-top: 12px">ประเภทสัญญา</p>
-                    <div class="row-box">
-                        <div class="filter-box-input form-check" data-type="area">
-                            <input class="form-check-input" type="radio" name="filterOptions" id="filterArea"
-                                onclick="toggleSelectionBox(this)">
-                            <label class="form-check-label" for="filterArea">
-
-                                เช่า
-                            </label>
-                        </div>
-                        <div class="filter-box-input form-check" data-type="station">
-                            <input class="form-check-input" type="radio" name="filterOptions" id="filterStation"
-                                onclick="toggleSelectionBox(this)">
-                            <label class="form-check-label" for="filterStation">
-
-                                ซื้อ
-                            </label>
-                        </div>
-                        <div class="filter-box-input form-check" data-type="all">
-                            <input class="form-check-input" type="radio" name="filterOptions" id="filterAll"
-                                onclick="toggleSelectionBox(this)">
-                            <label class="form-check-label" for="filterAll">
-
-                                ทั้งหมด
-                            </label>
-                        </div>
-                    </div>
-                    <p style="margin-top: 12px">ลักษณะพิเศษ</p>
-                    <div class="row-box" style="margin-top: 12px">
-                        <div class="col-6">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    ผ่อนตรง </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    เช่าออม
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    เช่าระยะสั้นได้ (น้อยกว่า 6 เดือน)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    ขายขาดทุน
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    ใกล้มหาวิทยาลัยดัง
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    ห้องเปล่า
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    ทรัพย์มือหนึ่ง
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    ตกแต่งสวยเว่อร์
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    คนต่างชาติ
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-primary col-12 mt-4 mb-3"> <span> <img class="icon-search-box"
-                                src="{{ URL::asset('/assets/image/welcome/search-box.png') }}"></span>คันหา</button>
-
-                </div>
-
+                </form>
             </div>
         </div>
     </div>

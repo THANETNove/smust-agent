@@ -29,8 +29,7 @@
 
 @foreach ($groupedTrain as $lineCode => $stations)
     <div>
-        <select class="form-select mt-3 station-select" name="stations[{{ $lineCode }}]"
-            id="station_{{ $lineCode }}"
+        <select class="form-select mt-3 station-select" name="stations" id="station_{{ $lineCode }}"
             style="background-color: {{ $lineStyles[$lineCode]['bgColor'] ?? '#FFFFFF' }}; color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
             <option selected disabled>Select Station</option>
             @foreach ($stations as $station)
@@ -44,7 +43,7 @@
                         $prefix = 'ARL';
                     }
                 @endphp
-                <option value="{{ $station->station_code }}"
+                <option value="{{ $station->station_name_th }}"
                     style="color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
                     {{ $prefix }} {{ $station->station_name_th }}
                 </option>
