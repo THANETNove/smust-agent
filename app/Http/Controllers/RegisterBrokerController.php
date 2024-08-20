@@ -86,6 +86,7 @@ class RegisterBrokerController extends Controller
             'image' => $filePath, // Save file path to the database
             'code' => $code,
             'status' => "0",
+            'plans' => "0",
         ]);
 
         $user = User::latest()->first(); // หรือ $user = User::orderBy('created_at', 'desc')->first();
