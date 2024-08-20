@@ -502,12 +502,17 @@
                         </div>
                     </div>
 
-                    <select class="form-select mt-4" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+                    <div class="mt-4">
+
+                        <div class="id-address">
+                            @include('layouts.address')
+                        </div>
+
+                        <div class="id-trainStation">
+                            @include('assetsCustomer.trainStation')
+                        </div>
+
+                    </div>
                     <p style="margin-top: 12px">ประเภทสัญญา</p>
                     <div class="row-box">
                         <div class="filter-box-input form-check" data-type="area">
