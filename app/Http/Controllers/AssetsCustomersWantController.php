@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 use App\Models\AssetsCustomersWant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class AssetsCustomersWantController extends Controller
 {
@@ -29,9 +28,7 @@ class AssetsCustomersWantController extends Controller
     public function index(Request $request)
     {
 
-
-
-        $wantsData = Cache::remember("wantsData_", 0, function () use ($request) {
+        $wantsData = Cache::remember("wantsData_", 60, function () use ($request) {
             $query = DB::table('assets_customers_wants')
                 ->where('assets_customers_wants.status', 1)
                 ->leftJoin('users', 'assets_customers_wants.user_id', '=', 'users.id')
@@ -84,32 +81,42 @@ class AssetsCustomersWantController extends Controller
                 }
             }
 
-            return $query->paginate(100)->appends($request->all());
+            return $query->get(); // ดึงข้อมูลทั้งหมดในรูปแบบ Collection
         });
 
-        // แยกข้อมูลตามเงื่อนไขการกรอง และสร้าง LengthAwarePaginator ใหม่
-        $wants = new LengthAwarePaginator(
-            $wantsData->filter(function ($item) {
-                return is_null($item->user_id);
-            }),
-            $wantsData->total(),
-            $wantsData->perPage(),
-            $wantsData->currentPage(),
-            ['path' => request()->url(), 'query' => request()->query()]
+        // แยกข้อมูลที่ status เป็น NULL และ ไม่เป็น NULL
+        $wantsNullStatus = $wantsData->filter(function ($item) {
+            return is_null($item->user_id);
+        });
+
+        $wantsNotNullStatus = $wantsData->filter(function ($item) {
+            return !is_null($item->user_id);
+        });
+
+        // สร้าง Paginator สำหรับ $wantsNullStatus
+        // สร้าง Paginator สำหรับ $wantsNullStatus
+        $wantsNullStatusPaginator = new \Illuminate\Pagination\LengthAwarePaginator(
+            $wantsNullStatus->forPage($request->input('page_null_status', 1), 100),
+            $wantsNullStatus->count(),
+            100,
+            $request->input('page_null_status', 1),
+            ['path' => $request->url(), 'pageName' => 'page_null_status']
         );
 
-        $wants2 = new LengthAwarePaginator(
-            $wantsData->filter(function ($item) {
-                return !is_null($item->user_id);
-            }),
-            $wantsData->total(),
-            $wantsData->perPage(),
-            $wantsData->currentPage(),
-            ['path' => request()->url(), 'query' => request()->query()]
+        // สร้าง Paginator สำหรับ $wantsNotNullStatus
+        $wantsNotNullStatusPaginator = new \Illuminate\Pagination\LengthAwarePaginator(
+            $wantsNotNullStatus->forPage($request->input('page_not_null_status', 1), 100),
+            $wantsNotNullStatus->count(),
+            100,
+            $request->input('page_not_null_status', 1),
+            ['path' => $request->url(), 'pageName' => 'page_not_null_status']
         );
 
 
-        return view('assetsCustomer.assets_customer', compact('wants', 'wants2'));
+        return view('assetsCustomer.assets_customer', [
+            'wants' => $wantsNullStatusPaginator,
+            'wants2' => $wantsNotNullStatusPaginator,
+        ]);
     }
 
     /**

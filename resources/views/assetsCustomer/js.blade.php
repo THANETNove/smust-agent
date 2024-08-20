@@ -83,7 +83,7 @@
         document.querySelector('.box-nav-link-home').addEventListener('click', function() {
             const url = new URL(window.location.href);
             url.searchParams.delete('page'); // ลบพารามิเตอร์ page ออกจาก URL
-            window.location.href = url.toString(); // โหลดหน้าใหม่ด้วย URL ที่อัปเดตแล้ว
+            history.replaceState(null, '', url.toString()); // ปรับปรุง URL โดยไม่โหลดหน้าใหม่
         });
     });
 </script>
