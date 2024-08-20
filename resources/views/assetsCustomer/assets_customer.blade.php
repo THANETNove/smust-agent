@@ -75,7 +75,18 @@
                                 <div class="wants-box">
                                     <div class="row-box">
                                         <div class="col-2 wants-box-icon">
-                                            <div class="ass-box-icon">
+                                            @php
+                                                $backgroundColors = [
+                                                    'บ้าน' => '#B8D7E2', // สีทอง
+                                                    'บ้านเดี่ยว' => '#B8D7E2', // สีส้มอ่อน
+                                                    'คอนโด' => '#FBC9BB', // สีฟ้าอ่อน
+                                                    'ทาวน์เฮ้าส์' => '#B8D7E2', // สีเขียวอ่อน
+                                                    'ที่ดิน' => '#FEE8C7', // สีชมพูอ่อน
+                                                    'พาณิชย์' => '#629F8C', // สีเทาอ่อน
+                                                ];
+                                            @endphp
+                                            <div class="ass-box-icon"
+                                                style="background-color: {{ $backgroundColors[$wan->property_type] }}">
                                                 @php
                                                     $propertyImages = [
                                                         'บ้าน' => '/assets/image/welcome/cottage.png',
@@ -293,7 +304,18 @@
                             <div class="wants-box">
                                 <div class="row-box">
                                     <div class="col-2 wants-box-icon">
-                                        <div class="ass-box-icon">
+                                        @php
+                                            $backgroundColors = [
+                                                'บ้าน' => '#B8D7E2', // สีทอง
+                                                'บ้านเดี่ยว' => '#B8D7E2', // สีส้มอ่อน
+                                                'คอนโด' => '#FBC9BB', // สีฟ้าอ่อน
+                                                'ทาวน์เฮ้าส์' => '#B8D7E2', // สีเขียวอ่อน
+                                                'ที่ดิน' => '#FEE8C7', // สีชมพูอ่อน
+                                                'พาณิชย์' => '#629F8C', // สีเทาอ่อน
+                                            ];
+                                        @endphp
+                                        <div class="ass-box-icon"
+                                            style="background-color: {{ $backgroundColors[$wan2->property_type] }}">
                                             @php
                                                 $propertyImages = [
                                                     'บ้าน' => '/assets/image/welcome/cottage.png',
