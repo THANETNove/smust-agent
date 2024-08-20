@@ -492,7 +492,7 @@
                     <p>เลือกทำเลจาก</p>
 
                     <div class="row-box">
-                        <div class="filter-box" data-type="area" onclick="toggleSelection(this)">
+                        <div class="filter-box selected" data-type="area" onclick="toggleSelection(this)">
                             <img class="icon-location" src="{{ URL::asset('/assets/image/welcome/location_on.png') }}">
                             <p>ย่าน</p>
                         </div>
@@ -508,7 +508,7 @@
                             @include('layouts.address')
                         </div>
 
-                        <div class="id-trainStation">
+                        <div class="id-trainStation" style="display: none">
                             @include('assetsCustomer.trainStation')
                         </div>
 

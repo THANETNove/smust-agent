@@ -172,5 +172,9 @@
             const provinceSelect = document.getElementById('provinces-id');
 
         });
+
+        function goBack() {
+            window.history.back();
+        }
     </script>
 @endsection

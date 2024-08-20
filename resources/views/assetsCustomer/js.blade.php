@@ -21,7 +21,15 @@
         }
 
         // Log the selected type or perform an action based on it
-        console.log('Selected type:', selectedType);
+
+        if (selectedType == 'area') {
+            document.querySelector('.id-address').style.display = 'block';
+            document.querySelector('.id-trainStation').style.display = 'none';
+        } else {
+            document.querySelector('.id-address').style.display = 'none';
+            document.querySelector('.id-trainStation').style.display = 'block';
+        }
+
     }
 
     function toggleSelectionBox(element) {

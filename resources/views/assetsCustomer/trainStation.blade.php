@@ -17,24 +17,24 @@
         'Grey' => ['bgColor' => '#D3D3D3', 'textColor' => '#696969'],
         'Pink' => ['bgColor' => '#FFC0CB', 'textColor' => '#FF69B4'],
         'Orange' => ['bgColor' => '#FFA500', 'textColor' => '#8B4513'],
-        'Purple' => ['bgColor' => '#800080', 'textColor' => '#FFFFFF'], // Purple with White Text
+        'Purple' => ['bgColor' => '#800080', 'textColor' => '#FFFFFF'],
         'Red east' => ['bgColor' => '#FF4500', 'textColor' => '#FFFFFF'],
         'Red north' => ['bgColor' => '#DC143C', 'textColor' => '#FFFFFF'],
         'Red south' => ['bgColor' => '#B22222', 'textColor' => '#FFFFFF'],
         'Red west' => ['bgColor' => '#FF6347', 'textColor' => '#FFFFFF'],
         'Red west south' => ['bgColor' => '#CD5C5C', 'textColor' => '#FFFFFF'],
         'Yellow' => ['bgColor' => '#FFFF00', 'textColor' => '#000000'],
-        // Add more line_code => background color and text color pairs as needed
     ];
 @endphp
+
 @foreach ($groupedTrain as $lineCode => $stations)
     <div>
-
-        <select class="form-select mt-3" name="stations[{{ $lineCode }}]" id="station_{{ $lineCode }}"
+        <select class="form-select mt-3 station-select" name="stations[{{ $lineCode }}]"
+            id="station_{{ $lineCode }}"
             style="background-color: {{ $lineStyles[$lineCode]['bgColor'] ?? '#FFFFFF' }}; color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
+            <option selected disabled>Select Station</option>
             @foreach ($stations as $station)
                 @php
-                    // ตรวจสอบสีเพื่อตรวจว่าเป็น BTS หรือ MRT
                     $prefix = '';
                     if (in_array($lineCode, ['Light green', 'Dark green'])) {
                         $prefix = 'BTS';
@@ -44,7 +44,7 @@
                         $prefix = 'ARL';
                     }
                 @endphp
-                <option value="{{ $station->station_code }}"
+                <option value="{{ $station->station_name_th }}"
                     style="color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
                     {{ $prefix }} {{ $station->station_name_th }}
                 </option>
@@ -52,3 +52,20 @@
         </select>
     </div>
 @endforeach
+
+<script>
+    // Add an event listener for each select element
+    document.querySelectorAll('.station-select').forEach(selectElement => {
+        selectElement.addEventListener('change', function() {
+            // Get the selected value
+            let selectedValue = this.value;
+
+            // Reset all other select elements to default (empty)
+            document.querySelectorAll('.station-select').forEach(otherSelect => {
+                if (otherSelect !== this) {
+                    otherSelect.selectedIndex = 0; // Set to the first option (Select Station)
+                }
+            });
+        });
+    });
+</script>
