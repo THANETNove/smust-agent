@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\AssetsCustomersWant;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AssetsCustomersWantController extends Controller
 {
@@ -29,68 +31,82 @@ class AssetsCustomersWantController extends Controller
 
 
 
-        $wantsData = DB::table('assets_customers_wants')
-            ->where('assets_customers_wants.status', 1)
-            ->leftJoin('users', 'assets_customers_wants.user_id', '=', 'users.id')
-            ->leftJoin('provinces', 'assets_customers_wants.provinces', '=', 'provinces.id')
-            ->leftJoin('amphures', 'assets_customers_wants.districts', '=', 'amphures.id')
-            ->leftJoin('districts', 'assets_customers_wants.amphures', '=', 'districts.id')
-            ->leftJoin('train_station', 'assets_customers_wants.station', '=', 'train_station.id') // เชื่อมกับตาราง train_station
-            ->select(
-                'assets_customers_wants.*',
-                'users.first_name',
-                'users.last_name',
-                'users.phone',
-                'users.image',
-                'users.line_id',
-                'users.facebook_id',
-                'provinces.name_th AS provinces_name_th',
-                'districts.name_th AS districts_name_th',
-                'amphures.name_th AS amphures_name_th',
-                'train_station.line_code',
-                'train_station.station_code',
-                'train_station.station_name_th'
-            )
-            ->orderBy('assets_customers_wants.created_at', 'DESC');
-        if ($request->all()) {
+        $wantsData = Cache::remember("wantsData_", 0, function () use ($request) {
+            $query = DB::table('assets_customers_wants')
+                ->where('assets_customers_wants.status', 1)
+                ->leftJoin('users', 'assets_customers_wants.user_id', '=', 'users.id')
+                ->leftJoin('provinces', 'assets_customers_wants.provinces', '=', 'provinces.id')
+                ->leftJoin('amphures', 'assets_customers_wants.districts', '=', 'amphures.id')
+                ->leftJoin('districts', 'assets_customers_wants.amphures', '=', 'districts.id')
+                ->leftJoin('train_station', 'assets_customers_wants.station', '=', 'train_station.id')
+                ->select(
+                    'assets_customers_wants.*',
+                    'users.first_name',
+                    'users.last_name',
+                    'users.phone',
+                    'users.image',
+                    'users.line_id',
+                    'users.facebook_id',
+                    'provinces.name_th AS provinces_name_th',
+                    'districts.name_th AS districts_name_th',
+                    'amphures.name_th AS amphures_name_th',
+                    'train_station.line_code',
+                    'train_station.station_code',
+                    'train_station.station_name_th'
+                )
+                ->orderBy('assets_customers_wants.created_at', 'DESC');
 
-            if ($request->area_station == "area") {
-                if ($request->has('provinces')) {
-                    $wantsData->where('assets_customers_wants.provinces', $request->input('provinces'));
-                }
-                if ($request->has('districts')) {
-                    $wantsData->where('assets_customers_wants.districts', $request->input('districts'));
-                }
-                if ($request->has('amphures')) {
-                    $wantsData->where('assets_customers_wants.amphures', $request->input('amphures'));
-                }
-            } else {
-                if ($request->has('stations')) {
-                    $wantsData->where('assets_customers_wants.station_name', $request->input('stations'));
+            if ($request->all()) {
+                $query->when($request->area_station == "area", function ($query) use ($request) {
+                    $query->when($request->has('provinces'), function ($q) use ($request) {
+                        $q->where('assets_customers_wants.provinces', $request->input('provinces'));
+                    })
+                        ->when($request->has('districts'), function ($q) use ($request) {
+                            $q->where('assets_customers_wants.districts', $request->input('districts'));
+                        })
+                        ->when($request->has('amphures'), function ($q) use ($request) {
+                            $q->where('assets_customers_wants.amphures', $request->input('amphures'));
+                        });
+                }, function ($query) use ($request) {
+                    $query->when($request->has('stations'), function ($q) use ($request) {
+                        $q->where('assets_customers_wants.station_name', $request->input('stations'));
+                    });
+                });
+
+                $query->when($request->has('sale_rent') && $request->input('sale_rent') !== 'sale_rent', function ($query) use ($request) {
+                    $query->where('assets_customers_wants.sale_rent', $request->input('sale_rent'));
+                });
+
+                if ($request->has('options') && !empty($request->input('options'))) {
+                    foreach ($request->input('options') as $option) {
+                        $query->whereRaw('JSON_CONTAINS(assets_customers_wants.options, ?)', [json_encode($option)]);
+                    }
                 }
             }
 
-            if ($request->has('sale_rent') && $request->input('sale_rent') !== 'sale_rent') {
-                $wantsData->where('assets_customers_wants.sale_rent', $request->input('sale_rent'));
-            }
+            return $query->paginate(100)->appends($request->all());
+        });
 
-            if ($request->has('options') && !empty($request->input('options'))) {
-                foreach ($request->input('options') as $option) {
-                    $wantsData->whereRaw('JSON_CONTAINS(assets_customers_wants.options, ?)', [json_encode($option)]);
-                }
-            }
-        }
+        // แยกข้อมูลตามเงื่อนไขการกรอง และสร้าง LengthAwarePaginator ใหม่
+        $wants = new LengthAwarePaginator(
+            $wantsData->filter(function ($item) {
+                return is_null($item->user_id);
+            }),
+            $wantsData->total(),
+            $wantsData->perPage(),
+            $wantsData->currentPage(),
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
 
-        $wants = (clone $wantsData)->whereNull('assets_customers_wants.user_id')->paginate(100)->appends($request->all());
-        $wants2 = (clone $wantsData)->whereNotNull('assets_customers_wants.user_id')->paginate(100)->appends($request->all());
-
-
-        // Clone the query for each condition
-
-
-
-
-
+        $wants2 = new LengthAwarePaginator(
+            $wantsData->filter(function ($item) {
+                return !is_null($item->user_id);
+            }),
+            $wantsData->total(),
+            $wantsData->perPage(),
+            $wantsData->currentPage(),
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
 
 
         return view('assetsCustomer.assets_customer', compact('wants', 'wants2'));

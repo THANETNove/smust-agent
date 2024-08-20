@@ -104,7 +104,7 @@ class HomeController extends Controller
         $dataHomeQuery->orderBy('rent_sell_home_details.id', 'DESC');
 
         // Use caching if possible for better performance
-        $dataCount = Cache::remember('dataHomeCount', 60, function () use ($dataHomeQuery) {
+        $dataCount = Cache::remember('dataHomeCount', 0, function () use ($dataHomeQuery) {
             return $dataHomeQuery->count();
         });
 
