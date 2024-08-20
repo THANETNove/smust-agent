@@ -81,8 +81,8 @@ class AssetsCustomersWantController extends Controller
             }
         }
 
-        $wants = (clone $wantsData)->whereNull('assets_customers_wants.user_id')->paginate(1)->appends($request->all());
-        $wants2 = (clone $wantsData)->whereNotNull('assets_customers_wants.user_id')->paginate(1)->appends($request->all());
+        $wants = (clone $wantsData)->whereNull('assets_customers_wants.user_id')->paginate(100)->appends($request->all());
+        $wants2 = (clone $wantsData)->whereNotNull('assets_customers_wants.user_id')->paginate(100)->appends($request->all());
 
 
         // Clone the query for each condition
