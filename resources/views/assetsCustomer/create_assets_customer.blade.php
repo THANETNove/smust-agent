@@ -74,9 +74,7 @@
 
                 <div id="station-select" style="display: none;">
                     <select class="form-select mt-3" name="station" id="station">
-                        <option value="null">
-
-                        </option>
+                        <option selected disabled>Select Station</option>
                         @foreach ($train as $station)
                             @php
                                 // ตรวจสอบสีเพื่อตรวจว่าเป็น BTS, MRT หรือ ARL

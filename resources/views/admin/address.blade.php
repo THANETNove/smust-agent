@@ -9,13 +9,18 @@
 
             const stationSelect = document.getElementById('station-select');
 
-            if (selectedProvinceId == '1') {
-                stationSelect.style.display = 'block';
-            } else {
-                const station = document.getElementById('station');
-                stationSelect.style.display = 'none';
-                station.value = 'null';
+            if (stationSelect) { // Check if stationSelect exists
+                if (selectedProvinceId == '1') {
+                    stationSelect.style.display = 'block';
+                } else {
+                    const station = document.getElementById('station');
+                    if (station) { // Check if station exists
+                        stationSelect.style.display = 'none';
+                        station.value = 'null';
+                    }
+                }
             }
+
 
 
             // ตรวจสอบว่าเลือก "จังหวัด" ให้ค่าไม่ใช่ค่าเริ่มต้น

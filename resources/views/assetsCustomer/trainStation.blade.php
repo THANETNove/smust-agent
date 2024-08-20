@@ -44,7 +44,7 @@
                         $prefix = 'ARL';
                     }
                 @endphp
-                <option value="{{ $station->station_name_th }}"
+                <option value="{{ $station->station_code }}"
                     style="color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
                     {{ $prefix }} {{ $station->station_name_th }}
                 </option>
