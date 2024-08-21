@@ -19,7 +19,7 @@ class PersonalWebsiteController extends Controller
      */
     public function create()
     {
-        //
+        return view('personalWebsite.create_personal');
     }
 
     /**

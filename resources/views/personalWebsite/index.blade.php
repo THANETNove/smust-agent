@@ -58,7 +58,7 @@
             <img class="frame660" src="{{ URL::asset('/assets/image/welcome/frame660.png') }}">
         </a>
         <p class="steps-3">แก้ไขเว็บของคุณง่าย ๆ 3 ขั้นตอน</p>
-        <a href="http://" target="_blank" rel="noopener noreferrer" class="no-underline">
+        <a href="{{url('create-personal')}}"  rel="noopener noreferrer" class="no-underline">
             <img class="parttoedit" src="{{ URL::asset('/assets/image/welcome/parttoedit.png') }}">
         </a>
         <a href="{{ url('home') }}" rel="noopener noreferrer" class="no-underline">
