@@ -1071,3 +1071,38 @@
     font-weight: 400px;
     color: #014158;
 }
+
+.content-image {
+    margin-top: 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 64px;
+}
+
+.frame660 {
+    width: 335px;
+    height: 147px;
+}
+
+.steps-3 {
+    margin-top: 24px;
+    color: #000000;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.frame23 {
+    margin-top: 24px;
+    width: 342px;
+    height: 36px;
+    margin-bottom: 8px;
+}
+
+.parttoedit {
+    width: 342px;
+    height: 139px;
+    margin-bottom: 8px;
+}
