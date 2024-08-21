@@ -9,6 +9,7 @@ use App\Http\Controllers\ForgotYourPasswordController;
 use App\Http\Controllers\FreeTrialRightsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssetsCustomersWantController;
+use App\Http\Controllers\PersonalWebsiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -64,6 +65,7 @@ Route::get('/assets-customer', [AssetsCustomersWantController::class, 'index'])-
 Route::get('/create-assets-customer', [AssetsCustomersWantController::class, 'create'])->name('create-assets-customer');
 Route::post('/co-agent-store', [AssetsCustomersWantController::class, 'store'])->name('co-agent-store');
 Route::post('/assets-customer', [AssetsCustomersWantController::class, 'index'])->name('assets-customer');
+Route::get('/personal-website', [PersonalWebsiteController::class, 'index'])->name('personal-website');
 
 //ส่วนของ admin
 Route::group(['middleware' => ['is_admin']], function () {

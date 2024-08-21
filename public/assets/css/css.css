@@ -958,3 +958,116 @@
 .ass-hr-wants>span {
     white-space: nowrap;
 }
+
+.box-head-personal-web {
+    display: flex;
+
+    justify-content: space-between;
+}
+
+.free-trial-box-nav-web {
+    padding-bottom: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+}
+
+.box-nav-web {
+    width: 100%;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-right: 42px;
+}
+
+
+
+.offcanvasManu-web {
+    margin-top: 32px;
+    margin-left: 16px;
+}
+
+.toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.toggle-button {
+
+    background-color: #FEE8C7;
+    margin-top: 24px;
+    width: 350px;
+    height: auto;
+    padding: 12px;
+    cursor: pointer;
+    position: relative;
+    font-size: 14px;
+    color: #CB7D10;
+    font-weight: 600;
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
+
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.toggle-button.active {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.toggle-button::after {
+    content: '';
+    position: absolute;
+    justify-content: center;
+    margin-left: 8px;
+
+    width: 20px;
+    /* ปรับขนาดของรูปภาพ */
+    height: 20px;
+    /* ปรับขนาดของรูปภาพ */
+    background-image: url('/assets/image/welcome/navigate_next_do.png');
+    /* ระบุที่อยู่ของภาพ */
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: transform 0.3s ease;
+}
+
+.toggle-button.active::after {
+    transform: rotate(180deg);
+
+}
+
+.toggle-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 10px;
+    background-color: #FEE8C7;
+    border-top: none;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    width: 350px;
+    height: 100%;
+}
+
+.toggle-content.active {
+    max-height: 237px;
+    /* ปรับตามความสูงของคอนเทนต์ */
+    padding: 12px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #CB7D10;
+}
+
+.read-benefits {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 12px;
+    font-weight: 400px;
+    color: #014158;
+}
