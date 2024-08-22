@@ -6,8 +6,13 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\User;
 use Auth;
+
 class OwnerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -15,18 +20,18 @@ class OwnerController extends Controller
     {
 
         $search = $request['search'];
-        if($search) {
+        if ($search) {
             $user = DB::table('users')
-            ->where('status', '!=', '3')
-            ->where(function($query) use ($search) {
-                $query->where('email', 'like', "%$search%")
-                    ->orWhere('first_name', 'like', "%$search%");
-            })
-            ->get();
-        }else {
+                ->where('status', '!=', '3')
+                ->where(function ($query) use ($search) {
+                    $query->where('email', 'like', "%$search%")
+                        ->orWhere('first_name', 'like', "%$search%");
+                })
+                ->get();
+        } else {
             $user = DB::table('users')
-            ->where('status', '!=', "3")
-            ->get();
+                ->where('status', '!=', "3")
+                ->get();
         }
 
         return view('owner.index', ['user' => $user]);
@@ -46,18 +51,18 @@ class OwnerController extends Controller
     public function changeAdmin($id)
     {
         $user = DB::table('users')
-        ->where('id', $id)
-        ->first(); // ใช้ first() แทน get() เพื่อให้ได้แค่ผลลัพธ์เดียว
+            ->where('id', $id)
+            ->first(); // ใช้ first() แทน get() เพื่อให้ได้แค่ผลลัพธ์เดียว
 
-    $member = User::find($id);
+        $member = User::find($id);
 
-    if ($user && $user->code_admin == null) {
-        $member->code_admin = $user->code;
-    }
+        if ($user && $user->code_admin == null) {
+            $member->code_admin = $user->code;
+        }
 
-    $member->status = "1";
-    $member->save();
-        return redirect('add-admin')->with('message', "เปลี่ยนสำเร็จ" );
+        $member->status = "1";
+        $member->save();
+        return redirect('add-admin')->with('message', "เปลี่ยนสำเร็จ");
     }
 
 
@@ -65,10 +70,10 @@ class OwnerController extends Controller
     {
 
 
-    $member = User::find($id);
-    $member->status = "0";
-    $member->save();
-        return redirect('add-admin')->with('message', "ยกเลิกลสำเร็จ" );
+        $member = User::find($id);
+        $member->status = "0";
+        $member->save();
+        return redirect('add-admin')->with('message', "ยกเลิกลสำเร็จ");
     }
 
 
