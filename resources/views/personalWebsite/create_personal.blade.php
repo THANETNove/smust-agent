@@ -80,7 +80,14 @@
 
     </form>
 
-di
+    <div class="box-type">
+        <p> <img class="img-contract2" src="{{ URL::asset('/assets/image/welcome/contract2.png') }}">ประเภทสัญญา: เช่า ซื้อ
+        </p>
+        <p> <img class="img-contract2" src="{{ URL::asset('/assets/image/welcome/domain2.png') }}">ประเภททรัพย์: บ้าน คอนโด
+        </p>
+        <p> <img class="img-contract2" src="{{ URL::asset('/assets/image/welcome/domain2.png') }}">ลักษณะเฉพาะ:
+            คอนโดตามแนวรถไฟฟ้า คอนโดมือหนึ่ง</p>
+    </div>
 
     <script>
         function triggerFileInput() {
