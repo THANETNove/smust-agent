@@ -33,77 +33,72 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="row mb-4">
-            <!-- Upload Method Selection -->
-            <div class="col-md-6">
-                <label for="upload-method">Upload Method:</label>
-                <select class="form-control" id="upload-method">
-                    <option value="upload">Upload File</option>
-                    <option value="url">Enter URL</option>
-                </select>
-            </div>
-        </div>
+    <form action="">
+        <div class="box-rectangle">
+            <img class="rectangle123" id="rectangle123" src="{{ URL::asset('/assets/image/welcome/Rectangle123.png') }}">
+            <img class="frame7" id="frame7" src="{{ URL::asset('/assets/image/welcome/Frame7.png') }}"
+                onclick="triggerFileInput()">
+            <input type="file" id="fileInput" class="frame7" name="image" accept="image/*"
+                onchange="previewImage(event)" style="display: none;">
 
-        <!-- File Upload Section -->
-        <div class="row mb-4" id="file-upload-section">
-            <div class="col-md-12">
-                <label for="select-file">Select File:</label>
-                <input type="file" class="form-control" id="select-file">
-            </div>
         </div>
-
-        <!-- URL Upload Section (hidden by default) -->
-        <div class="row mb-4" id="url-upload-section" style="display: none;">
-            <div class="col-md-12">
-                <label for="image-url">Enter Image URL:</label>
-                <input type="text" class="form-control" id="image-url" placeholder="Enter image URL">
-                <button class="btn btn-primary mt-2" id="fetch-image-url">Fetch Image</button>
+        <div class="box-history-profile">
+            <div>
+                @if (Auth::user()->image)
+                    <img class="userProfile" src="{{ URL::asset(Auth::user()->image) }}">
+                @else
+                    <img class="img-history-profile" src="{{ URL::asset('/assets/image/welcome/profile.png') }}">
+                @endif
             </div>
-        </div>
+            <div class="name-history-profile">
 
-        <!-- Image Preview Section -->
-        <div class="row mb-4">
-            <div class="col-md-12">
-                <label>Image Preview:</label>
-                <div class="box">
-                    <img id="image-preview" src="#" alt="No image selected"
-                        style="display: none; width: 100%; max-height: 300px; object-fit: cover; border-radius: 8px;">
+                <p class="name-history-profile-p">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
+                <div class="col-md-12 input_box">
+                    <input type="numner" name="id_card_number"
+                        class="form-control @error('id_card_number') is-invalid @enderror"
+                        value="{{ Auth::user()->provinces }}" required autocomplete="id_card_number">
+                    <label>เขตพื้นที่ที่สะดวกทำงาน <samp style="color: red;margin-left: 6px;"> *</samp> </label>
+
                 </div>
+
             </div>
+
+
         </div>
-    </div>
+        <div class="history-box">
+            <div class="col-12 input_box2">
+                <label>เขตพื้นที่ที่สะดวกทำงาน <samp style="color: red;margin-left: 6px;"> *</samp> </label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+
+            </div>
+
+            <button type="submit" class="btn btn-attention">
+                บันทึกการแก้ไข
+            </button>
+        </div>
+
+    </form>
+
+di
 
     <script>
-        document.getElementById('upload-method').addEventListener('change', function() {
-            var method = this.value;
-            if (method === 'upload') {
-                document.getElementById('file-upload-section').style.display = 'block';
-                document.getElementById('url-upload-section').style.display = 'none';
-            } else if (method === 'url') {
-                document.getElementById('file-upload-section').style.display = 'none';
-                document.getElementById('url-upload-section').style.display = 'block';
-            }
-        });
+        function triggerFileInput() {
+            document.getElementById('fileInput').click(); // ทำการคลิกปุ่ม input file โดยอัตโนมัติ
+        }
 
-        document.getElementById('select-file').addEventListener('change', function(event) {
-            var file = event.target.files[0];
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function() {
+                const rectangle123 = document.getElementById('rectangle123');
+                rectangle123.src = reader.result; // แสดงภาพที่ถูกเลือกใน Rectangle123
+            };
+
             if (file) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('image-preview').style.display = 'block';
-                    document.getElementById('image-preview').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(file); // อ่านไฟล์ภาพเป็น Data URL
             }
-        });
-
-        document.getElementById('fetch-image-url').addEventListener('click', function() {
-            var url = document.getElementById('image-url').value;
-            if (url) {
-                document.getElementById('image-preview').style.display = 'block';
-                document.getElementById('image-preview').src = url;
-            }
-        });
+        }
     </script>
 @endsection
