@@ -98,9 +98,9 @@ class AssetsCustomersWantController extends Controller
         $currentDate = Carbon::now(); // วันและเวลาปัจจุบัน
         $userCreatedDate = Carbon::parse(Auth::user()->created_at); // วันที่ของผู้ใช้
         $createdDate = $userCreatedDate->lessThan($currentDate->subDays(3));
-        $authCount = (Auth::user()->plans == 0 && $createdDate) ? 3 : 100;
+        $authCount = (Auth::user()->plans == 0 && $createdDate) ? 10 : 100;
 
-    
+
         // สร้าง Paginator สำหรับ $wantsNullStatus
         // สร้าง Paginator สำหรับ $wantsNullStatus
         $wantsNullStatusPaginator = new \Illuminate\Pagination\LengthAwarePaginator(
