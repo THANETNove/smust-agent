@@ -242,7 +242,6 @@
 
     </div>
     <script>
-
         document.getElementById('card_imageButton').addEventListener('click', function() {
             document.getElementById('card_numberInput').click();
         });

@@ -1452,3 +1452,15 @@
     /* เรียงลูกใน container ในแนวตั้ง */
     align-items: center;
 }
+
+.box-post-store {
+    width: 100%;
+    height: 100%;
+    padding: 32px 24px;
+}
+
+.box-post-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}

@@ -1,49 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <?php
-    $data = DB::table('provinces')->orderBy('name_th', 'ASC')->get();
-    ?>
-
-    <div class="free-trial-box-nav-web">
-        <div class="offcanvasManu-web">
-            @include('layouts.offcanvasManu')
-        </div>
-        <div class="box-nav-web">
+    <div class="box-post-store">
+        <div class="box-post-head">
+            <h1 class="modal-title-post fs-5" id="exampleModalLabel">สร้างโพส</h1>
             <a href="javascript:void(0);" onclick="goBack()">
-                <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
+                <button type="button" class="btn-close"></button>
             </a>
 
-            <p class="free-trial">แก้ไขเว็บไซต์ส่วนตัว
-                <br>
-
-            </p>
-
         </div>
-
-
-    </div>
-
-    <div class="success-box">
-        @if (session('success'))
-            <span>{{ session('success') }}</span>
-        @endif
-
-    </div>
-    @php
-        // กำหนดเงื่อนไขว่าฟอร์มจะใช้เพื่อแก้ไขหรือสร้างใหม่
-        $isEditing = !true; // แทนที่ `!true` ด้วยเงื่อนไขจริงของคุณ
-    @endphp
-
-
-    <div>
-        <form method="POST" action="{{ $isEditing ? route('edit-post-update', $personal->id) : route('new-post-store') }}"
-            enctype="multipart/form-data" id="postForm">
+        <form method="POST" action="{{ route('new-post-store') }}" enctype="multipart/form-data" id="postForm">
             @csrf
-            @if ($isEditing)
-                @method('PUT')
-            @endif
-
             <div class="mb-3">
                 <input type="text" class="form-control" name="name" id="postName" placeholder="ชื่อโพส">
             </div>
@@ -54,9 +21,10 @@
                     style="display: none;">
             </div>
             <div>
-                <textarea class="form-control history-areas" name="details_post" id="postDetails" style="min-height: 100px"></textarea>
+                <textarea class="form-control history-areas" name="details_post" id="postDetails" style="min-height: 183px"></textarea>
             </div>
             <div class="btn-box-post">
+
                 <button type="submit" id="submitButton" class="btn btn-register" disabled>โพส</button>
             </div>
         </form>
@@ -64,8 +32,6 @@
 
 
     <script>
-
-
         function adjustTextareaHeight() {
             var textareas = document.querySelectorAll('.history-areas');
 
@@ -103,20 +69,32 @@
         document.addEventListener('DOMContentLoaded', function() {
             const postName = document.getElementById('postName');
             const postDetails = document.getElementById('postDetails');
+            const postImage = document.getElementById('fileInput-image');
             const submitButton = document.getElementById('submitButton');
 
             function validateForm() {
-                if (postName.value.trim() === '' || postDetails.value.trim() === '') {
+                // ตรวจสอบว่ามีค่าใน input text, textarea และ input file
+                const isPostNameEmpty = postName.value.trim() === '';
+                const isPostDetailsEmpty = postDetails.value.trim() === '';
+                const isPostImageEmpty = postImage.files.length === 0;
+
+                if (isPostNameEmpty || isPostDetailsEmpty || isPostImageEmpty) {
                     submitButton.disabled = true;
                     submitButton.style.backgroundColor = '#9E9E9E'; // สีเทา
+                    submitButton.style.color = '#ffffff'; // สีเทา
                 } else {
                     submitButton.disabled = false;
-                    submitButton.style.backgroundColor = ''; // สีเดิม
+                    submitButton.style.backgroundColor = ''; // สีเดิมหรือสีอื่นที่ต้องการ
                 }
             }
 
+            // ตรวจสอบเมื่อมีการเปลี่ยนแปลงใน input text, textarea และ input file
             postName.addEventListener('input', validateForm);
             postDetails.addEventListener('input', validateForm);
+            postImage.addEventListener('change', validateForm); // เพิ่มการตรวจสอบเมื่อเลือกไฟล์
+
+            // เรียกใช้ validateForm() เพื่อให้แน่ใจว่าสถานะปุ่มถูกต้องเมื่อโหลด
+            validateForm();
         });
 
         document.addEventListener('DOMContentLoaded', adjustTextareaHeight); // เรียกใช้เมื่อเอกสารโหลดเสร็จ
