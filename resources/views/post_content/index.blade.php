@@ -34,36 +34,29 @@
                 src="{{ URL::asset('/assets/image/welcome/create_new_post.png') }}">
         </a>
         <p class="post">Posts</p>
-        <div class="posts-view">
-            <p class="post-head-name">พาลูกค้าไปโอนที่กรมที่ดินอีกแล้วค่า</p>
-            <img class="add-frame7-2" id="rectangle123"
-                src="{{ URL::asset('/assets/img/card_image/09_09_08_2024_1723180146.jpg') }}">
-            <div class="text-post-view">
-                <p class="text-content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                </p>
-                <span class="see-more" onclick="toggleText()">..see more..</span>
-            </div>
+        @foreach ($dataPost as $index => $daPo)
+            <div class="posts-view">
+                <p class="post-head-name">{{ $daPo->name }}</p>
+                <img class="add-frame7-2" id="rectangle123"
+                    src="{{ URL::asset('/assets/img/card_image/09_09_08_2024_1723180146.jpg') }}">
+                <div class="text-post-view">
+                    <p class="text-content" id="text-content-{{ $index }}">
+                        {{ $daPo->details_post }}
+                    </p>
+                    <span class="see-more" id="see-more-{{ $index }}"
+                        onclick="toggleText({{ $index }})">..see more..</span>
+                </div>
 
-            <div class="box-delete-post">
-                <p class="delete-text">ลบ</p>
-                <div class="edit-btn-post">
-                    <img class="edit-post" id="rectangle123" src="{{ URL::asset('/assets/image/welcome/edit.png') }}">
-                    แก้ไข
+                <div class="box-delete-post">
+                    <p class="delete-text">ลบ</p>
+                    <div class="edit-btn-post">
+                        <img class="edit-post" id="rectangle123" src="{{ URL::asset('/assets/image/welcome/edit.png') }}">
+                        แก้ไข
+                    </div>
                 </div>
             </div>
-        </div>
-        {{--      <div class="posts-view">
-            <p class="post-head-name">พาลูกค้าไปโอนที่กรมที่ดินอีกแล้วค่า</p>
-            <img class="add-frame7-2" id="rectangle123"
-                src="{{ URL::asset('/assets/img/card_image/09_09_08_2024_1723180146.jpg') }}">
-            <p class="text-post-view">เป็นเคสที่มายด์ไม่ได้ใช้เวลานานเลย เพียงแค่ 40 วันก็ขายได้แล้ว
-                มายด์ดูแลสินเชื่อให้ลูกค้าด้วยทุก เคสค่ะ</p>
-        </div> --}}
+        @endforeach
+
 
     </div>
 
@@ -83,18 +76,38 @@
 
 
 
-        function toggleText() {
-            const textContent = document.querySelector('.text-content');
-            const seeMoreButton = document.querySelector('.see-more');
+        document.addEventListener('DOMContentLoaded', function() {
+            const textContents = document.querySelectorAll('.text-content');
+            const seeMoreButtons = document.querySelectorAll('.see-more');
 
-            if (textContent.classList.contains('expanded')) {
-                textContent.classList.remove('expanded');
-                seeMoreButton.textContent = '..see more..';
-            } else {
-                textContent.classList.add('expanded');
-                seeMoreButton.textContent = 'See less';
+            function checkTextOverflow(index) {
+                const textContent = textContents[index];
+                const seeMoreButton = seeMoreButtons[index];
+
+                if (textContent.scrollHeight > textContent.clientHeight) {
+                    seeMoreButton.style.display = 'inline-block'; // แสดงปุ่มถ้าข้อความยาวเกิน
+                } else {
+                    seeMoreButton.style.display = 'none'; // ซ่อนปุ่มถ้าข้อความไม่ยาวเกิน
+                }
             }
-        }
+
+            textContents.forEach((_, index) => checkTextOverflow(index));
+
+            window.toggleText = function(index) {
+                const textContent = textContents[index];
+                const seeMoreButton = seeMoreButtons[index];
+
+                if (textContent.classList.contains('expanded')) {
+                    textContent.classList.remove('expanded');
+                    seeMoreButton.textContent = '..see more..';
+                } else {
+                    textContent.classList.add('expanded');
+                    seeMoreButton.textContent = 'see less';
+                }
+            };
+        });
+
+
 
 
 

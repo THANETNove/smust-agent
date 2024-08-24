@@ -19,11 +19,11 @@ class PostContentController extends Controller
      */
     public function index()
     {
-        $data = DB::table('post_contents')
+        $dataPost = DB::table('post_contents')
             ->where('user_id', Auth::user()->id)
             ->orderBy('updated_at', 'DESC')
             ->get();
-        return view('post_content.index', compact('data'));
+        return view('post_content.index', ['dataPost' => $dataPost]);
     }
 
     /**
