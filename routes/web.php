@@ -10,6 +10,7 @@ use App\Http\Controllers\FreeTrialRightsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssetsCustomersWantController;
 use App\Http\Controllers\PersonalWebsiteController;
+use App\Http\Controllers\PostContentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,7 +72,7 @@ Route::post('/convenient-area', [PersonalWebsiteController::class, 'store'])->na
 Route::put('/convenient-area-update/{id}', [PersonalWebsiteController::class, 'update'])->name('convenient-area-update');
 Route::post('/services-area', [PersonalWebsiteController::class, 'storeServices'])->name('services-area');
 Route::put('/services-area-update/{id}', [PersonalWebsiteController::class, 'updateServices'])->name('services-area-update');
-Route::get('create_post', [PersonalWebsiteController::class, 'index'])->name('create_post');
+Route::get('create_post', [PostContentController::class, 'index'])->name('create_post');
 
 //ส่วนของ admin
 Route::group(['middleware' => ['is_admin']], function () {
