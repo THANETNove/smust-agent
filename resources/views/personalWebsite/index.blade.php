@@ -64,7 +64,7 @@
         <a href="{{ url('home') }}" rel="noopener noreferrer" class="no-underline">
             <img class="parttoedit" src="{{ URL::asset('/assets/image/welcome/parttohome.png') }}">
         </a>
-        <a href="{{ url('create_post') }}" target="_blank" rel="noopener noreferrer" class="no-underline">
+        <a href="{{ url('create_post') }}" rel="noopener noreferrer" class="no-underline">
             <img class="parttoedit" src="{{ URL::asset('/assets/image/welcome/parttopost.png') }}">
         </a>
 

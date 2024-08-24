@@ -30,7 +30,13 @@
         @endif
 
     </div>
-    adasd
+    <div class="box-justify-content pb-post-19">
+        <img class="pick_highlight_post" id="rectangle123"
+            src="{{ URL::asset('/assets/image/welcome/pick_highlight_post.png') }}">
+        <img class="create_new_post" id="rectangle123" src="{{ URL::asset('/assets/image/welcome/create_new_post.png') }}">
+
+        <p class="post">Posts</p>
+    </div>
     <script>
         function goBack() {
             window.history.back();

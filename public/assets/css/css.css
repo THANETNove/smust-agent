@@ -1366,3 +1366,27 @@
     font-size: 14px;
     font-weight: 400;
 }
+
+.pb-post-19 {
+    padding-top: 19px;
+}
+
+.pick_highlight_post {
+    width: 350px;
+    height: 44px;
+}
+
+.create_new_post {
+    margin-top: 32px;
+    width: 350px;
+    height: 36px;
+}
+
+.post {
+    margin-top: 25px;
+    color: #000000;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    text-align: center;
+}
