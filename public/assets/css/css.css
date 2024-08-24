@@ -1518,6 +1518,7 @@
 }
 
 .delete-text {
+    margin-top: 8px;
     color: #E34234;
     font-size: 14px;
     font-weight: 400;
