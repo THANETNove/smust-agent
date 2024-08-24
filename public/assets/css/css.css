@@ -1390,3 +1390,35 @@
     margin-bottom: 28px;
     text-align: center;
 }
+
+.box-post-justify-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-title-post {
+    margin-top: 8px !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    color: #000000 !important;
+    margin-left: 40%;
+
+}
+
+.modal-body-post {
+    width: 100%;
+    position: relative;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 1rem 1rem 1rem;
+}
+
+.add-frame7 {
+    width: 193px;
+    height: 36px;
+    margin: 16px 0px;
+}
