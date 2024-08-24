@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\AssetsCustomersWant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
+
 
 class AssetsCustomersWantController extends Controller
 {
@@ -93,10 +95,16 @@ class AssetsCustomersWantController extends Controller
             return !is_null($item->user_id);
         });
 
+        $currentDate = Carbon::now(); // วันและเวลาปัจจุบัน
+        $userCreatedDate = Carbon::parse(Auth::user()->created_at); // วันที่ของผู้ใช้
+        $createdDate = $userCreatedDate->lessThan($currentDate->subDays(3));
+        $authCount = (Auth::user()->plans == 0 && $createdDate) ? 3 : 100;
+
+    
         // สร้าง Paginator สำหรับ $wantsNullStatus
         // สร้าง Paginator สำหรับ $wantsNullStatus
         $wantsNullStatusPaginator = new \Illuminate\Pagination\LengthAwarePaginator(
-            $wantsNullStatus->forPage($request->input('page_null_status', 1), 100),
+            $wantsNullStatus->forPage($request->input('page_null_status', 1),  $authCount),
             $wantsNullStatus->count(),
             100,
             $request->input('page_null_status', 1),
@@ -105,7 +113,7 @@ class AssetsCustomersWantController extends Controller
 
         // สร้าง Paginator สำหรับ $wantsNotNullStatus
         $wantsNotNullStatusPaginator = new \Illuminate\Pagination\LengthAwarePaginator(
-            $wantsNotNullStatus->forPage($request->input('page_not_null_status', 1), 100),
+            $wantsNotNullStatus->forPage($request->input('page_not_null_status', 1),  $authCount),
             $wantsNotNullStatus->count(),
             100,
             $request->input('page_not_null_status', 1),
@@ -116,6 +124,7 @@ class AssetsCustomersWantController extends Controller
         return view('assetsCustomer.assets_customer', [
             'wants' => $wantsNullStatusPaginator,
             'wants2' => $wantsNotNullStatusPaginator,
+            'createdDate' => $createdDate
         ]);
     }
 

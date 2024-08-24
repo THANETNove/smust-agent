@@ -258,9 +258,12 @@
                         </div>
 
                     </div>
-                    <div class="mt-5">
-                        {!! $wants->links() !!}
-                    </div>
+                    @if (!$createdDate)
+                        <div class="mt-5">
+                            {!! $wants->links() !!}
+                        </div>
+                    @endif
+
                 </div>
                 <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
                     tabindex="0">
@@ -452,21 +455,6 @@
                                             </div>
                                             <div style="margin-right: 16px">
                                                 @if ($wan2->user_id)
-                                                    {{--   @if ($wan2->line_id)
-                                                        <a href="{{ $wan2->line_id }}" class="no-underline"
-                                                            target="_blank" rel="noopener noreferrer">
-                                                            <img class="ass-icon-line"
-                                                                src="{{ URL::asset('/assets/image/home/line.png') }}">
-                                                        </a>
-                                                    @endif
-                                                    
-                                                    @if ($wan2->facebook_id)
-                                                        <a href="{{ $wan2->facebook_id }}" target="_blank"
-                                                            rel="noopener noreferrer" class="no-underline">
-                                                            <img class="ass-icon-line"
-                                                                src="{{ URL::asset('/assets/image/home/facbook.png') }}">
-                                                        </a>
-                                                    @endif --}}
                                                     @php
                                                         $lineIsUrl = filter_var($wan2->line_id, FILTER_VALIDATE_URL);
                                                         $facebookIsUrl = filter_var(
@@ -558,9 +546,12 @@
                         @endforeach
 
                     </div>
-                    <div class="mt-5">
-                        {!! $wants2->links() !!}
-                    </div>
+                    @if (!$createdDate)
+                        <div class="mt-5">
+                            {!! $wants2->links() !!}
+                        </div>
+                    @endif
+
 
 
                 </div>
