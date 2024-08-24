@@ -88,14 +88,20 @@
     </div>
 
     <div class="box-link-fb-tel">
-        <p> <img class="img-imageLine" src="{{ URL::asset('/assets/image/welcome/imageLine.png') }}">LINE ID: ovaljen</p>
+        <p> <img class="img-imageLine" src="{{ URL::asset('/assets/image/welcome/imageLine.png') }}">LINE ID:
+            {{ Auth::user()->line_id }}</p>
     </div>
     <div class="box-link-fb-tel">
-        <p> <img class="img-imageLine" src="{{ URL::asset('/assets/image/welcome/imageFb.png') }}">FB: Kornkanok Klin</p>
+        <p> <img class="img-imageLine" src="{{ URL::asset('/assets/image/welcome/imageFb.png') }}">FB:
+            {{ Auth::user()->facebook_id }}</p>
     </div>
+
     <div class="box-link-fb-tel">
-        <p> <img class="img-imageLine" src="{{ URL::asset('/assets/image/welcome/imagecall.png') }}">Tel: 0325687464 </p>
+        <p> <img class="img-imageLine" src="{{ URL::asset('/assets/image/welcome/imagecall.png') }}">Tel:
+            {{ Auth::user()->phone }}
+        </p>
     </div>
+
 
     <div class="footer-name">
         <p>ชื่อ นามสกุล ทรัพย์ที่ทำ และช่องทางการติดต่อ ต้องแก้ไขที่ แก้ไขข้อมูลส่วนตัว</p>
