@@ -71,7 +71,7 @@
     <div class="history-box">
         <div class="col-12 input_box2">
             <label>ประวัติ หรือผลงานโดยย่อ <samp style="color: red;margin-left: 6px;"> *</samp></label>
-            <textarea class="form-control" rows="3" id="history_work" name="history_work">
+            <textarea class="form-control history-areas" rows="3" id="history_work" name="history_work">
 @if ($personal)
 {{ $personal->history_work }}
 @endif
@@ -112,39 +112,47 @@
         <p>สามารถใส่บริการจุดเด่นของคุณได้สูงสุด 3 อย่างพร้อมรูปประกอบ หากไม่ใส่เลย จะไม่ถูกแสดงบนหน้าเว็บ จะใส่น้อยกว่า 3
             อย่างก็ได้</p>
     </div>
-    <form action="">
-        <div class="box-justify-content pt-services-32 mb-32-services">
-            @foreach (range(1, 3) as $i)
-                <div class="box-services-user">
-                    <img class="img-rectangle136" id="rectangle136-{{ $i }}"
-                        src="{{ URL::asset('/assets/image/welcome/rectangle136.png') }}">
-                    <img class="frame7-2" id="frame7-{{ $i }}"
-                        src="{{ URL::asset('/assets/image/welcome/Frame7.png') }}"
-                        onclick="triggerFileInput({{ $i }})">
-                    <input type="file" id="fileInput-{{ $i }}" class="frame7"
-                        name="image_{{ $i }}" accept="image/*"
-                        onchange="previewImage(event, {{ $i }})" style="display: none;">
-                    <div class="col-md-12 mt-services-24">
-                        <label>ชื่อจุดเด่นของคุณ (ไม่เกิน 50 คำ)</label>
-                        <input id="text" type="text" name="name_{{ $i }}"
-                            class="form-control @error('phone') is-invalid @enderror" required autocomplete="phone"
-                            maxlength="50">
-                        @error('phone')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        <div class="col-12 mt-4">
-                            <label>รายละเอียด (ไม่เกิน 100 คำ)</label>
-                            <textarea class="form-control" rows="3" name="details_{{ $i }}" maxlength="100"></textarea>
-                        </div>
+    @if ($personal)
+        <form method="POST" action="{{ route('services-area-update', $personal->id) }}" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+        @else
+            <form method="POST" action="{{ route('services-area') }}" enctype="multipart/form-data">
+                @csrf
+    @endif
+    <div class="box-justify-content pt-services-32 mb-32-services">
+        @foreach (range(1, 3) as $i)
+            <div class="box-services-user">
+
+                <img class="img-rectangle136" id="rectangle136-{{ $i }}"
+                    src="{{ URL::asset($personal->{'image_' . $i} ?? '/assets/image/welcome/rectangle136.png') }}">
+                <img class="frame7-2" id="frame7-{{ $i }}"
+                    src="{{ URL::asset('/assets/image/welcome/Frame7.png') }}"
+                    onclick="triggerFileInput({{ $i }})">
+                <input type="file" id="fileInput-{{ $i }}" class="frame7" name="image_{{ $i }}"
+                    accept="image/*" onchange="previewImage(event, {{ $i }})" style="display: none;">
+                <div class="col-md-12 mt-services-24">
+                    <label>ชื่อจุดเด่นของคุณ (ไม่เกิน 50 คำ)</label>
+                    <input id="text" type="text" name="name_{{ $i }}"
+                        class="form-control @error('phone') is-invalid @enderror" autocomplete="phone" maxlength="50"
+                        value="{{ $personal->{'name_' . $i} ?? '' }}">
+                    @error('phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <div class="col-12 mt-4">
+                        <label>รายละเอียด (ไม่เกิน 100 คำ)</label>
+                        <textarea class="form-control history-areas" rows="3" name="details_{{ $i }}" maxlength="100">{{ $personal->{'details_' . $i} ?? '' }}</textarea>
                     </div>
                 </div>
-            @endforeach
-            <div class="btn-box">
-                <button type="submit" class="btn btn-attention">บันทึกการแก้ไข</button>
             </div>
+        @endforeach
+
+        <div class="btn-box">
+            <button type="submit" class="btn btn-attention">บันทึกการแก้ไข</button>
         </div>
+    </div>
     </form>
     <script>
         function triggerFileInput(index) {
@@ -167,9 +175,14 @@
         }
 
         function adjustTextareaHeight() {
-            var textarea = document.getElementById('history_work');
-            textarea.style.height = 'auto'; // รีเซ็ตความสูงเพื่อคำนวณความสูงใหม่
-            textarea.style.height = (textarea.scrollHeight) + 'px'; // ตั้งค่าความสูงตามเนื้อหาที่มีอยู่
+            var textareas = document.querySelectorAll('.history-areas');
+
+            // การทำงานกับแต่ละ textarea
+            textareas.forEach(function(textarea) {
+                // ตัวอย่าง: ตั้งค่า rows ให้ตรงกับขนาดของข้อความ
+                textarea.style.height = 'auto'; // คืนค่า auto เพื่อให้ได้ขนาดที่พอดี
+                textarea.style.height = (textarea.scrollHeight) + 'px'; // ปรับความสูงให้พอดีกับขนาดของข้อความ
+            });
         }
 
         document.addEventListener('DOMContentLoaded', adjustTextareaHeight); // เรียกใช้เมื่อเอกสารโหลดเสร็จ
