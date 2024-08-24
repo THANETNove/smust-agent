@@ -12,6 +12,7 @@ class PersonalWebsite extends Model
     protected $fillable = [
         'user_id',
         'imageHade',
+        'provinces',
         'history_work',
         'image_1',
         'name_1',

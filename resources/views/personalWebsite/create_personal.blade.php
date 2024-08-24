@@ -61,8 +61,8 @@
         <div class="name-history-profile">
             <p class="name-history-profile-p">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
             <div class="col-md-12 input_box">
-                <input type="text" class="form-control @error('convenient_area') is-invalid @enderror"
-                    value="{{ Auth::user()->provinces }}" required autocomplete="เขตพื้นที่ที่สะดวกทำงาน">
+                <input type="text" class="form-control @error('convenient_area') is-invalid @enderror" name="provinces"
+                    required autocomplete="เขตพื้นที่ที่สะดวกทำงาน">
                 <label>เขตพื้นที่ที่สะดวกทำงาน <samp style="color: red;margin-left: 6px;"> *</samp></label>
             </div>
         </div>

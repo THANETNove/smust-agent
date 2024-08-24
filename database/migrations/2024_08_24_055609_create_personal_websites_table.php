@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('user_id')->nullable()->comment('user_id');
             $table->text('imageHade')->nullable()->comment('ภาพหัว');
+            $table->text('provinces')->nullable()->comment('provinces');
             $table->text('history_work')->nullable()->comment('ประวัติ หรือผลงานโดยย่อ');
             $table->text('image_1')->nullable()->comment('ภาพ 1');
             $table->string('name_1')->nullable()->comment('ชื่อที่ 1');

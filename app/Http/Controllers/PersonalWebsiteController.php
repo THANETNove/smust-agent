@@ -55,6 +55,7 @@ class PersonalWebsiteController extends Controller
             $file->move(public_path('/assets/img/history_work/'), $filename);
             $member->imageHade = $filePath;
         }
+        $member->provinces = $request['provinces'];
         $member->history_work = $request['history_work'];
         $member->save();
         return redirect('create-personal')->with('message', "บันทึกสำเร็จ");
@@ -62,7 +63,7 @@ class PersonalWebsiteController extends Controller
 
     public function storeServices(Request $request)
     {
-     
+
         $member = new PersonalWebsite;
         $member->user_id = Auth::user()->id;
         for ($i = 1; $i <= 3; $i++) {
@@ -124,6 +125,7 @@ class PersonalWebsiteController extends Controller
             $member->imageHade = $filePath;
         }
         $member->history_work = $request['history_work'];
+        $member->provinces = $request['provinces'];
         $member->save();
         return redirect('create-personal')->with('success', "บันทึกสำเร็จ");
     }
