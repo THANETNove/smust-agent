@@ -67,6 +67,8 @@ Route::post('/co-agent-store', [AssetsCustomersWantController::class, 'store'])-
 Route::post('/assets-customer', [AssetsCustomersWantController::class, 'index'])->name('assets-customer');
 Route::get('/personal-website', [PersonalWebsiteController::class, 'index'])->name('personal-website');
 Route::get('/create-personal', [PersonalWebsiteController::class, 'create'])->name('create-personal');
+Route::post('/convenient-area', [PersonalWebsiteController::class, 'store'])->name('convenient-area');
+Route::put('/convenient-area-update/{id}', [PersonalWebsiteController::class, 'update'])->name('convenient-area-update');
 
 //ส่วนของ admin
 Route::group(['middleware' => ['is_admin']], function () {

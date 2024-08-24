@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\PersonalWebsite;
+use Illuminate\Support\Facades\DB;
 
 class PersonalWebsiteController extends Controller
 {
@@ -23,7 +26,13 @@ class PersonalWebsiteController extends Controller
      */
     public function create()
     {
-        return view('personalWebsite.create_personal');
+        $personal = DB::table('personal_websites')
+            ->where('user_id', Auth::user()->id)
+            ->first();
+
+
+
+        return view('personalWebsite.create_personal', ['personal' => $personal]);
     }
 
     /**
@@ -31,7 +40,24 @@ class PersonalWebsiteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+
+
+        $member = new PersonalWebsite;
+        $member->user_id = Auth::user()->id;
+        if ($request->hasFile('image')) {
+
+
+            $file = $request->file('image');
+            $filename = date('i_d_m_Y') . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $filePath = '/assets/img/history_work/' . $filename;
+            $file->move(public_path('/assets/img/history_work/'), $filename);
+            $member->imageHade = $filePath;
+        }
+        $member->history_work = $request['history_work'];
+        $member->save();
+        return redirect('create-personal')->with('message', "บันทึกสำเร็จ");
     }
 
     /**
@@ -55,7 +81,25 @@ class PersonalWebsiteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $member =  PersonalWebsite::find($id);
+
+        if ($request->hasFile('image')) {
+            if ($member->imageHade) {
+                $existingImagePath = public_path($member->imageHade);
+                if (file_exists($existingImagePath)) {
+                    unlink($existingImagePath);
+                }
+            }
+
+            $file = $request->file('image');
+            $filename = date('i_d_m_Y') . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $filePath = '/assets/img/history_work/' . $filename;
+            $file->move(public_path('/assets/img/history_work/'), $filename);
+            $member->imageHade = $filePath;
+        }
+        $member->history_work = $request['history_work'];
+        $member->save();
+        return redirect('create-personal')->with('message', "บันทึกสำเร็จ");
     }
 
     /**

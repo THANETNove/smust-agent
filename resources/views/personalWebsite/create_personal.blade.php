@@ -20,39 +20,55 @@
             @endif
         </div>
     </div>
+    @if ($personal)
+        <form method="POST" action="{{ route('convenient-area-update', $personal->id) }}" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+        @else
+            <form method="POST" action="{{ route('convenient-area') }}" enctype="multipart/form-data">
+                @csrf
+    @endif
 
-    <form action="">
-        <div class="box-rectangle">
+    <div class="box-rectangle">
+
+        @if ($personal && $personal->imageHade)
+            <img class="rectangle123" id="rectangle123" src="{{ URL::asset($personal->imageHade) }}">
+        @else
             <img class="rectangle123" id="rectangle123" src="{{ URL::asset('/assets/image/welcome/Rectangle123.png') }}">
-            <img class="frame7" id="frame7" src="{{ URL::asset('/assets/image/welcome/Frame7.png') }}"
-                onclick="triggerFileInput('head')">
-            <input type="file" id="fileInput-head" class="frame7" name="image" accept="image/*"
-                onchange="previewImage(event, 'head')" style="display: none;">
-        </div>
+        @endif
 
-        <div class="box-history-profile">
-            <div>
-                <img class="userProfile"
-                    src="{{ Auth::user()->image ? URL::asset(Auth::user()->image) : URL::asset('/assets/image/welcome/profile.png') }}">
-            </div>
-            <div class="name-history-profile">
-                <p class="name-history-profile-p">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
-                <div class="col-md-12 input_box">
-                    <input type="number" name="id_card_number"
-                        class="form-control @error('id_card_number') is-invalid @enderror"
-                        value="{{ Auth::user()->provinces }}" required autocomplete="id_card_number">
-                    <label>เขตพื้นที่ที่สะดวกทำงาน <samp style="color: red;margin-left: 6px;"> *</samp></label>
-                </div>
-            </div>
-        </div>
+        <img class="frame7" id="frame7" src="{{ URL::asset('/assets/image/welcome/Frame7.png') }}"
+            onclick="triggerFileInput('head')">
+        <input type="file" id="fileInput-head" class="frame7" name="image" accept="image/*"
+            onchange="previewImage(event, 'head')" style="display: none;">
+    </div>
 
-        <div class="history-box">
-            <div class="col-12 input_box2">
+    <div class="box-history-profile">
+        <div>
+            <img class="userProfile"
+                src="{{ Auth::user()->image ? URL::asset(Auth::user()->image) : URL::asset('/assets/image/welcome/profile.png') }}">
+        </div>
+        <div class="name-history-profile">
+            <p class="name-history-profile-p">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
+            <div class="col-md-12 input_box">
+                <input type="text" class="form-control @error('convenient_area') is-invalid @enderror"
+                    value="{{ Auth::user()->provinces }}" required autocomplete="เขตพื้นที่ที่สะดวกทำงาน">
                 <label>เขตพื้นที่ที่สะดวกทำงาน <samp style="color: red;margin-left: 6px;"> *</samp></label>
-                <textarea class="form-control" rows="3"></textarea>
             </div>
-            <button type="submit" class="btn btn-attention">บันทึกการแก้ไข</button>
         </div>
+    </div>
+
+    <div class="history-box">
+        <div class="col-12 input_box2">
+            <label>ประวัติ หรือผลงานโดยย่อ <samp style="color: red;margin-left: 6px;"> *</samp></label>
+            <textarea class="form-control" rows="3" id="history_work" name="history_work">
+                    @if ($personal)
+{{ $personal->history_work }}
+@endif 
+                    </textarea>
+        </div>
+        <button type="submit" class="btn btn-attention">บันทึกการแก้ไข</button>
+    </div>
     </form>
 
     <div class="box-type">
@@ -62,9 +78,13 @@
     </div>
 
     <div class="box-link-fb-tel">
-        @foreach ([['imageLine.png', 'LINE ID: ovaljen'], ['imageFb.png', 'FB: Kornkanok Klin'], ['imagecall.png', 'Tel: 0325687464']] as [$icon, $text])
-            <p><img class="img-imageLine" src="{{ URL::asset("/assets/image/welcome/$icon") }}">{{ $text }}</p>
-        @endforeach
+        <p> <img class="img-imageLine" src="{{ URL::asset('/assets/image/welcome/imageLine.png') }}">LINE ID: ovaljen</p>
+    </div>
+    <div class="box-link-fb-tel">
+        <p> <img class="img-imageLine" src="{{ URL::asset('/assets/image/welcome/imageFb.png') }}">FB: Kornkanok Klin</p>
+    </div>
+    <div class="box-link-fb-tel">
+        <p> <img class="img-imageLine" src="{{ URL::asset('/assets/image/welcome/imagecall.png') }}">Tel: 0325687464 </p>
     </div>
 
     <div class="footer-name">
@@ -76,39 +96,40 @@
         <p>สามารถใส่บริการจุดเด่นของคุณได้สูงสุด 3 อย่างพร้อมรูปประกอบ หากไม่ใส่เลย จะไม่ถูกแสดงบนหน้าเว็บ จะใส่น้อยกว่า 3
             อย่างก็ได้</p>
     </div>
-
-    <div class="box-justify-content pt-services-32 mb-32-services">
-        @foreach (range(1, 3) as $i)
-            <div class="box-services-user">
-                <img class="img-rectangle136" id="rectangle136-{{ $i }}"
-                    src="{{ URL::asset('/assets/image/welcome/rectangle136.png') }}">
-                <img class="frame7-2" id="frame7-{{ $i }}"
-                    src="{{ URL::asset('/assets/image/welcome/Frame7.png') }}"
-                    onclick="triggerFileInput({{ $i }})">
-                <input type="file" id="fileInput-{{ $i }}" class="frame7" name="image_{{ $i }}"
-                    accept="image/*" onchange="previewImage(event, {{ $i }})" style="display: none;">
-                <div class="col-md-12 mt-services-24">
-                    <label>ชื่อจุดเด่นของคุณ (ไม่เกิน 50 คำ)</label>
-                    <input id="text" type="text" name="name_{{ $i }}"
-                        class="form-control @error('phone') is-invalid @enderror" required autocomplete="phone"
-                        maxlength="50">
-                    @error('phone')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    <div class="col-12 mt-4">
-                        <label>รายละเอียด {{ $i }} (ไม่เกิน 100 คำ)</label>
-                        <textarea class="form-control" rows="3" name="details_{{ $id }}" maxlength="100"></textarea>
+    <form action="">
+        <div class="box-justify-content pt-services-32 mb-32-services">
+            @foreach (range(1, 3) as $i)
+                <div class="box-services-user">
+                    <img class="img-rectangle136" id="rectangle136-{{ $i }}"
+                        src="{{ URL::asset('/assets/image/welcome/rectangle136.png') }}">
+                    <img class="frame7-2" id="frame7-{{ $i }}"
+                        src="{{ URL::asset('/assets/image/welcome/Frame7.png') }}"
+                        onclick="triggerFileInput({{ $i }})">
+                    <input type="file" id="fileInput-{{ $i }}" class="frame7"
+                        name="image_{{ $i }}" accept="image/*"
+                        onchange="previewImage(event, {{ $i }})" style="display: none;">
+                    <div class="col-md-12 mt-services-24">
+                        <label>ชื่อจุดเด่นของคุณ (ไม่เกิน 50 คำ)</label>
+                        <input id="text" type="text" name="name_{{ $i }}"
+                            class="form-control @error('phone') is-invalid @enderror" required autocomplete="phone"
+                            maxlength="50">
+                        @error('phone')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <div class="col-12 mt-4">
+                            <label>รายละเอียด (ไม่เกิน 100 คำ)</label>
+                            <textarea class="form-control" rows="3" name="details_{{ $i }}" maxlength="100"></textarea>
+                        </div>
                     </div>
                 </div>
+            @endforeach
+            <div class="btn-box">
+                <button type="submit" class="btn btn-attention">บันทึกการแก้ไข</button>
             </div>
-        @endforeach
-        <div class="btn-box">
-            <button type="submit" class="btn btn-attention">บันทึกการแก้ไข</button>
         </div>
-    </div>
-
+    </form>
     <script>
         function triggerFileInput(index) {
             document.getElementById('fileInput-' + index).click();
@@ -128,5 +149,13 @@
                 reader.readAsDataURL(file);
             }
         }
+
+        function adjustTextareaHeight() {
+            var textarea = document.getElementById('history_work');
+            textarea.style.height = 'auto'; // รีเซ็ตความสูงเพื่อคำนวณความสูงใหม่
+            textarea.style.height = (textarea.scrollHeight) + 'px'; // ตั้งค่าความสูงตามเนื้อหาที่มีอยู่
+        }
+
+        document.addEventListener('DOMContentLoaded', adjustTextareaHeight); // เรียกใช้เมื่อเอกสารโหลดเสร็จ
     </script>
 @endsection
