@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('post_contents', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id')->nullable()->comment('user_id');
+            $table->string('name')->nullable()->comment('ชื่อ');
+            $table->text('image')->nullable()->comment('ภาพ');
+            $table->text('details_post')->nullable()->comment('รายละเอียด');
             $table->timestamps();
         });
     }

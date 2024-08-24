@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\PostContent;
+use Illuminate\Support\Facades\Auth;
 
 class PostContentController extends Controller
 {
@@ -31,7 +34,22 @@ class PostContentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $member = new PostContent;
+        $member->user_id = Auth::user()->id;
+        if ($request->hasFile('image')) {
+
+
+            $file = $request->file('image');
+            $filename = date('i_d_m_Y') . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $filePath = '/assets/img/post/' . $filename;
+            $file->move(public_path('/assets/img/post/'), $filename);
+            $member->image = $filePath;
+        }
+        $member->name = $request['name'];
+        $member->details_post = $request['details_post'];
+        $member->save();
+        return redirect('create_post')->with('success', "บันทึกสำเร็จ");
     }
 
     /**
