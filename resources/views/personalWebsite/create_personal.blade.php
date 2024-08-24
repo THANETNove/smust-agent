@@ -14,11 +14,21 @@
                 onclick="{{ session('success') ? '' : 'goBack()' }}">
                 <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
             </a>
-            <p class="free-trial">แก้ไขเว็บไซต์ส่วนตัว</p>
-            @if (session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
+            <p class="free-trial">แก้ไขเว็บไซต์ส่วนตัว
+                <br>
+
+            </p>
+
         </div>
+
+
+    </div>
+
+    <div class="success-box">
+        @if (session('success'))
+            <span>{{ session('success') }}</span>
+        @endif
+
     </div>
     @if ($personal)
         <form method="POST" action="{{ route('convenient-area-update', $personal->id) }}" enctype="multipart/form-data">
@@ -62,10 +72,10 @@
         <div class="col-12 input_box2">
             <label>ประวัติ หรือผลงานโดยย่อ <samp style="color: red;margin-left: 6px;"> *</samp></label>
             <textarea class="form-control" rows="3" id="history_work" name="history_work">
-                    @if ($personal)
+@if ($personal)
 {{ $personal->history_work }}
-@endif 
-                    </textarea>
+@endif
+</textarea>
         </div>
         <button type="submit" class="btn btn-attention">บันทึกการแก้ไข</button>
     </div>

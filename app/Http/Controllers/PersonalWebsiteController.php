@@ -99,7 +99,7 @@ class PersonalWebsiteController extends Controller
         }
         $member->history_work = $request['history_work'];
         $member->save();
-        return redirect('create-personal')->with('message', "บันทึกสำเร็จ");
+        return redirect('create-personal')->with('success', "บันทึกสำเร็จ");
     }
 
     /**

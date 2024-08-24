@@ -1356,3 +1356,13 @@
     /* เรียงลูกใน container ในแนวตั้ง */
     align-items: center;
 }
+
+.success-box {
+    background-color: #FFFFFF;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 8px;
+    color: green;
+    font-size: 14px;
+    font-weight: 400;
+}
