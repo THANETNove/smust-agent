@@ -62,10 +62,7 @@ class PersonalWebsiteController extends Controller
 
     public function storeServices(Request $request)
     {
-
-
-
-
+     
         $member = new PersonalWebsite;
         $member->user_id = Auth::user()->id;
         for ($i = 1; $i <= 3; $i++) {

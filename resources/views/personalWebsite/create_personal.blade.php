@@ -10,10 +10,10 @@
             @include('layouts.offcanvasManu')
         </div>
         <div class="box-nav-web">
-            <a href="{{ session('success') ? url('/home') : 'javascript:void(0);' }}"
-                onclick="{{ session('success') ? '' : 'goBack()' }}">
+            <a href="javascript:void(0);" onclick="goBack()">
                 <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
             </a>
+
             <p class="free-trial">แก้ไขเว็บไซต์ส่วนตัว
                 <br>
 
@@ -155,6 +155,10 @@
     </div>
     </form>
     <script>
+        function goBack() {
+            window.history.back();
+        }
+
         function triggerFileInput(index) {
             document.getElementById('fileInput-' + index).click();
         }
