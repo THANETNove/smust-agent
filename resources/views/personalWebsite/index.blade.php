@@ -73,10 +73,7 @@
 
 
     <script>
-        function goBack() {
-            window.history.back();
-        }
-
+ 
         function toggleContent(element) {
             const content = element.nextElementSibling;
             element.classList.toggle('active');

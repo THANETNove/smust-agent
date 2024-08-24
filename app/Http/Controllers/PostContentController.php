@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\PostContent;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostContentController extends Controller
 {
@@ -18,7 +19,11 @@ class PostContentController extends Controller
      */
     public function index()
     {
-        return view('post_content.create_post');
+        $data = DB::table('post_contents')
+            ->where('user_id', Auth::user()->id)
+            ->orderBy('updated_at', 'DESC')
+            ->get();
+        return view('post_content.index', compact('data'));
     }
 
     /**
@@ -26,7 +31,7 @@ class PostContentController extends Controller
      */
     public function create()
     {
-        //
+        return view('post_content.create_post');
     }
 
     /**

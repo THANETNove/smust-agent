@@ -61,9 +61,4 @@
             <img class="compare-plans-img" src="{{ URL::asset('/assets/image/welcome/compare-plans.png') }}">
         </div>
     </div>
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
 @endsection

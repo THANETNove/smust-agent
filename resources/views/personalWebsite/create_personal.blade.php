@@ -165,9 +165,7 @@
     </div>
     </form>
     <script>
-        function goBack() {
-            window.history.back();
-        }
+
 
         function triggerFileInput(index) {
             document.getElementById('fileInput-' + index).click();

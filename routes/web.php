@@ -72,7 +72,8 @@ Route::post('/convenient-area', [PersonalWebsiteController::class, 'store'])->na
 Route::put('/convenient-area-update/{id}', [PersonalWebsiteController::class, 'update'])->name('convenient-area-update');
 Route::post('/services-area', [PersonalWebsiteController::class, 'storeServices'])->name('services-area');
 Route::put('/services-area-update/{id}', [PersonalWebsiteController::class, 'updateServices'])->name('services-area-update');
-Route::get('create_post', [PostContentController::class, 'index'])->name('create_post');
+Route::get('create_post', [PostContentController::class, 'index'])->name('post-create');
+Route::get('post-create', [PostContentController::class, 'create'])->name('create_post');
 Route::put('edit-post-update/{id}', [PostContentController::class, 'update'])->name('edit-post-update');
 Route::post('new-post-store', [PostContentController::class, 'store'])->name('new-post-store');
 

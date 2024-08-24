@@ -119,8 +119,5 @@
 
         });
 
-        function goBack() {
-            window.history.back();
-        }
     </script>
 @endsection

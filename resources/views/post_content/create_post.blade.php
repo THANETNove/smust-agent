@@ -30,65 +30,41 @@
         @endif
 
     </div>
-    <div class="box-post-justify-content pb-post-19">
-        <img class="pick_highlight_post" id="rectangle123"
-            src="{{ URL::asset('/assets/image/welcome/pick_highlight_post.png') }}">
-        <img class="create_new_post" id="rectangle123" data-bs-toggle="modal" data-bs-target="#exampleModal"
-            src="{{ URL::asset('/assets/image/welcome/create_new_post.png') }}">
-
-        <p class="post">Posts</p>
-    </div>
+    @php
+        // กำหนดเงื่อนไขว่าฟอร์มจะใช้เพื่อแก้ไขหรือสร้างใหม่
+        $isEditing = !true; // แทนที่ `!true` ด้วยเงื่อนไขจริงของคุณ
+    @endphp
 
 
+    <div>
+        <form method="POST" action="{{ $isEditing ? route('edit-post-update', $personal->id) : route('new-post-store') }}"
+            enctype="multipart/form-data" id="postForm">
+            @csrf
+            @if ($isEditing)
+                @method('PUT')
+            @endif
 
-    <!-- Modal -->
-    <div class="modal fade " id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title-post fs-5" id="exampleModalLabel">สร้างโพส</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body-post">
-                    @if (!true)
-                        <form method="POST" action="{{ route('edit-post-update', $personal->id) }}"
-                            enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
-                        @else
-                            <form method="POST" action="{{ route('new-post-store') }}" enctype="multipart/form-data">
-                                @csrf
-                    @endif
-                    <div class="mb-3">
-                        <input type="text" class="form-control" name="name" id="exampleFormControlInput1"
-                            placeholder="ชื่อโพส">
-                    </div>
-                    <div class="text-center mb-3"> <!-- ใช้ class นี้เพื่อตรงกลาง -->
-
-                        <img class="add-frame7-2" id="add-frame7-2" style="display: none">
-                        <img class="add-frame7" id="add-frame7"
-                            src="{{ URL::asset('/assets/image/welcome/add-frame7.png') }}">
-                        <input type="file" id="fileInput-image" class="frame7" name="image" accept="image/*"
-                            style="display: none;">
-
-                    </div>
-                    <div>
-                        <textarea class="form-control history-areas" name="details_post" style="min-height: 100px"></textarea>
-                    </div>
-                    <div class="btn-box-post">
-                        <button type="submit" class="btn btn-register">โพส</button>
-                    </div>
-                    </form>
-                </div>
-
+            <div class="mb-3">
+                <input type="text" class="form-control" name="name" id="postName" placeholder="ชื่อโพส">
             </div>
-        </div>
+            <div class="text-center mb-3">
+                <img class="add-frame7-2" id="add-frame7-2" style="display: none">
+                <img class="add-frame7" id="add-frame7" src="{{ URL::asset('/assets/image/welcome/add-frame7.png') }}">
+                <input type="file" id="fileInput-image" class="frame7" name="image" accept="image/*"
+                    style="display: none;">
+            </div>
+            <div>
+                <textarea class="form-control history-areas" name="details_post" id="postDetails" style="min-height: 100px"></textarea>
+            </div>
+            <div class="btn-box-post">
+                <button type="submit" id="submitButton" class="btn btn-register" disabled>โพส</button>
+            </div>
+        </form>
     </div>
+
+
     <script>
-        function goBack() {
-            window.history.back();
-        }
+
 
         function adjustTextareaHeight() {
             var textareas = document.querySelectorAll('.history-areas');
@@ -122,6 +98,25 @@
                 // อ่านไฟล์เป็น Data URL
                 reader.readAsDataURL(file);
             }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const postName = document.getElementById('postName');
+            const postDetails = document.getElementById('postDetails');
+            const submitButton = document.getElementById('submitButton');
+
+            function validateForm() {
+                if (postName.value.trim() === '' || postDetails.value.trim() === '') {
+                    submitButton.disabled = true;
+                    submitButton.style.backgroundColor = '#9E9E9E'; // สีเทา
+                } else {
+                    submitButton.disabled = false;
+                    submitButton.style.backgroundColor = ''; // สีเดิม
+                }
+            }
+
+            postName.addEventListener('input', validateForm);
+            postDetails.addEventListener('input', validateForm);
         });
 
         document.addEventListener('DOMContentLoaded', adjustTextareaHeight); // เรียกใช้เมื่อเอกสารโหลดเสร็จ
