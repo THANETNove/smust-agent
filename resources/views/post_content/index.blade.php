@@ -38,7 +38,24 @@
             <p class="post-head-name">พาลูกค้าไปโอนที่กรมที่ดินอีกแล้วค่า</p>
             <img class="add-frame7-2" id="rectangle123"
                 src="{{ URL::asset('/assets/img/card_image/09_09_08_2024_1723180146.jpg') }}">
+            <p class="text-post-view">เป็นเคสที่มายด์ไม่ได้ใช้เวลานานเลย เพียงแค่ 40 วันก็ขายได้แล้ว
+                มายด์ดูแลสินเชื่อให้ลูกค้าด้วยทุก เคสค่ะ</p>
+
+            <div class="box-delete-post">
+                <p class="delete-text">ลบ</p>
+                <div class="edit-btn-post">
+                    <img class="edit-post" id="rectangle123" src="{{ URL::asset('/assets/image/welcome/edit.png') }}">
+                    แก้ไข
+                </div>
+            </div>
         </div>
+        {{--      <div class="posts-view">
+            <p class="post-head-name">พาลูกค้าไปโอนที่กรมที่ดินอีกแล้วค่า</p>
+            <img class="add-frame7-2" id="rectangle123"
+                src="{{ URL::asset('/assets/img/card_image/09_09_08_2024_1723180146.jpg') }}">
+            <p class="text-post-view">เป็นเคสที่มายด์ไม่ได้ใช้เวลานานเลย เพียงแค่ 40 วันก็ขายได้แล้ว
+                มายด์ดูแลสินเชื่อให้ลูกค้าด้วยทุก เคสค่ะ</p>
+        </div> --}}
 
     </div>
 
