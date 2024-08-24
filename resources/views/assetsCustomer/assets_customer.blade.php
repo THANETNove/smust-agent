@@ -489,7 +489,13 @@
                                                             <script>
                                                                 function copyLineID() {
                                                                     var lineName = "{{ $wan2->line_id }}";
-                                                                    alert("Line ID: " + lineName + "\n\nข้อความถูกคัดลอกแล้ว!");
+                                                                    Swal.fire({
+                                                                        title: lineName,
+                                                                        text: "Line ID" + "\n\nถูกคัดลอกแล้ว!",
+                                                                        icon: 'success',
+                                                                        showConfirmButton: false,
+                                                                        timer: 2000
+                                                                    });
                                                                     navigator.clipboard.writeText(lineName).then(function() {
                                                                         console.log('Line ID ถูกคัดลอกไปยัง clipboard แล้ว');
                                                                     }, function(err) {
@@ -514,7 +520,13 @@
                                                             <script>
                                                                 function copyFacebookID() {
                                                                     var fbName = "{{ $wan2->facebook_id }}";
-                                                                    alert("Facebook ID: " + fbName + "\n\nข้อความถูกคัดลอกแล้ว!");
+                                                                    Swal.fire({
+                                                                        title: fbName,
+                                                                        text: "Facebook ID" + "\n\nถูกคัดลอกแล้ว!",
+                                                                        icon: 'success',
+                                                                        showConfirmButton: false,
+                                                                        timer: 2000
+                                                                    });
                                                                     navigator.clipboard.writeText(fbName).then(function() {
                                                                         console.log('Facebook ID ถูกคัดลอกไปยัง clipboard แล้ว');
                                                                     }, function(err) {
@@ -524,6 +536,7 @@
                                                             </script>
                                                         @endif
                                                     @endif
+
 
 
 
