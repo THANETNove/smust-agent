@@ -1185,6 +1185,19 @@
     position: absolute;
 }
 
+.input_box3 label {
+    display: flex;
+    flex-direction: row;
+    margin-top: -10px;
+    margin-left: 16px;
+
+    font-size: 14px !important;
+    color: #00000080;
+    font-weight: 400;
+    background-color: var(--white);
+    position: absolute;
+}
+
 
 
 .btn-attention {
@@ -1411,9 +1424,7 @@
     width: 100%;
     position: relative;
     flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
     padding: 0px 1rem 1rem 1rem;
 }
 

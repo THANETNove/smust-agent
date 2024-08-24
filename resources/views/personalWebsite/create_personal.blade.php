@@ -60,10 +60,20 @@
         </div>
         <div class="name-history-profile">
             <p class="name-history-profile-p">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
-            <div class="col-md-12 input_box">
-                <input type="text" class="form-control @error('convenient_area') is-invalid @enderror" name="provinces"
-                    required autocomplete="เขตพื้นที่ที่สะดวกทำงาน">
+            <div class="col-md-12 input_box3">
+                {{--    <input type="text" class="form-control @error('convenient_area') is-invalid @enderror" name="provinces"
+                    required autocomplete="เขตพื้นที่ที่สะดวกทำงาน"> --}}
                 <label>เขตพื้นที่ที่สะดวกทำงาน <samp style="color: red;margin-left: 6px;"> *</samp></label>
+                <select class="form-control" aria-label="Default select example" name="provinces">
+                    <option selected disabled>เขตพื้นที่ที่สะดวกทำงาน</option>
+                    @foreach ($dataProvinces as $data)
+                        <option value="{{ $data->id }}" @if ($data->id == $personal->provinces) selected @endif>
+                            {{ $data->name_th }}
+                        </option>
+                    @endforeach
+
+                </select>
+
             </div>
         </div>
     </div>

@@ -452,21 +452,81 @@
                                             </div>
                                             <div style="margin-right: 16px">
                                                 @if ($wan2->user_id)
-                                                    @if ($wan2->line_id)
+                                                    {{--   @if ($wan2->line_id)
                                                         <a href="{{ $wan2->line_id }}" class="no-underline"
                                                             target="_blank" rel="noopener noreferrer">
                                                             <img class="ass-icon-line"
                                                                 src="{{ URL::asset('/assets/image/home/line.png') }}">
                                                         </a>
                                                     @endif
-
+                                                    
                                                     @if ($wan2->facebook_id)
                                                         <a href="{{ $wan2->facebook_id }}" target="_blank"
                                                             rel="noopener noreferrer" class="no-underline">
                                                             <img class="ass-icon-line"
                                                                 src="{{ URL::asset('/assets/image/home/facbook.png') }}">
                                                         </a>
+                                                    @endif --}}
+                                                    @php
+                                                        $lineIsUrl = filter_var($wan2->line_id, FILTER_VALIDATE_URL);
+                                                        $facebookIsUrl = filter_var(
+                                                            $wan2->facebook_id,
+                                                            FILTER_VALIDATE_URL,
+                                                        );
+                                                    @endphp
+
+                                                    @if ($wan2->line_id)
+                                                        @if ($lineIsUrl)
+                                                            <a href="{{ $wan2->line_id }}" class="no-underline"
+                                                                target="_blank" rel="noopener noreferrer">
+                                                                <img class="ass-icon-line"
+                                                                    src="{{ URL::asset('/assets/image/home/line.png') }}">
+                                                            </a>
+                                                        @else
+                                                            <img class="ass-icon-line"
+                                                                src="{{ URL::asset('/assets/image/home/line.png') }}"
+                                                                onclick="copyLineID()">
+                                                            <script>
+                                                                function copyLineID() {
+                                                                    var lineName = "{{ $wan2->line_id }}";
+                                                                    alert("Line ID: " + lineName + "\n\nข้อความถูกคัดลอกแล้ว!");
+                                                                    navigator.clipboard.writeText(lineName).then(function() {
+                                                                        console.log('Line ID ถูกคัดลอกไปยัง clipboard แล้ว');
+                                                                    }, function(err) {
+                                                                        console.error('ไม่สามารถคัดลอกข้อความได้:', err);
+                                                                    });
+                                                                }
+                                                            </script>
+                                                        @endif
                                                     @endif
+
+                                                    @if ($wan2->facebook_id)
+                                                        @if ($facebookIsUrl)
+                                                            <a href="{{ $wan2->facebook_id }}" target="_blank"
+                                                                rel="noopener noreferrer" class="no-underline">
+                                                                <img class="ass-icon-line"
+                                                                    src="{{ URL::asset('/assets/image/home/facbook.png') }}">
+                                                            </a>
+                                                        @else
+                                                            <img class="ass-icon-line"
+                                                                src="{{ URL::asset('/assets/image/home/facbook.png') }}"
+                                                                onclick="copyFacebookID()">
+                                                            <script>
+                                                                function copyFacebookID() {
+                                                                    var fbName = "{{ $wan2->facebook_id }}";
+                                                                    alert("Facebook ID: " + fbName + "\n\nข้อความถูกคัดลอกแล้ว!");
+                                                                    navigator.clipboard.writeText(fbName).then(function() {
+                                                                        console.log('Facebook ID ถูกคัดลอกไปยัง clipboard แล้ว');
+                                                                    }, function(err) {
+                                                                        console.error('ไม่สามารถคัดลอกข้อความได้:', err);
+                                                                    });
+                                                                }
+                                                            </script>
+                                                        @endif
+                                                    @endif
+
+
+
                                                     @if ($wan2->phone)
                                                         <a href="tel:{{ $wan2->phone }}" rel="noopener noreferrer"
                                                             class="no-underline">

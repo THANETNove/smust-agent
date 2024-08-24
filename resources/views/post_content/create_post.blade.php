@@ -54,8 +54,10 @@
                         <input type="text" class="form-control" name="name" id="exampleFormControlInput1"
                             placeholder="ชื่อโพส">
                     </div>
-                    <img class="add-frame7" id="rectangle123" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                        src="{{ URL::asset('/assets/image/welcome/add-frame7.png') }}">
+                    <div class="text-center"> <!-- ใช้ class นี้เพื่อตรงกลาง -->
+                        <img class="add-frame7" id="rectangle123" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            src="{{ URL::asset('/assets/image/welcome/add-frame7.png') }}">
+                    </div>
                 </div>
 
             </div>

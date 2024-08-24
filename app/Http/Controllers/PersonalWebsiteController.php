@@ -29,10 +29,11 @@ class PersonalWebsiteController extends Controller
         $personal = DB::table('personal_websites')
             ->where('user_id', Auth::user()->id)
             ->first();
+        $dataProvinces = DB::table('provinces')
+            ->get();
 
 
-
-        return view('personalWebsite.create_personal', ['personal' => $personal]);
+        return view('personalWebsite.create_personal', ['personal' => $personal, 'dataProvinces' => $dataProvinces]);
     }
 
     /**
