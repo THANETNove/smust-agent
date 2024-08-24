@@ -135,21 +135,32 @@ class PersonalWebsiteController extends Controller
     {
         $member =  PersonalWebsite::find($id);
 
-        if ($request->hasFile('image')) {
-            if ($member->imageHade) {
-                $existingImagePath = public_path($member->imageHade);
-                if (file_exists($existingImagePath)) {
-                    unlink($existingImagePath);
-                }
-            }
+        for ($i = 1; $i <= 3; $i++) {
+            if ($request->hasFile('image_' . $i)) {
 
-            $file = $request->file('image');
-            $filename = date('i_d_m_Y') . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $filePath = '/assets/img/history_work/' . $filename;
-            $file->move(public_path('/assets/img/history_work/'), $filename);
-            $member->imageHade = $filePath;
+                if ($member->{'image_' . $i}) {
+                    $existingImagePath = public_path($member->{'image_' . $i});
+                    if (file_exists($existingImagePath)) {
+                        unlink($existingImagePath);
+                    }
+                }
+
+
+                $file = $request->file('image_' . $i);
+                $filename = date('i_d_m_Y') . '_' . time() . '.' . $file->getClientOriginalExtension();
+                $filePath = '/assets/img/history_work/' . $filename;
+                $file->move(public_path('/assets/img/history_work/'), $filename);
+                $member->{'image_' . $i} = $filePath;
+            }
+            $member->{'name_' . $i} = $request['name_' . $i];
+            $member->{'details_' . $i} = $request['details_' . $i];
         }
-        $member->history_work = $request['history_work'];
+        $member->name_1 = $request['name_1'];
+        $member->details_1 = $request['details_1'];
+        $member->name_2 = $request['name_2'];
+        $member->details_2 = $request['details_2'];
+        $member->name_3 = $request['name_3'];
+        $member->details_3 = $request['details_3'];
         $member->save();
         return redirect('create-personal')->with('success', "บันทึกสำเร็จ");
     }
