@@ -13,11 +13,7 @@
             <a href="javascript:void(0);" onclick="goBack()">
                 <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
             </a>
-
-            <p class="free-trial">แก้ไขเว็บไซต์ส่วนตัว
-                <br>
-
-            </p>
+            <p class="free-trial">แก้ไขเว็บไซต์ส่วนตัว</p>
 
         </div>
 
@@ -37,9 +33,13 @@
             <img class="create_new_post" id="rectangle123"
                 src="{{ URL::asset('/assets/image/welcome/create_new_post.png') }}">
         </a>
-
-
         <p class="post">Posts</p>
+        <div class="posts-view">
+            <p class="post-head-name">พาลูกค้าไปโอนที่กรมที่ดินอีกแล้วค่า</p>
+            <img class="add-frame7-2" id="rectangle123"
+                src="{{ URL::asset('/assets/img/card_image/09_09_08_2024_1723180146.jpg') }}">
+        </div>
+
     </div>
 
 

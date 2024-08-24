@@ -1409,6 +1409,7 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    background-color: #EFF6F9;
 }
 
 .modal-title-post {
@@ -1463,4 +1464,18 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 16px;
+}
+
+.posts-view {
+    width: 328px;
+    min-height: 359px;
+    height: 100%;
+    background-color: #FFFFFF;
+    padding: 24px 28px;
+}
+
+.post-head-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
 }
