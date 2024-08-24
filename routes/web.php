@@ -71,7 +71,7 @@ Route::post('/convenient-area', [PersonalWebsiteController::class, 'store'])->na
 Route::put('/convenient-area-update/{id}', [PersonalWebsiteController::class, 'update'])->name('convenient-area-update');
 Route::post('/services-area', [PersonalWebsiteController::class, 'storeServices'])->name('services-area');
 Route::put('/services-area-update/{id}', [PersonalWebsiteController::class, 'updateServices'])->name('services-area-update');
-Route::post('create_post', [PersonalWebsiteController::class, 'storePost'])->name('create_post');
+Route::get('create_post', [PersonalWebsiteController::class, 'index'])->name('create_post');
 
 //ส่วนของ admin
 Route::group(['middleware' => ['is_admin']], function () {
