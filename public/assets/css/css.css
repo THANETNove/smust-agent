@@ -1175,15 +1175,17 @@
 .input_box2 label {
     display: flex;
     flex-direction: row;
-    margin-top: -16px;
+    margin-top: -10px;
     margin-left: 16px;
 
-    font-size: 16px !important;
-    color: rgba(0, 0, 0, 0.3);
+    font-size: 14px !important;
+    color: #007BA7;
     font-weight: 400;
     background-color: var(--white);
     position: absolute;
 }
+
+
 
 .btn-attention {
 
@@ -1278,4 +1280,79 @@
 .services-name {
     font-size: 20px;
     font-weight: 700;
+}
+
+.box-justify-content {
+    display: flex;
+    justify-content: center;
+    background-color: #EFF6F9 !important;
+    flex-direction: column;
+    /* เรียงลูกใน container ในแนวตั้ง */
+    align-items: center;
+    /* จัดให้อยู่ตรงกลางในแนวนอน */
+
+
+}
+
+.pt-services-32 {
+    padding-top: 32px;
+
+}
+
+.box-services-user {
+    width: 326px;
+    height: 100%;
+    border-radius: 30px;
+    background-color: #FFFFFF;
+    margin-bottom: 12px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 32px;
+    position: relative;
+}
+
+.img-rectangle136 {
+    width: 280px;
+    height: 280px;
+    z-index: 0;
+
+}
+
+.frame7-2 {
+    width: 77px;
+    height: 36px;
+    z-index: 10;
+    position: absolute;
+    top: 220px;
+    right: 48px;
+}
+
+.mt-services-24 {
+    margin-top: 44px;
+}
+
+.mt-services-24 label {
+    position: absolute;
+    margin-top: -10px;
+    margin-left: 8px;
+    color: #808080 !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: #fff;
+
+}
+
+
+
+.btn-box {
+    width: 100%;
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff !important;
+    padding-bottom: 49px;
+    /* เรียงลูกใน container ในแนวตั้ง */
+    align-items: center;
 }
