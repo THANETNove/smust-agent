@@ -88,6 +88,24 @@
         <p> <img class="img-contract2" src="{{ URL::asset('/assets/image/welcome/domain2.png') }}">ลักษณะเฉพาะ:
             คอนโดตามแนวรถไฟฟ้า คอนโดมือหนึ่ง</p>
     </div>
+    <div class="box-link-fb-tel">
+        <p> <img class="img-imageLine" src="{{ URL::asset('/assets/image/welcome/imageLine.png') }}">LINE ID: ovaljen</p>
+    </div>
+    <div class="box-link-fb-tel">
+        <p> <img class="img-imageLine" src="{{ URL::asset('/assets/image/welcome/imageFb.png') }}">FB: Kornkanok Klin</p>
+    </div>
+    <div class="box-link-fb-tel">
+        <p> <img class="img-imageLine" src="{{ URL::asset('/assets/image/welcome/imagecall.png') }}">Tel: 0325687464 </p>
+    </div>
+
+    <div class="footer-name">
+        <p>ชื่อ นามสกุล ทรัพย์ที่ทำ และช่องทางการติดต่อ ต้องแก้ไขที่ แก้ไขข้อมูลส่วนตัว</p>
+    </div>
+    <div class="services-such-as">
+        <p class="services-name">บริการ อาทิ</p>
+        <p>สามารถใส่บริการจุดเด่นของคุณได้สูงสุด 3 อย่างพร้อมรูปประกอบ หากไม่ใส่เลย จะไม่ถูกแสดงบนหน้าเว็บ จะใส่น้อยกว่า 3
+            อย่างก็ได้</p>
+    </div>
 
     <script>
         function triggerFileInput() {
