@@ -77,6 +77,7 @@ Route::get('post-create', [PostContentController::class, 'create'])->name('creat
 Route::put('edit-post-update/{id}', [PostContentController::class, 'update'])->name('edit-post-update');
 Route::get('edit-post/{id}', [PostContentController::class, 'edit'])->name('edit-post');
 Route::post('new-post-store', [PostContentController::class, 'store'])->name('new-post-store');
+Route::get('destroy-post/{id}', [PostContentController::class, 'destroy'])->name('destroy-post');
 
 //ส่วนของ admin
 Route::group(['middleware' => ['is_admin']], function () {

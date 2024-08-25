@@ -53,7 +53,9 @@
                 </div>
 
                 <div class="box-delete-post">
-                    <p class="delete-text">ลบ</p>
+                    <a href="{{ url('destroy-post', $daPo->id) }}" class="no-underline">
+                        <p class="delete-text">ลบ</p>
+                    </a>
                     <a href="{{ url('edit-post', $daPo->id) }}" class="no-underline">
                         <div class="edit-btn-post">
                             <img class="edit-post" id="rectangle123"

@@ -109,6 +109,8 @@ class PostContentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $flight =  PostContent::find($id);
+        $flight->delete();
+        return redirect('create_post')->with('success', "บันทึกสำเร็จ");
     }
 }
