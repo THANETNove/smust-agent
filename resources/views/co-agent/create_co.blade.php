@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="box-free-trial">
-        <div @if (Auth::user()->plans > 0) class="free-trial-box-nav" @endif>
+        <div class="free-trial-box-nav">
             <a href="javascript:void(0);" onclick="goBack()">
                 <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
             </a>
