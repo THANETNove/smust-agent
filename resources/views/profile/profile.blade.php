@@ -9,7 +9,7 @@
         <div class="free-trial-box-nav">
 
             @if (session('success'))
-                <a href="{{ url('/home') }}">
+                <a href="{{ url('home') }}">
                     <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
                 </a>
             @else

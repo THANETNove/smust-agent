@@ -49,10 +49,13 @@
 
                 <div class="box-delete-post">
                     <p class="delete-text">ลบ</p>
-                    <div class="edit-btn-post">
-                        <img class="edit-post" id="rectangle123" src="{{ URL::asset('/assets/image/welcome/edit.png') }}">
-                        แก้ไข
-                    </div>
+                    <a href="{{ url('edit-post', $daPo->id) }}" class="no-underline">
+                        <div class="edit-btn-post">
+                            <img class="edit-post" id="rectangle123"
+                                src="{{ URL::asset('/assets/image/welcome/edit.png') }}">
+                            แก้ไข
+                        </div>
+                    </a>
                 </div>
             </div>
         @endforeach

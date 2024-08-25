@@ -3,32 +3,27 @@
 @section('content')
     <div class="box-post-store">
         <div class="box-post-head">
-            <h1 class="modal-title-post fs-5" id="exampleModalLabel">สร้างโพส</h1>
-            @if (session('success'))
-                <a href="{{ url('personal-website') }}">
-                    <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
-                </a>
-            @else
-                <a href="javascript:void(0);" onclick="goBack()">
-                    <button type="button" class="btn-close"></button>
-                </a>
-            @endif
-
+            <h1 class="modal-title-post fs-5" id="exampleModalLabel">แก้ไขโพส</h1>
+            <a href="javascript:void(0);" onclick="goBack()">
+                <button type="button" class="btn-close"></button>
+            </a>
 
         </div>
-        <form method="POST" action="{{ route('new-post-store') }}" enctype="multipart/form-data" id="postForm">
+        <form method="POST" action="{{ route('edit-post-update', $dataPost->id) }}" enctype="multipart/form-data"
+            id="postForm">
             @csrf
             <div class="mb-3">
-                <input type="text" class="form-control" name="name" id="postName" placeholder="ชื่อโพส">
+                <input type="text" class="form-control" name="name" id="postName" value="{{ $dataPost->name }}"
+                    placeholder="ชื่อโพส">
             </div>
             <div class="text-center mb-3">
-                <img class="add-frame7-2" id="add-frame7-2" style="display: none">
+                <img class="add-frame7-2" id="add-frame7-2" src="{{ URL::asset($dataPost->image) }}">
                 <img class="add-frame7" id="add-frame7" src="{{ URL::asset('/assets/image/welcome/add-frame7.png') }}">
                 <input type="file" id="fileInput-image" class="frame7" name="image" accept="image/*"
                     style="display: none;">
             </div>
             <div>
-                <textarea class="form-control history-areas" name="details_post" id="postDetails" style="min-height: 183px"></textarea>
+                <textarea class="form-control history-areas" name="details_post" id="postDetails" style="min-height: 183px">{{ $dataPost->details_post }}</textarea>
             </div>
             <div class="btn-box-post">
 
@@ -85,7 +80,7 @@
                 const isPostDetailsEmpty = postDetails.value.trim() === '';
                 const isPostImageEmpty = postImage.files.length === 0;
 
-                if (isPostNameEmpty || isPostDetailsEmpty || isPostImageEmpty) {
+                if (isPostNameEmpty || isPostDetailsEmpty) {
                     submitButton.disabled = true;
                     submitButton.style.backgroundColor = '#9E9E9E'; // สีเทา
                     submitButton.style.color = '#ffffff'; // สีเทา
@@ -98,7 +93,7 @@
             // ตรวจสอบเมื่อมีการเปลี่ยนแปลงใน input text, textarea และ input file
             postName.addEventListener('input', validateForm);
             postDetails.addEventListener('input', validateForm);
-            postImage.addEventListener('change', validateForm); // เพิ่มการตรวจสอบเมื่อเลือกไฟล์
+
 
             // เรียกใช้ validateForm() เพื่อให้แน่ใจว่าสถานะปุ่มถูกต้องเมื่อโหลด
             validateForm();

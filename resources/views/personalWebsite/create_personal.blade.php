@@ -10,8 +10,13 @@
             @include('layouts.offcanvasManu')
         </div>
         <div class="box-nav-web">
-            <a href="javascript:void(0);" onclick="goBack()">
-                <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
+            <a href="{{ session('success') ? url('personal-website') : 'javascript:void(0);' }}"
+                onclick="{{ session('success') ? '' : 'goBack()' }}">
+                @if (session('success'))
+                    <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
+                @else
+                    <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
+                @endif
             </a>
 
             <p class="free-trial">แก้ไขเว็บไซต์ส่วนตัว
@@ -122,51 +127,48 @@
         <p>สามารถใส่บริการจุดเด่นของคุณได้สูงสุด 3 อย่างพร้อมรูปประกอบ หากไม่ใส่เลย จะไม่ถูกแสดงบนหน้าเว็บ จะใส่น้อยกว่า 3
             อย่างก็ได้</p>
     </div>
-    @if ($personal)
-        <form method="POST" action="{{ route('services-area-update', $personal->id) }}" enctype="multipart/form-data">
-            @csrf
+    <form method="POST" action="{{ route($personal ? 'services-area-update' : 'services-area', $personal->id ?? '') }}"
+        enctype="multipart/form-data">
+        @csrf
+        @if ($personal)
             @method('PUT')
-        @else
-            <form method="POST" action="{{ route('services-area') }}" enctype="multipart/form-data">
-                @csrf
-    @endif
-    <div class="box-justify-content pt-services-32 mb-32-services">
-        @foreach (range(1, 3) as $i)
-            <div class="box-services-user">
+        @endif
+        <div class="box-justify-content pt-services-32 mb-32-services">
+            @foreach (range(1, 3) as $i)
+                <div class="box-services-user">
 
-                <img class="img-rectangle136" id="rectangle136-{{ $i }}"
-                    src="{{ URL::asset($personal->{'image_' . $i} ?? '/assets/image/welcome/rectangle136.png') }}">
-                <img class="frame7-2" id="frame7-{{ $i }}"
-                    src="{{ URL::asset('/assets/image/welcome/Frame7.png') }}"
-                    onclick="triggerFileInput({{ $i }})">
-                <input type="file" id="fileInput-{{ $i }}" class="frame7" name="image_{{ $i }}"
-                    accept="image/*" onchange="previewImage(event, {{ $i }})" style="display: none;">
-                <div class="col-md-12 mt-services-24">
-                    <label>ชื่อจุดเด่นของคุณ (ไม่เกิน 50 คำ)</label>
-                    <input id="text" type="text" name="name_{{ $i }}"
-                        class="form-control @error('phone') is-invalid @enderror" autocomplete="phone" maxlength="50"
-                        value="{{ $personal->{'name_' . $i} ?? '' }}">
-                    @error('phone')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    <div class="col-12 mt-4">
-                        <label>รายละเอียด (ไม่เกิน 100 คำ)</label>
-                        <textarea class="form-control history-areas" rows="3" name="details_{{ $i }}" maxlength="100">{{ $personal->{'details_' . $i} ?? '' }}</textarea>
+                    <img class="img-rectangle136" id="rectangle136-{{ $i }}"
+                        src="{{ URL::asset($personal->{'image_' . $i} ?? '/assets/image/welcome/rectangle136.png') }}">
+                    <img class="frame7-2" id="frame7-{{ $i }}"
+                        src="{{ URL::asset('/assets/image/welcome/Frame7.png') }}"
+                        onclick="triggerFileInput({{ $i }})">
+                    <input type="file" id="fileInput-{{ $i }}" class="frame7"
+                        name="image_{{ $i }}" accept="image/*"
+                        onchange="previewImage(event, {{ $i }})" style="display: none;">
+                    <div class="col-md-12 mt-services-24">
+                        <label>ชื่อจุดเด่นของคุณ (ไม่เกิน 50 คำ)</label>
+                        <input id="text" type="text" name="name_{{ $i }}"
+                            class="form-control @error('phone') is-invalid @enderror" autocomplete="phone" maxlength="50"
+                            value="{{ $personal->{'name_' . $i} ?? '' }}">
+                        @error('phone')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <div class="col-12 mt-4">
+                            <label>รายละเอียด (ไม่เกิน 100 คำ)</label>
+                            <textarea class="form-control history-areas" rows="3" name="details_{{ $i }}" maxlength="100">{{ $personal->{'details_' . $i} ?? '' }}</textarea>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
 
-        <div class="btn-box">
-            <button type="submit" class="btn btn-attention">บันทึกการแก้ไข</button>
+            <div class="btn-box">
+                <button type="submit" class="btn btn-attention">บันทึกการแก้ไข</button>
+            </div>
         </div>
-    </div>
     </form>
     <script>
-
-
         function triggerFileInput(index) {
             document.getElementById('fileInput-' + index).click();
         }

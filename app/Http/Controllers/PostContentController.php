@@ -70,7 +70,9 @@ class PostContentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $dataPost =  PostContent::find($id);
+
+        return view('post_content.edit_post', ['dataPost'  => $dataPost]);
     }
 
     /**
