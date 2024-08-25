@@ -107,6 +107,15 @@ class PostContentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function updatedAt(string $id)
+    {
+
+        $flight =  PostContent::find($id);
+        $flight->touch();
+        return redirect('create_post')->with('success', "บันทึกสำเร็จ");
+    }
+
+
     public function destroy(string $id)
     {
         $flight =  PostContent::find($id);

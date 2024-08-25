@@ -78,6 +78,7 @@ Route::put('edit-post-update/{id}', [PostContentController::class, 'update'])->n
 Route::get('edit-post/{id}', [PostContentController::class, 'edit'])->name('edit-post');
 Route::post('new-post-store', [PostContentController::class, 'store'])->name('new-post-store');
 Route::get('destroy-post/{id}', [PostContentController::class, 'destroy'])->name('destroy-post');
+Route::get('radio-updated_at/{id}', [PostContentController::class, 'updatedAt'])->name('radio-updated_at');
 
 //ส่วนของ admin
 Route::group(['middleware' => ['is_admin']], function () {
