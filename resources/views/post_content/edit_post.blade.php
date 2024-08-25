@@ -12,6 +12,7 @@
         <form method="POST" action="{{ route('edit-post-update', $dataPost->id) }}" enctype="multipart/form-data"
             id="postForm">
             @csrf
+            @method('PUT')
             <div class="mb-3">
                 <input type="text" class="form-control" name="name" id="postName" value="{{ $dataPost->name }}"
                     placeholder="ชื่อโพส">

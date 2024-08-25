@@ -80,7 +80,28 @@ class PostContentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $member =  PostContent::find($id);
+
+        if ($request->hasFile('image')) {
+
+            if ($member->image) {
+                $existingImagePath = public_path($member->image);
+
+                if (file_exists($existingImagePath)) {
+                    unlink($existingImagePath);
+                }
+            }
+
+            $file = $request->file('image');
+            $filename = date('i_d_m_Y') . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $filePath = '/assets/img/post/' . $filename;
+            $file->move(public_path('/assets/img/post/'), $filename);
+            $member->image = $filePath;
+        }
+        $member->name = $request['name'];
+        $member->details_post = $request['details_post'];
+        $member->save();
+        return redirect('create_post')->with('success', "บันทึกสำเร็จ");
     }
 
     /**

@@ -43,8 +43,7 @@
         @foreach ($dataPost as $index => $daPo)
             <div class="posts-view">
                 <p class="post-head-name">{{ $daPo->name }}</p>
-                <img class="add-frame7-2" id="rectangle123"
-                    src="{{ URL::asset('/assets/img/card_image/09_09_08_2024_1723180146.jpg') }}">
+                <img class="add-frame7-2" id="rectangle123" src="{{ URL::asset($daPo->image) }}">
                 <div class="text-post-view">
                     <p class="text-content" id="text-content-{{ $index }}">
                         {{ $daPo->details_post }}
