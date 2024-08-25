@@ -4,15 +4,11 @@
     <div class="box-post-store">
         <div class="box-post-head">
             <h1 class="modal-title-post fs-5" id="exampleModalLabel">สร้างโพส</h1>
-            @if (session('success'))
-                <a href="{{ url('personal-website') }}">
-                    <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
-                </a>
-            @else
-                <a href="javascript:void(0);" onclick="goBack()">
-                    <button type="button" class="btn-close"></button>
-                </a>
-            @endif
+
+            <a href="javascript:void(0);" onclick="goBack()">
+                <button type="button" class="btn-close"></button>
+            </a>
+
 
 
         </div>

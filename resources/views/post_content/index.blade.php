@@ -10,9 +10,15 @@
             @include('layouts.offcanvasManu')
         </div>
         <div class="box-nav-web">
-            <a href="javascript:void(0);" onclick="goBack()">
-                <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
-            </a>
+            @if (session('success'))
+                <a href="{{ url('personal-website') }}">
+                    <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
+                </a>
+            @else
+                <a href="javascript:void(0);" onclick="goBack()">
+                    <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
+                </a>
+            @endif
             <p class="free-trial">แก้ไขเว็บไซต์ส่วนตัว</p>
 
         </div>
