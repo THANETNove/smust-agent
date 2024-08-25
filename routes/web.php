@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssetsCustomersWantController;
 use App\Http\Controllers\PersonalWebsiteController;
 use App\Http\Controllers\PostContentController;
+use App\Http\Controllers\CoAgentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -79,6 +80,7 @@ Route::get('edit-post/{id}', [PostContentController::class, 'edit'])->name('edit
 Route::post('new-post-store', [PostContentController::class, 'store'])->name('new-post-store');
 Route::get('destroy-post/{id}', [PostContentController::class, 'destroy'])->name('destroy-post');
 Route::get('radio-updated_at/{id}', [PostContentController::class, 'updatedAt'])->name('radio-updated_at');
+Route::get('co-agent', [CoAgentController::class, 'index'])->name('co-agent');
 
 //ส่วนของ admin
 Route::group(['middleware' => ['is_admin']], function () {

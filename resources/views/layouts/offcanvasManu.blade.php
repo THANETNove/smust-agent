@@ -71,7 +71,7 @@
             </label>
             <ul class="menu-items">
                 <li>
-                    <a @if (Auth::user()->plans == 2) href="{{url('personal-website')}}" @endif>
+                    <a @if (Auth::user()->plans == 2) href="{{ url('personal-website') }}" @endif>
                         <p>
                             <img class="icon-account-manu"
                                 src="{{ URL::asset('/assets/image/welcome/bookmark_manager.png') }}">
@@ -82,7 +82,7 @@
                     </a>
                 </li>
                 <li>
-                    <a @if (Auth::user()->plans == 2) href="" @endif>
+                    <a @if (Auth::user()->plans == 2) href="{{ url('co-agent') }}" @endif>
                         <p>
                             <img class="icon-account-manu"
                                 src="{{ URL::asset('/assets/image/welcome/groups_2.png') }}">
