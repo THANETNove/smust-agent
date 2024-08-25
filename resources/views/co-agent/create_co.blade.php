@@ -27,12 +27,11 @@
 
             <p class="skip-steps-co">กรอกรายละเอียดทีละข้อหรือ <span><a href=""> แปะข้อมูลรวดเดียว</a></span></p>
 
-            <form id="multiStepForm">
+            <form id="multiStepForm" class="multi-step-form">
                 <!-- Step 1 -->
                 <div class="form-step active">
-                    <input type="text" placeholder="Step 1: Input 1">
-                    <input type="text" placeholder="Step 1: Input 2">
-                    <button type="button" onclick="nextStep()">ถัดไป</button>
+                    @include('co-agent.step_1')
+               
                 </div>
                 <!-- Step 2 -->
                 <div class="form-step">

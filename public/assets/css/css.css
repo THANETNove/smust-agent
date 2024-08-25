@@ -1671,3 +1671,21 @@
 .form-step.active {
     display: block;
 }
+
+.multi-step-form {
+    margin-top: 20px;
+}
+
+.text-label-co {
+    color: #808080;
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.span-label-co {
+    color: var(--attention);
+    font-size: 12px;
+    font-weight: 400;
+
+}
