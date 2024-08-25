@@ -1406,10 +1406,11 @@
 
 .box-post-justify-content {
     display: flex;
-    justify-content: center;
+
     flex-direction: column;
     align-items: center;
     background-color: #EFF6F9;
+    height: 100vh;
 }
 
 .modal-title-post {

@@ -41,7 +41,7 @@
                 src="{{ URL::asset('/assets/image/welcome/create_new_post.png') }}">
         </a>
         <p class="post">Posts</p>
-        @foreach ($dataPost as $index => $daPo)
+        {{--   @foreach ($dataPost as $index => $daPo)
             <div class="posts-view" id="post-{{ $index }}">
                 <div class="box-radio-name">
                     <p class="post-head-name">{{ $daPo->name }}</p>
@@ -75,7 +75,7 @@
                     </a>
                 </div>
             </div>
-        @endforeach
+        @endforeach --}}
     </div>
 
 
