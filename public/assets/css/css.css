@@ -1576,3 +1576,42 @@
     bottom: 22px;
     z-index: 10;
 }
+
+.img-ellipse {
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+}
+
+.img-smust {
+    width: 52px;
+    height: 23px;
+}
+
+.smust-co-head-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 23px;
+}
+
+.back-co {
+    display: flex;
+    align-items: center;
+
+}
+
+.co-go-back {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+.co-trial {
+    margin-top: 9px;
+    color: #007BA7;
+    font-size: 20px;
+    font-weight: bold;
+}
