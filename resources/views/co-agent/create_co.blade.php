@@ -6,13 +6,11 @@
             <a href="javascript:void(0);" onclick="goBack()">
                 <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
             </a>
-            <p class="free-trial">หา co-agent ช่วยขาย</p>
+            <p class="free-trial">ฝากทรัพย์</p>
         </div>
         <div class="box-announced">
-            <p class="announced-property">ทรัพย์ที่ลงประกาศ</p>
-            <a href="{{ url('co-create') }}">
-                <img class="add-co" id="rectangle123" src="{{ URL::asset('/assets/image/welcome/add.png') }}">
-            </a>
+
+
         </div>
 
     </div>
