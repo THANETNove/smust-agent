@@ -32,7 +32,7 @@
         @endif
 
     </div>
-    <div class="box-post-justify-content pb-post-19">
+    {{--   <div class="box-post-justify-content pb-post-19">
         <img class="pick_highlight_post" id="rectangle123"
             src="{{ URL::asset('/assets/image/welcome/pick_highlight_post.png') }}">
         <a href="{{ url('post-create') }}">
@@ -41,8 +41,13 @@
         </a>
         <p class="post">Posts</p>
         @foreach ($dataPost as $index => $daPo)
-            <div class="posts-view">
-                <p class="post-head-name">{{ $daPo->name }}</p>
+            <div class="posts-view" @if ($index <= 2) style="background-color: #007ba71a" @endif>
+                <div class="box-radio-name">
+                    <p class="post-head-name">{{ $daPo->name }}</p>
+                    <input class="form-check-input" type="radio" name="exampleRadios{{ $index }}"
+                        id="exampleRadios{{ $index }}" value="option{{ $index }}"
+                        @if ($index <= 2) checked @endif style="display: none">
+                </div>
                 <img class="add-frame7-2" id="rectangle123" src="{{ URL::asset($daPo->image) }}">
                 <div class="text-post-view">
                     <p class="text-content" id="text-content-{{ $index }}">
@@ -69,7 +74,50 @@
 
 
     </div>
+ --}}
+    <div class="box-post-justify-content pb-post-19">
+        <img class="pick_highlight_post" id="rectangle123"
+            src="{{ URL::asset('/assets/image/welcome/pick_highlight_post.png') }}" onclick="toggleHighlight()">
+        <a href="{{ url('post-create') }}">
+            <img class="create_new_post" id="rectangle123"
+                src="{{ URL::asset('/assets/image/welcome/create_new_post.png') }}">
+        </a>
+        <p class="post">Posts</p>
+        @foreach ($dataPost as $index => $daPo)
+            <div class="posts-view" id="post-{{ $index }}">
+                <div class="box-radio-name">
+                    <p class="post-head-name">{{ $daPo->name }}</p>
+                    <a href="" class="check-input-radio" style="display: none;">
+                        <input class="form-check-input" type="radio" name="exampleRadios{{ $index }}"
+                            id="exampleRadios{{ $index }}" value="option{{ $index }}"
+                            @if ($index <= 2) checked @endif>
+                    </a>
 
+                </div>
+                <img class="add-frame7-2" id="rectangle123" src="{{ URL::asset($daPo->image) }}">
+                <div class="text-post-view">
+                    <p class="text-content" id="text-content-{{ $index }}">
+                        {{ $daPo->details_post }}
+                    </p>
+                    <span class="see-more" id="see-more-{{ $index }}"
+                        onclick="toggleText({{ $index }})">..see more..</span>
+                </div>
+
+                <div class="box-delete-post">
+                    <a href="{{ url('destroy-post', $daPo->id) }}" class="no-underline">
+                        <p class="delete-text">ลบ</p>
+                    </a>
+                    <a href="{{ url('edit-post', $daPo->id) }}" class="no-underline">
+                        <div class="edit-btn-post">
+                            <img class="edit-post" id="rectangle123"
+                                src="{{ URL::asset('/assets/image/welcome/edit.png') }}">
+                            แก้ไข
+                        </div>
+                    </a>
+                </div>
+            </div>
+        @endforeach
+    </div>
 
 
     <script>
@@ -117,7 +165,26 @@
             };
         });
 
+        function toggleHighlight() {
+            const posts = document.querySelectorAll('.posts-view');
+            posts.forEach((post, index) => {
 
+                const radio = post.querySelector('.check-input-radio');
+                const isVisible = radio.style.display === 'none';
+
+                // Toggle visibility of the radio button
+                radio.style.display = isVisible ? 'block' : 'none';
+
+                // Toggle background color
+                if (index <= 2) {
+                    post.style.backgroundColor = isVisible ? '#007ba71a' : '#FFFFFF';
+                } else {
+                    post.style.backgroundColor = '#FFFFFF';
+                }
+
+
+            });
+        }
 
 
 

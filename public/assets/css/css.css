@@ -1541,3 +1541,18 @@
     border: 1px solid #007BA7;
 
 }
+
+.box-radio-name {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-check-input:focus {
+    background-color: #5DA36C !important;
+    border-color: #5DA36C !important;
+}
+
+.form-check-input:checked {
+    background-color: #5DA36C !important;
+    border-color: #5DA36C !important;
+}
