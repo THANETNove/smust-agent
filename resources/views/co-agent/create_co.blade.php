@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="box-free-trial">
-        <div class="smust-co-head-box free-trial-box-nav">
+    <div class="box-announced-co">
+        <div class="smust-co-head-box ">
             <img class="img-ellipse" src="{{ URL::asset('/assets/image/welcome/Ellipse.png') }}">
             <div class="back-co">
                 <a href="javascript:void(0);" onclick="goBack()">
@@ -15,15 +15,15 @@
             <img class="img-smust" src="{{ URL::asset('/assets/image/welcome/SMUSTLogo.png') }}">
         </div>
         <div class="box-announced">
-            <div class="progress-container">
-                <div class="progress-bar-co">
-                   {{--  <div class="progress-step completed"></div>
-                    <div class="progress-step completed"></div>
-                    <div class="progress-step"></div>
-                    <div class="progress-step"></div>
-                    <div class="progress-step"></div> --}}
-                </div>
+
+            <div class="progress-bar-co">
+                <div class="progress-step completed"></div>
+                <div class="progress-step completed"></div>
+                <div class="progress-step"></div>
+                <div class="progress-step"></div>
+                <div class="progress-step"></div>
             </div>
+
 
 
         </div>
