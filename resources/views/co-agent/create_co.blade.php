@@ -17,16 +17,114 @@
         <div class="box-announced">
 
             <div class="progress-bar-co">
-                <div class="progress-step completed"></div>
-                <div class="progress-step completed"></div>
-                <div class="progress-step"></div>
-                <div class="progress-step"></div>
-                <div class="progress-step"></div>
+                <div class="progress-step" id="step-0"></div>
+                <div class="progress-step" id="step-1"></div>
+                <div class="progress-step" id="step-2"></div>
+                <div class="progress-step" id="step-3"></div>
+                <div class="progress-step" id="step-4"></div>
             </div>
 
+
+            <p class="skip-steps-co">กรอกรายละเอียดทีละข้อหรือ <span><a href=""> แปะข้อมูลรวดเดียว</a></span></p>
+
+            <form id="multiStepForm">
+                <!-- Step 1 -->
+                <div class="form-step active">
+                    <input type="text" placeholder="Step 1: Input 1">
+                    <input type="text" placeholder="Step 1: Input 2">
+                    <button type="button" onclick="nextStep()">ถัดไป</button>
+                </div>
+                <!-- Step 2 -->
+                <div class="form-step">
+                    <input type="text" placeholder="Step 2: Input 1">
+                    <input type="text" placeholder="Step 2: Input 2">
+                    <button type="button" onclick="nextStep()">ถัดไป</button>
+                </div>
+                <!-- Step 3 -->
+                <div class="form-step">
+                    <input type="text" placeholder="Step 3: Input 1">
+                    <input type="text" placeholder="Step 3: Input 2">
+                    <button type="button" onclick="nextStep()">ถัดไป</button>
+                </div>
+                <!-- Step 4 -->
+                <div class="form-step">
+                    <input type="text" placeholder="Step 4: Input 1">
+                    <input type="text" placeholder="Step 4: Input 2">
+                    <button type="button" onclick="nextStep()">ถัดไป</button>
+                </div>
+                <!-- Step 5 -->
+                <div class="form-step">
+                    <input type="text" placeholder="Step 5: Input 1">
+                    <input type="text" placeholder="Step 5: Input 2">
+                    <button type="button" onclick="nextStep()">ถัดไป</button>
+                </div>
+                <!-- Step 6 -->
+                <div class="form-step">
+                    <input type="text" placeholder="Step 6: Input 1">
+                    <input type="text" placeholder="Step 6: Input 2">
+                    <button type="submit">ส่งฟอร์ม</button>
+                </div>
+            </form>
 
 
         </div>
 
     </div>
+
+    <script>
+        let currentStep = 1; // Start from the first step
+
+        function updateProgress() {
+            // Update progress steps
+            document.querySelectorAll('.progress-step').forEach((step, index) => {
+                // Apply 'completed' class to steps before the current one
+                if (currentStep != 3) {
+                    let cs = currentStep > 3 ? currentStep - 1 : currentStep;
+                    if (index < cs) {
+                        step.classList.add('completed');
+                    } else {
+                        step.classList.remove('completed');
+                    }
+                }
+
+            });
+
+            // Update step content visibility
+
+
+            document.querySelectorAll('.step-content').forEach((content, index) => {
+                content.style.display = index === (currentStep) ? 'block' :
+                    'none'; // Show only the current step
+            });
+        }
+
+        const steps = document.querySelectorAll('.form-step'); // Get all step elements
+
+        function showStep(step) {
+            steps.forEach((element, index) => {
+                element.classList.toggle('active', index === (step - 1)); // Adjust for 0-based index
+            });
+        }
+
+        function nextStep() {
+            if (currentStep < steps.length) { // Ensure it does not exceed the number of steps
+                currentStep++;
+                showStep(currentStep);
+                updateProgress();
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 1) { // Ensure it does not go below 1
+                currentStep--;
+                showStep(currentStep);
+                updateProgress();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showStep(currentStep);
+            updateProgress();
+        });
+    </script>
 @endsection

@@ -1656,3 +1656,18 @@
     min-height: 100vh;
     background-color: #FFFFFF;
 }
+
+.skip-steps-co {
+    margin-top: 16px;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.form-step {
+    display: none;
+}
+
+.form-step.active {
+    display: block;
+}
