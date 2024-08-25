@@ -15,6 +15,15 @@
             <img class="img-smust" src="{{ URL::asset('/assets/image/welcome/SMUSTLogo.png') }}">
         </div>
         <div class="box-announced">
+            <div class="progress-container">
+                <div class="progress-bar-co">
+                   {{--  <div class="progress-step completed"></div>
+                    <div class="progress-step completed"></div>
+                    <div class="progress-step"></div>
+                    <div class="progress-step"></div>
+                    <div class="progress-step"></div> --}}
+                </div>
+            </div>
 
 
         </div>
