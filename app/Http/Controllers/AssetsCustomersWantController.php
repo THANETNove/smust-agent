@@ -34,10 +34,10 @@ class AssetsCustomersWantController extends Controller
             $query = DB::table('assets_customers_wants')
                 ->where('assets_customers_wants.status', 1)
                 ->leftJoin('users', 'assets_customers_wants.user_id', '=', 'users.id')
-                ->leftJoin('provinces', 'assets_customers_wants.provinces', '=', 'provinces.id')
-                ->leftJoin('amphures', 'assets_customers_wants.districts', '=', 'amphures.id')
-                ->leftJoin('districts', 'assets_customers_wants.amphures', '=', 'districts.id')
-                ->leftJoin('train_station', 'assets_customers_wants.station', '=', 'train_station.id')
+                ->join('provinces', 'assets_customers_wants.provinces', '=', 'provinces.id')
+                ->join('amphures', 'assets_customers_wants.districts', '=', 'amphures.id')
+                ->join('districts', 'assets_customers_wants.amphures', '=', 'districts.id')
+                ->join('train_station', 'assets_customers_wants.station', '=', 'train_station.id')
                 ->select(
                     'assets_customers_wants.*',
                     'users.first_name',
