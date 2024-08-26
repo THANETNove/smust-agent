@@ -70,20 +70,16 @@
     @enderror
 </div>
 <div class="mb-3">
+    <label style="margin-right: 10px;">เริ่มให้เช่าได้ตั้งแต่</label>
+    <input id="datepicker-co" width="350" />
 
-    <input id="datepicker" width="276" />
-    <script>
-        $('#datepicker').datepicker({
-            uiLibrary: 'bootstrap5'
-        });
-    </script>
 
 </div>
 
 
 
+
 <script>
-    // เลือกปุ่มทั้งหมดที่มี class box-btn-type
     const buttons = document.querySelectorAll('.box-btn-type');
     const typeNameInput = document.getElementById('type-name');
 
@@ -97,6 +93,24 @@
 
             // อัปเดตค่าใน input ที่ซ่อนอยู่
             typeNameInput.value = this.textContent.trim();
+        });
+    });
+
+    $(function() {
+        $.datepicker.setDefaults($.datepicker.regional['th']); // ใช้การตั้งค่าภาษาไทย
+        $("#datepicker-co").datepicker({
+            dateFormat: 'dd MM yy', // รูปแบบวันที่ที่เราต้องการ
+            onSelect: function(dateText, inst) {
+                // แปลงวันที่เป็นพุทธศักราช
+                var date = $(this).datepicker('getDate');
+                var buddhistYear = date.getFullYear() + 543;
+                var thaiMonth = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+                    "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+                ];
+                var formattedDate = date.getDate() + " " + thaiMonth[date.getMonth()] + " " +
+                    buddhistYear;
+                $(this).val(formattedDate);
+            }
         });
     });
 </script>
