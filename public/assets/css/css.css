@@ -1731,3 +1731,53 @@
 
 }
 
+.box-datepicker-co {
+    position: relative;
+}
+
+.datepicker-co {
+    padding-left: 40px;
+    width: 350px;
+    height: 56px;
+    z-index: 0;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+}
+
+.img-datepicker {
+    position: absolute;
+    width: 20.3px;
+    height: 20px;
+    margin-top: 24px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.datepicker-line {
+    border-left: 1px solid #000000;
+    height: 36px;
+    position: absolute;
+    margin-left: 32px;
+    margin-top: 16px;
+
+}
+
+.placeholder-co {
+    margin-top: 8px;
+    position: absolute;
+    color: #808080;
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 40px;
+}
+
+.box-datepicker-co .button,
+input,
+optgroup,
+select,
+textarea {
+    margin: 5px 0 0 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+
+}

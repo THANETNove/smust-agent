@@ -69,9 +69,12 @@
         </span>
     @enderror
 </div>
-<div class="mb-3">
-    <label style="margin-right: 10px;">เริ่มให้เช่าได้ตั้งแต่</label>
-    <input id="datepicker-co" width="350" />
+<div class="box-datepicker-co mb-3">
+    {{-- <label style="margin-right: 10px;">เริ่มให้เช่าได้ตั้งแต่</label> --}}
+    <img class="img-datepicker" src="{{ URL::asset('/assets/image/welcome/calendar_month.png') }}">
+    <div class="datepicker-line"></div>
+    <p class="placeholder-co">เริ่มให้เช่าได้ตั้งแต่</p>
+    <input id="datepicker-co" class="datepicker-co" />
 
 
 </div>
