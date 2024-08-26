@@ -8,30 +8,32 @@
 
     // Define background colors and text colors for each line_code
     $lineStyles = [
-        'ARL' => ['bgColor' => '#C41230', 'textColor' => '#FFFFFF'],
-        'Blue' => ['bgColor' => '#0000FF', 'textColor' => '#FFFFFF'],
-        'Brown' => ['bgColor' => '#874514', 'textColor' => '#FFFFFF'],
-        'Dark green' => ['bgColor' => '#06402B', 'textColor' => '#FFFFFF'],
-        'Light green' => ['bgColor' => '#90EE90', 'textColor' => '#006400'],
-        'Gold' => ['bgColor' => '#FFD700', 'textColor' => '#000000'],
+        'ARL' => ['bgColor' => '#C41230', 'textColor' => '#696969'],
+        'Blue' => ['bgColor' => '#0000FF', 'textColor' => '#696969'],
+        'Brown' => ['bgColor' => '#874514', 'textColor' => '#696969'],
+        'Dark green' => ['bgColor' => '#06402B', 'textColor' => '#696969'],
+        'Light green' => ['bgColor' => '#90EE90', 'textColor' => '#696969'],
+        'Gold' => ['bgColor' => '#FFD700', 'textColor' => '#696969'],
         'Grey' => ['bgColor' => '#D3D3D3', 'textColor' => '#696969'],
-        'Pink' => ['bgColor' => '#FFC0CB', 'textColor' => '#FF69B4'],
-        'Orange' => ['bgColor' => '#FFA500', 'textColor' => '#8B4513'],
-        'Purple' => ['bgColor' => '#800080', 'textColor' => '#FFFFFF'],
-        'Red east' => ['bgColor' => '#FF4500', 'textColor' => '#FFFFFF'],
-        'Red north' => ['bgColor' => '#DC143C', 'textColor' => '#FFFFFF'],
-        'Red south' => ['bgColor' => '#B22222', 'textColor' => '#FFFFFF'],
-        'Red west' => ['bgColor' => '#FF6347', 'textColor' => '#FFFFFF'],
-        'Red west south' => ['bgColor' => '#CD5C5C', 'textColor' => '#FFFFFF'],
-        'Yellow' => ['bgColor' => '#FFFF00', 'textColor' => '#000000'],
+        'Pink' => ['bgColor' => '#FFC0CB', 'textColor' => '#696969'],
+        'Orange' => ['bgColor' => '#FFA500', 'textColor' => '#696969'],
+        'Purple' => ['bgColor' => '#800080', 'textColor' => '#696969'],
+        'Red east' => ['bgColor' => '#FF4500', 'textColor' => '#696969'],
+        'Red north' => ['bgColor' => '#DC143C', 'textColor' => '#696969'],
+        'Red south' => ['bgColor' => '#B22222', 'textColor' => '#696969'],
+        'Red west' => ['bgColor' => '#FF6347', 'textColor' => '#696969'],
+        'Red west south' => ['bgColor' => '#CD5C5C', 'textColor' => '#696969'],
+        'Yellow' => ['bgColor' => '#FFFF00', 'textColor' => '#696969'],
     ];
 @endphp
 
 @foreach ($groupedTrain as $lineCode => $stations)
-    <div>
+    <div class="input-group">
+        <label class="input-group-icon" for=""><i class="fa-solid fa-train-subway"
+                style="color: {{ $lineStyles[$lineCode]['bgColor'] ?? '#FFFFFF' }};"></i></label>
         <select class="form-select mt-3 station-select" name="stations" id="station_{{ $lineCode }}"
-            style="background-color: {{ $lineStyles[$lineCode]['bgColor'] ?? '#FFFFFF' }}; color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
-            <option selected disabled>Select Station</option>
+            style=" color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
+            <option selected disabled> Select Station</option>
             @foreach ($stations as $station)
                 @php
                     $prefix = '';

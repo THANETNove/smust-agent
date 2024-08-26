@@ -75,11 +75,30 @@
     <div class="datepicker-line"></div>
     <p class="placeholder-co">เริ่มให้เช่าได้ตั้งแต่</p>
     <input id="datepicker-co" class="datepicker-co" />
-
-
 </div>
 
+<p class="head-name-co">ที่ตั้ง</p>
+<div class="mb-3 house-number">
 
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="บ้านเลขที่">
+</div>
+<div class="mb-3 house-name">
+
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="โครงการ เช่น ชื่อหมู่บ้าน">
+</div>
+<div class="mb-3">
+    @include('layouts.address')
+</div>
+<div class="mb-3">
+
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="ถนน*">
+</div>
+<div class="mb-3">
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="ซอย">
+</div>
+<div class="mb-3">
+    @include('assetsCustomer.trainStation')
+</div>
 
 
 <script>
