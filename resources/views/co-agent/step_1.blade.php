@@ -100,6 +100,8 @@
     @include('assetsCustomer.trainStation')
 </div>
 
+<p class="head-name-co">ลักษณะ</p>
+
 
 <script>
     const buttons = document.querySelectorAll('.box-btn-type');
@@ -117,6 +119,23 @@
             typeNameInput.value = this.textContent.trim();
         });
     });
+
+    const buttonshave = document.querySelectorAll('.box-btn-have');
+
+    buttonshave.forEach(buttonhave => {
+        buttonhave.addEventListener('click', function() {
+            // ลบ active class จากทุกปุ่ม
+            buttonshave.forEach(btn => btn.classList.remove('active'));
+
+            // เพิ่ม active class ไปยังปุ่มที่ถูกกด
+            this.classList.add('active');
+
+            // อัปเดตค่าใน input ที่ซ่อนอยู่
+            /*    const typeNameInput = document.getElementById('text');
+               typeNameInput.value = this.textContent.trim(); */
+        });
+    });
+
 
     $(function() {
         $.datepicker.setDefaults($.datepicker.regional['th']); // ใช้การตั้งค่าภาษาไทย
