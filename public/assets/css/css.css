@@ -1689,3 +1689,44 @@
     font-weight: 400;
 
 }
+
+.box-btn-type {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007BA7;
+    border-radius: 6px;
+    font-size: 16px;
+    margin: 4px 0;
+    font-size: 16px;
+    font-weight: 400;
+    color: #FFFFFF;
+    cursor: pointer;
+
+}
+
+.box-btn-type.active {
+    background-color: #FFFFFF;
+    border: 1px solid #007BA7;
+    color: #007BA7;
+
+}
+
+.box-btn-have {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007BA7;
+    border-radius: 6px;
+    font-size: 16px;
+    margin: 4px 0;
+    font-size: 16px;
+    font-weight: 400;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.box-btn-have.active {
+    background-color: #FFFFFF;
+    border: 1px solid #007BA7;
+    color: #007BA7;
+
+}
