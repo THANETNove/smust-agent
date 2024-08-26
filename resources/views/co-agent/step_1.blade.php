@@ -39,7 +39,7 @@
             มี
         </div>
 
-        <div class="input_box2">
+        <div class="input_box2" id="have-no">
             <label style="margin-right: 10px;">มีภาระหนี้กับ <span style="color: red; margin-left: 6px;">
                     *</span></label>
             <input id="text" type="text" name="name_"
@@ -131,8 +131,14 @@
             this.classList.add('active');
 
             // อัปเดตค่าใน input ที่ซ่อนอยู่
-            /*    const typeNameInput = document.getElementById('text');
-               typeNameInput.value = this.textContent.trim(); */
+            const typeNameInput = document.getElementById('have-no');
+            if (this.textContent.trim() == "มี") {
+                typeNameInput.style.display = 'inline';
+            } else {
+                typeNameInput.style.display = 'none';
+            }
+
+
         });
     });
 
