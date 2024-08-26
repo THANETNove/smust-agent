@@ -28,7 +28,7 @@
 @endphp
 
 <input type="text" class="form-control" data-bs-toggle="modal" name="stations" id="stations"
-    data-bs-target="#exampleModal" placeholder="สถานีรถไฟฟ้าที่ใกล้ที่สุด">
+    data-bs-target="#exampleModal" placeholder="สถานีรถไฟฟ้าที่ใกล้ที่สุด" readonly>
 
 
 
