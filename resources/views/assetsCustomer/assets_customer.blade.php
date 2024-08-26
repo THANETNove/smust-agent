@@ -600,7 +600,7 @@
                             </div>
 
                             <div class="id-trainStation" style="display: none">
-                                @include('assetsCustomer.trainStation')
+                                @include('assetsCustomer.trainStation2')
                             </div>
 
                         </div>

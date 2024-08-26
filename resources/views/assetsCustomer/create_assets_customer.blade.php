@@ -73,8 +73,9 @@
                 @endphp
 
                 <div id="station-select" style="display: none;">
-                    <select class="form-select mt-3" name="station" id="station">
-                        <option selected disabled>Select Station</option>
+                    @include('assetsCustomer.trainStation')
+                    {{--  <select class="form-select mt-3" name="station" id="station">
+                        <option selected disabled>สถานีรถไฟฟ้าที่ใกล้ที่สุด</option>
                         @foreach ($train as $station)
                             @php
                                 // ตรวจสอบสีเพื่อตรวจว่าเป็น BTS, MRT หรือ ARL
@@ -91,7 +92,7 @@
                                 {{ $prefix }} {{ $station->station_name_th }}
                             </option>
                         @endforeach
-                    </select>
+                    </select> --}}
                 </div>
 
 
@@ -118,6 +119,5 @@
             const provinceSelect = document.getElementById('provinces-id');
 
         });
-
     </script>
 @endsection
