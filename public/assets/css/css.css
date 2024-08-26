@@ -1548,12 +1548,12 @@
     justify-content: space-between;
 }
 
-.form-check-input:focus {
+.posts-view .form-check-input:focus {
     background-color: #5DA36C !important;
     border-color: #5DA36C !important;
 }
 
-.form-check-input:checked {
+.posts-view .form-check-input:checked {
     background-color: #5DA36C !important;
     border-color: #5DA36C !important;
 }
@@ -1807,4 +1807,22 @@ textarea {
     padding: 16px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+}
+
+.box-screenshot-frame {
+    flex-direction: row;
+    display: flex;
+}
+
+.house-frame {
+    display: inline-block;
+    width: 160px;
+    margin-right: 8px;
+}
+
+.image-screenshot_frame {
+    margin-top: 13px;
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
 }

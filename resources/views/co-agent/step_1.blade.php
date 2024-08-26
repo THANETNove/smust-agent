@@ -79,29 +79,193 @@
 
 <p class="head-name-co">ที่ตั้ง</p>
 <div class="mb-3 house-number">
-
-    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="บ้านเลขที่">
+    <div class="row">
+        <div class="col-md-12 mb-3 input_box">
+            <input id="phone" type="text" class="form-control  @error('phone') is-invalid @enderror"
+                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <label>บ้านเลขที่</label>
+            @error('phone')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
 </div>
 <div class="mb-3 house-name">
-
-    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="โครงการ เช่น ชื่อหมู่บ้าน">
+    <div class="row ">
+        <div class="col-md-12 mb-3 input_box">
+            <input id="phone" type="text" class="form-control  @error('phone') is-invalid @enderror"
+                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <label>โครงการ เช่น ชื่อหมู่บ้าน</label>
+            @error('phone')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
 </div>
 <div class="mb-3">
     @include('layouts.address')
 </div>
 <div class="mb-3">
-
-    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="ถนน*">
+    <div class="row">
+        <div class="col-md-12 mb-3 input_box">
+            <input id="phone" type="text" class="form-control  @error('phone') is-invalid @enderror"
+                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <label>ถนน*</label>
+            @error('phone')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
 </div>
 <div class="mb-3">
-    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="ซอย">
+    <div class="row">
+        <div class="col-md-12 mb-3 input_box">
+            <input id="phone" type="text" class="form-control  @error('phone') is-invalid @enderror"
+                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <label>ซอย</label>
+            @error('phone')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+
 </div>
 <div class="mb-3">
     @include('assetsCustomer.trainStation')
 </div>
 
 <p class="head-name-co">ลักษณะ</p>
+<div class="house-frame mb-3">
+    <div class="box-screenshot-frame">
+        <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/bed.png') }}">
+        <div class="row">
+            <div class="input_box">
+                <input id="phone" type="text"
+                    class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
+                    value="{{ old('phone') }}" required autocomplete="phone">
+                <label>จำนวนห้องนอน *</label>
+                @error('phone')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+    </div>
+</div>
+<div class="house-frame mb-3">
+    <div class="box-screenshot-frame">
+        <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/shower.png') }}">
+        <div class="row">
+            <div class="input_box">
+                <input id="phone" type="text"
+                    class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
+                    value="{{ old('phone') }}" required autocomplete="phone">
+                <label>จำนวนห้องน้ำ*</label>
+                @error('phone')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+    </div>
+</div>
+<div class="house-frame mb-3">
+    <div class="box-screenshot-frame">
+        <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/floor.png') }}">
+        <div class="row">
+            <div class="input_box">
+                <input id="phone" type="text"
+                    class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
+                    value="{{ old('phone') }}" required autocomplete="phone">
+                <label>จำนวนชั้น*</label>
+                @error('phone')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+    </div>
+</div>
+<div class="house-frame mb-3">
+    <div class="box-screenshot-frame">
+        <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/directions_car.png') }}">
+        <div class="row">
+            <div class="input_box">
+                <input id="phone" type="text"
+                    class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
+                    value="{{ old('phone') }}" required autocomplete="phone">
+                <label>จำนวนที่จอดรถ*</label>
+                @error('phone')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box-screenshot-frame mb-3 ">
+    <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/screenshot_frame.png') }}">
 
+    <div class="row" style="width: 350px">
+        <div class="input_box">
+            <input id="phone" type="text" class="form-control col-12  @error('phone') is-invalid @enderror"
+                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <label>ขนาด* (ตร.ว.)</label>
+            @error('phone')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+</div>
+
+<p class="head-name-co">ราคาเช่า</p>
+<div class="row mb-3">
+    <div class="col-md-12 mb-3 input_box">
+        <input id="phone" type="text" class="form-control  @error('phone') is-invalid @enderror"
+            name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+        <label>ค่าเช่า* (บาท/เดือน)</label>
+        @error('phone')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+
+<p class="text-label-co">ให้มีการชำระค่าใช้จ่ายใดต่อไปนี้ <span class="span-label-co">*</span></p>
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+    <label class="form-check-label" for="flexCheckDefault">
+        ค่าเช่าล่วงหน้า 1 เดือน
+    </label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+    <label class="form-check-label" for="flexCheckChecked">
+        เงินมัดจำ
+    </label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+    <label class="form-check-label" for="flexCheckChecked">
+        เงินจอง
+    </label>
+</div>
 
 <script>
     const buttons = document.querySelectorAll('.box-btn-type');
