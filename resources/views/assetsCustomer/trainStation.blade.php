@@ -27,32 +27,56 @@
     ];
 @endphp
 
-@foreach ($groupedTrain as $lineCode => $stations)
-    <div class="input-group">
-        <label class="input-group-icon" for=""><i class="fa-solid fa-train-subway"
-                style="color: {{ $lineStyles[$lineCode]['bgColor'] ?? '#FFFFFF' }};"></i></label>
-        <select class="form-select mt-3 station-select" name="stations" id="station_{{ $lineCode }}"
-            style=" color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
-            <option selected disabled> Select Station</option>
-            @foreach ($stations as $station)
-                @php
-                    $prefix = '';
-                    if (in_array($lineCode, ['Light green', 'Dark green'])) {
-                        $prefix = 'BTS';
-                    } elseif (in_array($lineCode, ['Blue', 'Purple'])) {
-                        $prefix = 'MRT';
-                    } elseif (in_array($lineCode, ['ARL'])) {
-                        $prefix = 'ARL';
-                    }
-                @endphp
-                <option value="{{ $station->station_name_th }}"
-                    style="color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
-                    {{ $prefix }} {{ $station->station_name_th }}
-                </option>
-            @endforeach
-        </select>
+<input type="text" class="form-control" data-bs-toggle="modal" name="stations" id="stations"
+    data-bs-target="#exampleModal" placeholder="สถานีรถไฟฟ้าที่ใกล้ที่สุด">
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                <button type="button" class="btn-close" id="btn-close-train" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @foreach ($groupedTrain as $lineCode => $stations)
+                    <div class="input-group">
+                        <label class="input-group-icon" for="">
+                            <i class="fa-solid fa-train-subway"
+                                style="color: {{ $lineStyles[$lineCode]['bgColor'] ?? '#FFFFFF' }};"></i>
+                        </label>
+                        <select class="form-select mt-3 station-select"{{--  name="stations" --}}
+                            id="station_{{ $lineCode }}"
+                            style="color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
+                            <option selected disabled>สถานีรถไฟฟ้าที่ใกล้ที่สุด</option>
+
+                            @foreach ($stations as $station)
+                                @php
+                                    $prefix = '';
+                                    if (in_array($lineCode, ['Light green', 'Dark green'])) {
+                                        $prefix = 'BTS';
+                                    } elseif (in_array($lineCode, ['Blue', 'Purple'])) {
+                                        $prefix = 'MRT';
+                                    } elseif (in_array($lineCode, ['ARL'])) {
+                                        $prefix = 'ARL';
+                                    }
+                                @endphp
+                                <option value="{{ $station->station_name_th }}"
+                                    style="color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
+                                    {{ $prefix }} {{ $station->station_name_th }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
-@endforeach
+</div>
+
 
 <script>
     // Add an event listener for each select element
@@ -60,6 +84,7 @@
         selectElement.addEventListener('change', function() {
             // Get the selected value
             let selectedValue = this.value;
+            document.getElementById('stations').value = selectedValue;
 
             // Reset all other select elements to default (empty)
             document.querySelectorAll('.station-select').forEach(otherSelect => {
@@ -67,6 +92,11 @@
                     otherSelect.selectedIndex = 0; // Set to the first option (Select Station)
                 }
             });
+            const button = document.getElementById('btn-close-train');
+
+            // Trigger a click event on the button
+            button.click();
         });
+
     });
 </script>
