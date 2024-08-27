@@ -15,7 +15,7 @@
 </div>
 <div class="mb-3 input_box3">
     <label>ประเภททรัพย์ <span style="color: red;margin-left: 6px;"> *</span> </label>
-    <select class="form-select" name="property_type" aria-label="Default select example">
+    <select class="form-select" name="property_type" id="property_type-co" aria-label="Default select example">
         <option selected value="บ้านเดี่ยว">บ้านเดี่ยว</option>
         <option value="คอนโด">คอนโด </option>
         <option value="ทาวน์เฮ้าส์">ทาวน์เฮ้าส์</option>
@@ -56,7 +56,7 @@
 </div>
 
 
-<div class="mb-3">
+<div class="mb-3" id="minimum-rental" style="display: none">
     <select class="form-select" name="property_type" aria-label="Default select example">
         <option selected disabled>เช่าขั้นต่ำ*</option>
         <option value="1">1 เดือน </option>
@@ -145,75 +145,92 @@
 </div>
 
 <p class="head-name-co">ลักษณะ</p>
-<div class="house-frame mb-3">
-    <div class="box-screenshot-frame">
-        <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/bed.png') }}">
-        <div class="row">
-            <div class="input_box">
-                <input id="phone" type="text"
-                    class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
-                    value="{{ old('phone') }}" required autocomplete="phone">
-                <label>จำนวนห้องนอน *</label>
-                @error('phone')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+<div id="nature-co">
+    <div class="house-frame mb-3">
+        <div class="box-screenshot-frame">
+            <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/bed.png') }}">
+            <div class="row">
+                <div class="input_box">
+                    <input id="phone" type="text"
+                        class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
+                        value="{{ old('phone') }}" required autocomplete="phone">
+                    <label>จำนวนห้องนอน *</label>
+                    @error('phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="house-frame mb-3">
-    <div class="box-screenshot-frame">
-        <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/shower.png') }}">
-        <div class="row">
-            <div class="input_box">
-                <input id="phone" type="text"
-                    class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
-                    value="{{ old('phone') }}" required autocomplete="phone">
-                <label>จำนวนห้องน้ำ*</label>
-                @error('phone')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+    <div class="house-frame mb-3">
+        <div class="box-screenshot-frame">
+            <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/shower.png') }}">
+            <div class="row">
+                <div class="input_box">
+                    <input id="phone" type="text"
+                        class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
+                        value="{{ old('phone') }}" required autocomplete="phone">
+                    <label>จำนวนห้องน้ำ*</label>
+                    @error('phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="house-frame mb-3">
-    <div class="box-screenshot-frame">
-        <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/floor.png') }}">
-        <div class="row">
-            <div class="input_box">
-                <input id="phone" type="text"
-                    class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
-                    value="{{ old('phone') }}" required autocomplete="phone">
-                <label>จำนวนชั้น*</label>
-                @error('phone')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+    <div class="house-frame mb-3">
+        <div class="box-screenshot-frame">
+            <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/floor.png') }}">
+            <div class="row">
+                <div class="input_box">
+                    <input id="phone" type="text"
+                        class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
+                        value="{{ old('phone') }}" required autocomplete="phone">
+                    <label>จำนวนชั้น*</label>
+                    @error('phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="house-frame mb-3">
-    <div class="box-screenshot-frame">
-        <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/directions_car.png') }}">
-        <div class="row">
-            <div class="input_box">
-                <input id="phone" type="text"
-                    class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
-                    value="{{ old('phone') }}" required autocomplete="phone">
-                <label>จำนวนที่จอดรถ*</label>
-                @error('phone')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+    <div class="house-frame mb-3" id="number-parking">
+        <div class="box-screenshot-frame">
+            <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/directions_car.png') }}">
+            <div class="row">
+                <div class="input_box">
+                    <input id="phone" type="text"
+                        class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
+                        value="{{ old('phone') }}" required autocomplete="phone">
+                    <label>จำนวนที่จอดรถ*</label>
+                    @error('phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
+        </div>
+    </div>
+    <div class="house-frame mb-3" id="not-studio" style="display: none">
+        <div class="box-screenshot-frame">
+            <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/countertops.png') }}">
+            <div class="row">
+                <div class="input_box">
+                    <select class="form-select" aria-label="Default select example">
+                        <option value="สตูดิโอ" selected>สตูดิโอ</option>
+                        <option value="ไม่สตูดิโอ">ไม่สตูดิโอ</option>
+                    </select>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>
@@ -371,6 +388,7 @@
             const inputElement = document.getElementById(inputId);
             const typeInputhire = document.getElementById('rental-price');
             const typeSellingprice = document.getElementById('selling-price');
+            const minimumRental = document.getElementById('minimum-rental');
 
             if (inputElement) { // ตรวจสอบว่า inputElement ไม่ใช่ null
                 if (this.classList.contains('active')) {
@@ -385,9 +403,10 @@
             }
 
             // ตรวจสอบค่าของ inputElement.value ทั้งสองปุ่ม
-            const hireValue = document.getElementById('type-name-hire').value;
-            const hireSellValue = document.getElementById('type-name-hire_sell').value;
             const hireSell = document.getElementById('type-name-sell').value;
+
+            const hireSellValue = document.getElementById('type-name-hire_sell').value;
+            const hireValue = document.getElementById('type-name-hire').value;
 
             if (hireValue !== 'null' || hireSellValue !== 'null') {
                 typeInputhire.style.display = 'block';
@@ -398,6 +417,11 @@
                 typeSellingprice.style.display = 'block';
             } else {
                 typeSellingprice.style.display = 'none';
+            }
+            if (hireValue !== 'null') {
+                minimumRental.style.display = 'block';
+            } else {
+                minimumRental.style.display = 'none';
             }
         });
     });
@@ -474,5 +498,26 @@
     document.getElementById('month-advance-rent').addEventListener('change', function() {
         const bookingInput = document.getElementById('month-advance-rent-input');
         bookingInput.style.display = this.checked ? 'block' : 'none';
+    });
+
+    document.getElementById('property_type-co').addEventListener('change', function() {
+        const selectedValue = this.value;
+        console.log("Selected property type:", selectedValue);
+        const natureCoInput = document.getElementById('nature-co');
+        natureCoInput.style.display = selectedValue == "ที่ดิน" ? 'none' : 'block';
+
+
+        const numberParking = document.getElementById('number-parking');
+        const notStudio = document.getElementById('not-studio');
+
+        if (selectedValue == 'คอนโด') {
+            notStudio.style.display = 'inline-block';
+            numberParking.style.display = 'none';
+        } else {
+            notStudio.style.display = 'none';
+            numberParking.style.display = 'inline-block';
+        }
+
+        // คุณสามารถเพิ่มโค้ดอื่น ๆ ที่คุณต้องการใช้กับค่า selectedValue ที่นี่
     });
 </script>
