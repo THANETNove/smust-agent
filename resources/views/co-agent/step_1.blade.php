@@ -233,127 +233,129 @@
         </div>
     </div>
 </div>
-
-<p class="head-name-co">ราคาเช่า</p>
-<div class="row mb-3">
-    <div class="col-md-12 mb-3 input_box">
-        <input id="phone" type="text" class="form-control  @error('phone') is-invalid @enderror"
-            name="phone" value="{{ old('phone') }}" required autocomplete="phone">
-        <label>ค่าเช่า* (บาท/เดือน)</label>
-        @error('phone')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-    </div>
-</div>
-
-<p class="text-label-co">ให้มีการชำระค่าใช้จ่ายใดต่อไปนี้ <span class="span-label-co">*</span></p>
-
-<div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-    <label class="form-check-label" for="flexCheckDefault">
-        ค่าเช่าล่วงหน้า 1 เดือน
-    </label>
-</div>
-<div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="month-advance-rent">
-    <label class="form-check-label" for="flexCheckDeposit">
-        เงินมัดจำ
-    </label>
-    <input type="text" class="form-control" id="month-advance-rent-input" placeholder="เงินมัดจำ (เดือน)*"
-        style="display: none">
-</div>
-<div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="reservation-money">
-    <label class="form-check-label" for="flexCheckBooking">
-        เงินจอง
-    </label>
-    <input type="text" class="form-control" id="reservation-money-input" placeholder="เงินจอง *"
-        style="display: none">
-</div>
-<p class="text-reservation-money">เงินมัดจำ ค่าเช่าล่วงหน้า และเงินประกัน กฎหมายกำหนดว่ารวม กันต้องไม่เกิน 3
-    เดือนของค่าเช่า</p>
-
-
-<p class="head-name-co">ราคาขาย</p>
-<div class="row mb-3">
-    <div class="input_box">
-        <input id="phone" type="text" class="form-control col-12  @error('phone') is-invalid @enderror"
-            name="phone" value="{{ old('phone') }}" required autocomplete="phone">
-        <label>ราคาขาย* (บาท)</label>
-        @error('phone')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-    </div>
-</div>
-<div class="row mb-3">
-    <div class="input_box">
-        <input id="phone" type="text" class="form-control col-12  @error('phone') is-invalid @enderror"
-            name="phone" value="{{ old('phone') }}" required autocomplete="phone">
-        <label>จำนวนเงินจอง* (บาท)</label>
-        @error('phone')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-    </div>
-</div>
-<div class="row mb-3">
-    <div class="input_box">
-        <input id="phone" type="text" class="form-control col-12  @error('phone') is-invalid @enderror"
-            name="phone" value="{{ old('phone') }}" required autocomplete="phone">
-        <label>จำนวนดาวน์* (%)</label>
-        @error('phone')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-    </div>
-</div>
-<p class="text-label-co">ให้ผ่อนดาวน์ได้ไหม <span class="span-label-co">*</span></p>
-<div class="mb-3 deed-include">
-    <div style="display: flex; align-items: center;">
-        <div class="box-btn-down" style="margin-right: 10px;">
-            ไม่ได้
-        </div>
-        <div class="box-btn-down  active" style="margin-right: 10px;">
-            ผ่อนดาวน์ได้
+<div id="rental-price" style="display:none">
+    <p class="head-name-co">ราคาเช่า</p>
+    <div class="row mb-3">
+        <div class="col-md-12 mb-3 input_box">
+            <input id="phone" type="text" class="form-control  @error('phone') is-invalid @enderror"
+                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <label>ค่าเช่า* (บาท/เดือน)</label>
+            @error('phone')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
     </div>
-    <div id="input-down">
-        <div class="house-frame mb-3">
-            <div class="box-screenshot-frame">
-                <div class="row">
-                    <div class="input_box">
-                        <input id="phone" type="text"
-                            class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
-                            value="{{ old('phone') }}" required autocomplete="phone">
-                        <label>ผ่อนได้กี่งวด* (เดือน)</label>
-                        @error('phone')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+
+    <p class="text-label-co">ให้มีการชำระค่าใช้จ่ายใดต่อไปนี้ <span class="span-label-co">*</span></p>
+
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            ค่าเช่าล่วงหน้า 1 เดือน
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="month-advance-rent">
+        <label class="form-check-label" for="flexCheckDeposit">
+            เงินมัดจำ
+        </label>
+        <input type="text" class="form-control" id="month-advance-rent-input" placeholder="เงินมัดจำ (เดือน)*"
+            style="display: none">
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="reservation-money">
+        <label class="form-check-label" for="flexCheckBooking">
+            เงินจอง
+        </label>
+        <input type="text" class="form-control" id="reservation-money-input" placeholder="เงินจอง *"
+            style="display: none">
+    </div>
+    <p class="text-reservation-money">เงินมัดจำ ค่าเช่าล่วงหน้า และเงินประกัน กฎหมายกำหนดว่ารวม กันต้องไม่เกิน 3
+        เดือนของค่าเช่า</p>
+
+</div>
+<div id="selling-price" style="display: none">
+    <p class="head-name-co">ราคาขาย</p>
+    <div class="row mb-3">
+        <div class="input_box">
+            <input id="phone" type="text" class="form-control col-12  @error('phone') is-invalid @enderror"
+                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <label>ราคาขาย* (บาท)</label>
+            @error('phone')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="input_box">
+            <input id="phone" type="text" class="form-control col-12  @error('phone') is-invalid @enderror"
+                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <label>จำนวนเงินจอง* (บาท)</label>
+            @error('phone')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="input_box">
+            <input id="phone" type="text" class="form-control col-12  @error('phone') is-invalid @enderror"
+                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <label>จำนวนดาวน์* (%)</label>
+            @error('phone')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+    <p class="text-label-co">ให้ผ่อนดาวน์ได้ไหม <span class="span-label-co">*</span></p>
+    <div class="mb-3 deed-include">
+        <div style="display: flex; align-items: center;">
+            <div class="box-btn-down" style="margin-right: 10px;">
+                ไม่ได้
+            </div>
+            <div class="box-btn-down  active" style="margin-right: 10px;">
+                ผ่อนดาวน์ได้
+            </div>
+        </div>
+        <div id="input-down">
+            <div class="house-frame mb-3">
+                <div class="box-screenshot-frame">
+                    <div class="row">
+                        <div class="input_box">
+                            <input id="phone" type="text"
+                                class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
+                                value="{{ old('phone') }}" required autocomplete="phone">
+                            <label>ผ่อนได้กี่งวด* (เดือน)</label>
+                            @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="house-frame mb-3">
-            <div class="box-screenshot-frame">
-                <div class="row">
-                    <div class="input_box">
-                        <input id="phone" type="text"
-                            class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
-                            value="{{ old('phone') }}" required autocomplete="phone">
-                        <label>งวดละ* (บาท)</label>
-                        @error('phone')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+            <div class="house-frame mb-3">
+                <div class="box-screenshot-frame">
+                    <div class="row">
+                        <div class="input_box">
+                            <input id="phone" type="text"
+                                class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
+                                value="{{ old('phone') }}" required autocomplete="phone">
+                            <label>งวดละ* (บาท)</label>
+                            @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
             </div>
@@ -367,6 +369,8 @@
         button.addEventListener('click', function() {
             const inputId = this.getAttribute('data-input');
             const inputElement = document.getElementById(inputId);
+            const typeInputhire = document.getElementById('rental-price');
+            const typeSellingprice = document.getElementById('selling-price');
 
             if (inputElement) { // ตรวจสอบว่า inputElement ไม่ใช่ null
                 if (this.classList.contains('active')) {
@@ -379,8 +383,26 @@
             } else {
                 console.error('Element with id ' + inputId + ' not found.');
             }
+
+            // ตรวจสอบค่าของ inputElement.value ทั้งสองปุ่ม
+            const hireValue = document.getElementById('type-name-hire').value;
+            const hireSellValue = document.getElementById('type-name-hire_sell').value;
+            const hireSell = document.getElementById('type-name-sell').value;
+
+            if (hireValue !== 'null' || hireSellValue !== 'null') {
+                typeInputhire.style.display = 'block';
+            } else {
+                typeInputhire.style.display = 'none';
+            }
+            if (hireSell !== 'null' || hireSellValue !== 'null') {
+                typeSellingprice.style.display = 'block';
+            } else {
+                typeSellingprice.style.display = 'none';
+            }
         });
     });
+
+
 
     const buttonshave = document.querySelectorAll('.box-btn-have');
 
