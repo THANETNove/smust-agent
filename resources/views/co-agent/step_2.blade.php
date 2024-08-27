@@ -6,7 +6,7 @@
 </div>
 
 <p class="specialized">ที่เชี่ยวชาญในพื้นที่และงาน ของคุณ พร้อมที่จะรับงาน</p>
-<button type="button" class="btn btn-have-broker-back" onclick="nextStep()">
+<button type="button" class="btn btn-have-broker-back" onclick="previousStep()">
     กลับ
 </button>
 <button type="button" class="btn btn-have-broker" onclick="nextStep()">

@@ -54,7 +54,7 @@
             <label style="margin-right: 10px;">มีภาระหนี้กับ <span style="color: red; margin-left: 6px;">
                     *</span></label>
             <div style="display: flex">
-                <input id="text" type="text" name="name_have"
+                <input id="name-have" type="text" name="name_have"
                     class="form-control @error('phone') is-invalid @enderror" autocomplete="phone" maxlength="50"
                     value="{{ old('name_have') }}">
                 <span>
@@ -243,7 +243,8 @@
             <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/countertops.png') }}">
             <div class="row">
                 <div class="input_box">
-                    <select class="form-select" aria-label="Default select example" name="studio_name">
+                    <select class="form-select" aria-label="Default select example" name="studio_name"
+                        id="studio_name">
                         <option value="สตูดิโอ" {{ old('studio_name') == 'สตูดิโอ' ? 'selected' : '' }}>สตูดิโอ
                         </option>
                         <option value="ไม่สตูดิโอ" {{ old('studio_name') == 'ไม่สตูดิโอ' ? 'selected' : '' }}>
@@ -464,7 +465,7 @@
             if (inputElement) { // ตรวจสอบว่า inputElement ไม่ใช่ null
                 if (this.classList.contains('active')) {
                     this.classList.remove('active');
-                    inputElement.value = 'null';
+                    inputElement.value = null;
                 } else {
                     this.classList.add('active');
                     inputElement.value = this.getAttribute('data-value');
@@ -514,7 +515,10 @@
             if (this.textContent.trim() == "มี") {
                 typeNameInput.style.display = 'inline';
             } else {
+                const idNameHave = document.getElementById('name-have');
                 typeNameInput.style.display = 'none';
+                idNameHave.value = null;
+                //name-have
             }
 
 
@@ -533,10 +537,15 @@
 
             // อัปเดตค่าใน input ที่ซ่อนอยู่
             const typeNamedown = document.getElementById('input-down');
+            const ideach_installment_baht = document.getElementById('each_installment_baht');
+            const idmany_installments = document.getElementById('many_installments');
             if (this.textContent.trim() == "ผ่อนดาวน์ได้") {
                 typeNamedown.style.display = 'block';
             } else {
                 typeNamedown.style.display = 'none';
+
+                ideach_installment_baht.value = null;
+                idmany_installments.value = null;
             }
         });
     });
@@ -580,13 +589,17 @@
 
         const numberParking = document.getElementById('number-parking');
         const notStudio = document.getElementById('not-studio');
-
+        const idNumberParking = document.getElementById('number_parking');
+        const idStudioName = document.getElementById('studio_name');
+        //studio_name number_parking
         if (selectedValue == 'คอนโด') {
+            idNumberParking.value = null
             notStudio.style.display = 'inline-block';
             numberParking.style.display = 'none';
         } else {
             notStudio.style.display = 'none';
             numberParking.style.display = 'inline-block';
+            idStudioName.value = null
         }
 
         // คุณสามารถเพิ่มโค้ดอื่น ๆ ที่คุณต้องการใช้กับค่า selectedValue ที่นี่
