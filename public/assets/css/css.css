@@ -1865,9 +1865,42 @@ textarea {
 
 .img-info2 {
     position: absolute;
-    right: 8px;
+    right: 16px;
     width: 24px;
     height: 24px;
     top: 8px;
     z-index: 2;
+}
+
+.swal-btn-down {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 16px;
+    margin: 4px 0;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    border: 1px solid #007BA7;
+    color: #007BA7;
+    box-shadow: 0 0px 0px rgb(255, 255, 255) !important;
+    /* เงาของปุ่ม */
+}
+
+
+div:where(.swal2-container) div:where(.swal2-popup) {
+    display: none;
+    position: relative;
+    box-sizing: border-box;
+    grid-template-columns: minmax(0, 100%);
+    width: 32em;
+    max-width: 100%;
+    padding: 0 0 1.25em;
+    border: none;
+    border-radius: 5px;
+    background: #B8D7E2 !important;
+    color: #014158 !important;
+    font-family: 400 !important;
+    font-size: 12px !important;
 }
