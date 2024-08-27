@@ -1,26 +1,34 @@
 <p class="text-label-co">ประเภทสัญญา <span class="span-label-co">*</span></p>
 <div class="mb-3">
-    <div class="box-btn-type" id="btn-sell" data-input="type-name-sell" data-value="ขาย">
+    <div class="box-btn-type  {{ old('type_name_sell') == 'ขาย' ? 'active' : '' }}" id="btn-sell"
+        data-input="type-name-sell" data-value="ขาย">
         ขาย
     </div>
-    <div class="box-btn-type" id="btn-hire_sell" data-input="type-name-hire_sell" data-value="เช่าซื้อ/ขายผ่อน">
+    <div class="box-btn-type {{ old('type_name_hire_sell') == 'เช่าซื้อ/ขายผ่อน' ? 'active' : '' }}" id="btn-hire_sell"
+        data-input="type-name-hire_sell" data-value="เช่าซื้อ/ขายผ่อน">
         เช่าซื้อ/ขายผ่อน
     </div>
-    <div class="box-btn-type" id="btn-hire" data-input="type-name-hire" data-value="เช่า">
+    <div class="box-btn-type {{ old('type_name_hire') == 'เช่า' ? 'active' : '' }}" id="btn-hire"
+        data-input="type-name-hire" data-value="เช่า">
         เช่า
     </div>
-    <input type="text" id="type-name-sell" name="type_name" value="null" style="display: none">
-    <input type="text" id="type-name-hire_sell" name="type_name" value="null" style="display: none">
-    <input type="text" id="type-name-hire" name="type_name" value="null" style="display: none">
+    <input type="text" id="type-name-sell" name="type_name_sell"
+        value="{{ old('type_name_sell') == 'ขาย' ? 'ขาย' : 'null' }}" style="display: none">
+    <input type="text" id="type-name-hire_sell" name="type_name_hire_sell"
+        value="{{ old('type_name_hire_sell') == 'เช่าซื้อ/ขายผ่อน' ? 'เช่าซื้อ/ขายผ่อน' : 'null' }}"
+        style="display: none">
+    <input type="text" id="type-name-hire" name="type_name_hire"
+        value="{{ old('name_have') == 'เช่า' ? 'เช่า' : 'null' }}" style="display: none">
+
 </div>
 <div class="mb-3 input_box3">
     <label>ประเภททรัพย์ <span style="color: red;margin-left: 6px;"> *</span> </label>
     <select class="form-select" name="property_type" id="property_type-co" aria-label="Default select example">
         <option selected value="บ้านเดี่ยว">บ้านเดี่ยว</option>
-        <option value="คอนโด">คอนโด </option>
-        <option value="ทาวน์เฮ้าส์">ทาวน์เฮ้าส์</option>
-        <option value="ที่ดิน">ที่ดิน</option>
-        <option value="พาณิชย์">พาณิชย์</option>
+        <option value="คอนโด" {{ old('property_type') == 'คอนโด' ? 'selected' : '' }}>คอนโด </option>
+        <option value="ทาวน์เฮ้าส์" {{ old('property_type') == 'ทาวน์เฮ้าส์' ? 'selected' : '' }}>ทาวน์เฮ้าส์</option>
+        <option value="ที่ดิน" {{ old('property_type') == 'ที่ดิน' ? 'selected' : '' }}>ที่ดิน</option>
+        <option value="พาณิชย์" {{ old('property_type') == 'พาณิชย์' ? 'selected' : '' }}>พาณิชย์</option>
     </select>
     @error('id_card_number')
         <span class="invalid-feedback" role="alert">
@@ -34,10 +42,10 @@
     </label>
 
     <div style="display: flex; align-items: center;">
-        <div class="box-btn-have" style="margin-right: 10px;">
+        <div class="box-btn-have {{ old('name_have') == 'ไม่มี' ? 'active' : '' }}" style="margin-right: 10px;">
             ไม่มี
         </div>
-        <div class="box-btn-have active" style="margin-right: 10px;">
+        <div class="box-btn-have {{ old('name_have') == 'มี' ? 'active' : 'active' }}" style="margin-right: 10px;">
             มี
         </div>
 
@@ -45,8 +53,9 @@
             <label style="margin-right: 10px;">มีภาระหนี้กับ <span style="color: red; margin-left: 6px;">
                     *</span></label>
             <div style="display: flex">
-                <input id="text" type="text" name="name_"
-                    class="form-control @error('phone') is-invalid @enderror" autocomplete="phone" maxlength="50">
+                <input id="text" type="text" name="name_have"
+                    class="form-control @error('phone') is-invalid @enderror" autocomplete="phone" maxlength="50"
+                    value="{{ old('name_have') }}">
                 <span>
                     <img class="img-info" src="{{ URL::asset('/assets/image/welcome/info.png') }}"
                         onclick="messageID('สถาบันการเงิน เช่น ชื่อธนาคารที่ทรัพย์จด จำนองไว้')"
@@ -64,13 +73,13 @@
 
 
 <div class="mb-3" id="minimum-rental" style="display: none">
-    <select class="form-select" name="property_type" aria-label="Default select example">
-        <option selected disabled>เช่าขั้นต่ำ*</option>
-        <option value="1">1 เดือน </option>
-        <option value="2">2 เดือน</option>
-        <option value="3">3 เดือน</option>
-        <option value="6">6 เดือน</option>
-        <option value="12">12 เดือน</option>
+    <select class="form-select" name="minimum_rent" aria-label="Default select example">
+        <option value="" disabled selected>เช่าขั้นต่ำ*</option>
+        <option value="1" {{ old('minimum_rent') == '1' ? 'selected' : '' }}>1 เดือน</option>
+        <option value="2" {{ old('minimum_rent') == '2' ? 'selected' : '' }}>2 เดือน</option>
+        <option value="3" {{ old('minimum_rent') == '3' ? 'selected' : '' }}>3 เดือน</option>
+        <option value="6" {{ old('minimum_rent') == '6' ? 'selected' : '' }}>6 เดือน</option>
+        <option value="12" {{ old('minimum_rent') == '12' ? 'selected' : '' }}>12 เดือน</option>
     </select>
     @error('id_card_number')
         <span class="invalid-feedback" role="alert">
@@ -83,17 +92,17 @@
     <img class="img-datepicker" src="{{ URL::asset('/assets/image/welcome/calendar_month.png') }}">
     <div class="datepicker-line"></div>
     <p class="placeholder-co">เริ่มให้เช่าได้ตั้งแต่</p>
-    <input id="datepicker-co" class="datepicker-co" />
+    <input id="datepicker-co" class="datepicker-co" name="start_renting" value="{{ old('start_renting') }}" />
 </div>
 
 <p class="head-name-co">ที่ตั้ง</p>
 <div class="mb-3 house-number">
     <div class="row">
         <div class="col-md-12 mb-3 input_box">
-            <input id="phone" type="text" class="form-control  @error('phone') is-invalid @enderror"
-                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <input id="house_number" type="text" class="form-control  @error('house_number') is-invalid @enderror"
+                name="house_number" value="{{ old('house_number') }}" required autocomplete="house_number">
             <label>บ้านเลขที่</label>
-            @error('phone')
+            @error('house_number')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -104,10 +113,10 @@
 <div class="mb-3 house-name">
     <div class="row ">
         <div class="col-md-12 mb-3 input_box">
-            <input id="phone" type="text" class="form-control  @error('phone') is-invalid @enderror"
-                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <input id="house_name" type="text" class="form-control  @error('house_name') is-invalid @enderror"
+                name="house_name" value="{{ old('house_name') }}" required autocomplete="house_name">
             <label>โครงการ เช่น ชื่อหมู่บ้าน</label>
-            @error('phone')
+            @error('house_name')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -121,10 +130,10 @@
 <div class="mb-3">
     <div class="row">
         <div class="col-md-12 mb-3 input_box">
-            <input id="phone" type="text" class="form-control  @error('phone') is-invalid @enderror"
-                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <input id="road" type="text" class="form-control  @error('road') is-invalid @enderror"
+                name="road" value="{{ old('road') }}" required autocomplete="road">
             <label>ถนน*</label>
-            @error('phone')
+            @error('road')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -135,10 +144,10 @@
 <div class="mb-3">
     <div class="row">
         <div class="col-md-12 mb-3 input_box">
-            <input id="phone" type="text" class="form-control  @error('phone') is-invalid @enderror"
-                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <input id="alley" type="text" class="form-control  @error('alley') is-invalid @enderror"
+                name="alley" value="{{ old('alley') }}" required autocomplete="alley">
             <label>ซอย</label>
-            @error('phone')
+            @error('alley')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -158,11 +167,12 @@
             <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/bed.png') }}">
             <div class="row">
                 <div class="input_box">
-                    <input id="phone" type="text"
-                        class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
-                        value="{{ old('phone') }}" required autocomplete="phone">
+                    <input id="number_bedrooms" type="text"
+                        class="form-control col-12  @error('number_bedrooms') is-invalid @enderror"
+                        name="number_bedrooms" value="{{ old('number_bedrooms') }}" required
+                        autocomplete="number_bedrooms">
                     <label>จำนวนห้องนอน *</label>
-                    @error('phone')
+                    @error('number_bedrooms')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -176,11 +186,12 @@
             <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/shower.png') }}">
             <div class="row">
                 <div class="input_box">
-                    <input id="phone" type="text"
-                        class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
-                        value="{{ old('phone') }}" required autocomplete="phone">
+                    <input id="number_bathrooms" type="text"
+                        class="form-control col-12  @error('number_bathrooms') is-invalid @enderror"
+                        name="number_bathrooms" value="{{ old('number_bathrooms') }}" required
+                        autocomplete="number_bathrooms">
                     <label>จำนวนห้องน้ำ*</label>
-                    @error('phone')
+                    @error('number_bathrooms')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -194,11 +205,11 @@
             <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/floor.png') }}">
             <div class="row">
                 <div class="input_box">
-                    <input id="phone" type="text"
-                        class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
-                        value="{{ old('phone') }}" required autocomplete="phone">
+                    <input id="number_floors" type="text"
+                        class="form-control col-12  @error('number_floors') is-invalid @enderror" name="number_floors"
+                        value="{{ old('number_floors') }}" required autocomplete="number_floors">
                     <label>จำนวนชั้น*</label>
-                    @error('phone')
+                    @error('number_floors')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -212,11 +223,12 @@
             <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/directions_car.png') }}">
             <div class="row">
                 <div class="input_box">
-                    <input id="phone" type="text"
-                        class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
-                        value="{{ old('phone') }}" required autocomplete="phone">
+                    <input id="number_parking" type="text"
+                        class="form-control col-12  @error('number_parking') is-invalid @enderror"
+                        name="number_parking" value="{{ old('number_parking') }}" required
+                        autocomplete="number_parking">
                     <label>จำนวนที่จอดรถ*</label>
-                    @error('phone')
+                    @error('number_parking')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -230,9 +242,12 @@
             <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/countertops.png') }}">
             <div class="row">
                 <div class="input_box">
-                    <select class="form-select" aria-label="Default select example">
-                        <option value="สตูดิโอ" selected>สตูดิโอ</option>
-                        <option value="ไม่สตูดิโอ">ไม่สตูดิโอ</option>
+                    <select class="form-select" aria-label="Default select example" name="studio_name">
+                        <option value="สตูดิโอ" {{ old('studio_name') == 'สตูดิโอ' ? 'selected' : '' }}>สตูดิโอ
+                        </option>
+                        <option value="ไม่สตูดิโอ" {{ old('studio_name') == 'ไม่สตูดิโอ' ? 'selected' : '' }}>
+                            ไม่สตูดิโอ
+                        </option>
                     </select>
                 </div>
             </div>
@@ -246,10 +261,11 @@
 
     <div class="row" style="width: 350px">
         <div class="input_box">
-            <input id="phone" type="text" class="form-control col-12  @error('phone') is-invalid @enderror"
-                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <input id="size_sq_m" type="text"
+                class="form-control col-12  @error('size_sq_m') is-invalid @enderror" name="size_sq_m"
+                value="{{ old('size_sq_m') }}" required autocomplete="size_sq_m">
             <label>ขนาด* (ตร.ว.)</label>
-            @error('phone')
+            @error('size_sq_m')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -261,10 +277,11 @@
     <p class="head-name-co">ราคาเช่า</p>
     <div class="row mb-3">
         <div class="col-md-12 mb-3 input_box">
-            <input id="phone" type="text" class="form-control  @error('phone') is-invalid @enderror"
-                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <input id="rent_baht_month" type="text"
+                class="form-control  @error('rent_baht_month') is-invalid @enderror" name="rent_baht_month"
+                value="{{ old('rent_baht_month') }}" required autocomplete="rent_baht_month">
             <label>ค่าเช่า* (บาท/เดือน)</label>
-            @error('phone')
+            @error('rent_baht_month')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -275,7 +292,8 @@
     <p class="text-label-co">ให้มีการชำระค่าใช้จ่ายใดต่อไปนี้ <span class="span-label-co">*</span></p>
 
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="month_advance_rent"
+            value="1" {{ old('month_advance_rent') ? 'checked' : '' }}>
         <label class="form-check-label" for="flexCheckDefault">
             ค่าเช่าล่วงหน้า 1 เดือน <span>
                 <img class="img-info" src="{{ URL::asset('/assets/image/welcome/info.png') }}"
@@ -284,18 +302,20 @@
         </label>
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="month-advance-rent">
+        <input class="form-check-input" type="checkbox" value="1" id="month-advance-rent"
+            {{ old('deposit_month_checkbox') ? 'checked' : '' }}>
         <label class="form-check-label" for="flexCheckDeposit">
             เงินมัดจำ <span>
                 <img class="img-info" src="{{ URL::asset('/assets/image/welcome/info.png') }}"
                     onclick="messageID('เงินมัดจำ หรือ เงินประกัน คือ ประกันความเสีย หายของทรัพย์ที่ เช่า โดยหากมีความเสียหายในวัน สิ้นสุดสัญญา เงินส่วนนี้จะถูกนำมา ชดใช้ความเสียหาย แต่หากไม่มี ความเสียหาย หรือมีแต่ความเสีย หายตาม ปกติธรรมดาของการใช้ ทรัพย์ตามปกติ เจ้าของต้องคืนเงิน ประกันนี้ ภายใน 7 วันนับแต่วันสิ้น สุดสัญญา โดยหากมีการเก็บเงิน จองไปแล้ว จะต้องจ่าย เพียงเท่าที่ ไม่ได้จ่ายไปตอนจอง เช่น หากจ่าย เงินจองแล้ว 5,000 บาท เงินมัดจำ ก็จะลดลง 5,000 บาทในภายหลัง')">
             </span>
         </label>
-        <input type="text" class="form-control" id="month-advance-rent-input" placeholder="เงินมัดจำ (เดือน)*"
-            style="display: none">
+        <input type="text" class="form-control" id="month-advance-rent-input" name="deposit_month"
+            value="" placeholder="เงินมัดจำ (เดือน)*" style="display: none">
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="reservation-money">
+        <input class="form-check-input" type="checkbox" value="" id="reservation-money"
+            {{ old('reservation_money_checkbox') ? 'checked' : '' }}>
         <label class="form-check-label" for="flexCheckBooking">
             เงินจอง <span>
                 <img class="img-info" src="{{ URL::asset('/assets/image/welcome/info.png') }}"
@@ -303,7 +323,7 @@
             </span>
         </label>
         <input type="text" class="form-control" id="reservation-money-input" placeholder="เงินจอง *"
-            style="display: none">
+            value=" {{ old('reservation_money_checkbox') }}" name="reservation_money" style="display: none">
     </div>
     <p class="text-reservation-money">เงินมัดจำ ค่าเช่าล่วงหน้า และเงินประกัน กฎหมายกำหนดว่ารวม กันต้องไม่เกิน 3
         เดือนของค่าเช่า</p>
@@ -313,10 +333,12 @@
     <p class="head-name-co">ราคาขาย</p>
     <div class="row mb-3">
         <div class="input_box">
-            <input id="phone" type="text" class="form-control col-12  @error('phone') is-invalid @enderror"
-                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <input id="selling_price_baht" type="text"
+                class="form-control col-12  @error('selling_price_baht') is-invalid @enderror"
+                name="selling_price_baht)" value="{{ old('selling_price_baht') }}" required
+                autocomplete="selling_price_baht">
             <label>ราคาขาย* (บาท)</label>
-            @error('phone')
+            @error('selling_price_baht')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -326,8 +348,10 @@
     <div class="row mb-3">
         <div class="input_box">
 
-            <input id="phone" type="text" class="form-control col-12  @error('phone') is-invalid @enderror"
-                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <input id="reservation_amount_baht" type="text"
+                class="form-control col-12  @error('reservation_amount_baht') is-invalid @enderror"
+                name="reservation_amount_baht" value="{{ old('reservation_amount_baht') }}" required
+                autocomplete="reservation_amount_baht">
 
 
             <label>จำนวนเงินจอง* (บาท)</label>
@@ -335,7 +359,7 @@
                 <img class="img-info2" src="{{ URL::asset('/assets/image/welcome/info.png') }}"
                     onclick="messageID('เป็นเสมือนเงินมัดจำของสัญญาซื้อขาย เป็นหลักประกันว่าเขากำลังจะมาซื้อทรัพย์กับคุณ โดยทั่วไปกำหนดอยู่ที่ 5,000-10,000 บาท ขึ้นอยู่กับมูลค่าของทรัพย์นั้น')">
             </span>
-            @error('phone')
+            @error('reservation_amount_baht')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -344,10 +368,12 @@
     </div>
     <div class="row mb-3">
         <div class="input_box">
-            <input id="phone" type="text" class="form-control col-12  @error('phone') is-invalid @enderror"
-                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            <input id="down_payment_amount" type="text"
+                class="form-control col-12  @error('down_payment_amount') is-invalid @enderror"
+                name="down_payment_amount" value="{{ old('down_payment_amount') }}" required
+                autocomplete="down_payment_amount">
             <label>จำนวนดาวน์* (%)</label>
-            @error('phone')
+            @error('down_payment_amount')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -369,11 +395,12 @@
                 <div class="box-screenshot-frame">
                     <div class="row">
                         <div class="input_box">
-                            <input id="phone" type="text"
-                                class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
-                                value="{{ old('phone') }}" required autocomplete="phone">
+                            <input id="many_installments" type="text"
+                                class="form-control col-12  @error('many_installments') is-invalid @enderror"
+                                name="many_installments" value="{{ old('many_installments') }}" required
+                                autocomplete="many_installments">
                             <label>ผ่อนได้กี่งวด* (เดือน)</label>
-                            @error('phone')
+                            @error('many_installments')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -386,11 +413,12 @@
                 <div class="box-screenshot-frame">
                     <div class="row">
                         <div class="input_box">
-                            <input id="phone" type="text"
-                                class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
-                                value="{{ old('phone') }}" required autocomplete="phone">
+                            <input id="each_installment_baht" type="text"
+                                class="form-control col-12  @error('each_installment_baht') is-invalid @enderror"
+                                name="each_installment_baht" value="{{ old('each_installment_baht') }}" required
+                                autocomplete="each_installment_baht">
                             <label>งวดละ* (บาท)</label>
-                            @error('phone')
+                            @error('each_installment_baht')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
