@@ -1693,42 +1693,61 @@
 .box-btn-type {
     display: inline-block;
     padding: 8px 16px;
-    background-color: #007BA7;
+
     border-radius: 6px;
     font-size: 16px;
     margin: 4px 0;
     font-size: 16px;
     font-weight: 400;
-    color: #FFFFFF;
+
     cursor: pointer;
-
-}
-
-.box-btn-type.active {
     background-color: #FFFFFF;
     border: 1px solid #007BA7;
     color: #007BA7;
 
+}
+
+.box-btn-type.active {
+    color: #FFFFFF;
+    background-color: #007BA7;
 }
 
 .box-btn-have {
     display: inline-block;
     padding: 8px 16px;
-    background-color: #007BA7;
     border-radius: 6px;
     font-size: 16px;
     margin: 4px 0;
     font-size: 16px;
     font-weight: 400;
-    color: #FFFFFF;
     cursor: pointer;
-}
-
-.box-btn-have.active {
     background-color: #FFFFFF;
     border: 1px solid #007BA7;
     color: #007BA7;
+}
 
+.box-btn-have.active {
+    background-color: #007BA7;
+    color: #FFFFFF;
+}
+
+.box-btn-down {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 16px;
+    margin: 4px 0;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    border: 1px solid #007BA7;
+    color: #007BA7;
+}
+
+.box-btn-down.active {
+    background-color: #007BA7;
+    color: #FFFFFF;
 }
 
 .box-datepicker-co {
@@ -1820,9 +1839,20 @@ textarea {
     margin-right: 8px;
 }
 
+
+
 .image-screenshot_frame {
     margin-top: 13px;
     width: 24px;
     height: 24px;
     margin-right: 8px;
+}
+
+.text-reservation-money {
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    color: #E34234;
+    font-size: 14px;
+    font-weight: 400;
 }

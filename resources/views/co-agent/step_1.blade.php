@@ -1,15 +1,17 @@
 <p class="text-label-co">ประเภทสัญญา <span class="span-label-co">*</span></p>
 <div class="mb-3">
-    <div class="box-btn-type">
+    <div class="box-btn-type" id="btn-sell" data-input="type-name-sell" data-value="ขาย">
         ขาย
     </div>
-    <div class="box-btn-type active">
+    <div class="box-btn-type" id="btn-hire_sell" data-input="type-name-hire_sell" data-value="เช่าซื้อ/ขายผ่อน">
         เช่าซื้อ/ขายผ่อน
     </div>
-    <div class="box-btn-type">
+    <div class="box-btn-type" id="btn-hire" data-input="type-name-hire" data-value="เช่า">
         เช่า
     </div>
-    <input type="text" id="type-name" name="type_name" value="เช่าซื้อ/ขายผ่อน" style="display: none">
+    <input type="text" id="type-name-sell" name="type_name" value="null" {{-- style="display: none" --}}>
+    <input type="text" id="type-name-hire_sell" name="type_name" value="null" {{-- style="display: none" --}}>
+    <input type="text" id="type-name-hire" name="type_name" value="null" {{-- style="display: none" --}}>
 </div>
 <div class="mb-3 input_box3">
     <label>ประเภททรัพย์ <span style="color: red;margin-left: 6px;"> *</span> </label>
@@ -255,32 +257,128 @@
     </label>
 </div>
 <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-    <label class="form-check-label" for="flexCheckChecked">
+    <input class="form-check-input" type="checkbox" value="" id="month-advance-rent">
+    <label class="form-check-label" for="flexCheckDeposit">
         เงินมัดจำ
     </label>
+    <input type="text" class="form-control" id="month-advance-rent-input" placeholder="เงินมัดจำ (เดือน)*"
+        style="display: none">
 </div>
 <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-    <label class="form-check-label" for="flexCheckChecked">
+    <input class="form-check-input" type="checkbox" value="" id="reservation-money">
+    <label class="form-check-label" for="flexCheckBooking">
         เงินจอง
     </label>
+    <input type="text" class="form-control" id="reservation-money-input" placeholder="เงินจอง *"
+        style="display: none">
+</div>
+<p class="text-reservation-money">เงินมัดจำ ค่าเช่าล่วงหน้า และเงินประกัน กฎหมายกำหนดว่ารวม กันต้องไม่เกิน 3
+    เดือนของค่าเช่า</p>
+
+
+<p class="head-name-co">ราคาขาย</p>
+<div class="row mb-3">
+    <div class="input_box">
+        <input id="phone" type="text" class="form-control col-12  @error('phone') is-invalid @enderror"
+            name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+        <label>ราคาขาย* (บาท)</label>
+        @error('phone')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="input_box">
+        <input id="phone" type="text" class="form-control col-12  @error('phone') is-invalid @enderror"
+            name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+        <label>จำนวนเงินจอง* (บาท)</label>
+        @error('phone')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="input_box">
+        <input id="phone" type="text" class="form-control col-12  @error('phone') is-invalid @enderror"
+            name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+        <label>จำนวนดาวน์* (%)</label>
+        @error('phone')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<p class="text-label-co">ให้ผ่อนดาวน์ได้ไหม <span class="span-label-co">*</span></p>
+<div class="mb-3 deed-include">
+    <div style="display: flex; align-items: center;">
+        <div class="box-btn-down" style="margin-right: 10px;">
+            ไม่ได้
+        </div>
+        <div class="box-btn-down  active" style="margin-right: 10px;">
+            ผ่อนดาวน์ได้
+        </div>
+    </div>
+    <div id="input-down">
+        <div class="house-frame mb-3">
+            <div class="box-screenshot-frame">
+                <div class="row">
+                    <div class="input_box">
+                        <input id="phone" type="text"
+                            class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
+                            value="{{ old('phone') }}" required autocomplete="phone">
+                        <label>ผ่อนได้กี่งวด* (เดือน)</label>
+                        @error('phone')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="house-frame mb-3">
+            <div class="box-screenshot-frame">
+                <div class="row">
+                    <div class="input_box">
+                        <input id="phone" type="text"
+                            class="form-control col-12  @error('phone') is-invalid @enderror" name="phone"
+                            value="{{ old('phone') }}" required autocomplete="phone">
+                        <label>งวดละ* (บาท)</label>
+                        @error('phone')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
     const buttons = document.querySelectorAll('.box-btn-type');
-    const typeNameInput = document.getElementById('type-name');
-
     buttons.forEach(button => {
         button.addEventListener('click', function() {
-            // ลบ active class จากทุกปุ่ม
-            buttons.forEach(btn => btn.classList.remove('active'));
+            const inputId = this.getAttribute('data-input');
+            const inputElement = document.getElementById(inputId);
 
-            // เพิ่ม active class ไปยังปุ่มที่ถูกกด
-            this.classList.add('active');
-
-            // อัปเดตค่าใน input ที่ซ่อนอยู่
-            typeNameInput.value = this.textContent.trim();
+            if (inputElement) { // ตรวจสอบว่า inputElement ไม่ใช่ null
+                if (this.classList.contains('active')) {
+                    this.classList.remove('active');
+                    inputElement.value = 'null';
+                } else {
+                    this.classList.add('active');
+                    inputElement.value = this.getAttribute('data-value');
+                }
+            } else {
+                console.error('Element with id ' + inputId + ' not found.');
+            }
         });
     });
 
@@ -306,6 +404,27 @@
         });
     });
 
+    const buttonsdown = document.querySelectorAll('.box-btn-down');
+
+    buttonsdown.forEach(buttondown => {
+        buttondown.addEventListener('click', function() {
+            // ลบ active class จากทุกปุ่ม
+            buttonsdown.forEach(btn => btn.classList.remove('active'));
+
+            // เพิ่ม active class ไปยังปุ่มที่ถูกกด
+            this.classList.add('active');
+
+            // อัปเดตค่าใน input ที่ซ่อนอยู่
+            const typeNamedown = document.getElementById('input-down');
+            if (this.textContent.trim() == "ผ่อนดาวน์ได้") {
+                typeNamedown.style.display = 'block';
+            } else {
+                typeNamedown.style.display = 'none';
+            }
+        });
+    });
+
+
 
     $(function() {
         $.datepicker.setDefaults($.datepicker.regional['th']); // ใช้การตั้งค่าภาษาไทย
@@ -323,5 +442,15 @@
                 $(this).val(formattedDate);
             }
         });
+    });
+
+    document.getElementById('reservation-money').addEventListener('change', function() {
+        const depositInput = document.getElementById('reservation-money-input');
+        depositInput.style.display = this.checked ? 'block' : 'none';
+    });
+
+    document.getElementById('month-advance-rent').addEventListener('change', function() {
+        const bookingInput = document.getElementById('month-advance-rent-input');
+        bookingInput.style.display = this.checked ? 'block' : 'none';
     });
 </script>
