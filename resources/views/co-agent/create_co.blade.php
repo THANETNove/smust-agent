@@ -31,7 +31,7 @@
                 <!-- Step 1 -->
                 <div class="form-step active">
                     @include('co-agent.step_1')
-               
+
                 </div>
                 <!-- Step 2 -->
                 <div class="form-step">

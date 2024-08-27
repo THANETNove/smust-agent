@@ -1856,3 +1856,18 @@ textarea {
     font-size: 14px;
     font-weight: 400;
 }
+
+.img-info {
+    width: 24px;
+    height: 24px;
+    margin-left: 8px;
+}
+
+.img-info2 {
+    position: absolute;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    top: 8px;
+    z-index: 2;
+}

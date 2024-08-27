@@ -9,9 +9,9 @@
     <div class="box-btn-type" id="btn-hire" data-input="type-name-hire" data-value="เช่า">
         เช่า
     </div>
-    <input type="text" id="type-name-sell" name="type_name" value="null" {{-- style="display: none" --}}>
-    <input type="text" id="type-name-hire_sell" name="type_name" value="null" {{-- style="display: none" --}}>
-    <input type="text" id="type-name-hire" name="type_name" value="null" {{-- style="display: none" --}}>
+    <input type="text" id="type-name-sell" name="type_name" value="null" style="display: none">
+    <input type="text" id="type-name-hire_sell" name="type_name" value="null" style="display: none">
+    <input type="text" id="type-name-hire" name="type_name" value="null" style="display: none">
 </div>
 <div class="mb-3 input_box3">
     <label>ประเภททรัพย์ <span style="color: red;margin-left: 6px;"> *</span> </label>
@@ -44,8 +44,14 @@
         <div class="input_box2" id="have-no">
             <label style="margin-right: 10px;">มีภาระหนี้กับ <span style="color: red; margin-left: 6px;">
                     *</span></label>
-            <input id="text" type="text" name="name_"
-                class="form-control @error('phone') is-invalid @enderror" autocomplete="phone" maxlength="50">
+            <div style="display: flex">
+                <input id="text" type="text" name="name_"
+                    class="form-control @error('phone') is-invalid @enderror" autocomplete="phone" maxlength="50">
+                <span>
+                    <img class="img-info" src="{{ URL::asset('/assets/image/welcome/info.png') }}"
+                        style="margin-top: 8px">
+                </span>
+            </div>
             @error('phone')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -270,13 +276,17 @@
     <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
         <label class="form-check-label" for="flexCheckDefault">
-            ค่าเช่าล่วงหน้า 1 เดือน
+            ค่าเช่าล่วงหน้า 1 เดือน <span>
+                <img class="img-info" src="{{ URL::asset('/assets/image/welcome/info.png') }}">
+            </span>
         </label>
     </div>
     <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="month-advance-rent">
         <label class="form-check-label" for="flexCheckDeposit">
-            เงินมัดจำ
+            เงินมัดจำ <span>
+                <img class="img-info" src="{{ URL::asset('/assets/image/welcome/info.png') }}">
+            </span>
         </label>
         <input type="text" class="form-control" id="month-advance-rent-input" placeholder="เงินมัดจำ (เดือน)*"
             style="display: none">
@@ -284,7 +294,9 @@
     <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="reservation-money">
         <label class="form-check-label" for="flexCheckBooking">
-            เงินจอง
+            เงินจอง <span>
+                <img class="img-info" src="{{ URL::asset('/assets/image/welcome/info.png') }}">
+            </span>
         </label>
         <input type="text" class="form-control" id="reservation-money-input" placeholder="เงินจอง *"
             style="display: none">
@@ -309,9 +321,15 @@
     </div>
     <div class="row mb-3">
         <div class="input_box">
+
             <input id="phone" type="text" class="form-control col-12  @error('phone') is-invalid @enderror"
                 name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+
+
             <label>จำนวนเงินจอง* (บาท)</label>
+            <span>
+                <img class="img-info2" src="{{ URL::asset('/assets/image/welcome/info.png') }}">
+            </span>
             @error('phone')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -359,7 +377,7 @@
                     </div>
                 </div>
             </div>
-            <div class="house-frame mb-3">
+            <div class="house-frame">
                 <div class="box-screenshot-frame">
                     <div class="row">
                         <div class="input_box">
@@ -380,6 +398,12 @@
     </div>
 </div>
 
+<div class="submit-box mb-3">
+    <button type="button" class="btn btn-register" onclick="nextStep()">
+        ถัดไป
+    </button>
+
+</div>
 <script>
     const buttons = document.querySelectorAll('.box-btn-type');
     buttons.forEach(button => {
