@@ -1,3 +1,4 @@
+<p class="skip-steps-co">กรอกรายละเอียดทีละข้อหรือ <span><a href=""> แปะข้อมูลรวดเดียว</a></span></p>
 <p class="text-label-co">ประเภทสัญญา <span class="span-label-co">*</span></p>
 <div class="mb-3">
     <div class="box-btn-type  {{ old('type_name_sell') == 'ขาย' ? 'active' : '' }}" id="btn-sell"

@@ -25,7 +25,7 @@
             </div>
 
 
-            <p class="skip-steps-co">กรอกรายละเอียดทีละข้อหรือ <span><a href=""> แปะข้อมูลรวดเดียว</a></span></p>
+
 
             <form id="multiStepForm" class="multi-step-form">
                 <!-- Step 1 -->
@@ -35,9 +35,8 @@
                 </div>
                 <!-- Step 2 -->
                 <div class="form-step">
-                    <input type="text" placeholder="Step 2: Input 1">
-                    <input type="text" placeholder="Step 2: Input 2">
-                    <button type="button" onclick="nextStep()">ถัดไป</button>
+                    @include('co-agent.step_2')
+
                 </div>
                 <!-- Step 3 -->
                 <div class="form-step">
@@ -71,7 +70,7 @@
     </div>
 
     <script>
-        let currentStep = 1; // Start from the first step
+        let currentStep = 2; // Start from the first step
 
         function updateProgress() {
             // Update progress steps
