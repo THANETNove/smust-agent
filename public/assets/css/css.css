@@ -2029,3 +2029,50 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     height: 20px;
     margin-right: 8px;
 }
+
+.box-add-image-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    position: relative;
+}
+
+.image-rectangle-co-90 {
+    width: 330px;
+    z-index: 0;
+    height: 150px;
+    border: 1px solid #ccc;
+    /* เพิ่มเส้นขอบให้เห็นภาพชัดเจน */
+    object-fit: cover;
+}
+
+#image-preview-container {
+    position: relative;
+    width: 330px;
+    height: 150px;
+    overflow: hidden;
+    /* ซ่อนส่วนเกิน */
+}
+
+
+.box-add-photo-text {
+    z-index: 0;
+    position: absolute;
+}
+
+.image-add_photo_alternate {
+    margin-top: 16px;
+    margin-left: 16px;
+    width: 48px;
+    height: 48px;
+}
+
+.text-add-image {
+
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 16px;
+
+}

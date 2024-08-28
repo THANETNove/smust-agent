@@ -44,9 +44,7 @@
                 </div>
                 <!-- Step 4 -->
                 <div class="form-step">
-                    <input type="text" placeholder="Step 4: Input 1">
-                    <input type="text" placeholder="Step 4: Input 2">
-                    <button type="button" onclick="nextStep()">ถัดไป</button>
+                    @include('co-agent.step_4')
                 </div>
                 <!-- Step 5 -->
                 <div class="form-step">
@@ -68,15 +66,15 @@
     </div>
 
     <script>
-        let currentStep = 3; // Start from the first step
+        let currentStep = 4; // Start from the first step
 
         function updateProgress() {
             // Update progress steps
             document.querySelectorAll('.progress-step').forEach((step, index) => {
                 // Apply 'completed' class to steps before the current one
 
-                let cs = currentStep > 3 ? currentStep - 1 : currentStep;
-                if (index < cs) {
+
+                if (index < currentStep) {
                     step.classList.add('completed');
                 } else {
                     step.classList.remove('completed');
