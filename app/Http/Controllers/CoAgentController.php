@@ -42,6 +42,20 @@ class CoAgentController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'product_name' => 'required',
+            'price' => 'required',
+            'image.*' => ['required', 'image', 'image:jpg,png,jpeg,webp'],
+            'check_manu' => 'required',
+            'link_lazada' => ['nullable', 'regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?(\?.*)?$/'],
+            'link_shopee' => ['nullable', 'regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?(\?.*)?$/'],
+            'other_links' => ['nullable', 'regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?(\?.*)?$/'],
+        ], [
+            'link_lazada.url' => 'The link Lazada must be a valid URL.',
+            'link_shopee.url' => 'The link Shopee must be a valid URL.',
+            'other_links.url' => 'The link Other_links must be a valid URL.',
+        ]);
         dd($request->all());
     }
 

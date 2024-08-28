@@ -2085,3 +2085,11 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     font-weight: 400;
     color: #000000;
 }
+
+.text-not-forced {
+    margin-top: 12px;
+    font-size: 12px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #000000;
+}

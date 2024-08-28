@@ -9,9 +9,9 @@
     </div>
 </div>
 
-<input id="file" type="file" class="form-control @error('image') is-invalid @enderror" name="image[]" multiple
-    placeholder="image" accept="image/*" style="display:none;" onchange="previewImages(event)">
-@error('image')
+<input id="file" type="file" class="form-control @error('image[]') is-invalid @enderror" name="image[]" multiple
+    placeholder="image[]" accept="image/*" style="display:none;" onchange="previewImages(event)">
+@error('image[]')
     <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
     </span>
@@ -69,6 +69,24 @@
         @enderror
     </div>
 </div>
+<div class="row mb-3">
+    <div class="col-md-12 mb-3">
+        <input id="files" type="file" class="form-control @error('files') is-invalid @enderror" name="files"
+            value="{{ old('files') }}" autocomplete="files" accept=".pdf,.jpg,.jpeg,.png,.docx">
+
+        @error('meters_store')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<p class="text-not-forced">(ไม่ได้บังคับ)
+    <br>
+    ประเภทไฟล์: pdf, jpg, png, docx
+    <br>
+    ขนาดไฟล์: ไม่เกิน 2MB
+</p>
 
 
 
