@@ -2078,3 +2078,10 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     margin-top: 16px;
 
 }
+
+.recommend-video {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #000000;
+}

@@ -1,19 +1,3 @@
-{{-- <div class="box-add-image-center" onclick="document.getElementById('file').click()">
-    <div id="image-preview-container">
-        <img id="default-image" class="image-rectangle-co-90"
-            src="{{ URL::asset('/assets/image/welcome/rectangle90.png') }}">
-    </div>
-    <div class="box-add-photo-text">
-        <img class="image-add_photo_alternate" src="{{ URL::asset('/assets/image/welcome/add_photo_alternate.png') }}">
-        <p class="text-add-image">เพิ่มรูปภาพ</p>
-    </div>
-</div>
-
-<input id="file" type="file" class="form-control @error('image[]') is-invalid @enderror" name="image[]" multiple
-    required placeholder="image" accept="image/*" style="display:none;" onchange="previewImages(event)">
-
- --}}
-
 <div class="box-add-image-center" onclick="document.getElementById('file').click()">
     <div id="image-preview-container" style="position: relative; width: 350px; height: 150px; overflow: hidden;">
         <img id="default-image" class="image-rectangle-co-90"
@@ -27,6 +11,61 @@
 
 <input id="file" type="file" class="form-control @error('image[]') is-invalid @enderror" name="image[]" multiple
     required placeholder="image" accept="image/*" style="display:none;" onchange="previewImages(event)">
+
+<p class="recommend-video">แนะนำให้เพิ่มวีดีโอ เพื่อให้ลูกค้าตัดสินใจได้เร็วขึ้น</p>
+
+<div class="row mt-3 mb-3">
+    <div class="col-md-12 mb-3 input_box">
+        <input id="url_video" type="url" class="form-control @error('meters_store') is-invalid @enderror"
+            name="url_video" value="{{ old('url_video') }}" required autocomplete="meters_store">
+        <label>ลิงก์ Video (ลิงก์ Video youtube)*</label>
+        @error('meters_store')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<div class="row  mb-3">
+    <div class="col-md-12 mb-3 input_box">
+        <input id="announcement_name" type="text"
+            class="form-control @error('announcement_name') is-invalid @enderror" name="announcement_name"
+            value="{{ old('announcement_name') }}" required autocomplete="announcement_name">
+        <label>ชื่อประกาศ* (คำจูงใจสั้นๆ บอกว่านี่ทรัพย์อะไร)</label>
+        @error('announcement_name')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-md-12 mb-3 input_box">
+        <input id="url_gps" type="url" class="form-control @error('url_gps') is-invalid @enderror" name="url_gps"
+            value="{{ old('url_gps') }}" required autocomplete="url_gps">
+        <label>พิกัดที่ตั้ง (ลิงก์ Google Maps)*</label>
+        @error('url_gps')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-md-12 mb-3">
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"
+            placeholder="รายละเอียด เขียนอิสระ เช่น สถานที่สำคัญ ใกล้เคียง หรือรายละเอียดอื่น ๆ ที่ไม่ได้กรอกไว้"
+            name="details">{{ old('details') }}</textarea>
+
+        @error('meters_store')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+
+
 
 <div class="box-btn-block-center">
     <button type="button" class="btn btn-have-broker-back" onclick="previousStep()">

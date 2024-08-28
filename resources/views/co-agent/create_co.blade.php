@@ -48,9 +48,7 @@
                 </div>
                 <!-- Step 5 -->
                 <div class="form-step">
-                    <input type="text" placeholder="Step 5: Input 1">
-                    <input type="text" placeholder="Step 5: Input 2">
-                    <button type="button" onclick="nextStep()">ถัดไป</button>
+                    @include('co-agent.step_5')
                 </div>
                 <!-- Step 6 -->
                 <div class="form-step">
