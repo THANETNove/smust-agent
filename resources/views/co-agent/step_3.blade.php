@@ -35,7 +35,7 @@
 <div class="row" id="input-container">
     <div class="col-md-12 mb-3 input_box">
         <input id="shopping_center" type="text" class="form-control @error('shopping_center') is-invalid @enderror"
-            name="shopping_center[]" value="{{ old('shopping_center') }}" required autocomplete="shopping_center">
+            name="shopping_center[]" value="{{ old('shopping_center') }}"  autocomplete="shopping_center">
         <label>ศูนย์การค้า</label>
         @error('shopping_center')
             <span class="invalid-feedback" role="alert">
@@ -54,7 +54,7 @@
 <div class="row" id="input-container-school">
     <div class="col-md-12 mb-3 input_box">
         <input id="shopping_center" type="text" class="form-control @error('school') is-invalid @enderror"
-            name="school[]" value="{{ old('school') }}" required autocomplete="school">
+            name="school[]" value="{{ old('school') }}"  autocomplete="school">
         <label>สถานศึกษา</label>
         @error('school')
             <span class="invalid-feedback" role="alert">
@@ -73,7 +73,7 @@
 <div class="row">
     <div class="col-md-12 mb-3 input_box">
         <input id="shopping_center" type="text" class="form-control @error('meters_store') is-invalid @enderror"
-            name="meters_store" value="{{ old('meters_store') }}" required autocomplete="meters_store">
+            name="meters_store" value="{{ old('meters_store') }}"  autocomplete="meters_store">
         <label>ร้านสะดวกซื้อที่ใกล้ที่สุด</label>
         @error('meters_store')
             <span class="invalid-feedback" role="alert">
@@ -128,7 +128,7 @@
         newInput.type = 'text';
         newInput.name = 'shopping_center[]';
         newInput.classList.add('form-control');
-        newInput.required = true;
+        newInput. = true;
         newInput.autocomplete = 'shopping_center';
 
         // สร้าง label ใหม่
@@ -153,7 +153,7 @@
         newInput.type = 'text';
         newInput.name = 'school[]';
         newInput.classList.add('form-control');
-        newInput.required = true;
+        newInput. = true;
         newInput.autocomplete = 'school';
 
         // สร้าง label ใหม่

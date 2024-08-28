@@ -27,7 +27,9 @@
 
 
 
-            <form id="multiStepForm" class="multi-step-form">
+            <form id="multiStepForm" class="multi-step-form" method="POST" action="{{ route('co-agent-store') }}"
+                enctype="multipart/form-data">
+                @csrf
                 <!-- Step 1 -->
                 <div class="form-step active">
                     @include('co-agent.step_1')
@@ -50,12 +52,7 @@
                 <div class="form-step">
                     @include('co-agent.step_5')
                 </div>
-                <!-- Step 6 -->
-                <div class="form-step">
-                    <input type="text" placeholder="Step 6: Input 1">
-                    <input type="text" placeholder="Step 6: Input 2">
-                    <button type="submit">ส่งฟอร์ม</button>
-                </div>
+
             </form>
 
 
@@ -64,7 +61,7 @@
     </div>
 
     <script>
-        let currentStep = 4; // Start from the first step
+        let currentStep = 1; // Start from the first step
 
         function updateProgress() {
             // Update progress steps

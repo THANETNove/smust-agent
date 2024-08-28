@@ -9,15 +9,20 @@
     </div>
 </div>
 
-<input id="file" type="file" class="form-control @error('image[]') is-invalid @enderror" name="image[]" multiple
-    required placeholder="image" accept="image/*" style="display:none;" onchange="previewImages(event)">
+<input id="file" type="file" class="form-control @error('image') is-invalid @enderror" name="image[]" multiple
+    placeholder="image" accept="image/*" style="display:none;" onchange="previewImages(event)">
+@error('image')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+@enderror
 
 <p class="recommend-video">แนะนำให้เพิ่มวีดีโอ เพื่อให้ลูกค้าตัดสินใจได้เร็วขึ้น</p>
 
 <div class="row mt-3 mb-3">
     <div class="col-md-12 mb-3 input_box">
         <input id="url_video" type="url" class="form-control @error('meters_store') is-invalid @enderror"
-            name="url_video" value="{{ old('url_video') }}" required autocomplete="meters_store">
+            name="url_video" value="{{ old('url_video') }}" autocomplete="meters_store">
         <label>ลิงก์ Video (ลิงก์ Video youtube)*</label>
         @error('meters_store')
             <span class="invalid-feedback" role="alert">
@@ -30,7 +35,7 @@
     <div class="col-md-12 mb-3 input_box">
         <input id="announcement_name" type="text"
             class="form-control @error('announcement_name') is-invalid @enderror" name="announcement_name"
-            value="{{ old('announcement_name') }}" required autocomplete="announcement_name">
+            value="{{ old('announcement_name') }}" autocomplete="announcement_name">
         <label>ชื่อประกาศ* (คำจูงใจสั้นๆ บอกว่านี่ทรัพย์อะไร)</label>
         @error('announcement_name')
             <span class="invalid-feedback" role="alert">
@@ -42,7 +47,7 @@
 <div class="row mb-3">
     <div class="col-md-12 mb-3 input_box">
         <input id="url_gps" type="url" class="form-control @error('url_gps') is-invalid @enderror" name="url_gps"
-            value="{{ old('url_gps') }}" required autocomplete="url_gps">
+            value="{{ old('url_gps') }}" autocomplete="url_gps">
         <label>พิกัดที่ตั้ง (ลิงก์ Google Maps)*</label>
         @error('url_gps')
             <span class="invalid-feedback" role="alert">

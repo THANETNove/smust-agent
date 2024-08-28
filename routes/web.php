@@ -82,6 +82,8 @@ Route::get('destroy-post/{id}', [PostContentController::class, 'destroy'])->name
 Route::get('radio-updated_at/{id}', [PostContentController::class, 'updatedAt'])->name('radio-updated_at');
 Route::get('co-agent', [CoAgentController::class, 'index'])->name('co-agent');
 Route::get('co-create', [CoAgentController::class, 'create'])->name('co-create');
+Route::post('co-agent-store', [CoAgentController::class, 'store'])->name('co-agent-store');
+
 
 //ส่วนของ admin
 Route::group(['middleware' => ['is_admin']], function () {

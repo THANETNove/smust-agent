@@ -101,7 +101,7 @@
     <div class="row">
         <div class="col-md-12 mb-3 input_box">
             <input id="house_number" type="text" class="form-control  @error('house_number') is-invalid @enderror"
-                name="house_number" value="{{ old('house_number') }}" required autocomplete="house_number">
+                name="house_number" value="{{ old('house_number') }}" autocomplete="house_number">
             <label>บ้านเลขที่</label>
             @error('house_number')
                 <span class="invalid-feedback" role="alert">
@@ -115,7 +115,7 @@
     <div class="row ">
         <div class="col-md-12 mb-3 input_box">
             <input id="house_name" type="text" class="form-control  @error('house_name') is-invalid @enderror"
-                name="house_name" value="{{ old('house_name') }}" required autocomplete="house_name">
+                name="house_name" value="{{ old('house_name') }}" autocomplete="house_name">
             <label>โครงการ เช่น ชื่อหมู่บ้าน</label>
             @error('house_name')
                 <span class="invalid-feedback" role="alert">
@@ -132,7 +132,7 @@
     <div class="row">
         <div class="col-md-12 mb-3 input_box">
             <input id="road" type="text" class="form-control  @error('road') is-invalid @enderror"
-                name="road" value="{{ old('road') }}" required autocomplete="road">
+                name="road" value="{{ old('road') }}" autocomplete="road">
             <label>ถนน*</label>
             @error('road')
                 <span class="invalid-feedback" role="alert">
@@ -146,7 +146,7 @@
     <div class="row">
         <div class="col-md-12 mb-3 input_box">
             <input id="alley" type="text" class="form-control  @error('alley') is-invalid @enderror"
-                name="alley" value="{{ old('alley') }}" required autocomplete="alley">
+                name="alley" value="{{ old('alley') }}" autocomplete="alley">
             <label>ซอย</label>
             @error('alley')
                 <span class="invalid-feedback" role="alert">
@@ -170,8 +170,7 @@
                 <div class="input_box">
                     <input id="number_bedrooms" type="text"
                         class="form-control col-12  @error('number_bedrooms') is-invalid @enderror"
-                        name="number_bedrooms" value="{{ old('number_bedrooms') }}" required
-                        autocomplete="number_bedrooms">
+                        name="number_bedrooms" value="{{ old('number_bedrooms') }}" autocomplete="number_bedrooms">
                     <label>จำนวนห้องนอน *</label>
                     @error('number_bedrooms')
                         <span class="invalid-feedback" role="alert">
@@ -189,7 +188,7 @@
                 <div class="input_box">
                     <input id="number_bathrooms" type="text"
                         class="form-control col-12  @error('number_bathrooms') is-invalid @enderror"
-                        name="number_bathrooms" value="{{ old('number_bathrooms') }}" required
+                        name="number_bathrooms" value="{{ old('number_bathrooms') }}"
                         autocomplete="number_bathrooms">
                     <label>จำนวนห้องน้ำ*</label>
                     @error('number_bathrooms')
@@ -208,7 +207,7 @@
                 <div class="input_box">
                     <input id="number_floors" type="text"
                         class="form-control col-12  @error('number_floors') is-invalid @enderror" name="number_floors"
-                        value="{{ old('number_floors') }}" required autocomplete="number_floors">
+                        value="{{ old('number_floors') }}" autocomplete="number_floors">
                     <label>จำนวนชั้น*</label>
                     @error('number_floors')
                         <span class="invalid-feedback" role="alert">
@@ -226,8 +225,7 @@
                 <div class="input_box">
                     <input id="number_parking" type="text"
                         class="form-control col-12  @error('number_parking') is-invalid @enderror"
-                        name="number_parking" value="{{ old('number_parking') }}" required
-                        autocomplete="number_parking">
+                        name="number_parking" value="{{ old('number_parking') }}" autocomplete="number_parking">
                     <label>จำนวนที่จอดรถ*</label>
                     @error('number_parking')
                         <span class="invalid-feedback" role="alert">
@@ -265,7 +263,7 @@
         <div class="input_box">
             <input id="size_sq_m" type="text"
                 class="form-control col-12  @error('size_sq_m') is-invalid @enderror" name="size_sq_m"
-                value="{{ old('size_sq_m') }}" required autocomplete="size_sq_m">
+                value="{{ old('size_sq_m') }}" autocomplete="size_sq_m">
             <label>ขนาด* (ตร.ว.)</label>
             @error('size_sq_m')
                 <span class="invalid-feedback" role="alert">
@@ -281,7 +279,7 @@
         <div class="col-md-12 mb-3 input_box">
             <input id="rent_baht_month" type="text"
                 class="form-control  @error('rent_baht_month') is-invalid @enderror" name="rent_baht_month"
-                value="{{ old('rent_baht_month') }}" required autocomplete="rent_baht_month">
+                value="{{ old('rent_baht_month') }}" autocomplete="rent_baht_month">
             <label>ค่าเช่า* (บาท/เดือน)</label>
             @error('rent_baht_month')
                 <span class="invalid-feedback" role="alert">
@@ -337,7 +335,7 @@
         <div class="input_box">
             <input id="selling_price_baht" type="text"
                 class="form-control col-12  @error('selling_price_baht') is-invalid @enderror"
-                name="selling_price_baht)" value="{{ old('selling_price_baht') }}" required
+                name="selling_price_baht)" value="{{ old('selling_price_baht') }}"
                 autocomplete="selling_price_baht">
             <label>ราคาขาย* (บาท)</label>
             @error('selling_price_baht')
@@ -352,7 +350,7 @@
 
             <input id="reservation_amount_baht" type="text"
                 class="form-control col-12  @error('reservation_amount_baht') is-invalid @enderror"
-                name="reservation_amount_baht" value="{{ old('reservation_amount_baht') }}" required
+                name="reservation_amount_baht" value="{{ old('reservation_amount_baht') }}"
                 autocomplete="reservation_amount_baht">
 
 
@@ -372,7 +370,7 @@
         <div class="input_box">
             <input id="down_payment_amount" type="text"
                 class="form-control col-12  @error('down_payment_amount') is-invalid @enderror"
-                name="down_payment_amount" value="{{ old('down_payment_amount') }}" required
+                name="down_payment_amount" value="{{ old('down_payment_amount') }}"
                 autocomplete="down_payment_amount">
             <label>จำนวนดาวน์* (%)</label>
             @error('down_payment_amount')
@@ -399,7 +397,7 @@
                         <div class="input_box">
                             <input id="many_installments" type="text"
                                 class="form-control col-12  @error('many_installments') is-invalid @enderror"
-                                name="many_installments" value="{{ old('many_installments') }}" required
+                                name="many_installments" value="{{ old('many_installments') }}"
                                 autocomplete="many_installments">
                             <label>ผ่อนได้กี่งวด* (เดือน)</label>
                             @error('many_installments')
@@ -417,7 +415,7 @@
                         <div class="input_box">
                             <input id="each_installment_baht" type="text"
                                 class="form-control col-12  @error('each_installment_baht') is-invalid @enderror"
-                                name="each_installment_baht" value="{{ old('each_installment_baht') }}" required
+                                name="each_installment_baht" value="{{ old('each_installment_baht') }}"
                                 autocomplete="each_installment_baht">
                             <label>งวดละ* (บาท)</label>
                             @error('each_installment_baht')
