@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CoAgentController extends Controller
 {
@@ -28,7 +29,12 @@ class CoAgentController extends Controller
      */
     public function create()
     {
-        return view('co-agent.create_co');
+
+        $electricalAppliance = DB::table('electrical_appliances')->get();
+        $facilities = DB::table('facilities')->get();
+        $furniture = DB::table('furniture')->get();
+
+        return view('co-agent.create_co', compact('electricalAppliance', 'facilities', 'furniture'));
     }
 
     /**

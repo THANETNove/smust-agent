@@ -1,0 +1,24 @@
+{
+    "predictions": [
+        {
+            "x": 620.5,
+            "y": 572,
+            "width": 169,
+            "height": 246,
+            "confidence": 0.619,
+            "class": "Mangosteen-Leaf-Spot-Disease",
+            "class_id": 0,
+            "detection_id": "b3324449-5634-408d-aaa5-a60ab402b437"
+        },
+        {
+            "x": 629.5,
+            "y": 739,
+            "width": 261,
+            "height": 582,
+            "confidence": 0.592,
+            "class": "Mangosteen-Leaf-Spot-Disease",
+            "class_id": 0,
+            "detection_id": "3f23039b-aa79-4a0d-802e-c6ab03d76512"
+        }
+    ]
+}

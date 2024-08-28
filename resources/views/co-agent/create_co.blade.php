@@ -68,7 +68,7 @@
     </div>
 
     <script>
-        let currentStep = 1; // Start from the first step
+        let currentStep = 3; // Start from the first step
 
         function updateProgress() {
             // Update progress steps

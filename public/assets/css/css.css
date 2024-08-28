@@ -1953,13 +1953,18 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     color: #000000;
 }
 
+.box-btn-block-center {
+    display: flex;
+    justify-content: space-around;
+}
+
 .btn-have-broker {
 
     width: 160px;
     display: inline-block;
     justify-content: center;
     align-items: center;
-    margin-top: 66px;
+    margin-top: 58px;
     color: var(--white);
     font-weight: 400;
     font-size: 16px;
@@ -1974,11 +1979,53 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     display: inline-block;
     justify-content: center;
     align-items: center;
-    margin-top: 66px;
+    margin-top: 58px;
     color: #014158;
     font-weight: 400;
     font-size: 16px;
     background-color: #B8D7E2;
     transition: background-color 0.3s ease, color 0.3s ease;
     margin-bottom: 52px;
+}
+
+.step-skipped {
+    text-align: center;
+    margin-top: 19px;
+    color: #80BDD0;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-decoration: underline;
+}
+
+.shopping-center {
+    font-size: 16px;
+    font-weight: 400;
+    color: #424862;
+}
+
+.image-local_mall {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+.add-circle-btn {
+    background-color: #FFFFFF;
+    width: 350px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 400;
+    color: #007BA7;
+    border-radius: 6px;
+    border: 1px solid #007BA7;
+}
+
+.mage-add_circle {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
 }
