@@ -2031,15 +2031,17 @@ div:where(.swal2-container) div:where(.swal2-popup) {
 }
 
 .box-add-image-center {
+    width: 350px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 16px;
     position: relative;
+    background-color: #808080;
 }
 
 .image-rectangle-co-90 {
-    width: 330px;
+    width: 350px;
     z-index: 0;
     height: 150px;
     border: 1px solid #ccc;
@@ -2049,7 +2051,7 @@ div:where(.swal2-container) div:where(.swal2-popup) {
 
 #image-preview-container {
     position: relative;
-    width: 330px;
+    width: 350px;
     height: 150px;
     overflow: hidden;
     /* ซ่อนส่วนเกิน */
