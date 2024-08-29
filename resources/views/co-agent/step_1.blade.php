@@ -1,5 +1,5 @@
 <p class="skip-steps-co">กรอกรายละเอียดทีละข้อหรือ <span>
-        <a class="next-step-cross" onclick="nextStepCross()"> แปะข้อมูลรวดเดียว</a>
+        <span class="next-step-cross" onclick="nextStepCross()"> แปะข้อมูลรวดเดียว</span>
     </span></p>
 <p class="text-label-co">ประเภทสัญญา <span class="span-label-co">*</span></p>
 <div class="mb-3">

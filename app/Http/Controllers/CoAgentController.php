@@ -124,9 +124,8 @@ class CoAgentController extends Controller
         $member->electricalAppliance = $request['electricalAppliance'];  //TODO: add สิ่งอำนวยความสะดวก
         $member->facilities = $request['facilities'];  //TODO: add เครื่องใช้ไฟฟ้า
         $member->furniture = $request['furniture'];  //TODO: add เฟอร์นิเจอร์
-        $member->shopping_center = $request['shopping_center'];  //TODO: add เฟอร์นิเจอร์
-        $member->shopping_center = $request['shopping_center'];  //TODO: add สถานที่สำคัญใกล้เคียง
-        $member->school = $request['school'];  //TODO: add สถานศึกษา
+        $member->shopping_center = json_encode($request['shopping_center']);  //TODO: add สถานที่สำคัญใกล้เคียง
+        $member->school = json_encode($request['school']);  //TODO: add สถานศึกษา
         $member->meters_store = $request['meters_store'];  //TODO: add ร้านสะดวกซื้อที่ใกล้ที่สุด
         $member->image = $request['image'];  //ภาพ
         $member->url_video = $request['url_video'];  //TODO: ลิงค์ video 
