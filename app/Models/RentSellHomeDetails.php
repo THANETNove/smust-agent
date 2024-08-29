@@ -73,5 +73,8 @@ class RentSellHomeDetails extends Model
         'url_video',
         'announcement_name',
         'files',
+        'user_name',
+        'user_surname',
+        'user_phone',
     ];
 }

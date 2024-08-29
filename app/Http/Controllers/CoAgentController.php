@@ -90,8 +90,8 @@ class CoAgentController extends Controller
             $member->code_admin = Auth::user()->code;
             $member->user_id = Auth::user()->id; // add
         }
-        $member->cross = $request['cross']; //TODO:  add ข้ามการกรอกข้อมูลใหม
 
+        $member->cross = $request['cross']; //TODO:  add ข้ามการกรอกข้อมูลใหม
         $member->sell = $request['type_name_sell']; //TODO: add ขาย
         $member->rent_sell = $request['type_name_hire_sell']; // เช่าซื้อ/ขายผ่อน
         $member->rent = $request['type_name_hire']; //TODO: add  เช่า
@@ -132,6 +132,9 @@ class CoAgentController extends Controller
         $member->announcement_name = $request['announcement_name'];  //TODO: ชื่อประกาศ* 
         $member->url_gps = $request['url_gps'];  // ลิงค์ GPS 
         $member->files = $request['files'];  //TODO: add files  
+        $member->user_name = $request['user_name'];  //TODO: add ชื่อ 
+        $member->user_surname = $request['user_surname'];  //TODO: add นาสกุล  
+        $member->user_phone = $request['user_phone'];  //TODO: add เบอร์โทร  
 
 
 
