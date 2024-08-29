@@ -74,7 +74,8 @@ class CoAgentController extends Controller
         $member->property_type = $request['property_type'];
         $member->name_have = $request['name_have']; // add
         $member->rental_price = $request['minimum_rent'];
-        $member->rental_price = $request['minimum_rent'];
+        $member->cross = $request['cross']; // add
+        $member->cross = $request['cross']; // add
 
 
 
