@@ -77,7 +77,7 @@
 
 <div class="mb-3" id="minimum-rental" style="display: none">
     <select class="form-select" name="minimum_rent" aria-label="Default select example">
-        <option value="" disabled selected>เช่าขั้นต่ำ*</option>
+        <option value="0" disabled selected>เช่าขั้นต่ำ*</option>
         <option value="1" {{ old('minimum_rent') == '1' ? 'selected' : '' }}>1 เดือน</option>
         <option value="2" {{ old('minimum_rent') == '2' ? 'selected' : '' }}>2 เดือน</option>
         <option value="3" {{ old('minimum_rent') == '3' ? 'selected' : '' }}>3 เดือน</option>
@@ -245,6 +245,7 @@
                 <div class="input_box">
                     <select class="form-select" aria-label="Default select example" name="studio_name"
                         id="studio_name">
+                        <option selected disabled>เลือก</option>
                         <option value="สตูดิโอ" {{ old('studio_name') == 'สตูดิโอ' ? 'selected' : '' }}>สตูดิโอ
                         </option>
                         <option value="ไม่สตูดิโอ" {{ old('studio_name') == 'ไม่สตูดิโอ' ? 'selected' : '' }}>
@@ -383,7 +384,7 @@
     </div>
     <p class="text-label-co">ให้ผ่อนดาวน์ได้ไหม <span class="span-label-co">*</span></p>
     <div class="mb-3 deed-include">
-        <div style="display: flex; align-items: center;">
+        <div style="display: flex; align-items: center;" class="mb-3">
             <div class="box-btn-down" style="margin-right: 10px;">
                 ไม่ได้
             </div>

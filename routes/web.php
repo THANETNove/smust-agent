@@ -51,8 +51,6 @@ Route::get('/reset-password', [ForgotYourPasswordController::class, 'index'])->n
 Route::post('/reset-check-password', [ForgotYourPasswordController::class, 'resetCheck'])->name('reset-check-password');
 Route::get('/reset-check-passwordId/{id}', [ForgotYourPasswordController::class, 'edit'])->name('reset-check-passwordId');
 Route::put('/reset-new-password/{id}', [ForgotYourPasswordController::class, 'store'])->name('reset-new-password');
-Route::get('/get-districts/{id}', [HomeController::class, 'districts'])->name('get-districts');
-Route::get('/get-amphures/{id}', [HomeController::class, 'amphures'])->name('get-amphures');
 Route::get('/get-detall/{id}', [HomeController::class, 'show'])->name('get-detall');
 Route::post('/home', [HomeController::class, 'index'])->name('search');
 Route::get('/register-broker/{id}', [RegisterBrokerController::class, 'index'])->name('register-broker');
@@ -80,6 +78,8 @@ Route::get('edit-post/{id}', [PostContentController::class, 'edit'])->name('edit
 Route::post('new-post-store', [PostContentController::class, 'store'])->name('new-post-store');
 Route::get('destroy-post/{id}', [PostContentController::class, 'destroy'])->name('destroy-post');
 Route::get('radio-updated_at/{id}', [PostContentController::class, 'updatedAt'])->name('radio-updated_at');
+Route::get('/get-districts/{id}', [CoAgentController::class, 'districts'])->name('get-districts');
+Route::get('/get-amphures/{id}', [CoAgentController::class, 'amphures'])->name('get-amphures');
 Route::get('co-agent', [CoAgentController::class, 'index'])->name('co-agent');
 Route::get('co-create', [CoAgentController::class, 'create'])->name('co-create');
 Route::post('co-agent-store', [CoAgentController::class, 'store'])->name('co-agent-store');

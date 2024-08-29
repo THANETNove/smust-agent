@@ -26,6 +26,28 @@ class CoAgentController extends Controller
         }
     }
 
+
+    public function districts($id)
+    {
+
+        $data = DB::table('amphures')
+            ->where('amphures.province_id', $id)
+            ->orderBy('name_th', 'ASC')
+            ->get();
+
+        return response()->json($data);
+    }
+    public function amphures($id)
+    {
+
+
+        $data = DB::table('districts')
+            ->where('amphure_id', $id)
+            ->orderBy('name_th', 'ASC')
+            ->get();
+
+        return response()->json($data);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -61,21 +83,36 @@ class CoAgentController extends Controller
 
 
 
-        $randomText = Str::random(12);
+
         $member = new RentSellHomeDetails;
 
         if (Auth::check()) {
             $member->code_admin = Auth::user()->code;
             $member->user_id = Auth::user()->id; // add
         }
-        $member->sell = $request['type_name_sell']; // add
-        $member->rent_sell = $request['type_name_hire_sell'];
-        $member->rent = $request['type_name_hire']; // add
-        $member->property_type = $request['property_type'];
-        $member->name_have = $request['name_have']; // add
-        $member->rental_price = $request['minimum_rent'];
         $member->cross = $request['cross']; // add
-        $member->cross = $request['cross']; // add
+
+        $member->sell = $request['type_name_sell']; //TODO: add ขาย
+        $member->rent_sell = $request['type_name_hire_sell']; // เช่าซื้อ/ขายผ่อน
+        $member->rent = $request['type_name_hire']; //TODO: add  เช่า
+        $member->property_type = $request['property_type']; // ประเภททรัพย์ 
+        $member->name_have =  $request['name_have']; //TODO: add โฉนดมีภาระหนี้หรือไม่
+        $member->minimum_rent = $request['minimum_rent']; //TODO: add  เช่าขั้นต่ำ*
+        $member->start_date = $request['start_date']; //TODO: add เริ่มให้เช่าได้ตั้งแต่
+        $member->address = $request['house_number']; // บ้านเลขที่
+        $member->building_name = $request['house_name']; // โครงการ เช่น ชื่อหมู่บ้าน
+        $member->provinces = $request['provinces']; // จังหวัด
+        $member->districts = $request['districts']; // อำเภอ
+        $member->amphures = $request['amphures'];  // ตำบล
+        $member->road = $request['road'];  //TODO: add ถนน
+        $member->alley = $request['alley'];  //TODO: add ซอย
+        $member->train_name = $request['stations'];  // ชื่อสถานีรถไฟ	
+        $member->bedroom = $request['number_bedrooms'];  // จำนวนห้องนอน	
+        $member->bathroom = $request['number_bathrooms'];  // จำนวนห้องน้ำ		
+        $member->number_floors = $request['number_floors'];  // จำนวนห้องน้ำ		
+        $member->number_parking = $request['number_parking'];  //TODO: add จำนวนที่จอดรถ		
+        $member->studio = $request['studio_name'];  //สตูดิโอ	
+
 
 
 

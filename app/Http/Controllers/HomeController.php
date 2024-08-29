@@ -158,27 +158,7 @@ class HomeController extends Controller
     }
 
 
-    public function districts($id)
-    {
-
-        $data = DB::table('amphures')
-            ->where('amphures.province_id', $id)
-            ->orderBy('name_th', 'ASC')
-            ->get();
-
-        return response()->json($data);
-    }
-    public function amphures($id)
-    {
-
-
-        $data = DB::table('districts')
-            ->where('amphure_id', $id)
-            ->orderBy('name_th', 'ASC')
-            ->get();
-
-        return response()->json($data);
-    }
+  
     public function show($id)
     {
         $dataHome = DB::table('rent_sell_home_details')
