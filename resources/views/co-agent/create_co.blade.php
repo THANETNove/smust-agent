@@ -61,7 +61,7 @@
     </div>
 
     <script>
-        let currentStep = 4; // Start from the first step
+        let currentStep = 1; // Start from the first step
 
         function updateProgress() {
             // Update progress steps
@@ -97,6 +97,15 @@
         function nextStep() {
             if (currentStep < steps.length) { // Ensure it does not exceed the number of steps
                 currentStep++;
+                showStep(currentStep);
+                updateProgress();
+            }
+        }
+
+        function nextStepCross() {
+
+            if (currentStep <= steps.length - 3) { // Ensure it does not exceed the number of steps
+                currentStep += 3; // Update currentStep by adding 3
                 showStep(currentStep);
                 updateProgress();
             }

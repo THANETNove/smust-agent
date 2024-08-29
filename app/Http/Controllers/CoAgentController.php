@@ -44,8 +44,10 @@ class CoAgentController extends Controller
     {
 
         $request->validate([
-            'product_name' => 'required',
-            'price' => 'required',
+            'minimum_rent' => 'required',
+            'provinces' => 'required',
+            'districts' => 'required',
+            'amphures' => 'required',
             'image.*' => ['required', 'image', 'image:jpg,png,jpeg,webp'],
             'check_manu' => 'required',
             'link_lazada' => ['nullable', 'regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?(\?.*)?$/'],
@@ -57,6 +59,71 @@ class CoAgentController extends Controller
             'other_links.url' => 'The link Other_links must be a valid URL.',
         ]);
         dd($request->all());
+
+
+        /*     $validated = $request->validate([
+            'image.*' => ['required', 'image', 'image:jpg,png,jpeg,webp']
+        ]);
+        $randomText = Str::random(12);
+        $member = new RentSellHomeDetails;
+        $member->code_admin = Auth::user()->code;
+        $member->building_name = $request['building_name'];
+        $member->property_type = $request['property_type'];
+        $member->rent_sell = $request['rent_sell'];
+        $member->rental_price = $request['rental_price'];
+        $member->sell_price = $request['sell_price'];
+        $member->url_gps = $request['url_gps'];
+        $member->time_arrive = $request['time_arrive'];
+        $member->train_name = $request['train_name'];
+        $member->bedroom = $request['bedroom'];
+        $member->bathroom = $request['bathroom'];
+        $member->room_width = $request['room_width'];
+        $member->studio = $request['studio'];
+        $member->number_floors = $request['number_floors'];
+        $member->decoration = $request['decoration'];
+        $member->address = $request['address'];
+        $member->provinces = $request['provinces'];
+        $member->districts = $request['districts'];
+        $member->amphures = $request['amphures'];
+        $member->zip_code = $request['zip_code'];
+        $member->details = $request['details'];
+        $member->minimum_rent = $request['minimum_rent'];
+        $member->deposit = $request['deposit'];
+        $member->cash_pledge = $request['cash_pledge'];
+        $member->advance_rent = $request['advance_rent'];
+        $member->reservation_money = $request['reservation_money'];
+        $member->down_payment = $request['down_payment'];
+        $member->down_payment_installments = $request['down_payment_installments'];
+        $member->installments = $request['installments'];
+        $member->each_installment = $request['each_installment'];
+        $member->kitchen = $request['kitchen'];
+        $member->bed = $request['bed'];
+        $member->fitness = $request['fitness'];
+        $member->wardrobe = $request['wardrobe'];
+        $member->parking = $request['parking'];
+        $member->air_conditioner = $request['air_conditioner'];
+        $member->make_appointment_location = $request['make_appointment_location'];
+        $member->send_customers = $request['send_customers'];
+        $member->ask_more = $request['ask_more'];
+        $member->contact_number = $request['contact_number'];
+        $member->status_home = "on";
+        $member->thereVarious = is_array($request['thereVarious']) ? json_encode($request['thereVarious']) : NULL;
+
+
+        $dateImg = [];
+        if($request->hasFile('image')){
+            $imagefile = $request->file('image');
+
+            foreach ($imagefile as $image) {
+              $data =   $image->move(public_path().'/img/product',$randomText."".$image->getClientOriginalName());
+              $dateImg[] =  $randomText."".$image->getClientOriginalName();
+            }
+        }
+    $member->image = json_encode($dateImg);
+    $member->save();
+
+
+    return redirect('home')->with('message', "บันทึกสำเร็จ" ); */
     }
 
     /**

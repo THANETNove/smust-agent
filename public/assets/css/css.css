@@ -2093,3 +2093,8 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     font-weight: 400;
     color: #000000;
 }
+
+.next-step-cross {
+    color: #007BA7;
+    cursor: pointer;
+}
