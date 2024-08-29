@@ -90,14 +90,14 @@ class CoAgentController extends Controller
             $member->code_admin = Auth::user()->code;
             $member->user_id = Auth::user()->id; // add
         }
-        $member->cross = $request['cross']; // add
+        $member->cross = $request['cross']; //TODO:  add ข้ามการกรอกข้อมูลใหม
 
         $member->sell = $request['type_name_sell']; //TODO: add ขาย
         $member->rent_sell = $request['type_name_hire_sell']; // เช่าซื้อ/ขายผ่อน
         $member->rent = $request['type_name_hire']; //TODO: add  เช่า
         $member->property_type = $request['property_type']; // ประเภททรัพย์ 
         $member->name_have =  $request['name_have']; //TODO: add โฉนดมีภาระหนี้หรือไม่
-        $member->minimum_rent = $request['minimum_rent']; //TODO: add  เช่าขั้นต่ำ*
+        $member->minimum_rent = $request['minimum_rent']; //  เช่าขั้นต่ำ*
         $member->start_date = $request['start_date']; //TODO: add เริ่มให้เช่าได้ตั้งแต่
         $member->address = $request['house_number']; // บ้านเลขที่
         $member->building_name = $request['house_name']; // โครงการ เช่น ชื่อหมู่บ้าน
@@ -112,11 +112,31 @@ class CoAgentController extends Controller
         $member->number_floors = $request['number_floors'];  // จำนวนห้องน้ำ		
         $member->number_parking = $request['number_parking'];  //TODO: add จำนวนที่จอดรถ		
         $member->studio = $request['studio_name'];  //สตูดิโอ	
+        $member->rent_baht_month = $request['rent_baht_month'];  //TODO: add ค่าเช่า* (บาท/เดือน)	
+        $member->month_advance_rent = $request['month_advance_rent'];  //TODO: add ค่าเช่าล่วงหน้า 1 เดือน
+        $member->cash_pledge = $request['deposit_month'];  // เงินมัดจำ (เดือน)*
+        $member->reservation_money = $request['reservation_money'];  // เงินจอง *
+        $member->sell_price = $request['selling_price_baht'];  //ราคาขาย* (บาท)
+        $member->reservation_amount_baht = $request['reservation_amount_baht'];  //จำนวนเงินจอง* (บาท)
+        $member->down_payment = $request['down_payment_amount'];  //เงินดาวน์ (ขาย)	
+        $member->installments = $request['many_installments'];  //ผ่อนได้กี่งวด* (เดือน)
+        $member->each_installment = $request['each_installment_baht'];  //งวดละ* (บาท)
+        $member->electricalAppliance = $request['electricalAppliance'];  //TODO: add สิ่งอำนวยความสะดวก
+        $member->facilities = $request['facilities'];  //TODO: add เครื่องใช้ไฟฟ้า
+        $member->furniture = $request['furniture'];  //TODO: add เฟอร์นิเจอร์
+        $member->shopping_center = $request['shopping_center'];  //TODO: add เฟอร์นิเจอร์
+        $member->shopping_center = $request['shopping_center'];  //TODO: add สถานที่สำคัญใกล้เคียง
+        $member->school = $request['school'];  //TODO: add สถานศึกษา
+        $member->meters_store = $request['meters_store'];  //TODO: add ร้านสะดวกซื้อที่ใกล้ที่สุด
+        $member->image = $request['image'];  //ภาพ
+        $member->url_video = $request['url_video'];  //TODO: ลิงค์ video 
+        $member->announcement_name = $request['announcement_name'];  //TODO: ชื่อประกาศ* 
+        $member->url_gps = $request['url_gps'];  // ลิงค์ GPS 
+        $member->files = $request['files'];  //TODO: add files  
 
 
 
-
-        $member->building_name = $request['building_name'];
+        /*  $member->building_name = $request['building_name'];
         $member->property_type = $request['property_type'];
         $member->rent_sell = $request['rent_sell'];
         $member->rental_price = $request['rental_price'];
@@ -168,8 +188,8 @@ class CoAgentController extends Controller
                 $dateImg[] =  $randomText . "" . $image->getClientOriginalName();
             }
         }
-        $member->image = json_encode($dateImg);
-        $member->save();
+        $member->image = json_encode($dateImg); */
+        // $member->save();
 
 
         return redirect('home')->with('message', "บันทึกสำเร็จ");
