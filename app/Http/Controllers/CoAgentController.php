@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\RentSellHomeDetails;
+use App\Models\User;
 
 class CoAgentController extends Controller
 {
@@ -43,30 +45,39 @@ class CoAgentController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            'minimum_rent' => 'required',
-            'provinces' => 'required',
-            'districts' => 'required',
-            'amphures' => 'required',
+        /* $request->validate([
             'image.*' => ['required', 'image', 'image:jpg,png,jpeg,webp'],
-            'check_manu' => 'required',
-            'link_lazada' => ['nullable', 'regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?(\?.*)?$/'],
-            'link_shopee' => ['nullable', 'regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?(\?.*)?$/'],
-            'other_links' => ['nullable', 'regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?(\?.*)?$/'],
+            'user_name' => 'required',
+            'user_surname' => 'required',
+            'user_phone' => 'required',
+            'url_video' => ['nullable', 'regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?(\?.*)?$/'],
+            'url_gps' => ['nullable', 'regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?(\?.*)?$/'],
         ], [
-            'link_lazada.url' => 'The link Lazada must be a valid URL.',
-            'link_shopee.url' => 'The link Shopee must be a valid URL.',
-            'other_links.url' => 'The link Other_links must be a valid URL.',
-        ]);
+            'url_video.url' => 'The link Video must be a valid URL.',
+            'url_gps.url' => 'The link GPS must be a valid URL.',
+        ]); */
         dd($request->all());
 
 
-        /*     $validated = $request->validate([
-            'image.*' => ['required', 'image', 'image:jpg,png,jpeg,webp']
-        ]);
+
+
         $randomText = Str::random(12);
         $member = new RentSellHomeDetails;
-        $member->code_admin = Auth::user()->code;
+
+        if (Auth::check()) {
+            $member->code_admin = Auth::user()->code;
+            $member->user_id = Auth::user()->id; // add
+        }
+        $member->sell = $request['type_name_sell']; // add
+        $member->rent_sell = $request['type_name_hire_sell'];
+        $member->rent = $request['type_name_hire']; // add
+        $member->property_type = $request['property_type'];
+        $member->name_have = $request['name_have']; // add
+        $member->rental_price = $request['minimum_rent'];
+        $member->rental_price = $request['minimum_rent'];
+
+
+
         $member->building_name = $request['building_name'];
         $member->property_type = $request['property_type'];
         $member->rent_sell = $request['rent_sell'];
@@ -111,19 +122,19 @@ class CoAgentController extends Controller
 
 
         $dateImg = [];
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $imagefile = $request->file('image');
 
             foreach ($imagefile as $image) {
-              $data =   $image->move(public_path().'/img/product',$randomText."".$image->getClientOriginalName());
-              $dateImg[] =  $randomText."".$image->getClientOriginalName();
+                $data =   $image->move(public_path() . '/img/product', $randomText . "" . $image->getClientOriginalName());
+                $dateImg[] =  $randomText . "" . $image->getClientOriginalName();
             }
         }
-    $member->image = json_encode($dateImg);
-    $member->save();
+        $member->image = json_encode($dateImg);
+        $member->save();
 
 
-    return redirect('home')->with('message', "บันทึกสำเร็จ" ); */
+        return redirect('home')->with('message', "บันทึกสำเร็จ");
     }
 
     /**

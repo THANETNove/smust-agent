@@ -20,7 +20,8 @@
     <input type="text" id="type-name-hire_sell" name="type_name_hire_sell"
         value="{{ old('type_name_hire_sell') == 'เช่าซื้อ/ขายผ่อน' ? 'เช่าซื้อ/ขายผ่อน' : '' }}" style="display: none">
     <input type="text" id="type-name-hire" name="type_name_hire"
-        value="{{ old('name_have') == 'เช่า' ? 'เช่า' : '' }}" style="display: none">
+        value="{{ old('type_name_hire') == 'เช่า' ? 'เช่า' : '' }}" style="display: none">
+    <input type="text" name="cross" id="cross" value="0" {{-- vstyle="display: none" --}}>
 
 </div>
 <div class="mb-3 input_box3">
@@ -336,8 +337,7 @@
         <div class="input_box">
             <input id="selling_price_baht" type="text"
                 class="form-control col-12  @error('selling_price_baht') is-invalid @enderror"
-                name="selling_price_baht" value="{{ old('selling_price_baht') }}"
-                autocomplete="selling_price_baht">
+                name="selling_price_baht" value="{{ old('selling_price_baht') }}" autocomplete="selling_price_baht">
             <label>ราคาขาย* (บาท)</label>
             @error('selling_price_baht')
                 <span class="invalid-feedback" role="alert">

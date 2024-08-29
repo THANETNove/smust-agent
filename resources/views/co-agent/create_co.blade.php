@@ -99,6 +99,9 @@
                 currentStep++;
                 showStep(currentStep);
                 updateProgress();
+                if (currentStep == 1) {
+                    document.getElementById('cross').value = 0;
+                }
             }
         }
 
@@ -108,7 +111,10 @@
                 currentStep += 3; // Update currentStep by adding 3
                 showStep(currentStep);
                 updateProgress();
+                document.getElementById('cross').value = 1;
             }
+
+
         }
 
         function previousStep() {
@@ -116,6 +122,10 @@
                 currentStep--;
                 showStep(currentStep);
                 updateProgress();
+
+            }
+            if (currentStep == 1) {
+                document.getElementById('cross').value = 0;
             }
         }
 
