@@ -110,6 +110,7 @@ class CoAgentController extends Controller
         $member->bedroom = $request['number_bedrooms'];  // จำนวนห้องนอน	
         $member->bathroom = $request['number_bathrooms'];  // จำนวนห้องน้ำ		
         $member->number_floors = $request['number_floors'];  // จำนวนห้องน้ำ		
+        $member->room_width = $request['size_sq_m'];  // ขนาด* (ตร.ว.)		
         $member->number_parking = $request['number_parking'];  //TODO: add จำนวนที่จอดรถ		
         $member->studio = $request['studio_name'];  //สตูดิโอ	
         $member->rent_baht_month = $request['rent_baht_month'];  //TODO: add ค่าเช่า* (บาท/เดือน)	
@@ -127,23 +128,23 @@ class CoAgentController extends Controller
         $member->shopping_center = json_encode($request['shopping_center']);  //TODO: add สถานที่สำคัญใกล้เคียง
         $member->school = json_encode($request['school']);  //TODO: add สถานศึกษา
         $member->meters_store = $request['meters_store'];  //TODO: add ร้านสะดวกซื้อที่ใกล้ที่สุด
-        $member->image = $request['image'];  //ภาพ
         $member->url_video = $request['url_video'];  //TODO: ลิงค์ video 
         $member->announcement_name = $request['announcement_name'];  //TODO: ชื่อประกาศ* 
         $member->url_gps = $request['url_gps'];  // ลิงค์ GPS 
-
         $member->user_name = $request['user_name'];  //TODO: add ชื่อ 
         $member->user_surname = $request['user_surname'];  //TODO: add นาสกุล  
         $member->user_phone = $request['user_phone'];  //TODO: add เบอร์โทร  
 
 
-        /* $dateImg = [];
+        $randomText  = time();
+
+        $dateImg = [];
         if ($request->hasFile('image')) {
             $imagefile = $request->file('image');
 
             foreach ($imagefile as $image) {
                 $data =   $image->move(public_path() . '/img/product', $randomText . "" . $image->getClientOriginalName());
-                $dateImg[] =  $randomText . "" . $image->getClientOriginalName();
+                $dateImg[] =  $randomText . "_" . $image->getClientOriginalName();
             }
         }
         $member->image = json_encode($dateImg);
@@ -159,7 +160,24 @@ class CoAgentController extends Controller
 
 
             $member->files = $dateFile;  //TODO: add files  
-        } */
+        }
+
+        // files
+
+        if ($request->hasFile('files')) {
+            $files = $request->file('files');
+
+
+            $fileName = $randomText . '_' . $files->getClientOriginalName();
+
+            // Move the file to the specified directory
+            $files->move(public_path('assets/img/files'), $fileName);
+
+            // Store or use $fileName as needed
+            $filePaths = 'assets/images/files/' . $fileName; // Store paths to use or save in database
+
+            $data->files = $filePaths;
+        }
         $member->save();
 
 
