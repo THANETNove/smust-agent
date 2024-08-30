@@ -35,7 +35,7 @@
 <div class="row" id="input-container">
     <div class="col-md-12 mb-3 input_box">
         <input id="shopping_center" type="text" class="form-control @error('shopping_center') is-invalid @enderror"
-            name="shopping_center[]" value="{{ old('shopping_center') }}" autocomplete="shopping_center">
+            name="shopping_center[]" autocomplete="shopping_center">
         <label>ศูนย์การค้า</label>
         @error('shopping_center')
             <span class="invalid-feedback" role="alert">
@@ -54,7 +54,7 @@
 <div class="row" id="input-container-school">
     <div class="col-md-12 mb-3 input_box">
         <input id="shopping_center" type="text" class="form-control @error('school') is-invalid @enderror"
-            name="school[]" value="{{ old('school') }}" autocomplete="school">
+            name="school[]" autocomplete="school">
         <label>สถานศึกษา</label>
         @error('school')
             <span class="invalid-feedback" role="alert">

@@ -9,9 +9,9 @@
     </div>
 </div>
 
-<input id="file" type="file" class="form-control @error('image[]') is-invalid @enderror" name="image[]" multiple
+<input id="file" type="file" class="form-control @error('image.*') is-invalid @enderror" name="image[]" multiple
     placeholder="image[]" accept="image/*" style="display:none;" onchange="previewImages(event)">
-@error('image[]')
+@error('image.*')
     <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
     </span>
@@ -72,8 +72,8 @@
 <div class="row mb-3">
     <div class="col-md-12 mb-3">
         <input id="files" type="file" class="form-control @error('files') is-invalid @enderror" name="files"
-            value="{{ old('files') }}" autocomplete="files" accept=".pdf,.jpg,.jpeg,.png,.docx">
-
+            value="{{ old('files') }}" autocomplete="files" accept=".pdf,.jpg,.jpeg,.png,.docx"
+            onchange="validateFileSize(this)">
         @error('meters_store')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -81,6 +81,9 @@
         @enderror
     </div>
 </div>
+<span id="file-error" style="color: red; display: none;">ไฟล์ที่คุณเลือกมีขนาดใหญ่เกินไป กรุณาเลือกไฟล์ที่มีขนาดไม่เกิน
+    2MB</span>
+
 <p class="text-not-forced">(ไม่ได้บังคับ)
     <br>
     ประเภทไฟล์: pdf, jpg, png, docx
@@ -90,15 +93,23 @@
 
 
 
+{{-- <div class="box-btn-block-center">
+    <button type="button" class="btn btn-have-broker-back" onclick="previousStep()">
+        กลับ
+    </button>
+    <button type="button" class="btn btn-have-broker" id="next-btn" onclick="nextStep()">
+        ถัดไป
+    </button>
+</div>
+ --}}
 <div class="box-btn-block-center">
     <button type="button" class="btn btn-have-broker-back" onclick="previousStep()">
         กลับ
     </button>
-    <button type="button" class="btn btn-have-broker" onclick="nextStep()">
+    <button type="button" class="btn btn-have-broker" id="next-btn" onclick="nextStep()">
         ถัดไป
     </button>
 </div>
-
 <script>
     function previewImages(event) {
         const container = document.getElementById('image-preview-container');
@@ -131,6 +142,26 @@
 
                 reader.readAsDataURL(file);
             });
+        }
+
+
+    }
+
+    function validateFileSize(input) {
+        const file = input.files[0];
+        const maxSizeInMB = 2; // ขนาดไฟล์สูงสุดที่อนุญาตใน MB
+        const maxSizeInBytes = maxSizeInMB * 1024 * 1024; // แปลงเป็น Bytes
+        const errorSpan = document.getElementById('file-error');
+        const nextButton = document.getElementById('next-btn');
+
+        if (file.size > maxSizeInBytes) {
+            errorSpan.style.display = 'block'; // แสดงข้อความแจ้งเตือน
+            nextButton.disabled = true; // ปิดการทำงานของปุ่ม 'ถัดไป'
+            // เริ่มต้นให้ปิดการทำงานของปุ่ม 'ถัดไป' จนกว่าจะมีการเลือกไฟล์
+            document.getElementById('next-btn').disabled = true;
+        } else {
+            errorSpan.style.display = 'none'; // ซ่อนข้อความแจ้งเตือน
+            nextButton.disabled = false; // เปิดการทำงานของปุ่ม 'ถัดไป'
         }
     }
 </script>
