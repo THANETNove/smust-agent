@@ -151,7 +151,7 @@ class CoAgentController extends Controller
             }
         }
 
-        //$member->image = json_encode($dateImg);
+        $member->image = json_encode($dateImg);
         // files
 
         if ($request->hasFile('files')) {
