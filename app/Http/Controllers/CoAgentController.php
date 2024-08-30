@@ -138,30 +138,20 @@ class CoAgentController extends Controller
 
         $randomText  = time();
 
+
         $dateImg = [];
         if ($request->hasFile('image')) {
+
             $imagefile = $request->file('image');
 
             foreach ($imagefile as $image) {
+
                 $data =   $image->move(public_path() . '/img/product', $randomText . "" . $image->getClientOriginalName());
-                $dateImg[] =  $randomText . "_" . $image->getClientOriginalName();
+                $dateImg[] =  $randomText . "" . $image->getClientOriginalName();
             }
         }
-        $member->image = json_encode($dateImg);
 
-
-        if ($request->hasFile('image')) {
-            $imagefile = $request->file('image');
-
-
-            $data =   $image->move(public_path() . '/img/product', $randomText . "" . $image->getClientOriginalName());
-            $dateFile =  $randomText . "" . $image->getClientOriginalName();
-
-
-
-            $member->files = $dateFile;  //TODO: add files  
-        }
-
+        //$member->image = json_encode($dateImg);
         // files
 
         if ($request->hasFile('files')) {
@@ -176,7 +166,7 @@ class CoAgentController extends Controller
             // Store or use $fileName as needed
             $filePaths = 'assets/images/files/' . $fileName; // Store paths to use or save in database
 
-            $data->files = $filePaths;
+            $member->files = $filePaths;
         }
         $member->save();
 
