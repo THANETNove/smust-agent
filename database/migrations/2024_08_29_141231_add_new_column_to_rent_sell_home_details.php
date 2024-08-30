@@ -25,15 +25,17 @@ return new class extends Migration
             $table->string('electricalAppliance')->nullable()->comment('เครื่องใช้ไฟฟ้า')->after('month_advance_rent');
             $table->string('facilities')->nullable()->comment('สิ่งอำนวยความสะดวก')->after('electricalAppliance');
             $table->string('furniture')->nullable()->comment('เฟอร์นิเจอร์')->after('facilities');
-            $table->string('shopping_center')->nullable()->comment('สถานที่สำคัญใกล้เคียง')->after('furniture');
-            $table->string('school')->nullable()->comment('สถานศึกษา')->after('shopping_center');
-            $table->string('meters_store')->nullable()->comment('ร้านสะดวกซื้อที่ใกล้ที่สุด')->after('school');
-            $table->string('url_video')->nullable()->comment('ลิงค์ video')->after('meters_store');
+            $table->text('shopping_center')->nullable()->comment('ศูนย์การค้า')->after('furniture');
+            $table->text('school')->nullable()->comment('สถานศึกษา')->after('shopping_center');
+            $table->text('meters_store')->nullable()->comment('ร้านสะดวกซื้อที่ใกล้ที่สุด')->after('school');
+            $table->text('url_video')->nullable()->comment('ลิงค์ video')->after('meters_store');
             $table->string('announcement_name')->nullable()->comment('ชื่อประกาศ*')->after('url_video');
-            $table->string('files')->nullable()->comment('ไฟล์')->after('announcement_name');
+            $table->text('files')->nullable()->comment('ไฟล์')->after('announcement_name');
             $table->string('user_name')->nullable()->comment('ชื่อ')->after('files');
             $table->string('user_surname')->nullable()->comment('นามสกุล')->after('user_name');
             $table->string('user_phone')->nullable()->comment('เบอร์โทร')->after('user_surname');
+            $table->string('user_id')->nullable()->comment('id user')->after('user_phone');
+            $table->string('reservation_amount_baht')->nullable()->comment('จำนวนเงินจอง* (บาท) ขาย')->after('user_id');
         });
     }
 

@@ -170,7 +170,7 @@
             <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/bed.png') }}">
             <div class="row">
                 <div class="input_box">
-                    <input id="number_bedrooms" type="text"
+                    <input id="number_bedrooms" type="number"
                         class="form-control col-12  @error('number_bedrooms') is-invalid @enderror"
                         name="number_bedrooms" value="{{ old('number_bedrooms') }}" autocomplete="number_bedrooms">
                     <label>จำนวนห้องนอน *</label>
@@ -188,7 +188,7 @@
             <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/shower.png') }}">
             <div class="row">
                 <div class="input_box">
-                    <input id="number_bathrooms" type="text"
+                    <input id="number_bathrooms" type="number"
                         class="form-control col-12  @error('number_bathrooms') is-invalid @enderror"
                         name="number_bathrooms" value="{{ old('number_bathrooms') }}"
                         autocomplete="number_bathrooms">
@@ -207,7 +207,7 @@
             <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/floor.png') }}">
             <div class="row">
                 <div class="input_box">
-                    <input id="number_floors" type="text"
+                    <input id="number_floors" type="number"
                         class="form-control col-12  @error('number_floors') is-invalid @enderror" name="number_floors"
                         value="{{ old('number_floors') }}" autocomplete="number_floors">
                     <label>จำนวนชั้น*</label>
@@ -225,7 +225,7 @@
             <img class="image-screenshot_frame" src="{{ URL::asset('/assets/image/welcome/directions_car.png') }}">
             <div class="row">
                 <div class="input_box">
-                    <input id="number_parking" type="text"
+                    <input id="number_parking" type="number"
                         class="form-control col-12  @error('number_parking') is-invalid @enderror"
                         name="number_parking" value="{{ old('number_parking') }}" autocomplete="number_parking">
                     <label>จำนวนที่จอดรถ*</label>
@@ -280,7 +280,7 @@
     <p class="head-name-co">ราคาเช่า</p>
     <div class="row mb-3">
         <div class="col-md-12 mb-3 input_box">
-            <input id="rent_baht_month" type="text"
+            <input id="rent_baht_month" type="number"
                 class="form-control  @error('rent_baht_month') is-invalid @enderror" name="rent_baht_month"
                 value="{{ old('rent_baht_month') }}" autocomplete="rent_baht_month">
             <label>ค่าเช่า* (บาท/เดือน)</label>
@@ -325,7 +325,7 @@
                     onclick="messageID('เงินจอง คือ หลักประกันว่าผู้เช่าจะ มาเช่าจริงตามที่สัญญาไว้ โดยสา- มารถริบได้ หากไม่ได้มาเช่าจริง เพื่อ เป็นค่าเสียโอกาสให้เจ้าของ  โดยทั่วไปเก็บไม่เกิน 5,000 บาท')">
             </span>
         </label>
-        <input type="text" class="form-control" id="reservation-money-input" placeholder="เงินจอง *"
+        <input type="number" class="form-control" id="reservation-money-input" placeholder="เงินจอง *"
             value=" {{ old('reservation_money_checkbox') }}" name="reservation_money" style="display: none">
     </div>
     <p class="text-reservation-money">เงินมัดจำ ค่าเช่าล่วงหน้า และเงินประกัน กฎหมายกำหนดว่ารวม กันต้องไม่เกิน 3
@@ -336,7 +336,7 @@
     <p class="head-name-co">ราคาขาย</p>
     <div class="row mb-3">
         <div class="input_box">
-            <input id="selling_price_baht" type="text"
+            <input id="selling_price_baht" type="number"
                 class="form-control col-12  @error('selling_price_baht') is-invalid @enderror"
                 name="selling_price_baht" value="{{ old('selling_price_baht') }}" autocomplete="selling_price_baht">
             <label>ราคาขาย* (บาท)</label>
@@ -370,7 +370,7 @@
     </div>
     <div class="row mb-3">
         <div class="input_box">
-            <input id="down_payment_amount" type="text"
+            <input id="down_payment_amount" type="number"
                 class="form-control col-12  @error('down_payment_amount') is-invalid @enderror"
                 name="down_payment_amount" value="{{ old('down_payment_amount') }}"
                 autocomplete="down_payment_amount">
@@ -397,7 +397,7 @@
                 <div class="box-screenshot-frame">
                     <div class="row">
                         <div class="input_box">
-                            <input id="many_installments" type="text"
+                            <input id="many_installments" type="number"
                                 class="form-control col-12  @error('many_installments') is-invalid @enderror"
                                 name="many_installments" value="{{ old('many_installments') }}"
                                 autocomplete="many_installments">
@@ -415,7 +415,7 @@
                 <div class="box-screenshot-frame">
                     <div class="row">
                         <div class="input_box">
-                            <input id="each_installment_baht" type="text"
+                            <input id="each_installment_baht" type="number"
                                 class="form-control col-12  @error('each_installment_baht') is-invalid @enderror"
                                 name="each_installment_baht" value="{{ old('each_installment_baht') }}"
                                 autocomplete="each_installment_baht">

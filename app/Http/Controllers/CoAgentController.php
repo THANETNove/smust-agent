@@ -78,7 +78,7 @@ class CoAgentController extends Controller
             'url_video.url' => 'The link Video must be a valid URL.',
             'url_gps.url' => 'The link GPS must be a valid URL.',
         ]); */
-        dd($request->all());
+
 
 
 
@@ -117,7 +117,7 @@ class CoAgentController extends Controller
         $member->cash_pledge = $request['deposit_month'];  // เงินมัดจำ (เดือน)*
         $member->reservation_money = $request['reservation_money'];  // เงินจอง *
         $member->sell_price = $request['selling_price_baht'];  //ราคาขาย* (บาท)
-        $member->reservation_amount_baht = $request['reservation_amount_baht'];  //จำนวนเงินจอง* (บาท)
+        $member->reservation_amount_baht = $request['reservation_amount_baht'];  //จำนวนเงินจอง* (บาท) ขาย
         $member->down_payment = $request['down_payment_amount'];  //เงินดาวน์ (ขาย)	
         $member->installments = $request['many_installments'];  //ผ่อนได้กี่งวด* (เดือน)
         $member->each_installment = $request['each_installment_baht'];  //งวดละ* (บาท)
@@ -131,57 +131,13 @@ class CoAgentController extends Controller
         $member->url_video = $request['url_video'];  //TODO: ลิงค์ video 
         $member->announcement_name = $request['announcement_name'];  //TODO: ชื่อประกาศ* 
         $member->url_gps = $request['url_gps'];  // ลิงค์ GPS 
-        $member->files = $request['files'];  //TODO: add files  
+
         $member->user_name = $request['user_name'];  //TODO: add ชื่อ 
         $member->user_surname = $request['user_surname'];  //TODO: add นาสกุล  
         $member->user_phone = $request['user_phone'];  //TODO: add เบอร์โทร  
 
 
-
-        /*  $member->building_name = $request['building_name'];
-        $member->property_type = $request['property_type'];
-        $member->rent_sell = $request['rent_sell'];
-        $member->rental_price = $request['rental_price'];
-        $member->sell_price = $request['sell_price'];
-        $member->url_gps = $request['url_gps'];
-        $member->time_arrive = $request['time_arrive'];
-        $member->train_name = $request['train_name'];
-        $member->bedroom = $request['bedroom'];
-        $member->bathroom = $request['bathroom'];
-        $member->room_width = $request['room_width'];
-        $member->studio = $request['studio'];
-        $member->number_floors = $request['number_floors'];
-        $member->decoration = $request['decoration'];
-        $member->address = $request['address'];
-        $member->provinces = $request['provinces'];
-        $member->districts = $request['districts'];
-        $member->amphures = $request['amphures'];
-        $member->zip_code = $request['zip_code'];
-        $member->details = $request['details'];
-        $member->minimum_rent = $request['minimum_rent'];
-        $member->deposit = $request['deposit'];
-        $member->cash_pledge = $request['cash_pledge'];
-        $member->advance_rent = $request['advance_rent'];
-        $member->reservation_money = $request['reservation_money'];
-        $member->down_payment = $request['down_payment'];
-        $member->down_payment_installments = $request['down_payment_installments'];
-        $member->installments = $request['installments'];
-        $member->each_installment = $request['each_installment'];
-        $member->kitchen = $request['kitchen'];
-        $member->bed = $request['bed'];
-        $member->fitness = $request['fitness'];
-        $member->wardrobe = $request['wardrobe'];
-        $member->parking = $request['parking'];
-        $member->air_conditioner = $request['air_conditioner'];
-        $member->make_appointment_location = $request['make_appointment_location'];
-        $member->send_customers = $request['send_customers'];
-        $member->ask_more = $request['ask_more'];
-        $member->contact_number = $request['contact_number'];
-        $member->status_home = "on";
-        $member->thereVarious = is_array($request['thereVarious']) ? json_encode($request['thereVarious']) : NULL;
-
-
-        $dateImg = [];
+        /* $dateImg = [];
         if ($request->hasFile('image')) {
             $imagefile = $request->file('image');
 
@@ -190,8 +146,21 @@ class CoAgentController extends Controller
                 $dateImg[] =  $randomText . "" . $image->getClientOriginalName();
             }
         }
-        $member->image = json_encode($dateImg); */
-        // $member->save();
+        $member->image = json_encode($dateImg);
+
+
+        if ($request->hasFile('image')) {
+            $imagefile = $request->file('image');
+
+
+            $data =   $image->move(public_path() . '/img/product', $randomText . "" . $image->getClientOriginalName());
+            $dateFile =  $randomText . "" . $image->getClientOriginalName();
+
+
+
+            $member->files = $dateFile;  //TODO: add files  
+        } */
+        $member->save();
 
 
         return redirect('home')->with('message', "บันทึกสำเร็จ");

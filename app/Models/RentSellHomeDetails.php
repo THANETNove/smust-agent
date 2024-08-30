@@ -54,6 +54,7 @@ class RentSellHomeDetails extends Model
         'status_home',
         'thereVarious',
         // เพิ่มใหม่
+        'user_id',
         'cross',
         'sell',
         'rent',
@@ -76,5 +77,6 @@ class RentSellHomeDetails extends Model
         'user_name',
         'user_surname',
         'user_phone',
+        'reservation_amount_baht'
     ];
 }
