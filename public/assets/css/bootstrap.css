@@ -511,7 +511,7 @@ input[autofocus]:focus {
 }
 
 .rent-sell-primary {
-    width: 29px;
+    width: 35px;
     height: 25px;
     display: flex;
     justify-content: center;
@@ -524,7 +524,7 @@ input[autofocus]:focus {
 }
 
 .rent-sell-yellow {
-    width: 33px;
+    width: 35px;
     height: 25px;
     display: flex;
     justify-content: center;
@@ -537,7 +537,7 @@ input[autofocus]:focus {
 }
 
 .rent-sell-green {
-    width: 58px;
+    width: 90px;
     height: 25px;
     display: flex;
     justify-content: center;
@@ -551,11 +551,7 @@ input[autofocus]:focus {
 }
 
 .absolute-rent-sell {
-    right: 0;
-
-    position: absolute;
-    margin-top: 22px;
-    margin-right: -9px;
+    margin-bottom: 8px;
 
 
 }
@@ -1272,11 +1268,11 @@ input[autofocus]:focus {
 .card-new {
     width: 360px;
     height: auto;
-    max-height: 128px;
     background-color: var(--white);
     margin-bottom: 16px;
     border-radius: 8px;
     display: flex;
+    padding-bottom: 16px;
 
 
 
@@ -1294,11 +1290,11 @@ input[autofocus]:focus {
 }
 
 .box-price-new {
-    position: relative;
+    /*    position: relative;
     width: 170px;
     padding-right: 16px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; */
 }
 
 .price-new {
@@ -1315,10 +1311,7 @@ input[autofocus]:focus {
     -webkit-box-orient: vertical;
 }
 
-.price-top {
-    margin-right: -32px;
-    margin-top: 53px;
-}
+.price-top {}
 
 .price-top-2 {
     margin-right: -32px;
@@ -1470,4 +1463,9 @@ input[autofocus]:focus {
 .value {
     width: 100%;
     height: auto;
+}
+
+a {
+    color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+    text-decoration: none !important;
 }

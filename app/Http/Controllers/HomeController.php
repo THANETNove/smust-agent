@@ -158,7 +158,7 @@ class HomeController extends Controller
     }
 
 
-  
+
     public function show($id)
     {
         $dataHome = DB::table('rent_sell_home_details')

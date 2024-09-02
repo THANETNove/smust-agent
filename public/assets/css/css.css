@@ -2130,3 +2130,10 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     cursor: pointer;
     text-decoration: underline;
 }
+
+.box-width-rent-sell {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 200px;
+}
