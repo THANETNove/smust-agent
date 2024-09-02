@@ -196,41 +196,55 @@
                                         } else {
                                             $price_sell = number_format($home->sell_price) . ' บาท';
                                         }
+                                        $rental_ = $home->rental_price;
+                                        $rental_String = (string) $rental_;
+                                        if (strlen($rental_String) > 6) {
+                                            $rental_String = str_replace(',', '', $rental_String);
+                                            $formatted_rental = number_format($rental_String / 1000000, 1) . ' ล้าน';
+                                            $rental_price = $formatted_rental;
+                                        } else {
+                                            $rental_price = number_format($home->rental_price) . ' บาท';
+                                        }
                                     @endphp
 
-                                    <div class="box-price-new">
 
-                                        {{-- //*  ชุดเก่า --}}
-                                        @if ($home->rental_price && $home->rent_sell == 'เช่า')
-                                            <p class="price-new price-top">฿ {{ number_format($home->rental_price) }}/m
-                                            </p>
-                                        @endif
-                                        @if ($home->sell_price && $home->rent_sell == 'ขาย')
-                                            <p class="price-new price-top-sell">฿ {{ $price_sell }}</p>
-                                        @endif
-
-                                        @if ($home->sell_price && $home->rent_sell == 'เช่า/ขาย')
-                                            <p class="price-new price-top-2">฿ {{ number_format($home->rental_price) }}/m
-                                            </p>
-                                            <p class="price-new price-top-sell2">฿{{ $price_sell }}</p>
-                                        @endif
-
-
-
-                                        @if ($home->rent_sell == 'เช่า' || $home->rent == 'เช่า')
-                                            <span class="rent-sell-primary absolute-rent-sell">{{ $home->rent_sell }}
-                                                {{ $home->rent }}</span>
-                                        @endif
-
-                                        @if ($home->rent_sell == 'ขาย' || $home->sell == 'ขาย')
-                                            <span class="rent-sell-yellow absolute-rent-sell">{{ $home->rent_sell }}
-                                                {{ $home->sell }}</span>
-                                        @endif
-                                        @if ($home->rent_sell == 'เช่าซื้อ/ขายผ่อน' || $home->rent_sell == 'เช่า/ขาย')
+                                    <div class="box-width-rent-sell">
+                                        @if ($home->rent_sell == 'เช่า')
+                                            <span
+                                                class="rent-sell-primary absolute-rent-sell">{{ $home->rent_sell }}</span>
+                                        @elseif ($home->rent_sell == 'ขาย')
+                                            <span class="rent-sell-yellow absolute-rent-sell">{{ $home->rent_sell }}</span>
+                                        @elseif ($home->rent_sell == 'เช่า/ขาย' || $home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
                                             <span class="rent-sell-green absolute-rent-sell">{{ $home->rent_sell }}</span>
                                         @endif
 
+                                        @if ($home->rent == 'เช่า')
+                                            <span class="rent-sell-primary absolute-rent-sell">{{ $home->rent }}</span>
+                                        @endif
 
+                                        @if ($home->sell == 'ขาย')
+                                            <span class="rent-sell-yellow absolute-rent-sell">{{ $home->sell }}</span>
+                                        @endif
+
+                                        <div class="box-price-new">
+
+                                            @if (($home->sell_price && $home->rent_sell == 'เช่า/ขาย') || $home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
+                                                <p class="price-new">฿
+                                                    {{ number_format($home->rental_price) }}/m
+                                                </p>
+                                                <p class="price-new price-top-sell2">฿ {{ $price_sell }}</p>
+                                            @else
+                                                @if (($home->rental_price && $home->rent_sell == 'เช่า') || $home->rent == 'เช่า')
+                                                    <p class="price-new">฿ {{ number_format($home->rental_price) }}/m
+                                                    </p>
+                                                @endif
+                                                @if (($home->sell_price && $home->rent_sell == 'ขาย') || $home->sell == 'ขาย')
+                                                    <p class="price-new">฿{{ $price_sell }}</p>
+                                                @endif
+                                            @endif
+
+
+                                        </div>
                                     </div>
                                 </div>
                             </a>
