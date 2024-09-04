@@ -7,11 +7,27 @@
 </p>
 <div class="">
     <div class="w-100">
-        <p class="text-content-black margin-bottom-8 space-between">
-            <span> <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/pajamas_sort-lowest.png') }}">
-                เงินประกัน {{ number_format($home->deposit) }} เดือน</span>
+        @if ($home->name_have)
+            <p class="text-content-black margin-bottom-8 space-between">
+                <span> <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/pajamas_sort-lowest.png') }}">
+                    โฉนดมีภาระหนี้กับ {{ $home->name_have }}</span>
 
-        </p>
+            </p>
+        @else
+            <p class="text-content-black margin-bottom-8 space-between">
+                <span> <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/pajamas_sort-lowest.png') }}">
+                    โฉนดมีภาระหนี้ไม่</span>
+
+            </p>
+        @endif
+        @if ($home->deposit)
+            <p class="text-content-black margin-bottom-8 space-between">
+                <span> <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/pajamas_sort-lowest.png') }}">
+                    เงินประกัน {{ number_format($home->deposit) }} เดือน</span>
+
+            </p>
+        @endif
+
         <p class="text-content-black margin-bottom-8 space-between">
             <span> <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/pajamas_sort-lowest.png') }}">
                 ค่าเช่าล่วงหน้า @if ($home->advance_rent)
