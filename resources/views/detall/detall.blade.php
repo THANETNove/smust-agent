@@ -264,6 +264,15 @@
                                         </p>
                                     </div>
                                 @endif
+                                @if ($home->electricalAppliance)
+                                    <div class="w-50">
+                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                            <img class="icon-content-2"
+                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                            {{ $home->electricalAppliance }}
+                                        </p>
+                                    </div>
+                                @endif
                                 @if ($home->fitness)
                                     <div class="w-50">
                                         <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
@@ -312,8 +321,18 @@
                                 @if ($home->facilities)
                                     <div class="w-50">
                                         <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-
+                                            <img class="icon-content-2"
+                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
                                             {{ $home->facilities }}
+                                        </p>
+                                    </div>
+                                @endif
+                                @if ($home->furniture)
+                                    <div class="w-50">
+                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                            <img class="icon-content-2"
+                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                            {{ $home->furniture }}
                                         </p>
                                     </div>
                                 @endif
