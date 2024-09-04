@@ -926,6 +926,13 @@ input[autofocus]:focus {
     color: var(--black);
 }
 
+.head-content2 {
+
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--black);
+}
+
 .text-content {
     font-size: 14px;
     font-weight: 400;

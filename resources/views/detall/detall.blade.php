@@ -228,7 +228,8 @@
                             @endif
 
 
-                            <p class="head-content">รายละเอียด</p>
+                            <p class="head-content">ไฮไลท์อสังหา</p>
+                            <p class="head-content2">รายละเอียด</p>
 
                             <p class="text-content">{!! $home->details !!}</p>
 
