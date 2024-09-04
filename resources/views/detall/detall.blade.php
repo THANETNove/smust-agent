@@ -82,6 +82,8 @@
                                 <p> {{ number_format($home->rental_price) }}/m</p>
                             </div>
                         @endif
+
+
                         @if ($home->rent_sell == 'ขาย')
                             <div class="flex-direction-row">
                                 <span class="rent-sell-yellow width-rent-sell">
@@ -90,6 +92,7 @@
                                 <p> {{ number_format($home->sell_price) }} บาท</p>
                             </div>
                         @endif
+
                         @if ($home->rent_sell == 'เช่า/ขาย')
                             <div class="flex-direction-column">
                                 <div class="flex-direction-row ">
@@ -106,6 +109,35 @@
                                 </div>
                             </div>
                         @endif
+
+
+                        <div class="flex-direction-column">
+                            @if ($home->rent == 'เช่า')
+                                <div class="flex-direction-row">
+                                    <span class="rent-sell-primary width-rent-sell">
+                                        {{ $home->rent }}
+                                    </span>
+                                    <p> {{ number_format($home->rental_price) }}/m</p>
+                                </div>
+                            @endif
+                            @if ($home->sell == 'ขาย')
+                                <div class="flex-direction-row">
+                                    <span class="rent-sell-yellow width-rent-sell">
+                                        {{ $home->sell }}
+                                    </span>
+                                    <p> {{ number_format($home->sell_price) }} บาท</p>
+                                </div>
+                            @endif
+                            @if ($home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
+                                <div class="flex-direction-row ">
+                                    <span class="rent-sell-green width-rent-sell">
+                                        {{ $home->rent_sell }}
+                                    </span>
+
+                                </div>
+                            @endif
+                        </div>
+
 
 
                     </div>
@@ -204,7 +236,15 @@
                                 @include('detall.reall_detall')
                             @elseif ($home->rent_sell == 'ขาย')
                                 @include('detall.sell_detall')
-                            @else
+                            @elseif ($home->rent_sell == 'เช่า/ขาย')
+                                @include('detall.reall_detall')
+                                @include('detall.sell_detall')
+                            @endif
+                            @if ($home->rent == 'เช่า' && $home->rent_sell != 'เช่าซื้อ/ขายผ่อน')
+                                @include('detall.reall_detall')
+                            @elseif ($home->sell == 'ขาย' && $home->rent_sell != 'เช่าซื้อ/ขายผ่อน')
+                                @include('detall.sell_detall')
+                            @elseif ($home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
                                 @include('detall.reall_detall')
                                 @include('detall.sell_detall')
                             @endif
@@ -265,6 +305,14 @@
                                             <img class="icon-content-2"
                                                 src="{{ URL::asset('/assets/image/home/check.png') }}">
                                             เครื่องปรับอากาศ
+                                        </p>
+                                    </div>
+                                @endif
+                                @if ($home->facilities)
+                                    <div class="w-50">
+                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+
+                                            {{ $home->facilities }}
                                         </p>
                                     </div>
                                 @endif

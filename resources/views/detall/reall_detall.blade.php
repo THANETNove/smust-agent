@@ -14,7 +14,13 @@
         </p>
         <p class="text-content-black margin-bottom-8 space-between">
             <span> <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/pajamas_sort-lowest.png') }}">
-                ค่าเช่าล่วงหน้า {{ number_format($home->advance_rent) }} เดือน</span>
+                ค่าเช่าล่วงหน้า @if ($home->advance_rent)
+                    {{ number_format($home->advance_rent) }}
+                @else
+                    {{ number_format($home->month_advance_rent) }}
+                @endif
+
+                เดือน</span>
 
         </p>
     </div>
