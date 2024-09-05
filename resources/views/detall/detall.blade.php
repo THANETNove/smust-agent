@@ -43,7 +43,7 @@
                         กลับ
                     </a>
 
-                    @if (Auth::user()->status != '0')
+                    {{--   @if (Auth::user()->status != '0')
                         &nbsp; &nbsp;
                         <a href="{{ url('/edit', $home->id) }}" class="box-call">
                             เเก้ไข
@@ -52,7 +52,7 @@
                         <a href="{{ url('destroy', $home->id) }}" class="box-call2 ">
                             ยกเลิก
                         </a>
-                    @endif
+                    @endif --}}
 
 
 
@@ -465,9 +465,7 @@
                                     </a>
                                 @endif
                                 <div class="box-report-property-sold" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
-                                    รายงานทรัพย์ขายแล้ว
-                                </div>
+                                    data-bs-target="#exampleModal">รายงานทรัพย์ขายแล้ว</div>
 
                                 {{--  <a href="{{ $home->make_appointment_location }}" target="_blank"
                                     class="box-appointment">
@@ -666,6 +664,32 @@
                 </div>
                 <div class="modal-body">
                     <p class="know-property">คุณทราบได้อย่างไรว่าทรัพย์นี้ - ได้ลูกค้าแล้ว</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="โทรถามเจ้าของแล้ว - ติดจอง"
+                            id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            โทรถามเจ้าของแล้ว - ติดจอง </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="เห็นว่าขายได้แล้วที่อื่น"
+                            id="flexCheckChecked">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            เห็นว่าขายได้แล้วที่อื่น
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="ฉันเป็นคนขายได้เอง"
+                            id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            ฉันเป็นคนขายได้เอง </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"
+                            value="โทรถามเจ้าของแล้ว - ได้ผู้เช่า/ผู้ซื้อแล้ว" id="flexCheckChecked">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            โทรถามเจ้าของแล้ว - ได้ผู้เช่า/ผู้ซื้อแล้ว
+                        </label>
+                    </div>
                 </div>
 
             </div>

@@ -2153,5 +2153,8 @@ div:where(.swal2-container) div:where(.swal2-popup) {
 }
 
 .know-property {
-    
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+    margin-top: -32px;
 }
