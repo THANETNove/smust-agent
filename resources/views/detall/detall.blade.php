@@ -255,7 +255,9 @@
                             <div class="box-highlights top-highlights">
                                 <p class="head-content">ไฮไลท์อสังหา</p>
                                 <p class="head-content2">รายละเอียด</p>
-
+                                @if ($home->announcement_name)
+                                    <p class="head-content2">{{ $home->announcement_name }}</p>
+                                @endif
                                 <p class="text-content">{!! $home->details !!}</p>
 
                                 @if ($home->rent_sell == 'เช่า')
