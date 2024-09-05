@@ -548,7 +548,7 @@
                                     <div class="input_box mt-3">
                                         <input id="down_payment_amount" type="text" class="form-control col-12 r"
                                             value="{{ Auth::user()->facebook_id }}">
-                                        <label style="margin-left: -16px">Facebook ID </label>
+                                        <label style="margin-left: -16px">Facebook </label>
                                         <div class="position-contact">
                                             @if ($facebookIsUrl)
                                                 <a href="{{ Auth::user()->facebook_id }}" target="_blank"
