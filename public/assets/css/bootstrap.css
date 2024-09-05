@@ -970,6 +970,40 @@ input[autofocus]:focus {
     text-decoration: none !important;
 }
 
+.box-contract {
+    background-color: var(--white);
+    width: 310px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #464646;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    border: 1px solid #464646;
+    text-decoration: none !important;
+}
+
+.box-report-property-sold {
+    margin-top: 4px;
+    background: #FBC9BB;
+    width: 310px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #E34234;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    border: 1px solid #E34234;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
 .align-items-center {
     display: flex;
     align-items: center;

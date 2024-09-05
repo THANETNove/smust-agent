@@ -226,6 +226,30 @@
                                     {{ $home->zip_code }}
                                 </p>
                             @endif
+                            @if ($home->url_video)
+                                @php
+                                    // รับ URL ของ YouTube
+                                    $videoUrl = $home->url_video;
+
+                                    // แปลง URL ให้เป็นรูปแบบ embed
+                                    $embedUrl = preg_replace(
+                                        '/^https:\/\/www\.youtube\.com\/watch\?v=/',
+                                        'https://www.youtube.com/embed/',
+                                        $videoUrl,
+                                    );
+                                @endphp
+                                <div class="box-highlights top-highlights">
+                                    <p class="head-content">Video</p>
+                                    <iframe src="{{ $embedUrl }}" height="300" width="100%"
+                                        title="Iframe Example"></iframe>
+                                </div>
+                            @endif
+                            @if ($home->announcement_name)
+                                <div class="box-highlights top-highlights">
+                                    <p class="head-content">{{ $home->announcement_name }}</p>
+                                    <p class="head-content">{{ $home->announcement_name }}</p>
+                                </div>
+                            @endif
 
 
                             <div class="box-highlights top-highlights">
@@ -433,7 +457,20 @@
                         <div class="tab-pane fade " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"
                             tabindex="0">
                             <div class="align-items-center mt-27 ">
-                                <a href="{{ $home->make_appointment_location }}" target="_blank"
+                                @if ($home->files)
+                                    <a href="{{ url(asset($home->files)) }}" target="_blank" rel="noopener noreferrer">
+                                        <div class="box-contract">
+                                            <img class="icon-content-3"
+                                                src="{{ URL::asset('/assets/image/welcome/article.png') }}">สัญญา
+                                        </div>
+                                    </a>
+                                @endif
+                                <div class="box-report-property-sold" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    รายงานทรัพย์ขายแล้ว
+                                </div>
+
+                                {{--  <a href="{{ $home->make_appointment_location }}" target="_blank"
                                     class="box-appointment">
                                     <img class="icon-content-3"
                                         src="{{ URL::asset('/assets/image/home/calendar_add_on.png') }}">
@@ -455,7 +492,7 @@
                                             src="{{ URL::asset('/assets/image/home/call.png') }}">
                                         โทร
                                     </a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -493,4 +530,22 @@
         </div>
     </div>
     @include('detall.javascript_popupImage')
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

@@ -131,6 +131,7 @@ class CoAgentController extends Controller
         $member->url_video = $request['url_video'];  //TODO: ลิงค์ video 
         $member->announcement_name = $request['announcement_name'];  //TODO: ชื่อประกาศ* 
         $member->url_gps = $request['url_gps'];  // ลิงค์ GPS 
+        $member->details = $request['details'];  // details
         $member->user_name = $request['user_name'];  //TODO: add ชื่อ 
         $member->user_surname = $request['user_surname'];  //TODO: add นาสกุล  
         $member->user_phone = $request['user_phone'];  //TODO: add เบอร์โทร  
@@ -164,7 +165,7 @@ class CoAgentController extends Controller
             $files->move(public_path('assets/img/files'), $fileName);
 
             // Store or use $fileName as needed
-            $filePaths = 'assets/images/files/' . $fileName; // Store paths to use or save in database
+            $filePaths = 'assets/img/files/' . $fileName; // Store paths to use or save in database
 
             $member->files = $filePaths;
         }
