@@ -244,12 +244,7 @@
                                         title="Iframe Example"></iframe>
                                 </div>
                             @endif
-                            @if ($home->announcement_name)
-                                <div class="box-highlights top-highlights">
-                                    <p class="head-content">{{ $home->announcement_name }}</p>
-                                    <p class="head-content">{{ $home->announcement_name }}</p>
-                                </div>
-                            @endif
+
 
 
                             <div class="box-highlights top-highlights">
