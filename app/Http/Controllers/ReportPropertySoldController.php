@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ReportPropertySold;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReportPropertySoldController extends Controller
 {
@@ -51,7 +53,20 @@ class ReportPropertySoldController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $member = new ReportPropertySold;
+
+        if (Auth::check()) {
+
+            $member->user_id = Auth::user()->id; // add
+        }
+
+        $member->id_product = $id;
+        $member->report = json_encode($request['report']);
+        $member->save();
+
+
+        return redirect()->back()->with('message', "รายงานสำเร็จ");
     }
 
     /**

@@ -58,6 +58,10 @@
 
 
                 </div>
+                @if (session('message'))
+                    <p class="text-center " style="color: green"> {{ session('message') }}</p>
+                @endif
+
 
             </div>
             <div class="box-content">
@@ -623,6 +627,55 @@
                 </div>
             </div>
     </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="know-property">คุณทราบได้อย่างไรว่าทรัพย์นี้ - ได้ลูกค้าแล้ว</p>
+                    <form id="multiStepForm" class="multi-step-form" method="POST"
+                        action="{{ route('report-product-update', $home->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-check">
+                            <input class="form-check-input" name="report[]" type="checkbox"
+                                value="โทรถามเจ้าของแล้ว - ติดจอง" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                โทรถามเจ้าของแล้ว - ติดจอง </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="report[]" type="checkbox"
+                                value="เห็นว่าขายได้แล้วที่อื่น" id="flexCheckChecked">
+                            <label class="form-check-label" for="flexCheckChecked">
+                                เห็นว่าขายได้แล้วที่อื่น
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="report[]" type="checkbox" value="ฉันเป็นคนขายได้เอง"
+                                id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                ฉันเป็นคนขายได้เอง </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="report[]" type="checkbox"
+                                value="โทรถามเจ้าของแล้ว - ได้ผู้เช่า/ผู้ซื้อแล้ว" id="flexCheckChecked">
+                            <label class="form-check-label" for="flexCheckChecked">
+                                โทรถามเจ้าของแล้ว - ได้ผู้เช่า/ผู้ซื้อแล้ว
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-report">
+                            รายงาน
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
     @endforeach
     <div class="popup" id="imagePopup">
         <div class="popup-content">
@@ -655,44 +708,5 @@
     </div>
     @include('detall.javascript_popupImage')
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p class="know-property">คุณทราบได้อย่างไรว่าทรัพย์นี้ - ได้ลูกค้าแล้ว</p>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="โทรถามเจ้าของแล้ว - ติดจอง"
-                            id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            โทรถามเจ้าของแล้ว - ติดจอง </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="เห็นว่าขายได้แล้วที่อื่น"
-                            id="flexCheckChecked">
-                        <label class="form-check-label" for="flexCheckChecked">
-                            เห็นว่าขายได้แล้วที่อื่น
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="ฉันเป็นคนขายได้เอง"
-                            id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            ฉันเป็นคนขายได้เอง </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox"
-                            value="โทรถามเจ้าของแล้ว - ได้ผู้เช่า/ผู้ซื้อแล้ว" id="flexCheckChecked">
-                        <label class="form-check-label" for="flexCheckChecked">
-                            โทรถามเจ้าของแล้ว - ได้ผู้เช่า/ผู้ซื้อแล้ว
-                        </label>
-                    </div>
-                </div>
 
-            </div>
-        </div>
-    </div>
 @endsection

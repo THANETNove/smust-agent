@@ -191,6 +191,33 @@ p {
     background-color: var(--blue) !important;
 }
 
+.btn-report {
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    color: var(--white);
+    font-weight: 400;
+    font-size: 16px;
+    background-color: var(--primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+}
+
+.btn-p:hover {
+    color: var(--white);
+    background-color: var(--blue);
+}
+
+.btn-report:active {
+    color: var(--white) !important;
+    border: 1px solid var(--primary) !important;
+    background-color: var(--blue) !important;
+}
+
+
 .already-registered {
     margin-top: 22px;
     font-weight: 400;

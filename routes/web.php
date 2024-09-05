@@ -12,6 +12,7 @@ use App\Http\Controllers\AssetsCustomersWantController;
 use App\Http\Controllers\PersonalWebsiteController;
 use App\Http\Controllers\PostContentController;
 use App\Http\Controllers\CoAgentController;
+use App\Http\Controllers\ReportPropertySoldController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -83,6 +84,7 @@ Route::get('/get-amphures/{id}', [CoAgentController::class, 'amphures'])->name('
 Route::get('co-agent', [CoAgentController::class, 'index'])->name('co-agent');
 Route::get('co-create', [CoAgentController::class, 'create'])->name('co-create');
 Route::post('co-agent-store', [CoAgentController::class, 'store'])->name('co-agent-store');
+Route::put('report-product-update/{id}', [ReportPropertySoldController::class, 'update'])->name('report-product-update');
 
 
 //ส่วนของ admin
