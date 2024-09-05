@@ -77,6 +77,7 @@ class RentSellHomeDetails extends Model
         'user_name',
         'user_surname',
         'user_phone',
-        'reservation_amount_baht'
+        'reservation_amount_baht',
+        'product_new'
     ];
 }
