@@ -228,116 +228,117 @@
                             @endif
 
 
-                            <p class="head-content">ไฮไลท์อสังหา</p>
-                            <p class="head-content2">รายละเอียด</p>
+                            <div class="box-highlights top-highlights">
+                                <p class="head-content">ไฮไลท์อสังหา</p>
+                                <p class="head-content2">รายละเอียด</p>
 
-                            <p class="text-content">{!! $home->details !!}</p>
+                                <p class="text-content">{!! $home->details !!}</p>
 
-                            @if ($home->rent_sell == 'เช่า')
-                                @include('detall.reall_detall')
-                            @elseif ($home->rent_sell == 'ขาย')
-                                @include('detall.sell_detall')
-                            @elseif ($home->rent_sell == 'เช่า/ขาย')
-                                @include('detall.reall_detall')
-                                @include('detall.sell_detall')
-                            @endif
-                            @if ($home->rent == 'เช่า' && $home->rent_sell != 'เช่าซื้อ/ขายผ่อน')
-                                @include('detall.reall_detall')
-                            @elseif ($home->sell == 'ขาย' && $home->rent_sell != 'เช่าซื้อ/ขายผ่อน')
-                                @include('detall.sell_detall')
-                            @elseif ($home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
-                                @include('detall.reall_detall')
-                                @include('detall.sell_detall')
-                            @endif
-
-
-
-
-                            <p class="head-content">สิ่งอำนวยความสะดวก</p>
-                            <div class="flex-direction-break-word">
-                                @if ($home->kitchen)
-                                    <div class="w-50">
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            ห้องครัว
-                                        </p>
-                                    </div>
+                                @if ($home->rent_sell == 'เช่า')
+                                    @include('detall.reall_detall')
+                                @elseif ($home->rent_sell == 'ขาย')
+                                    @include('detall.sell_detall')
+                                @elseif ($home->rent_sell == 'เช่า/ขาย')
+                                    @include('detall.reall_detall')
+                                    @include('detall.sell_detall')
                                 @endif
-                                @if ($home->electricalAppliance)
-                                    <div class="w-50">
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            {{ $home->electricalAppliance }}
-                                        </p>
-                                    </div>
-                                @endif
-                                @if ($home->fitness)
-                                    <div class="w-50">
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            ฟิตเนส
-                                        </p>
-                                    </div>
-                                @endif
-                                @if ($home->parking)
-                                    <div class="w-50">
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            ที่จอดรถ
-                                        </p>
-                                    </div>
-                                @endif
-                                @if ($home->bed)
-                                    <div class="w-50">
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            เตียง
-                                        </p>
-                                    </div>
-                                @endif
-                                @if ($home->wardrobe)
-                                    <div class="w-50">
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            ตู้เสื้อผ้า
-                                        </p>
-                                    </div>
-                                @endif
-                                @if ($home->air_conditioner)
-                                    <div class="w-50">
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            เครื่องปรับอากาศ
-                                        </p>
-                                    </div>
-                                @endif
-                                @if ($home->facilities)
-                                    <div class="w-50">
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            {{ $home->facilities }}
-                                        </p>
-                                    </div>
-                                @endif
-                                @if ($home->furniture)
-                                    <div class="w-50">
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            {{ $home->furniture }}
-                                        </p>
-                                    </div>
+                                @if ($home->rent == 'เช่า' && $home->rent_sell != 'เช่าซื้อ/ขายผ่อน')
+                                    @include('detall.reall_detall')
+                                @elseif ($home->sell == 'ขาย' && $home->rent_sell != 'เช่าซื้อ/ขายผ่อน')
+                                    @include('detall.sell_detall')
+                                @elseif ($home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
+                                    @include('detall.reall_detall')
+                                    @include('detall.sell_detall')
                                 @endif
 
-                                {{-- <div class="w-50">
+
+
+
+                                <p class="head-content">สิ่งอำนวยความสะดวก</p>
+                                <div class="flex-direction-break-word">
+                                    @if ($home->kitchen)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                ห้องครัว
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->electricalAppliance)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                {{ $home->electricalAppliance }}
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->fitness)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                ฟิตเนส
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->parking)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                ที่จอดรถ
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->bed)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                เตียง
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->wardrobe)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                ตู้เสื้อผ้า
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->air_conditioner)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                เครื่องปรับอากาศ
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->facilities)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                {{ $home->facilities }}
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->furniture)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                {{ $home->furniture }}
+                                            </p>
+                                        </div>
+                                    @endif
+
+                                    {{-- <div class="w-50">
                                     @if ($home->bed)
                                         <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
                                             <img class="icon-content-2"
@@ -360,7 +361,52 @@
                                         </p>
                                     @endif
                                 </div> --}}
+                                </div>
                             </div>
+
+                            <div class="box-highlights">
+                                <p class="head-content">สถานที่สำคัญใกล้เคียง</p>
+                                @php
+                                    // ตรวจสอบและแก้ไขข้อมูล
+                                    $shoppingCenters = is_array($home->shopping_center)
+                                        ? $home->shopping_center
+                                        : json_decode(str_replace("\n", '', $home->shopping_center), true);
+                                    $schools = is_array($home->school)
+                                        ? $home->school
+                                        : json_decode(str_replace("\n", '', $home->school), true);
+                                @endphp
+
+                                {{-- แสดง Shopping Centers --}}
+                                @foreach ($shoppingCenters as $shopping_center)
+                                    <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                        <img class="icon-content-2"
+                                            src="{{ URL::asset('/assets/image/welcome/local_mall.png') }}">
+                                        {{ $shopping_center }}
+                                    </p>
+                                @endforeach
+
+                                {{-- แสดง Schools --}}
+                                @foreach ($schools as $school)
+                                    <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                        <img class="icon-content-2"
+                                            src="{{ URL::asset('/assets/image/welcome/school.png') }}">
+                                        {{ $school }}
+                                    </p>
+                                @endforeach
+
+
+
+
+
+                                @if ($home->meters_store)
+                                    <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                        <img class="icon-content-2"
+                                            src="{{ URL::asset('/assets/image/welcome/storefront.png') }}">
+                                        {{ $home->meters_store }}
+                                    </p>
+                                @endif
+                            </div>
+
                             @if ($home->thereVarious)
                                 @php
                                     $thereVarious = json_decode($home->thereVarious, true);

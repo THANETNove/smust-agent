@@ -2137,3 +2137,16 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     margin-top: 20px;
     width: 200px;
 }
+
+.box-highlights {
+    border: 1px solid #DCDCDC;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 32px;
+    margin-bottom: 12px;
+}
+.top-highlights{
+
+    margin-top: 32px;
+
+}
