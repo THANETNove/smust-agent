@@ -938,6 +938,14 @@ input[autofocus]:focus {
     color: var(--black);
 }
 
+.contact-owner {
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 13px;
+}
+
 .add_head-content {
     font-size: 24px;
     font-weight: 800;
@@ -1508,4 +1516,11 @@ input[autofocus]:focus {
 a {
     color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
     text-decoration: none !important;
+}
+
+.position-contact {
+    display: flex;
+    position: absolute;
+    right: 8px;
+    top: 8px;
 }

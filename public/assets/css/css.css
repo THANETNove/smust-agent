@@ -1881,7 +1881,7 @@ textarea {
     font-size: 16px;
     font-weight: 400;
     cursor: pointer;
-    background-color: #FFFFFF;
+    background-color: #FFFFFF !important;
     border: 1px solid #007BA7;
     color: #007BA7;
     box-shadow: 0 0px 0px rgb(255, 255, 255) !important;
@@ -2145,7 +2145,8 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     margin-top: 32px;
     margin-bottom: 12px;
 }
-.top-highlights{
+
+.top-highlights {
 
     margin-top: 32px;
 

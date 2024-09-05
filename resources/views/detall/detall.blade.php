@@ -491,6 +491,132 @@
                                     </a>
                                 </div> --}}
                             </div>
+
+                            <p class="contact-owner mb-3">ติดต่อเจ้าของ</p>
+
+
+                            @if (Auth::check())
+                                @php
+                                    $lineIsUrl = filter_var(Auth::user()->line_id, FILTER_VALIDATE_URL);
+                                    $facebookIsUrl = filter_var(Auth::user()->facebook_id, FILTER_VALIDATE_URL);
+                                @endphp
+
+                                @if (Auth::user()->line_id)
+                                    <div class="input_box">
+                                        <input id="down_payment_amount" type="text" class="form-control col-12 r"
+                                            value="{{ Auth::user()->line_id }}">
+                                        <label style="margin-left: -16px">Line ID </label>
+                                        <div class="position-contact">
+                                            @if ($lineIsUrl)
+                                                <a href="{{ Auth::user()->line_id }}" class="no-underline"
+                                                    target="_blank" rel="noopener noreferrer">
+                                                    <img class="ass-icon-line"
+                                                        src="{{ URL::asset('/assets/image/home/line.png') }}">
+                                                </a>
+                                            @else
+                                                <img class="ass-icon-line"
+                                                    src="{{ URL::asset('/assets/image/home/line.png') }}"
+                                                    onclick="copyLineID()">
+                                                <script>
+                                                    function copyLineID() {
+                                                        var lineName = "{{ Auth::user()->line_id }}";
+                                                        Swal.fire({
+                                                            title: lineName,
+                                                            text: "Line ID" + "\n\nถูกคัดลอกแล้ว!",
+                                                            icon: 'success',
+                                                            /*   showConfirmButton: false,
+                                                              timer: 2000 */
+                                                            showConfirmButton: true, // ปุ่มยืนยันจะไม่หายไปเอง
+                                                            confirmButtonText: 'ปิด', // ข้อความบนปุ่มยืนยัน
+                                                            customClass: {
+                                                                confirmButton: 'swal-btn-down' // ตั้งชื่อคลาสสำหรับปุ่มยืนยัน
+                                                            }
+                                                        });
+                                                        navigator.clipboard.writeText(lineName).then(function() {
+                                                            console.log('Line ID ถูกคัดลอกไปยัง clipboard แล้ว');
+                                                        }, function(err) {
+                                                            console.error('ไม่สามารถคัดลอกข้อความได้:', err);
+                                                        });
+                                                    }
+                                                </script>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if (Auth::user()->facebook_id)
+                                    <div class="input_box mt-3">
+                                        <input id="down_payment_amount" type="text" class="form-control col-12 r"
+                                            value="{{ Auth::user()->facebook_id }}">
+                                        <label style="margin-left: -16px">Facebook ID </label>
+                                        <div class="position-contact">
+                                            @if ($facebookIsUrl)
+                                                <a href="{{ Auth::user()->facebook_id }}" target="_blank"
+                                                    rel="noopener noreferrer" class="no-underline">
+                                                    <img class="ass-icon-line"
+                                                        src="{{ URL::asset('/assets/image/home/facbook.png') }}">
+                                                </a>
+                                            @else
+                                                <img class="ass-icon-line"
+                                                    src="{{ URL::asset('/assets/image/home/facbook.png') }}"
+                                                    onclick="copyFacebookID()">
+                                                <script>
+                                                    function copyFacebookID() {
+                                                        var fbName = "{{ Auth::user()->facebook_id }}";
+                                                        Swal.fire({
+                                                            title: fbName,
+                                                            text: "Facebook ID" + "\n\nถูกคัดลอกแล้ว!",
+                                                            icon: 'success',
+                                                            showConfirmButton: true, // ปุ่มยืนยันจะไม่หายไปเอง
+                                                            confirmButtonText: 'ปิด', // ข้อความบนปุ่มยืนยัน
+                                                            customClass: {
+                                                                confirmButton: 'swal-btn-down' // ตั้งชื่อคลาสสำหรับปุ่มยืนยัน
+                                                            }
+                                                        });
+                                                        navigator.clipboard.writeText(fbName).then(function() {
+                                                            console.log('Facebook ID ถูกคัดลอกไปยัง clipboard แล้ว');
+                                                        }, function(err) {
+                                                            console.error('ไม่สามารถคัดลอกข้อความได้:', err);
+                                                        });
+                                                    }
+                                                </script>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if (Auth::user()->phone)
+                                    <div class="input_box mt-3">
+                                        <input id="down_payment_amount" type="text" class="form-control col-12 r"
+                                            value="{{ Auth::user()->phone }}">
+                                        <label style="margin-left: -16px">Phone </label>
+                                        <div class="position-contact">
+                                            <a href="tel:{{ Auth::user()->phone }}" rel="noopener noreferrer"
+                                                class="no-underline">
+                                                <img class="ass-icon-line"
+                                                    src="{{ URL::asset('/assets/image/home/thone.png') }}">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    @if ($home->user_phone != Auth::user()->phone)
+                                        <div class="input_box mt-3">
+                                            <input id="down_payment_amount" type="text" class="form-control col-12 r"
+                                                value="{{ $home->user_phone }}">
+                                            <label style="margin-left: -16px">Phone </label>
+                                            <div class="position-contact">
+                                                <a href="tel:{{ $home->user_phone }}" rel="noopener noreferrer"
+                                                    class="no-underline">
+                                                    <img class="ass-icon-line"
+                                                        src="{{ URL::asset('/assets/image/home/thone.png') }}">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endif
+                            @else
+                            @endif
+
                         </div>
                     </div>
                 </div>
