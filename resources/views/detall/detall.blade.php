@@ -384,49 +384,51 @@
                                 </div> --}}
                                 </div>
                             </div>
+                            @if ($home->shopping_center)
+                                <div class="box-highlights">
+                                    <p class="head-content">สถานที่สำคัญใกล้เคียง</p>
+                                    @php
+                                        // ตรวจสอบและแก้ไขข้อมูล
+                                        $shoppingCenters = is_array($home->shopping_center)
+                                            ? $home->shopping_center
+                                            : json_decode(str_replace("\n", '', $home->shopping_center), true);
+                                        $schools = is_array($home->school)
+                                            ? $home->school
+                                            : json_decode(str_replace("\n", '', $home->school), true);
+                                    @endphp
 
-                            <div class="box-highlights">
-                                <p class="head-content">สถานที่สำคัญใกล้เคียง</p>
-                                @php
-                                    // ตรวจสอบและแก้ไขข้อมูล
-                                    $shoppingCenters = is_array($home->shopping_center)
-                                        ? $home->shopping_center
-                                        : json_decode(str_replace("\n", '', $home->shopping_center), true);
-                                    $schools = is_array($home->school)
-                                        ? $home->school
-                                        : json_decode(str_replace("\n", '', $home->school), true);
-                                @endphp
+                                    {{-- แสดง Shopping Centers --}}
+                                    @foreach ($shoppingCenters as $shopping_center)
+                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                            <img class="icon-content-2"
+                                                src="{{ URL::asset('/assets/image/welcome/local_mall.png') }}">
+                                            {{ $shopping_center }}
+                                        </p>
+                                    @endforeach
 
-                                {{-- แสดง Shopping Centers --}}
-                                @foreach ($shoppingCenters as $shopping_center)
-                                    <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                        <img class="icon-content-2"
-                                            src="{{ URL::asset('/assets/image/welcome/local_mall.png') }}">
-                                        {{ $shopping_center }}
-                                    </p>
-                                @endforeach
-
-                                {{-- แสดง Schools --}}
-                                @foreach ($schools as $school)
-                                    <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                        <img class="icon-content-2"
-                                            src="{{ URL::asset('/assets/image/welcome/school.png') }}">
-                                        {{ $school }}
-                                    </p>
-                                @endforeach
-
-
+                                    {{-- แสดง Schools --}}
+                                    @foreach ($schools as $school)
+                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                            <img class="icon-content-2"
+                                                src="{{ URL::asset('/assets/image/welcome/school.png') }}">
+                                            {{ $school }}
+                                        </p>
+                                    @endforeach
 
 
 
-                                @if ($home->meters_store)
-                                    <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                        <img class="icon-content-2"
-                                            src="{{ URL::asset('/assets/image/welcome/storefront.png') }}">
-                                        {{ $home->meters_store }}
-                                    </p>
-                                @endif
-                            </div>
+
+
+                                    @if ($home->meters_store)
+                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                            <img class="icon-content-2"
+                                                src="{{ URL::asset('/assets/image/welcome/storefront.png') }}">
+                                            {{ $home->meters_store }}
+                                        </p>
+                                    @endif
+                                </div>
+                            @endif
+
 
                             @if ($home->thereVarious)
                                 @php
@@ -663,7 +665,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>คุณทราบได้อย่างไรว่าทรัพย์นี้ - ได้ลูกค้าแล้ว</p>
+                    <p class="know-property">คุณทราบได้อย่างไรว่าทรัพย์นี้ - ได้ลูกค้าแล้ว</p>
                 </div>
 
             </div>
