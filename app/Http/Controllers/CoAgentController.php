@@ -113,7 +113,7 @@ class CoAgentController extends Controller
         $member->room_width = $request['size_sq_m'];  // ขนาด* (ตร.ว.)		
         $member->number_parking = $request['number_parking'];  //TODO: add จำนวนที่จอดรถ		
         $member->studio = $request['studio_name'];  //สตูดิโอ	
-        $member->rent_baht_month = $request['rent_baht_month'];  //TODO: add ค่าเช่า* (บาท/เดือน)	
+        $member->rental_price = $request['rent_baht_month'];  //TODO: add ค่าเช่า* (บาท/เดือน)	
         $member->month_advance_rent = $request['month_advance_rent'];  //TODO: add ค่าเช่าล่วงหน้า 1 เดือน
         $member->cash_pledge = $request['deposit_month'];  // เงินมัดจำ (เดือน)*
         $member->reservation_money = $request['reservation_money'];  // เงินจอง *
