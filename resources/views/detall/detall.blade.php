@@ -496,7 +496,35 @@
                                 </div> --}}
                             </div>
 
-                            <p class="contact-owner mb-5">พื้นที่ร่าง caption</p>
+                            <p class="contact-owner">พื้นที่ร่าง caption</p>
+                            @php
+                                $dataCap = DB::table('captions')
+                                    ->where('id_product', $home->id)
+                                    ->where('user_id', Auth::user()->id)
+                                    ->first();
+                            @endphp
+                            <form id="multiStepForm" class="multi-step-form" method="POST"
+                                action="{{ route('caption-update', $home->id) }}" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="mb-4 position-relative">
+                                    <textarea class="form-control" id="caption-textarea" name="details" style="min-height: 196px;height: auto;">
+@if ($dataCap)
+{{ $dataCap->details }}
+@endif
+</textarea>
+                                    <img class="icon-edit2" id="edit2-btn"
+                                        src="{{ URL::asset('/assets/image/welcome/edit2.png') }}">
+                                    <img class="icon-edit3" id="icon-edit3"
+                                        src="{{ URL::asset('/assets/image/welcome/content_copy.png') }}">
+                                </div>
+                                <button type="submit" id="submitBtn-textarea" class=" btn btn-primary mb-3"
+                                    style="display: none">
+                                    {{ __('บันทึก') }}
+                                </button>
+                            </form>
+
+
                             <p class="contact-owner mb-3">ติดต่อเจ้าของ</p>
 
 
@@ -707,6 +735,28 @@
         </div>
     </div>
     @include('detall.javascript_popupImage')
+    <script>
+        document.getElementById('edit2-btn').addEventListener('click', function() {
+            var submitBtn = document.getElementById('submitBtn-textarea');
+            // Toggle the display of the button
+            if (submitBtn.style.display === 'none') {
+                submitBtn.style.display = 'block';
+            } else {
+                submitBtn.style.display = 'none';
+            }
+        });
+        document.getElementById('icon-edit3').addEventListener('click', function() {
+            // Get the textarea element
+            var textArea = document.getElementById('caption-textarea');
+
+            // Copy the content of the textarea to the clipboard
+            navigator.clipboard.writeText(textArea.value).then(function() {
+                alert('ข้อความถูกคัดลอกแล้ว!');
+            }).catch(function(error) {
+                console.error('การคัดลอกข้อความล้มเหลว:', error);
+            });
+        });
+    </script>
     <!-- Modal -->
 
 @endsection

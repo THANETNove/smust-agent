@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ReportPropertySold;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Caption;
 use Illuminate\Support\Facades\Auth;
 
-class ReportPropertySoldController extends Controller
+class CaptionController extends Controller
 {
     public function __construct()
     {
@@ -31,10 +32,7 @@ class ReportPropertySoldController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store(Request $request) {}
 
     /**
      * Display the specified resource.
@@ -58,19 +56,29 @@ class ReportPropertySoldController extends Controller
     public function update(Request $request, string $id)
     {
 
-        $member = new ReportPropertySold;
+        $data = DB::table('captions')
+            ->where('id_product', $id)
+            ->where('user_id',  Auth::user()->id);
+        $dataCount =  $data->count();
 
-        if (Auth::check()) {
 
+        if ($dataCount == 0) {
+            $member = new Caption;
             $member->user_id = Auth::user()->id; // add
+
+            $member->id_product = $id;
+            $member->details = $request['details'];
+            $member->save();
+            return redirect()->back()->with('message', "บันทึกสำเร็จ");
+        } else {
+
+            $da =  $data->first();
+            $member =  Caption::find($da->id);
+            $member->details = $request['details'];
+            $member->save();
+
+            return redirect()->back()->with('message', "เเก้ไขสำเร็จ");
         }
-
-        $member->id_product = $id;
-        $member->report = json_encode($request['report']);
-        $member->save();
-
-
-        return redirect()->back()->with('message', "รายงานสำเร็จ");
     }
 
     /**
