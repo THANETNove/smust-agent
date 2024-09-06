@@ -1551,3 +1551,12 @@ a {
     right: 8px;
     top: 8px;
 }
+
+.icon-favorite {
+    width: 24px;
+    height: 24px;
+}
+
+.content-box {
+    position: relative;
+}

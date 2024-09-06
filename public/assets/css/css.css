@@ -2177,3 +2177,20 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     cursor: pointer;
 
 }
+
+.heart-icon {
+    fill: #014158;
+    /* ไม่เติมสีด้านใน */
+    stroke: #014158;
+    /* สีของเส้นเป็น #ef742d */
+    stroke-width: 2;
+    /* ความหนาของเส้น */
+    width: 24px;
+    height: 24px;
+}
+
+.box-icon-favorite {
+    position: absolute;
+    right: 24px;
+    top: 0;
+}

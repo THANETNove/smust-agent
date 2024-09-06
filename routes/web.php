@@ -14,6 +14,7 @@ use App\Http\Controllers\PostContentController;
 use App\Http\Controllers\CoAgentController;
 use App\Http\Controllers\ReportPropertySoldController;
 use App\Http\Controllers\CaptionController;
+use App\Http\Controllers\FavoriteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -87,6 +88,7 @@ Route::get('co-create', [CoAgentController::class, 'create'])->name('co-create')
 Route::post('co-agent-store', [CoAgentController::class, 'store'])->name('co-agent-store');
 Route::put('report-product-update/{id}', [ReportPropertySoldController::class, 'update'])->name('report-product-update');
 Route::put('caption-update/{id}', [CaptionController::class, 'update'])->name('caption-update');
+Route::get('click-favorite/{id}', [FavoriteController::class, 'update'])->name('click-favorite');
 
 
 //ส่วนของ admin
