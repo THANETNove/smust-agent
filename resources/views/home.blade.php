@@ -377,7 +377,57 @@
 
                         </div>
                         <p style="margin-top: 12px">ประเภทสัญญา</p>
+                        <style>
+                            .filter-box-input {
+                                display: inline-block;
+                                border: 2px solid transparent;
+                                padding: 10px;
+                                border-radius: 5px;
+                                margin-right: 10px;
+                                transition: border-color 0.3s;
+                                cursor: pointer;
+                            }
+
+                            /* เมื่อ radio button ถูกเลือกจะมีกรอบสีฟ้า */
+                            .form-check-input:checked+.form-check-label {
+                                border: 2px solid #007bff;
+                                /* กรอบสีฟ้า */
+                                border-radius: 5px;
+                                padding: 5px;
+                            }
+
+                            .form-check-label {
+                                cursor: pointer;
+                            }
+                        </style>
+
                         <div class="row-box mb-4">
+                            <div class="form-check-home">
+                                <input class="form-check-input" type="radio" name="sale_rent" value="rent"
+                                    id="filterArea" style="display: none">
+                                <label class="form-check-label3" for="filterArea">
+                                    เช่า
+                                </label>
+                            </div>
+
+                            <div class="form-check-home">
+                                <input class="form-check-input" type="radio" name="sale_rent" value="sale"
+                                    id="filterStation" style="display: none">
+                                <label class="form-check-label3" for="filterStation">
+                                    ซื้อ
+                                </label>
+                            </div>
+
+                            <div class="form-check-home">
+                                <input class="form-check-input" type="radio" name="sale_rent" value="sale_rent"
+                                    id="filterAll" style="display: none">
+                                <label class="form-check-label3" for="filterAll">
+                                    ทั้งหมด
+                                </label>
+                            </div>
+                        </div>
+
+                        {{--  <div class="row-box mb-4">
                             <div class="filter-box-input form-check" data-type="area">
                                 <input class="form-check-input" type="radio" name="sale_rent" value="rent"
                                     id="filterArea" onclick="toggleSelectionBox(this)">
@@ -402,7 +452,7 @@
                                     ทั้งหมด
                                 </label>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <p style="margin-top: 12px">ประเภททรัพย์</p>
                         {{-- <div class="flex-direction-row">

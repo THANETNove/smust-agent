@@ -2233,3 +2233,31 @@ div:where(.swal2-container) div:where(.swal2-popup) {
 
     text-align: center;
 }
+
+.form-check-label3 {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    border: 1px solid #E5E5E5;
+    background-color: #E5E5E5;
+    padding: 4px 24px;
+    border-radius: 50px;
+    transition: border-color 0.3s;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 4px;
+
+}
+
+.form-check-input:checked+.form-check-label3 {
+    border: 1px solid #007bff;
+    /* กำหนดกรอบสีฟ้า */
+    width: auto;
+    height: auto;
+    padding: 4px 24px;
+    border-radius: 50px;
+    background-color: #007bff;
+    color: #ffffff !important;
+    text-align: center;
+
+}
