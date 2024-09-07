@@ -346,7 +346,7 @@
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="{{ route('assets-customer') }}">
+                <form method="POST" action="{{ route('search-data') }}">
                     @csrf
 
                     <div class="modal-body">
@@ -427,53 +427,8 @@
                             </div>
                         </div>
 
-                        {{--  <div class="row-box mb-4">
-                            <div class="filter-box-input form-check" data-type="area">
-                                <input class="form-check-input" type="radio" name="sale_rent" value="rent"
-                                    id="filterArea" onclick="toggleSelectionBox(this)">
-                                <label class="form-check-label" for="filterArea">
-
-                                    เช่า
-                                </label>
-                            </div>
-                            <div class="filter-box-input form-check" data-type="station">
-                                <input class="form-check-input" type="radio" name="sale_rent" value="sale"
-                                    id="filterStation" onclick="toggleSelectionBox(this)">
-                                <label class="form-check-label" for="filterStation">
-
-                                    ซื้อ
-                                </label>
-                            </div>
-                            <div class="filter-box-input form-check" data-type="all">
-                                <input class="form-check-input" type="radio" name="sale_rent" id="filterAll"
-                                    value="sale_rent" onclick="toggleSelectionBox(this)">
-                                <label class="form-check-label" for="filterAll">
-
-                                    ทั้งหมด
-                                </label>
-                            </div>
-                        </div> --}}
-
                         <p style="margin-top: 12px">ประเภททรัพย์</p>
-                        {{-- <div class="flex-direction-row">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="property_type" value="คอนโด"
-                                    id="property_type1">
-                                <label class="form-check-label check-icon" for="property_type1">
-                                    <img class="property-img" src="{{ URL::asset('/assets/image/home/apartment.png') }}">
-                                    <p class="font-size-12-black text-lr">คอนโด</p>
-                                </label>
-                            </div>
-                            &nbsp; &nbsp; &nbsp; &nbsp;
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="property_type" value="บ้าน"
-                                    id="property_type2">
-                                <label class="form-check-label check-icon" for="property_type2">
-                                    <img class="property-img" src="{{ URL::asset('/assets/image/home/cottage.png') }}">
-                                    <p class="font-size-12-black ">บ้าน</p>
-                                </label>
-                            </div>
-                        </div> --}}
+
                         <style>
 
                         </style>
@@ -526,7 +481,7 @@
                             </div>
                         </div>
 
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" name="usable_area">
                             <option selected>พื้นที่ใช้สอย</option>
                             <option value="29">น้อยกว่า 30 ตร.ม.</option>
                             <option value="30-50">30-50 ตร.ม.</option>
@@ -535,7 +490,7 @@
                             <option value="1000-5000">1,000-5,000 ตร.ม.</option>
                             <option value="5001">มากกว่า 5,000 ตร.ม.</option>
                         </select>
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" name="price_range">
                             <option selected>ช่วงราคา</option>
                             <option value="9999">น้อยกว่า 10,000 บาท</option>
                             <option value="10000-15000">10,000-15,0000 บาท</option>
@@ -551,7 +506,7 @@
                             <option value="5000000-10000000">5-10 ล้าน</option>
                             <option value="10000001">มากกว่า 10 ล้าน</option>
                         </select>
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" name="date_posted">
                             <option selected>วันที่โพส</option>
                             <option value="1">วันนี้</option>
                             <option value="2">สัปดาห์นี้</option>

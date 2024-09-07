@@ -95,6 +95,7 @@ class HomeController extends Controller
     public function indexSearchData(Request $request)
     {
 
+        dd($request->all());
 
         $dataHomeQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.status_home', 'on')
