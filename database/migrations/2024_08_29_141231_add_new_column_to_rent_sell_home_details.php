@@ -37,6 +37,7 @@ return new class extends Migration
             $table->string('user_id')->nullable()->comment('id user')->after('user_phone');
             $table->string('reservation_amount_baht')->nullable()->comment('จำนวนเงินจอง* (บาท) ขาย')->after('user_id');
             $table->string('product_new')->nullable()->comment('product เเบบใหม่')->after('reservation_amount_baht');
+            $table->string('notifications')->nullable()->comment(' เเจ้งเตื่อน')->after('product_new');
         });
     }
 
