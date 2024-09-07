@@ -3,7 +3,8 @@
         <div class="box-head-home">
             @include('layouts.offcanvasManu')
             <div>
-                <p class="p-login">ทรัพย์ของฉัน ({{ $dataCount }}) </p>
+                <p class="p-login" id="data-count-1">ทรัพย์ของฉัน ({{ $dataCount }}) </p>
+                <p class="p-login" id="data-count-2">ทรัพย์ของฉัน ({{ $dataCount2 }}) </p>
             </div>
             <div class="box-number-count">
                 <div class="number-count"> 5</div>

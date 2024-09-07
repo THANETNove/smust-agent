@@ -27,7 +27,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         // Create base query
         $dataHomeQuery = DB::table('rent_sell_home_details')
@@ -43,15 +43,20 @@ class HomeController extends Controller
             )
             ->orderBy('rent_sell_home_details.id', 'DESC');
 
+        // dd($request->all());
+
         // Apply authorization logic if needed
         $user = Auth::user();
         //$dataHomeQuery->where('code_admin', $user->code_admin);
 
         // Use caching if possible for better performance
-        $dataCount = Cache::remember('dataHomeCount', 0, function () use ($dataHomeQuery) {
-            return $dataHomeQuery->count();
+        $dataCount = Cache::remember('dataHomeCount_with_code_admin', 0, function () use ($dataHomeQuery) {
+            return (clone $dataHomeQuery)->whereNotNull('code_admin')->count();
         });
 
+        $dataCount2 = Cache::remember('dataHomeCount_without_code_admin', 0, function () use ($dataHomeQuery) {
+            return (clone $dataHomeQuery)->whereNull('code_admin')->count();
+        });
         // Separate cache keys for dataHome and dataHome2 using the same base query
         $dataHome = Cache::remember('dataHomePage_with_code_admin', 0, function () use ($dataHomeQuery) {
             return (clone $dataHomeQuery)->whereNotNull('code_admin')->paginate(100);
@@ -80,7 +85,8 @@ class HomeController extends Controller
             'data' => $data,
             'dataHome' => $dataHome,
             'dataHome2' => $dataHome2,
-            'dataCount' => $dataCount
+            'dataCount' => $dataCount,
+            'dataCount2' =>  $dataCount2
         ]);
     }
 

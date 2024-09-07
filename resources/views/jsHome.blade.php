@@ -92,6 +92,8 @@
 
 
         // ถ้ามีค่าแท็บที่ถูกเลือกใน localStorage
+
+
         if (activeTab) {
             // เอาคลาส active ออกจากแท็บทั้งหมด
             document.querySelectorAll('.box-link-manu-home').forEach(tab => {
@@ -112,6 +114,7 @@
 
         // เพิ่ม Event Listener ให้กับแท็บทั้งหมด
         document.querySelectorAll('.box-link-manu-home').forEach(tab => {
+
             tab.addEventListener('click', function() {
                 // เก็บ ID ของแท็บที่ถูกเลือกลงใน localStorage
                 localStorage.setItem('activeTabHome', this.id);
@@ -121,10 +124,34 @@
 
     });
     document.addEventListener('DOMContentLoaded', function() {
+        const activeTab = localStorage.getItem('activeTabHome');
+        if (activeTab == "home-tab") {
+            document.getElementById('data-count-1').style.display = 'none';
+            document.getElementById('data-count-2').style.display = 'block';
+        } else {
+            document.getElementById('data-count-1').style.display = 'block';
+            document.getElementById('data-count-2').style.display = 'none';
+        }
+
+
         document.querySelector('.box-nav-link-home').addEventListener('click', function() {
             const url = new URL(window.location.href);
             url.searchParams.delete('page'); // ลบพารามิเตอร์ page ออกจาก URL
             history.replaceState(null, '', url.toString()); // ปรับปรุง URL โดยไม่โหลดหน้าใหม่
-        });
+
+            const activeTab = localStorage.getItem('activeTabHome');
+
+            if (activeTab == "home-tab") {
+                document.getElementById('data-count-1').style.display = 'none';
+                document.getElementById('data-count-2').style.display = 'block';
+            } else {
+                document.getElementById('data-count-1').style.display = 'block';
+                document.getElementById('data-count-2').style.display = 'none';
+            }
+
+        })
+
+
+
     });
 </script>
