@@ -29,18 +29,73 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        dd($request->all());
         // Create base query
         $dataHomeQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.status_home', 'on')
             ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
             ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
-            ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
-            ->select(
-                'rent_sell_home_details.*',
-                'provinces.name_th AS provinces_name_th',
-                'districts.name_th AS districts_name_th',
-                'amphures.name_th AS amphures_name_th'
-            )
+            ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id');
+
+        // ตรวจสอบค่าที่รับจาก request
+        if ($request->all()) {
+
+            if ($request->area_station == 'area') {
+                if ($request->has('searchProvinces')) {
+                    $dataHomeQuery->where('rent_sell_home_details.provinces', $request->input('searchProvinces'));
+                }
+                if ($request->has('searchAmphures')) {
+                    $dataHomeQuery->where('rent_sell_home_details.amphures', $request->input('searchAmphures'));
+                }
+                if ($request->has('searchDistricts')) {
+                    $dataHomeQuery->where('rent_sell_home_details.districts', $request->input('searchDistricts'));
+                }
+            } else {
+                if ($request->has('stations')) {
+                    $dataHomeQuery->where('rent_sell_home_details.train_name', $request->input('stations'));
+                }
+            }
+
+            if ($request->has('property_type')) {
+                $dataHomeQuery->where('rent_sell_home_details.property_type', $request->input('property_type'));
+            }
+            if ($request->has('usable_area')) {
+
+                $usableArea = $request->input('usable_area');
+
+                if ($usableArea) {
+                    if ($usableArea === '29') {
+                        // ค่าที่เลือกคือ 'น้อยกว่า 30 ตร.ม.'
+                        $dataHomeQuery->where('rent_sell_home_details.room_width', '<', 30);
+                    } elseif ($usableArea === '30-50') {
+                        // ค่าที่เลือกคือ '30-50 ตร.ม.'
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.room_width', [30, 50]);
+                    } elseif ($usableArea === '50-100') {
+                        // ค่าที่เลือกคือ '50-100 ตร.ม.'
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.room_width', [50, 100]);
+                    } elseif ($usableArea === '100-1000') {
+                        // ค่าที่เลือกคือ '100-1,000 ตร.ม.'
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.room_width', [100, 1000]);
+                    } elseif ($usableArea === '1000-5000') {
+                        // ค่าที่เลือกคือ '1,000-5,000 ตร.ม.'
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.room_width', [1000, 5000]);
+                    } elseif ($usableArea === '5001') {
+                        // ค่าที่เลือกคือ 'มากกว่า 5,000 ตร.ม.'
+                        $dataHomeQuery->where('rent_sell_home_details.room_width', '>', 5000);
+                    }
+                }
+            }
+            if ($request->has('searchRent_sell')) {
+                $dataHomeQuery->where('rent_sell_home_details.rent_sell', $request->input('price_range'));
+            }
+        }
+
+        $dataHomeQuery->select(
+            'rent_sell_home_details.*',
+            'provinces.name_th AS provinces_name_th',
+            'districts.name_th AS districts_name_th',
+            'amphures.name_th AS amphures_name_th'
+        )
             ->orderBy('rent_sell_home_details.id', 'DESC');
 
         // dd($request->all());
@@ -95,13 +150,15 @@ class HomeController extends Controller
     public function indexSearchData(Request $request)
     {
 
-        dd($request->all());
+
 
         $dataHomeQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.status_home', 'on')
             ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
             ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
             ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
+
+
             ->select(
                 'rent_sell_home_details.*',
                 'provinces.name_th AS provinces_name_th',

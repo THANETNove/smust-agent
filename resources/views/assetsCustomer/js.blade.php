@@ -81,9 +81,11 @@
     });
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('.box-nav-link-home').addEventListener('click', function() {
+       
             const url = new URL(window.location.href);
             url.searchParams.delete('page'); // ลบพารามิเตอร์ page ออกจาก URL
             history.replaceState(null, '', url.toString()); // ปรับปรุง URL โดยไม่โหลดหน้าใหม่
+
         });
     });
 </script>

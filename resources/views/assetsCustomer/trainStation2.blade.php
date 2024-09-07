@@ -32,7 +32,7 @@
         <label class="input-group-icon" for="">
             <i class="fa-solid fa-train-subway" style="color: {{ $lineStyles[$lineCode]['bgColor'] ?? '#FFFFFF' }};"></i>
         </label>
-        <select class="form-select mt-3 station-select" name="stations" id="station_{{ $lineCode }}"
+        <select class="form-select mt-3 station-select station_name" name="stations" id="station_{{ $lineCode }}"
             style="color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
             <option selected disabled>สถานีรถไฟฟ้าที่ใกล้ที่สุด</option>
 

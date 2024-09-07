@@ -593,8 +593,8 @@
                         </div>
 
                         <div class="mt-4">
-                            <input type="text" id="area-station" name="area_station" value="area"
-                                style="display: none">
+                            {{-- <input type="text" id="area-station" name="area_station" value="area"
+                                style="display: none"> --}}
                             <div class="id-address">
                                 @include('layouts.address')
                             </div>

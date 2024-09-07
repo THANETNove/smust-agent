@@ -481,8 +481,8 @@
                             </div>
                         </div>
 
-                        <select class="form-select" aria-label="Default select example" name="usable_area">
-                            <option selected>พื้นที่ใช้สอย</option>
+                        <select class="form-select mb-3" aria-label="Default select example" name="usable_area">
+                            <option selected disabled>พื้นที่ใช้สอย</option>
                             <option value="29">น้อยกว่า 30 ตร.ม.</option>
                             <option value="30-50">30-50 ตร.ม.</option>
                             <option value="50-100">50-100 ตร.ม.</option>
@@ -490,8 +490,8 @@
                             <option value="1000-5000">1,000-5,000 ตร.ม.</option>
                             <option value="5001">มากกว่า 5,000 ตร.ม.</option>
                         </select>
-                        <select class="form-select" aria-label="Default select example" name="price_range">
-                            <option selected>ช่วงราคา</option>
+                        <select class="form-select mb-3" aria-label="Default select example" name="price_range">
+                            <option selected disabled>ช่วงราคา</option>
                             <option value="9999">น้อยกว่า 10,000 บาท</option>
                             <option value="10000-15000">10,000-15,0000 บาท</option>
                             <option value="15000-20000">15,000-20,000 บาท</option>
@@ -507,7 +507,7 @@
                             <option value="10000001">มากกว่า 10 ล้าน</option>
                         </select>
                         <select class="form-select" aria-label="Default select example" name="date_posted">
-                            <option selected>วันที่โพส</option>
+                            <option selected disabled>วันที่โพส</option>
                             <option value="1">วันนี้</option>
                             <option value="2">สัปดาห์นี้</option>
                             <option value="3">เดือนนี้</option>
