@@ -26,13 +26,13 @@
                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
                     tabindex="0">
                     <div class="row">
-                        @foreach ($dataHome as $home)
+                        @foreach ($dataHome2 as $home2)
                             @php
-                                $imgUrl = json_decode(htmlspecialchars_decode($home->image));
+                                $imgUrl = json_decode(htmlspecialchars_decode($home2->image));
                             @endphp
-                            <a href="{{ url('get-detall', $home->id) }}">
+                            <a href="{{ url('get-detall', $home2->id) }}">
                                 <div class="card-new">
-                                    @if (Carbon\Carbon::parse($home->created_at)->diffInDays(Carbon\Carbon::now()) < 4)
+                                    @if (Carbon\Carbon::parse($home2->created_at)->diffInDays(Carbon\Carbon::now()) < 4)
                                         <div class="box-new">NEW</div>
                                     @endif
                                     <div class="box-img-new">
@@ -40,19 +40,19 @@
                                             data-src="{{ URL::asset('/img/product/' . $imgUrl[0]) }}">
                                     </div>
                                     <div class="box-name-new">
-                                        <p class="name-content">{{ $home->building_name }}</p>
+                                        <p class="name-content">{{ $home2->building_name }}</p>
                                         <p class="name-details">
                                             <img class="img-icon "
                                                 src="{{ URL::asset('/assets/image/home/location_on.png') }}">
-                                            {{ $home->districts_name_th }} {{ $home->amphures_name_th }}
-                                            {{ $home->provinces_name_th }}
+                                            {{ $home2->districts_name_th }} {{ $home2->amphures_name_th }}
+                                            {{ $home2->provinces_name_th }}
                                         </p>
-                                        @if ($home->train_name != 'ไม่มี' && $home->train_name)
-                                            @if ($home->time_arrive < '61')
+                                        @if ($home2->train_name != 'ไม่มี' && $home2->train_name)
+                                            @if ($home2->time_arrive < '61')
                                                 <p class="name-details">
                                                     <img class="img-icon"
                                                         src="{{ URL::asset('/assets/image/home/directions_subway.png') }}">
-                                                    {{ $home->train_name }}
+                                                    {{ $home2->train_name }}
                                                 </p>
                                             @endif
                                         @endif
@@ -61,69 +61,70 @@
                                             <span class="img-icon-ri2">
                                                 <img class="img-icon img-icon-ri"
                                                     src="{{ URL::asset('/assets/image/home/bed.png') }}">
-                                                {{ $home->bedroom }} ห้องนอน
+                                                {{ $home2->bedroom }} ห้องนอน
                                             </span>
                                             <span>
                                                 <img class="img-icon img-icon-ri"
                                                     src="{{ URL::asset('/assets/image/home/screenshot_frame.png') }}">
-                                                {{ $home->room_width }} ตร.ม.
+                                                {{ $home2->room_width }} ตร.ม.
                                             </span>
                                         </p>
                                     </div>
 
                                     @php
-                                        $price = $home->sell_price;
+                                        $price = $home2->sell_price;
                                         $priceString = (string) $price;
                                         if (strlen($priceString) > 6) {
                                             $priceString = str_replace(',', '', $priceString);
                                             $formattedPrice = number_format($priceString / 1000000, 1) . ' ล้าน';
                                             $price_sell = $formattedPrice;
                                         } else {
-                                            $price_sell = number_format($home->sell_price) . ' บาท';
+                                            $price_sell = number_format($home2->sell_price) . ' บาท';
                                         }
-                                        $rental_ = $home->rental_price;
+                                        $rental_ = $home2->rental_price;
                                         $rental_String = (string) $rental_;
                                         if (strlen($rental_String) > 6) {
                                             $rental_String = str_replace(',', '', $rental_String);
                                             $formatted_rental = number_format($rental_String / 1000000, 1) . ' ล้าน';
                                             $rental_price = $formatted_rental;
                                         } else {
-                                            $rental_price = number_format($home->rental_price) . ' บาท';
+                                            $rental_price = number_format($home2->rental_price) . ' บาท';
                                         }
                                     @endphp
 
 
                                     <div class="box-width-rent-sell">
-                                        @if ($home->rent_sell == 'เช่า')
+                                        @if ($home2->rent_sell == 'เช่า')
                                             <span
-                                                class="rent-sell-primary absolute-rent-sell">{{ $home->rent_sell }}</span>
-                                        @elseif ($home->rent_sell == 'ขาย')
-                                            <span class="rent-sell-yellow absolute-rent-sell">{{ $home->rent_sell }}</span>
-                                        @elseif ($home->rent_sell == 'เช่า/ขาย' || $home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
-                                            <span class="rent-sell-green absolute-rent-sell">{{ $home->rent_sell }}</span>
+                                                class="rent-sell-primary absolute-rent-sell">{{ $home2->rent_sell }}</span>
+                                        @elseif ($home2->rent_sell == 'ขาย')
+                                            <span
+                                                class="rent-sell-yellow absolute-rent-sell">{{ $home2->rent_sell }}</span>
+                                        @elseif ($home2->rent_sell == 'เช่า/ขาย' || $home2->rent_sell == 'เช่าซื้อ/ขายผ่อน')
+                                            <span class="rent-sell-green absolute-rent-sell">{{ $home2->rent_sell }}</span>
                                         @endif
 
-                                        @if ($home->rent == 'เช่า')
-                                            <span class="rent-sell-primary absolute-rent-sell">{{ $home->rent }}</span>
+                                        @if ($home2->rent == 'เช่า')
+                                            <span class="rent-sell-primary absolute-rent-sell">{{ $home2->rent }}</span>
                                         @endif
 
-                                        @if ($home->sell == 'ขาย')
-                                            <span class="rent-sell-yellow absolute-rent-sell">{{ $home->sell }}</span>
+                                        @if ($home2->sell == 'ขาย')
+                                            <span class="rent-sell-yellow absolute-rent-sell">{{ $home2->sell }}</span>
                                         @endif
 
                                         <div class="box-price-new">
 
-                                            @if (($home->sell_price && $home->rent_sell == 'เช่า/ขาย') || $home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
+                                            @if (($home2->sell_price && $home2->rent_sell == 'เช่า/ขาย') || $home2->rent_sell == 'เช่าซื้อ/ขายผ่อน')
                                                 <p class="price-new">฿
-                                                    {{ number_format($home->rental_price) }}/m
+                                                    {{ number_format($home2->rental_price) }}/m
                                                 </p>
                                                 <p class="price-new price-top-sell2">฿ {{ $price_sell }}</p>
                                             @else
-                                                @if (($home->rental_price && $home->rent_sell == 'เช่า') || $home->rent == 'เช่า')
-                                                    <p class="price-new">฿ {{ number_format($home->rental_price) }}/m
+                                                @if (($home2->rental_price && $home2->rent_sell == 'เช่า') || $home2->rent == 'เช่า')
+                                                    <p class="price-new">฿ {{ number_format($home2->rental_price) }}/m
                                                     </p>
                                                 @endif
-                                                @if (($home->sell_price && $home->rent_sell == 'ขาย') || $home->sell == 'ขาย')
+                                                @if (($home2->sell_price && $home2->rent_sell == 'ขาย') || $home2->sell == 'ขาย')
                                                     <p class="price-new">฿{{ $price_sell }}</p>
                                                 @endif
                                             @endif
@@ -136,6 +137,10 @@
                                 </div>
                             </a>
                         @endforeach
+                    </div>
+                    <div class="mt-5">
+                        {!! $dataHome2->links() !!}
+
                     </div>
                 </div>
                 <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
@@ -250,15 +255,16 @@
                             </a>
                         @endforeach
                     </div>
+                    <div class="mt-5">
+                        {!! $dataHome->links() !!}
+
+                    </div>
                 </div>
             </div>
 
 
         </div>
-        <div class="mt-5">
-            {!! $dataHome->links() !!}
 
-        </div>
     </div>
 
     <!-- Modal -->

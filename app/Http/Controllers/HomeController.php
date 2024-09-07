@@ -29,7 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+        // Create base query
         $dataHomeQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.status_home', 'on')
             ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
@@ -40,24 +40,28 @@ class HomeController extends Controller
                 'provinces.name_th AS provinces_name_th',
                 'districts.name_th AS districts_name_th',
                 'amphures.name_th AS amphures_name_th'
-            );
+            )
+            ->orderBy('rent_sell_home_details.id', 'DESC');
 
-        // Apply authorization logic
+        // Apply authorization logic if needed
         $user = Auth::user();
         //$dataHomeQuery->where('code_admin', $user->code_admin);
-
-
-        $dataHomeQuery->orderBy('rent_sell_home_details.id', 'DESC');
 
         // Use caching if possible for better performance
         $dataCount = Cache::remember('dataHomeCount', 0, function () use ($dataHomeQuery) {
             return $dataHomeQuery->count();
         });
 
-        $dataHome = Cache::remember('dataHomePage', 0, function () use ($dataHomeQuery) {
-            return $dataHomeQuery->paginate(100);
+        // Separate cache keys for dataHome and dataHome2 using the same base query
+        $dataHome = Cache::remember('dataHomePage_with_code_admin', 0, function () use ($dataHomeQuery) {
+            return (clone $dataHomeQuery)->whereNotNull('code_admin')->paginate(100);
         });
 
+        $dataHome2 = Cache::remember('dataHomePage_without_code_admin', 0, function () use ($dataHomeQuery) {
+            return (clone $dataHomeQuery)->whereNull('code_admin')->paginate(100);
+        });
+
+        // Cache provinces and train station data
         $data = Cache::remember('provincesData', 0, function () {
             return DB::table('provinces')->orderBy('name_th', 'ASC')->get();
         });
@@ -69,13 +73,17 @@ class HomeController extends Controller
                 ->get();
         });
 
+
+
         return view('home', [
             'train_station' => $train_station,
             'data' => $data,
             'dataHome' => $dataHome,
+            'dataHome2' => $dataHome2,
             'dataCount' => $dataCount
         ]);
     }
+
 
 
     public function indexSearchData(Request $request)
