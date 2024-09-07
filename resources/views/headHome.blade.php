@@ -17,7 +17,7 @@
                 placeholder="พิมพ์ค้นหา...">
         </div>
         <div class="box-filter-home">
-            <div>
+            <div data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <img class="icon-filterData" src="{{ URL::asset('/assets/image/welcome/filterData.png') }}">
             </div>
             <div>
