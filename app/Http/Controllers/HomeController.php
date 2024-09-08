@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
+
+
 
 
 
@@ -29,7 +32,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        dd($request->all());
+        //   dd($request->all());
         // Create base query
         $dataHomeQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.status_home', 'on')
@@ -85,8 +88,78 @@ class HomeController extends Controller
                     }
                 }
             }
-            if ($request->has('searchRent_sell')) {
-                $dataHomeQuery->where('rent_sell_home_details.rent_sell', $request->input('price_range'));
+            if ($request->has('sale_rent')) {
+                $priceRange = $request->input('price_range');
+
+                // ตรวจสอบประเภทการขายหรือเช่า
+                if ($request->input('sale_rent') == 'sale') {
+                    // ตรวจสอบช่วงราคา
+                    if (strpos($priceRange, '-') !== false) {
+                        // แยกช่วงราคา
+                        [$minPrice, $maxPrice] = explode('-', $priceRange);
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.sell_price', [$minPrice, $maxPrice]);
+                    } elseif ($priceRange == '10000001') {
+                        // ราคาเกิน 10 ล้าน
+                        $dataHomeQuery->where('rent_sell_home_details.sell_price', '>', 10000000);
+                    } else {
+                        // น้อยกว่า 10,000 บาท
+                        $dataHomeQuery->where('rent_sell_home_details.sell_price', '<', 10000);
+                    }
+                } elseif ($request->input('sale_rent') == 'rent') {
+                    // การเช่าจะทำงานแบบเดียวกันกับการขาย
+                    if (strpos($priceRange, '-') !== false) {
+                        [$minPrice, $maxPrice] = explode('-', $priceRange);
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.rental_price', [$minPrice, $maxPrice]);
+                    } elseif ($priceRange == '10000001') {
+                        // ราคาเช่าเกิน 10 ล้าน
+                        $dataHomeQuery->where('rent_sell_home_details.rental_price', '>', 10000000);
+                    } else {
+                        // น้อยกว่า 10,000 บาท
+                        $dataHomeQuery->where('rent_sell_home_details.rental_price', '<', 10000);
+                    }
+                } else {
+                    // กรณีเลือกทั้งการขายและเช่า
+                    if (strpos($priceRange, '-') !== false) {
+                        [$minPrice, $maxPrice] = explode('-', $priceRange);
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.sell_price', [$minPrice, $maxPrice])
+                            ->orWhereBetween('rent_sell_home_details.rental_price', [$minPrice, $maxPrice]);
+                    } elseif ($priceRange == '10000001') {
+                        // เกิน 10 ล้าน
+                        $dataHomeQuery->where('rent_sell_home_details.sell_price', '>', 10000000)
+                            ->orWhere('rent_sell_home_details.rental_price', '>', 10000000);
+                    } else {
+                        // น้อยกว่า 10,000 บาท
+                        $dataHomeQuery->where('rent_sell_home_details.sell_price', '<', 10000)
+                            ->orWhere('rent_sell_home_details.rental_price', '<', 10000);
+                    }
+                }
+            }
+
+            if ($request->has('date_posted')) {
+                $datePosted = $request->input('date_posted');
+
+                switch ($datePosted) {
+                    case '1':
+                        // โพสต์วันนี้
+                        $dataHomeQuery->whereDate('rent_sell_home_details.created_at', Carbon::today());
+                        break;
+                    case '2':
+                        // โพสต์ในสัปดาห์นี้
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.created_at', [Carbon::now()->startOfWeek(), Carbon::now()]);
+                        break;
+                    case '3':
+                        // โพสต์ในเดือนนี้
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.created_at', [Carbon::now()->startOfMonth(), Carbon::now()]);
+                        break;
+                    case '4':
+                        // โพสต์ภายใน 1-6 เดือนที่ผ่านมา
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.created_at', [Carbon::now()->subMonths(6), Carbon::now()]);
+                        break;
+                    case '5':
+                        // โพสต์มากกว่า 6 เดือนที่ผ่านมา
+                        $dataHomeQuery->where('rent_sell_home_details.created_at', '<', Carbon::now()->subMonths(6));
+                        break;
+                }
             }
         }
 
