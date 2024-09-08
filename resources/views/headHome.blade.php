@@ -6,6 +6,16 @@
                 <p class="p-login" id="data-count-1">ทรัพย์ของฉัน ({{ $dataCount }}) </p>
                 <p class="p-login" id="data-count-2">ทรัพย์ของฉัน ({{ $dataCount2 }}) </p>
             </div>
+
+            @php
+                $query_co = DB::table('assets_customers_wants')->where('status', 1)->where('notifications', 1)->count();
+                $query_home = DB::table('rent_sell_home_details')
+                    ->where('status_home', 'on')
+                    ->where('cross', 0)
+                    ->where('notifications', 1)
+                    ->count();
+                dd($query_co, $query_home);
+            @endphp
             <div class="box-number-count">
                 <div class="number-count"> 5</div>
                 <img class="vector-icon" src="{{ URL::asset('/assets/image/welcome/Vector.png') }}">

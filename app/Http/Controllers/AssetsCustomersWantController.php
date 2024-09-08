@@ -146,6 +146,8 @@ class AssetsCustomersWantController extends Controller
         $member->provinces = $request['provinces'];
         $member->districts = $request['districts'];
         $member->amphures = $request['amphures'];
+        $member->notifications = 1;
+
         if ($request->has('station') && $request['station'] != 'null') {
             $train = DB::table('train_station')
                 ->where('id', $request['station'])

@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('webPhone')->nullable()->comment('webPhone');
             $table->string('webLine')->nullable()->comment('webLine');
             $table->string('webFacebook')->nullable()->comment('webFacebook');
+            $table->string('notifications')->nullable()->comment('เเจ้งเตื่อน');
             $table->timestamps();
         });
     }

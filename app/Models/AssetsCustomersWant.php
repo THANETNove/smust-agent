@@ -25,6 +25,7 @@ class AssetsCustomersWant extends Model
         'webName',
         'webPhone',
         'webLine',
-        'webFacebook'
+        'webFacebook',
+        'notifications'
     ];
 }
