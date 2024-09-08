@@ -51,6 +51,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/search-data', [HomeController::class, 'index'])->name('search-data');
 Route::get('/search-data', [HomeController::class, 'index'])->name('search-data');
 Route::get('/search-favorites', [HomeController::class, 'indexFavorites'])->name('search-favorites');
+Route::get('/search-name', [HomeController::class, 'indexName'])->name('search-name');
 Route::get('/reset-password', [ForgotYourPasswordController::class, 'index'])->name('reset-password');
 Route::post('/reset-check-password', [ForgotYourPasswordController::class, 'resetCheck'])->name('reset-check-password');
 Route::get('/reset-check-passwordId/{id}', [ForgotYourPasswordController::class, 'edit'])->name('reset-check-passwordId');

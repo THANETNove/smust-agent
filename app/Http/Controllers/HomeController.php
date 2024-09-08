@@ -65,6 +65,7 @@ class HomeController extends Controller
                     }
                 } else {
                     if ($request->has('stations')) {
+
                         $dataHomeQuery->where('rent_sell_home_details.train_name', $request->input('stations'));
                     }
                 }
@@ -286,6 +287,71 @@ class HomeController extends Controller
             ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
             ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
             ->join('favorites', 'rent_sell_home_details.id', '=', 'favorites.id_product')
+            ->select(
+                'rent_sell_home_details.*',
+                'provinces.name_th AS provinces_name_th',
+                'districts.name_th AS districts_name_th',
+                'amphures.name_th AS amphures_name_th'
+            )->orderBy('rent_sell_home_details.id', 'DESC');
+
+
+
+        // dd($request->all());
+
+        // Apply authorization logic if needed
+        $user = Auth::user();
+        //$dataHomeQuery->where('code_admin', $user->code_admin);
+
+        // Use caching if possible for better performance
+        $dataCount = Cache::remember('dataHomeCount_with_code_admin', 0, function () use ($dataHomeQuery) {
+            return (clone $dataHomeQuery)->whereNotNull('code_admin')->count();
+        });
+
+        $dataCount2 = Cache::remember('dataHomeCount_without_code_admin', 0, function () use ($dataHomeQuery) {
+            return (clone $dataHomeQuery)->whereNull('code_admin')->count();
+        });
+        // Separate cache keys for dataHome and dataHome2 using the same base query
+        $dataHome = Cache::remember('dataHomePage_with_code_admin', 0, function () use ($dataHomeQuery) {
+            return (clone $dataHomeQuery)->whereNotNull('code_admin')->paginate(100)->appends(request()->all());
+        });
+
+        $dataHome2 = Cache::remember('dataHomePage_without_code_admin', 0, function () use ($dataHomeQuery) {
+            return (clone $dataHomeQuery)->whereNull('code_admin')->paginate(100)->appends(request()->all());
+        });
+
+        // Cache provinces and train station data
+        $data = Cache::remember('provincesData', 0, function () {
+            return DB::table('provinces')->orderBy('name_th', 'ASC')->get();
+        });
+
+        $train_station = Cache::remember('trainStationData', 0, function () {
+            return DB::table('train_station')
+                ->select('train_station.id', 'train_station.station_name_th')
+                ->orderBy('station_name_th', 'ASC')
+                ->get();
+        });
+
+
+
+        return view('home', [
+            'train_station' => $train_station,
+            'data' => $data,
+            'dataHome' => $dataHome,
+            'dataHome2' => $dataHome2,
+            'dataCount' => $dataCount,
+            'dataCount2' =>  $dataCount2
+        ]);
+    }
+    public function indexName(Request $request)
+    {
+        $search = $request->input('search_name'); // รับค่าที่ผู้ใช้พิมพ์
+        // Create base query
+        $dataHomeQuery = DB::table('rent_sell_home_details')
+            ->where('rent_sell_home_details.status_home', 'on')
+            ->where('rent_sell_home_details.building_name', 'LIKE', "%$search%")
+            ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
+            ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
+            ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
             ->select(
                 'rent_sell_home_details.*',
                 'provinces.name_th AS provinces_name_th',

@@ -11,11 +11,31 @@
                 <img class="vector-icon" src="{{ URL::asset('/assets/image/welcome/Vector.png') }}">
             </div>
         </div>
-        <div class="box-search-home mb-3">
+        {{--  <div class="box-search-home mb-3">
             <img class="icon-search" src="{{ URL::asset('/assets/image/welcome/search.png') }}">
-            <input type="text" class="form-control box-filter_alt" id="exampleFormControlInput1"
+            <input type="text" name="search_name" class="form-control box-filter_alt" id="exampleFormControlInput1"
                 placeholder="พิมพ์ค้นหา...">
-        </div>
+        </div> --}}
+        <form action="{{ url('/search-name') }}" method="GET" id="searchForm">
+            <div class="box-search-home mb-3">
+                <img class="icon-search" src="{{ URL::asset('/assets/image/welcome/search.png') }}">
+                <input type="text" name="search_name" class="form-control box-filter_alt"
+                    id="exampleFormControlInput1" placeholder="พิมพ์ค้นหา..." onkeyup="doneTyping()">
+            </div>
+        </form>
+        <script>
+            let typingTimer; // ตัวแปรเก็บ timer
+            let doneTypingInterval = 1000; // หน่วงเวลา 1 วินาที (1000 มิลลิวินาที)
+
+            // ฟังก์ชันเรียกใช้เมื่อผู้ใช้พิมพ์
+            function doneTyping() {
+                clearTimeout(typingTimer); // ยกเลิก timer ถ้ายังไม่ครบกำหนด
+                typingTimer = setTimeout(function() {
+                    document.getElementById('searchForm').submit(); // ส่งฟอร์มเมื่อหยุดพิมพ์แล้ว 1 วินาที
+                }, doneTypingInterval);
+            }
+        </script>
+
         <div class="box-filter-home">
             <div data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <img class="icon-filterData" src="{{ URL::asset('/assets/image/welcome/filterData.png') }}">
