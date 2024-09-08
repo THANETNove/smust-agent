@@ -11,7 +11,7 @@
                 <img class="vector-icon" src="{{ URL::asset('/assets/image/welcome/Vector.png') }}">
             </div>
         </div>
-        <div class="box-search-home">
+        <div class="box-search-home mb-3">
             <img class="icon-search" src="{{ URL::asset('/assets/image/welcome/search.png') }}">
             <input type="text" class="form-control box-filter_alt" id="exampleFormControlInput1"
                 placeholder="พิมพ์ค้นหา...">
@@ -23,10 +23,15 @@
             <div data-bs-toggle="modal" data-bs-target="#exampleModal2">
                 <img class="icon-filter" src="{{ URL::asset('/assets/image/welcome/filter.png') }}">
             </div>
-            <div>
 
-                <img class="icon-filterLove" src="{{ URL::asset('/assets/image/welcome/filterLove.png') }}">
-            </div>
+            <a href="{{ url('search-favorites') }}">
+                <div>
+
+                    <img class="icon-filterLove" src="{{ URL::asset('/assets/image/welcome/filterLove.png') }}">
+                </div>
+            </a>
+
+
         </div>
 
         <div class="box-nav-link-home nav nav-tabs" id="myTab" role="tablist">
