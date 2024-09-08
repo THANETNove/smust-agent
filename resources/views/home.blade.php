@@ -377,29 +377,7 @@
 
                         </div>
                         <p style="margin-top: 12px">ประเภทสัญญา</p>
-                        <style>
-                            .filter-box-input {
-                                display: inline-block;
-                                border: 2px solid transparent;
-                                padding: 10px;
-                                border-radius: 5px;
-                                margin-right: 10px;
-                                transition: border-color 0.3s;
-                                cursor: pointer;
-                            }
 
-                            /* เมื่อ radio button ถูกเลือกจะมีกรอบสีฟ้า */
-                            .form-check-input:checked+.form-check-label {
-                                border: 2px solid #007bff;
-                                /* กรอบสีฟ้า */
-                                border-radius: 5px;
-                                padding: 5px;
-                            }
-
-                            .form-check-label {
-                                cursor: pointer;
-                            }
-                        </style>
 
                         <div class="row-box mb-4">
                             <div class="form-check-home">

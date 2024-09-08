@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\AssetsCustomersWant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Carbon\Carbon;
 
 
@@ -30,100 +32,82 @@ class AssetsCustomersWantController extends Controller
     public function index(Request $request)
     {
 
-        $wantsData = Cache::remember("wantsData_", 60, function () use ($request) {
-            $query = DB::table('assets_customers_wants')
-                ->where('assets_customers_wants.status', 1)
-                ->leftJoin('users', 'assets_customers_wants.user_id', '=', 'users.id')
-                ->join('provinces', 'assets_customers_wants.provinces', '=', 'provinces.id')
-                ->join('amphures', 'assets_customers_wants.districts', '=', 'amphures.id')
-                ->join('districts', 'assets_customers_wants.amphures', '=', 'districts.id')
-                ->leftJoin('train_station', 'assets_customers_wants.station', '=', 'train_station.id')
-                ->select(
-                    'assets_customers_wants.*',
-                    'users.first_name',
-                    'users.last_name',
-                    'users.phone',
-                    'users.image',
-                    'users.line_id',
-                    'users.facebook_id',
-                    'provinces.name_th AS provinces_name_th',
-                    'districts.name_th AS districts_name_th',
-                    'amphures.name_th AS amphures_name_th',
-                    'train_station.line_code',
-                    'train_station.station_code',
-                    'train_station.station_name_th'
-                )
-                ->orderBy('assets_customers_wants.created_at', 'DESC');
 
-            if ($request->all()) {
-                $query->when($request->area_station == "area", function ($query) use ($request) {
-                    $query->when($request->has('provinces'), function ($q) use ($request) {
-                        $q->where('assets_customers_wants.provinces', $request->input('provinces'));
+        $query = DB::table('assets_customers_wants')
+            ->where('assets_customers_wants.status', 1)
+            ->leftJoin('users', 'assets_customers_wants.user_id', '=', 'users.id')
+            ->join('provinces', 'assets_customers_wants.provinces', '=', 'provinces.id')
+            ->join('amphures', 'assets_customers_wants.districts', '=', 'amphures.id')
+            ->join('districts', 'assets_customers_wants.amphures', '=', 'districts.id')
+            ->leftJoin('train_station', 'assets_customers_wants.station', '=', 'train_station.id')
+            ->select(
+                'assets_customers_wants.*',
+                'users.first_name',
+                'users.last_name',
+                'users.phone',
+                'users.image',
+                'users.line_id',
+                'users.facebook_id',
+                'provinces.name_th AS provinces_name_th',
+                'districts.name_th AS districts_name_th',
+                'amphures.name_th AS amphures_name_th',
+                'train_station.line_code',
+                'train_station.station_code',
+                'train_station.station_name_th'
+            )
+            ->orderBy('assets_customers_wants.created_at', 'DESC');
+
+        if ($request->all()) {
+            $query->when($request->area_station == "area", function ($query) use ($request) {
+                $query->when($request->has('provinces'), function ($q) use ($request) {
+                    $q->where('assets_customers_wants.provinces', $request->input('provinces'));
+                })
+                    ->when($request->has('districts'), function ($q) use ($request) {
+                        $q->where('assets_customers_wants.districts', $request->input('districts'));
                     })
-                        ->when($request->has('districts'), function ($q) use ($request) {
-                            $q->where('assets_customers_wants.districts', $request->input('districts'));
-                        })
-                        ->when($request->has('amphures'), function ($q) use ($request) {
-                            $q->where('assets_customers_wants.amphures', $request->input('amphures'));
-                        });
-                }, function ($query) use ($request) {
-                    $query->when($request->has('stations'), function ($q) use ($request) {
-                        $q->where('assets_customers_wants.station_name', $request->input('stations'));
+                    ->when($request->has('amphures'), function ($q) use ($request) {
+                        $q->where('assets_customers_wants.amphures', $request->input('amphures'));
                     });
+            }, function ($query) use ($request) {
+                $query->when($request->has('stations'), function ($q) use ($request) {
+                    $q->where('assets_customers_wants.station_name', $request->input('stations'));
                 });
+            });
 
-                $query->when($request->has('sale_rent') && $request->input('sale_rent') !== 'sale_rent', function ($query) use ($request) {
-                    $query->where('assets_customers_wants.sale_rent', $request->input('sale_rent'));
-                });
+            $query->when($request->has('sale_rent') && $request->input('sale_rent') !== 'sale_rent', function ($query) use ($request) {
+                $query->where('assets_customers_wants.sale_rent', $request->input('sale_rent'));
+            });
 
-                if ($request->has('options') && !empty($request->input('options'))) {
-                    foreach ($request->input('options') as $option) {
-                        $query->whereRaw('JSON_CONTAINS(assets_customers_wants.options, ?)', [json_encode($option)]);
-                    }
+            if ($request->has('options') && !empty($request->input('options'))) {
+                foreach ($request->input('options') as $option) {
+                    $query->whereRaw('JSON_CONTAINS(assets_customers_wants.options, ?)', [json_encode($option)]);
                 }
             }
+        }
 
-            return $query->get(); // ดึงข้อมูลทั้งหมดในรูปแบบ Collection
-        });
+
 
         // แยกข้อมูลที่ status เป็น NULL และ ไม่เป็น NULL
-        $wantsNullStatus = $wantsData->filter(function ($item) {
-            return is_null($item->user_id);
-        });
 
-        $wantsNotNullStatus = $wantsData->filter(function ($item) {
-            return !is_null($item->user_id);
-        });
+        // สร้างสำเนาของ query สำหรับแยกข้อมูลที่ user_id เป็น NULL
+        $queryForNullStatus = clone $query;
+        $wantsNullStatus = $queryForNullStatus->whereNull('assets_customers_wants.user_id')->paginate(1)->appends($request->all());
+
+        // สร้างสำเนาของ query สำหรับแยกข้อมูลที่ user_id ไม่เป็น NULL
+        $queryForNotNullStatus = clone $query;
+        $wantsNotNullStatus = $queryForNotNullStatus->whereNotNull('assets_customers_wants.user_id')->paginate(1)->appends($request->all());
 
         $currentDate = Carbon::now(); // วันและเวลาปัจจุบัน
         $userCreatedDate = Carbon::parse(Auth::user()->created_at); // วันที่ของผู้ใช้
         $createdDate = $userCreatedDate->lessThan($currentDate->subDays(3));
-        $authCount = (Auth::user()->plans == 0 && $createdDate) ? 10 : 100;
+        $authCount = (Auth::user()->plans == 0 && $createdDate) ? 1 : 2;
 
 
-        // สร้าง Paginator สำหรับ $wantsNullStatus
-        // สร้าง Paginator สำหรับ $wantsNullStatus
-        $wantsNullStatusPaginator = new \Illuminate\Pagination\LengthAwarePaginator(
-            $wantsNullStatus->forPage($request->input('page_null_status', 1),  $authCount),
-            $wantsNullStatus->count(),
-            100,
-            $request->input('page_null_status', 1),
-            ['path' => $request->url(), 'pageName' => 'page_null_status']
-        );
-
-        // สร้าง Paginator สำหรับ $wantsNotNullStatus
-        $wantsNotNullStatusPaginator = new \Illuminate\Pagination\LengthAwarePaginator(
-            $wantsNotNullStatus->forPage($request->input('page_not_null_status', 1),  $authCount),
-            $wantsNotNullStatus->count(),
-            100,
-            $request->input('page_not_null_status', 1),
-            ['path' => $request->url(), 'pageName' => 'page_not_null_status']
-        );
 
 
         return view('assetsCustomer.assets_customer', [
-            'wants' => $wantsNullStatusPaginator,
-            'wants2' => $wantsNotNullStatusPaginator,
+            'wants' => $wantsNullStatus,
+            'wants2' => $wantsNotNullStatus,
             'createdDate' => $createdDate
         ]);
     }

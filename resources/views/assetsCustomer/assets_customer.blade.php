@@ -258,11 +258,11 @@
                         </div>
 
                     </div>
-                    @if (!$createdDate)
-                        <div class="mt-5">
-                            {!! $wants->links() !!}
-                        </div>
-                    @endif
+
+                    <div class="mt-5">
+                        {!! $wants->links() !!}
+                    </div>
+
 
                 </div>
                 <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
@@ -546,11 +546,11 @@
                         @endforeach
 
                     </div>
-                    @if (!$createdDate)
-                        <div class="mt-5">
-                            {!! $wants2->links() !!}
-                        </div>
-                    @endif
+
+                    <div class="mt-5">
+                        {!! $wants2->links() !!}
+                    </div>
+
 
 
 
@@ -605,7 +605,32 @@
 
                         </div>
                         <p style="margin-top: 12px">ประเภทสัญญา</p>
-                        <div class="row-box">
+                        <div class="row-box mb-4">
+                            <div class="form-check-home">
+                                <input class="form-check-input" type="radio" name="sale_rent" value="rent"
+                                    id="filterArea" style="display: none">
+                                <label class="form-check-label3" for="filterArea">
+                                    เช่า
+                                </label>
+                            </div>
+
+                            <div class="form-check-home">
+                                <input class="form-check-input" type="radio" name="sale_rent" value="sale"
+                                    id="filterStation" style="display: none">
+                                <label class="form-check-label3" for="filterStation">
+                                    ซื้อ
+                                </label>
+                            </div>
+
+                            <div class="form-check-home">
+                                <input class="form-check-input" type="radio" name="sale_rent" value="sale_rent"
+                                    id="filterAll" style="display: none">
+                                <label class="form-check-label3" for="filterAll">
+                                    ทั้งหมด
+                                </label>
+                            </div>
+                        </div>
+                        {{-- <div class="row-box">
                             <div class="filter-box-input form-check" data-type="area">
                                 <input class="form-check-input" type="radio" name="sale_rent" value="rent"
                                     id="filterArea" onclick="toggleSelectionBox(this)">
@@ -630,7 +655,7 @@
                                     ทั้งหมด
                                 </label>
                             </div>
-                        </div>
+                        </div> --}}
                         <p style="margin-top: 12px">ลักษณะพิเศษ</p>
                         @include('assetsCustomer.optionsJs')
                         <button type="submit" class="btn btn-primary col-12 mt-4 mb-3"> <span> <img

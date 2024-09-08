@@ -32,7 +32,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        //   dd($request->all());
+
         // Create base query
         $dataHomeQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.status_home', 'on')
@@ -93,30 +93,46 @@ class HomeController extends Controller
 
                 // ตรวจสอบประเภทการขายหรือเช่า
                 if ($request->input('sale_rent') == 'sale') {
-                    // ตรวจสอบช่วงราคา
-                    if (strpos($priceRange, '-') !== false) {
-                        // แยกช่วงราคา
-                        [$minPrice, $maxPrice] = explode('-', $priceRange);
-                        $dataHomeQuery->whereBetween('rent_sell_home_details.sell_price', [$minPrice, $maxPrice]);
-                    } elseif ($priceRange == '10000001') {
-                        // ราคาเกิน 10 ล้าน
-                        $dataHomeQuery->where('rent_sell_home_details.sell_price', '>', 10000000);
-                    } else {
-                        // น้อยกว่า 10,000 บาท
-                        $dataHomeQuery->where('rent_sell_home_details.sell_price', '<', 10000);
+                    $dataHomeQuery->where(function ($query) {
+                        $query->where('rent_sell_home_details.rent_sell', 'ขาย')
+                            ->orWhere('rent_sell_home_details.sell', 'ขาย');
+                    });
+
+                    if ($request->has('price_range')) {
+                        // ตรวจสอบช่วงราคา
+                        if (strpos($priceRange, '-') !== false) {
+                            // แยกช่วงราคา
+                            [$minPrice, $maxPrice] = explode('-', $priceRange);
+                            $dataHomeQuery->whereBetween('rent_sell_home_details.sell_price', [$minPrice, $maxPrice]);
+                        } elseif ($priceRange == '10000001') {
+                            // ราคาเกิน 10 ล้าน
+                            $dataHomeQuery->where('rent_sell_home_details.sell_price', '>', 10000000);
+                        } else {
+                            // น้อยกว่า 10,000 บาท
+                            $dataHomeQuery->where('rent_sell_home_details.sell_price', '<', 10000);
+                        }
                     }
                 } elseif ($request->input('sale_rent') == 'rent') {
-                    // การเช่าจะทำงานแบบเดียวกันกับการขาย
-                    if (strpos($priceRange, '-') !== false) {
-                        [$minPrice, $maxPrice] = explode('-', $priceRange);
-                        $dataHomeQuery->whereBetween('rent_sell_home_details.rental_price', [$minPrice, $maxPrice]);
-                    } elseif ($priceRange == '10000001') {
-                        // ราคาเช่าเกิน 10 ล้าน
-                        $dataHomeQuery->where('rent_sell_home_details.rental_price', '>', 10000000);
-                    } else {
-                        // น้อยกว่า 10,000 บาท
-                        $dataHomeQuery->where('rent_sell_home_details.rental_price', '<', 10000);
+                    $dataHomeQuery->where(function ($query) {
+                        $query->where('rent_sell_home_details.rent_sell', 'เช่า')
+                            ->orWhere('rent_sell_home_details.sell', 'เช่า');
+                    });
+
+
+                    if ($request->has('price_range')) {
+                        if (strpos($priceRange, '-') !== false) {
+                            [$minPrice, $maxPrice] = explode('-', $priceRange);
+                            $dataHomeQuery->whereBetween('rent_sell_home_details.rental_price', [$minPrice, $maxPrice]);
+                        } elseif ($priceRange == '10000001') {
+                            // ราคาเช่าเกิน 10 ล้าน
+                            $dataHomeQuery->where('rent_sell_home_details.rental_price', '>', 10000000);
+                        } else {
+                            // น้อยกว่า 10,000 บาท
+                            $dataHomeQuery->where('rent_sell_home_details.rental_price', '<', 10000);
+                        }
                     }
+                    // การเช่าจะทำงานแบบเดียวกันกับการขาย
+
                 } else {
                     // กรณีเลือกทั้งการขายและเช่า
                     if (strpos($priceRange, '-') !== false) {
