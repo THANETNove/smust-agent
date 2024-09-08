@@ -54,7 +54,7 @@ class FavoriteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-    
+
         $data = DB::table('favorites')
             ->where('id_product', $id)
             ->where('user_id',  Auth::user()->id);
@@ -78,7 +78,7 @@ class FavoriteController extends Controller
                 $member->status_favorites = 1;
                 $mess = "เพิ่มเข้ารายการโปรดสำเร็จ";
             } else {
-                $member->status_favorites = 0;
+                $member->status_favorites = 3;
                 $mess = "ยกเลิกรายการโปรดสำเร็จ";
             }
 

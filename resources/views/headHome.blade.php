@@ -14,10 +14,12 @@
                     ->where('cross', 0)
                     ->where('notifications', 1)
                     ->count();
-                dd($query_co, $query_home);
+
+                $co_hom_count = $query_home + $query_co;
+                //  dd($query_co, $query_home);
             @endphp
             <div class="box-number-count">
-                <div class="number-count"> 5</div>
+                <div class="number-count"> {{ $co_hom_count }}</div>
                 <img class="vector-icon" src="{{ URL::asset('/assets/image/welcome/Vector.png') }}">
             </div>
         </div>
