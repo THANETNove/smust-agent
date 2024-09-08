@@ -78,7 +78,7 @@ class FavoriteController extends Controller
                 $member->status_favorites = 1;
                 $mess = "เพิ่มเข้ารายการโปรดสำเร็จ";
             } else {
-                $member->status_favorites = 3;
+                $member->status_favorites = 2;
                 $mess = "ยกเลิกรายการโปรดสำเร็จ";
             }
 

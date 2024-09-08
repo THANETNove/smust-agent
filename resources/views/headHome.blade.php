@@ -15,10 +15,28 @@
                     ->where('notifications', 1)
                     ->count();
 
-                $co_hom_count = $query_home + $query_co;
+                $co_agQuery_1 = DB::table('rent_sell_home_details')
+                    ->where('rent_sell_home_details.status_home', 'on')
+                    ->where('rent_sell_home_details.user_id', Auth::user()->id)
+                    ->join('favorites', 'rent_sell_home_details.id', '=', 'favorites.id_product')
+                    ->where('favorites.status_favorites', 1)
+                    ->count();
+                $co_agQuery_2 = DB::table('rent_sell_home_details')
+                    ->where('rent_sell_home_details.status_home', 'on')
+                    ->where('rent_sell_home_details.user_id', Auth::user()->id)
+                    ->join('favorites', 'rent_sell_home_details.id', '=', 'favorites.id_product')
+                    ->where('favorites.status_favorites', 2)
+                    ->count();
                 //  dd($query_co, $query_home);
+
+                if (Auth::user()->plans == '2') {
+                    $co_hom_count = $query_home + $query_co + $co_agQuery_1 + $co_agQuery_2;
+                } else {
+                    $co_hom_count = $query_home + $query_co;
+                }
+
             @endphp
-            <div class="box-number-count">
+            <div class="box-number-count" data-bs-toggle="modal" data-bs-target="#exampleModal3_co">
                 <div class="number-count"> {{ $co_hom_count }}</div>
                 <img class="vector-icon" src="{{ URL::asset('/assets/image/welcome/Vector.png') }}">
             </div>
@@ -77,5 +95,39 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal3_co" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body" style="margin-top: 8px">
+                <p class="text-co-home"><img class="icon-co-home"
+                        src="{{ URL::asset('/assets/image/welcome/A1.png') }}">มีทรัพย์เพิ่มใหม่ {{ $query_home }}
+                    รายการ</p>
+                <hr>
+                <p class="text-co-home"><img class="icon-co-home"
+                        src="{{ URL::asset('/assets/image/welcome/A2.png') }}">มีรีเควสเพิ่มจากลูกค้า และ co-agent
+                    {{ $query_co }} รายการ</p>
+                @if (Auth::user()->plans == '2')
+                    <hr>
+                    <p class="text-co-home"><img class="icon-co-home"
+                            src="{{ URL::asset('/assets/image/welcome/A3.png') }}">มี co-agent
+                        อยากช่วยคุณขายทรัพย์ {{ $co_agQuery_1 }} คน <img class="icon-co-premium"
+                            src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}"></p>
+                    <hr>
+                    <p class="text-co-home"><img class="icon-co-home"
+                            src="{{ URL::asset('/assets/image/welcome/A4.png') }}">ทรัพย์ที่กดเข้ารายการโปรด
+                        ถูกขายไปแล้ว {{ $co_agQuery_2 }} รายการ <img class="icon-co-premium"
+                            src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}"></p>
+                @endif
+
+            </div>
+
+        </div>
     </div>
 </div>
