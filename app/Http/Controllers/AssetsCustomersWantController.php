@@ -91,11 +91,11 @@ class AssetsCustomersWantController extends Controller
 
         // สร้างสำเนาของ query สำหรับแยกข้อมูลที่ user_id เป็น NULL
         $queryForNullStatus = clone $query;
-        $wantsNullStatus = $queryForNullStatus->whereNull('assets_customers_wants.user_id')->paginate(1)->appends($request->all());
+        $wantsNullStatus = $queryForNullStatus->whereNull('assets_customers_wants.user_id')->paginate(100)->appends($request->all());
 
         // สร้างสำเนาของ query สำหรับแยกข้อมูลที่ user_id ไม่เป็น NULL
         $queryForNotNullStatus = clone $query;
-        $wantsNotNullStatus = $queryForNotNullStatus->whereNotNull('assets_customers_wants.user_id')->paginate(1)->appends($request->all());
+        $wantsNotNullStatus = $queryForNotNullStatus->whereNotNull('assets_customers_wants.user_id')->paginate(100)->appends($request->all());
 
         $currentDate = Carbon::now(); // วันและเวลาปัจจุบัน
         $userCreatedDate = Carbon::parse(Auth::user()->created_at); // วันที่ของผู้ใช้

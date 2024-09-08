@@ -135,18 +135,20 @@ class HomeController extends Controller
 
                 } else {
                     // กรณีเลือกทั้งการขายและเช่า
-                    if (strpos($priceRange, '-') !== false) {
-                        [$minPrice, $maxPrice] = explode('-', $priceRange);
-                        $dataHomeQuery->whereBetween('rent_sell_home_details.sell_price', [$minPrice, $maxPrice])
-                            ->orWhereBetween('rent_sell_home_details.rental_price', [$minPrice, $maxPrice]);
-                    } elseif ($priceRange == '10000001') {
-                        // เกิน 10 ล้าน
-                        $dataHomeQuery->where('rent_sell_home_details.sell_price', '>', 10000000)
-                            ->orWhere('rent_sell_home_details.rental_price', '>', 10000000);
-                    } else {
-                        // น้อยกว่า 10,000 บาท
-                        $dataHomeQuery->where('rent_sell_home_details.sell_price', '<', 10000)
-                            ->orWhere('rent_sell_home_details.rental_price', '<', 10000);
+                    if ($request->has('price_range')) {
+                        if (strpos($priceRange, '-') !== false) {
+                            [$minPrice, $maxPrice] = explode('-', $priceRange);
+                            $dataHomeQuery->whereBetween('rent_sell_home_details.sell_price', [$minPrice, $maxPrice])
+                                ->orWhereBetween('rent_sell_home_details.rental_price', [$minPrice, $maxPrice]);
+                        } elseif ($priceRange == '10000001') {
+                            // เกิน 10 ล้าน
+                            $dataHomeQuery->where('rent_sell_home_details.sell_price', '>', 10000000)
+                                ->orWhere('rent_sell_home_details.rental_price', '>', 10000000);
+                        } else {
+                            // น้อยกว่า 10,000 บาท
+                            $dataHomeQuery->where('rent_sell_home_details.sell_price', '<', 10000)
+                                ->orWhere('rent_sell_home_details.rental_price', '<', 10000);
+                        }
                     }
                 }
             }
@@ -203,11 +205,11 @@ class HomeController extends Controller
         });
         // Separate cache keys for dataHome and dataHome2 using the same base query
         $dataHome = Cache::remember('dataHomePage_with_code_admin', 0, function () use ($dataHomeQuery) {
-            return (clone $dataHomeQuery)->whereNotNull('code_admin')->paginate(100);
+            return (clone $dataHomeQuery)->whereNotNull('code_admin')->paginate(100)->appends(request()->all());
         });
 
         $dataHome2 = Cache::remember('dataHomePage_without_code_admin', 0, function () use ($dataHomeQuery) {
-            return (clone $dataHomeQuery)->whereNull('code_admin')->paginate(100);
+            return (clone $dataHomeQuery)->whereNull('code_admin')->paginate(100)->appends(request()->all());
         });
 
         // Cache provinces and train station data
