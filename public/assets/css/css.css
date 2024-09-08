@@ -2199,6 +2199,10 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     margin-right: 8px;
 }
 
+.form-check-search {
+    margin-right: -8px;
+}
+
 .form-check-label2 {
     display: inline-block;
     width: 76px;
@@ -2214,11 +2218,11 @@ div:where(.swal2-container) div:where(.swal2-popup) {
 }
 
 .form-check-input:checked+.form-check-label2 {
-    border: 1px solid #007bff;
+    border: 1px solid #007BA7;
     /* กำหนดกรอบสีฟ้า */
     border-radius: 5px;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #007BA7;
 
 }
 
@@ -2250,13 +2254,41 @@ div:where(.swal2-container) div:where(.swal2-popup) {
 }
 
 .form-check-input:checked+.form-check-label3 {
-    border: 1px solid #007bff;
+    border: 1px solid #007BA7;
     /* กำหนดกรอบสีฟ้า */
     width: auto;
     height: auto;
     padding: 4px 24px;
     border-radius: 50px;
-    background-color: #007bff;
+    background-color: #007BA7;
+    color: #ffffff !important;
+    text-align: center;
+
+}
+
+.form-check-label4 {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    border: 1px solid #007BA7;
+    background-color: #FFFFFF;
+    padding: 7px 30px;
+    border-radius: 50px;
+    transition: border-color 0.3s;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 4px;
+
+}
+
+.form-check-input:checked+.form-check-label4 {
+    border: 1px solid #007BA7;
+    /* กำหนดกรอบสีฟ้า */
+    width: auto;
+    height: auto;
+    padding: 7px 30px;
+    border-radius: 50px;
+    background-color: #007BA7;
     color: #ffffff !important;
     text-align: center;
 

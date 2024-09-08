@@ -406,11 +406,6 @@
                         </div>
 
                         <p style="margin-top: 12px">ประเภททรัพย์</p>
-
-                        <style>
-
-                        </style>
-
                         <div class="flex-direction-row mb-4">
                             <div class="form-check-home">
                                 <input class="form-check-input" type="radio" name="property_type" value="บ้าน"
@@ -497,6 +492,87 @@
                                     src="{{ URL::asset('/assets/image/welcome/search-box.png') }}"></span>คันหา</button>
 
                     </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        <img class="icon-filterData" src="{{ URL::asset('/assets/image/welcome/filter.png') }}">
+
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="{{ route('search-data') }}">
+                    @csrf
+
+                    <div class="modal-body">
+
+
+
+
+                        <div class="row-box mb-4">
+                            <div class="form-check-search">
+                                <input class="form-check-input" type="radio" name="too_little" value="price_min_max"
+                                    id="filter1" style="display: none">
+                                <label class="form-check-label4" for="filter1">
+                                    ราคาจากน้อยไปมาก
+                                </label>
+                            </div>
+
+                            <div class="form-check-search">
+                                <input class="form-check-input" type="radio" name="too_little" value="price_max_min"
+                                    id="filter2" style="display: none">
+                                <label class="form-check-label4" for="filter2">
+                                    ราคาจากมากไปน้อย
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <p style="margin-top: 12px">พื้นที่ใช้สอย</p>
+                        <div class="row-box mb-4">
+                            <div class="form-check-search">
+                                <input class="form-check-input" type="radio" name="too_little" value="area_max_min"
+                                    id="filter3" style="display: none">
+                                <label class="form-check-label4" for="filter3">
+                                    จากมาก ไป น้อย
+                                </label>
+                            </div>
+
+                            <div class="form-check-search">
+                                <input class="form-check-input" type="radio" name="too_little" value="area_min_max"
+                                    id="filter4" style="display: none">
+                                <label class="form-check-label4" for="filter4">
+                                    จากน้อย ไป มาก
+                                </label>
+                            </div>
+                        </div>
+                        <p style="margin-top: 12px">จํานวนชั้น / ชั้น</p>
+                        <div class="row-box mb-4">
+                            <div class="form-check-search">
+                                <input class="form-check-input" type="radio" name="too_little" value="floors_max_min"
+                                    id="filter5" style="display: none">
+                                <label class="form-check-label4" for="filter5">
+                                    จากมาก ไป น้อย
+                                </label>
+                            </div>
+
+                            <div class="form-check-search">
+                                <input class="form-check-input" type="radio" name="too_little" value="floors_min_max"
+                                    id="filter6" style="display: none">
+                                <label class="form-check-label4" for="filter6">
+                                    จากน้อย ไป มาก
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary col-12 mt-4 mb-3"> <span> <img
+                                    class="icon-search-box"
+                                    src="{{ URL::asset('/assets/image/welcome/search-box.png') }}"></span>คันหา</button>
                 </form>
             </div>
         </div>

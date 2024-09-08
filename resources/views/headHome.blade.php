@@ -20,7 +20,7 @@
             <div data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <img class="icon-filterData" src="{{ URL::asset('/assets/image/welcome/filterData.png') }}">
             </div>
-            <div>
+            <div data-bs-toggle="modal" data-bs-target="#exampleModal2">
                 <img class="icon-filter" src="{{ URL::asset('/assets/image/welcome/filter.png') }}">
             </div>
             <div>

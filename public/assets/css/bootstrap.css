@@ -1573,7 +1573,7 @@ a {
 
 /* เมื่อ radio button ถูกเลือกจะมีกรอบสีฟ้า */
 .form-check-input:checked+.form-check-label {
-    border: 2px solid #007bff;
+    border: 2px solid #007BA7;
     /* กรอบสีฟ้า */
     border-radius: 5px;
     padding: 5px;
