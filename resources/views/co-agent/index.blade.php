@@ -7,6 +7,10 @@
                 <img class="free-go-back" src="{{ URL::asset('/assets/image/welcome/go-back.png') }}">
             </a>
             <p class="free-trial">หา co-agent ช่วยขาย</p>
+            @if (session('message'))
+                <p class="text-center" style="color: green"> {{ session('message') }}</p>
+            @endif
+
 
         </div>
         <div class="box-announced announced-background">
@@ -110,7 +114,10 @@
                         </a>
 
                         <hr>
-                        <p class="remove-announcement">ลบออกจากประกาศ</p>
+                        <p class="remove-announcement" data-bs-toggle="modal" data-id="{{ $home->id }}"
+                            data-bs-target="#exampleModalDe">
+                            ลบออกจากประกาศ
+                        </p>
                     </div>
                 </div>
             @endforeach
@@ -120,4 +127,40 @@
         </div>
 
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalDe" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <p class="remove-text-announcement">ลบออกจากประกาศ?</p>
+                    <p class="you-have-deleted">หากคุณลบแล้ว ประกาศของคุณจะถูกนำออกจากหน้าประกาศ
+                        และ co-agent ของคุณจะไม่เห็นประกาศของคุณแล้ว</p>
+
+                    <div style="display: flex;justify-content: center;">
+                        <button type="button" class="btn btn-close-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                        <a href="#" id="delete-link" type="button" class="btn btn-remove-announcement">
+                            ลบออกจากประกาศ
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // เมื่อคลิกที่ปุ่ม "ลบออกจากประกาศ"
+        document.querySelectorAll('.remove-announcement').forEach(function(button) {
+            button.addEventListener('click', function() {
+                // ดึง id จาก data-id ของปุ่มที่คลิก
+                var announcementId = this.getAttribute('data-id');
+                // อัปเดตลิงก์ใน modal
+                var deleteLink = document.getElementById('delete-link');
+                deleteLink.href = '/destroy-announcement/' + announcementId;
+            });
+        });
+    </script>
 @endsection

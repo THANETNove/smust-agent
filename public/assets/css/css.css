@@ -2404,3 +2404,67 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     font-size: 12px;
     font-weight: 400;
 }
+
+.remove-text-announcement {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.you-have-deleted {
+    font-size: 12px;
+    font-weight: 400;
+    color: #7C7C7C;
+
+}
+
+.btn-close-secondary {
+    border: 2px solid #0000004D;
+    color: #0000004D;
+    width: 136px;
+    height: 36px;
+    margin-right: 6px;
+}
+
+.btn-close-secondary:hover {
+    border: 2px solid #0000004D;
+    color: #0000004D;
+    width: 136px;
+    height: 36px;
+    margin-right: 6px;
+}
+
+.btn-close-secondary:active {
+    border: 2px solid #0000004D !important;
+    color: #0000004D !important;
+    width: 136px !important;
+    height: 36px !important;
+    margin-right: 6px !important;
+}
+
+.btn-remove-announcement {
+    border: 2px solid #E34234;
+    background-color: #E34234;
+    color: #FFFFFF;
+    width: 166px;
+    height: 36px;
+    margin-left: 6px;
+}
+
+.btn-remove-announcement:hover {
+    border: 2px solid #E34234;
+    background-color: #E34234;
+    color: #FFFFFF;
+    width: 166px;
+    height: 36px;
+    margin-left: 6px;
+}
+
+.btn-remove-announcement:active {
+    border: 2px solid #E34234 !important;
+    background-color: #E34234 !important;
+    color: #FFFFFF !important;
+    width: 166px !important;
+    height: 36px !important;
+    margin-left: 6px !important;
+}

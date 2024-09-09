@@ -236,6 +236,39 @@ class CoAgentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        $data =  RentSellHomeDetails::find($id);
+
+
+        $favorite = DB::table('favorites')
+            ->where('status_favorites', $id)
+            ->delete();
+
+        if ($data->image) {
+            $desImage = json_decode($data->image);
+            foreach ($desImage as $imagePath) {
+                // Assuming images are stored in public directory
+                $imagePath = public_path($imagePath); // Adjust if stored differently
+
+                if (file_exists($imagePath)) {
+                    unlink($imagePath); // Delete the file from the server
+                }
+            }
+        }
+        if ($data->files) {
+
+            // Assuming images are stored in public directory
+            $filesPath = public_path($data->files); // Adjust if stored differently
+
+
+            if (file_exists($imagePath)) {
+                unlink($imagePath); // Delete the file from the server
+            }
+        }
+
+
+
+        $data->delete();
+        return redirect('co-agent')->with('message', "บันทึกสำเร็จ");
     }
 }
