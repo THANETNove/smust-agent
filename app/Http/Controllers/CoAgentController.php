@@ -78,9 +78,17 @@ class CoAgentController extends Controller
     public function coUsers()
     {
 
+        $dataHomeQuery = DB::table('rent_sell_home_details')
+            ->where('rent_sell_home_details.status_home', 'on')
+            ->where('rent_sell_home_details.user_id', Auth::user()->id)
+            ->join('favorites', 'rent_sell_home_details.id', '=', 'favorites.id_product')
+            ->join('users', 'favorites.user_id', '=', 'users.id')
+            ->select(
+                'users.*',
+            )->orderBy('users.id', 'DESC')->get();
 
 
-        return view('co-agent.users_co_agent');
+        return view('co-agent.users_co_agent', ['dataHomeQuery' => $dataHomeQuery]);
     }
 
     /**
