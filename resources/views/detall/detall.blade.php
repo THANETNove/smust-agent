@@ -21,12 +21,11 @@
                     </div>
                     @if ($count > 1)
                         <div class="flex-direction-column">
-                            <img class="popup-trigger image-detall-2" src="{{ URL::asset('/img/product/' . $imgUrl[1]) }}"
-                                data-index="1">
+                            <img class="popup-trigger image-detall-2" src="{{ URL::asset($imgUrl[1]) }}" data-index="1">
                             @if ($count > 2)
                                 <div class="image-opacity">
-                                    <img class="popup-trigger image-detall-2"
-                                        src="{{ URL::asset('/img/product/' . $imgUrl[2]) }}" data-index="2">
+                                    <img class="popup-trigger image-detall-2" src="{{ URL::asset($imgUrl[2]) }}"
+                                        data-index="2">
                                     <p class="number-image">+{{ $count - 2 }}</p>
                                 </div>
                             @endif

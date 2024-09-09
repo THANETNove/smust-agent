@@ -70,7 +70,7 @@
 
         var assetUrl = "{{ asset('img/product') }}";
         img = document.createElement('img'); // ตัวแปร img ต้องเป็นตัวแปรที่ถูกสร้างใน scope ที่ถูกต้อง
-        img.src = assetUrl + '/' + mediaItems[index];
+        img.src = mediaItems[index];
         popupMediaContainer.appendChild(img);
     }
 
@@ -90,11 +90,11 @@
 
     function saveAll() {
         var mediaItems = {!! json_encode($imgUrl) !!};
-        var assetUrl = "{{ asset('img/product') }}";
+
 
         mediaItems.forEach(function(item, index) {
             var img = document.createElement('img');
-            img.src = assetUrl + '/' + item;
+            img.src = item;
             saveImage(img.src);
         });
     }
@@ -118,6 +118,4 @@
         downloadLink.click();
         document.body.removeChild(downloadLink);
     }
-
-    
 </script>
