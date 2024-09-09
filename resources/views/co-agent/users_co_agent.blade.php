@@ -17,7 +17,9 @@
                 <div class="box-co-uses" style="display: flex; align-items: center;">
                     <div class="box-profile-co" style="margin-right: 10px;">
                         <img class="profile-co" id="rectangle123"
-                            src="{{ URL::asset('/assets/image/welcome/profile.png') }}">
+                            @if ($dataHo->image) src="{{ URL::asset($dataHo->image) }}"
+                            @else
+                        src="{{ URL::asset('/assets/image/welcome/profile.png') }}" @endif>
 
                         <img class="icon-co-user" id="rectangle123"
                             @if ($dataHo->plans == 2) src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}"
@@ -81,7 +83,8 @@
                                                 src="{{ URL::asset('/assets/image/home/facbook.png') }}">
                                         </a>
                                     @else
-                                        <img class="ass-icon-line2" src="{{ URL::asset('/assets/image/home/facbook.png') }}"
+                                        <img class="ass-icon-line2"
+                                            src="{{ URL::asset('/assets/image/home/facbook.png') }}"
                                             onclick="copyFacebookID()">
                                         <script>
                                             function copyFacebookID() {
