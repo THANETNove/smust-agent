@@ -37,10 +37,6 @@ Route::get('/HomeLogin', function () {
     return view('welcomeLogin');
 });
 
-Route::get('/HomeLogin', function () {
-
-    return view('welcomeLogin');
-});
 
 
 
