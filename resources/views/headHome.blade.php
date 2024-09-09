@@ -21,7 +21,6 @@
                     ->join('favorites', 'rent_sell_home_details.id', '=', 'favorites.id_product')
                     ->where('favorites.status_favorites', 1)
                     ->count();
-   
 
                 if (Auth::user()->plans == '2') {
                     $co_hom_count = $query_home + $query_co + $co_agQuery_1;
@@ -31,7 +30,10 @@
 
             @endphp
             <div class="box-number-count" data-bs-toggle="modal" data-bs-target="#exampleModal3_co">
-                <div class="number-count"> {{ $co_hom_count }}</div>
+                @if ($co_hom_count)
+                    <div class="number-count"> {{ $co_hom_count }}</div>
+                @endif
+
                 <img class="vector-icon" src="{{ URL::asset('/assets/image/welcome/Vector.png') }}">
             </div>
         </div>
