@@ -106,24 +106,55 @@
         <div class="modal-content">
 
             <div class="modal-body" style="margin-top: 8px">
-                <p class="text-co-home"><img class="icon-co-home"
-                        src="{{ URL::asset('/assets/image/welcome/A1.png') }}">มีทรัพย์เพิ่มใหม่ {{ $query_home }}
-                    รายการ</p>
-                <hr>
-                <p class="text-co-home"><img class="icon-co-home"
-                        src="{{ URL::asset('/assets/image/welcome/A2.png') }}">มีรีเควสเพิ่มจากลูกค้า และ co-agent
-                    {{ $query_co }} รายการ</p>
+                @if ($query_home)
+                    <a href="{{ url('new-wealth') }}">
+                        <p class="text-co-home"><img class="icon-co-home"
+                                src="{{ URL::asset('/assets/image/welcome/A1.png') }}">มีทรัพย์เพิ่มใหม่
+                            {{ $query_home }}
+                            รายการ</p>
+                    </a>
+                    <hr>
+                @endif
+
+
+                @if ($query_co)
+                    <a href="{{ url('new-co-agent') }}">
+                        <p class="text-co-home"><img class="icon-co-home"
+                                src="{{ URL::asset('/assets/image/welcome/A2.png') }}">มีรีเควสเพิ่มจากลูกค้า และ
+                            co-agent
+                            {{ $query_co }} รายการ</p>
+                    </a>
+                @endif
+
+
                 @if (Auth::user()->plans == '2')
-                    <hr>
-                    <p class="text-co-home"><img class="icon-co-home"
-                            src="{{ URL::asset('/assets/image/welcome/A3.png') }}">มี co-agent
-                        อยากช่วยคุณขายทรัพย์ {{ $co_agQuery_1 }} คน <img class="icon-co-premium"
-                            src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}"></p>
-                    <hr>
-                    <p class="text-co-home"><img class="icon-co-home"
-                            src="{{ URL::asset('/assets/image/welcome/A4.png') }}">ทรัพย์ที่กดเข้ารายการโปรด
-                        ถูกขายไปแล้ว {{ $co_agQuery_2 }} รายการ <img class="icon-co-premium"
-                            src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}"></p>
+                    @if ($co_agQuery_1)
+                        @if ($query_co)
+                            <hr>
+                        @endif
+
+                        <a href="{{ url('help-co-agent') }}">
+                            <p class="text-co-home"><img class="icon-co-home"
+                                    src="{{ URL::asset('/assets/image/welcome/A3.png') }}">มี co-agent
+                                อยากช่วยคุณขายทรัพย์ {{ $co_agQuery_1 }} คน <img class="icon-co-premium"
+                                    src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}"></p>
+                        </a>
+
+                        @if ($co_agQuery_2)
+                            <hr>
+                        @endif
+
+                    @endif
+
+                    @if ($co_agQuery_2)
+                        <a href="{{ url('delete-help-co-agent') }}">
+                            <p class="text-co-home"><img class="icon-co-home"
+                                    src="{{ URL::asset('/assets/image/welcome/A4.png') }}">ทรัพย์ที่กดเข้ารายการโปรด
+                                ถูกขายไปแล้ว {{ $co_agQuery_2 }} รายการ <img class="icon-co-premium"
+                                    src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}"></p>
+                        </a>
+                    @endif
+
                 @endif
 
             </div>

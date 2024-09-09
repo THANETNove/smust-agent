@@ -512,4 +512,33 @@ class HomeController extends Controller
 
         return view('detall.detall', ['dataHome' => $dataHome]);
     }
+
+
+
+    public function newWealth(Request $request)
+    {
+        DB::table('rent_sell_home_details')
+            ->update(['notifications' => 0]);
+        return redirect()->back();
+    }
+    public function newCoAgent(Request $request)
+    {
+        DB::table('assets_customers_wants')
+            ->update(['notifications' => 0]);
+        return redirect()->back();
+    }
+    public function helpCoAgent(Request $request)
+    {
+        DB::table('favorites')
+            ->where('status_favorites', 1)
+            ->update(['status_favorites' => 0]);
+        return redirect()->back();
+    }
+    public function deleteHelpCoAgent(Request $request)
+    {
+        DB::table('favorites')
+            ->where('status_favorites', 2)
+            ->update(['status_favorites' => 0]);
+        return redirect()->back();
+    }
 }
