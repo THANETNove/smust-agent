@@ -297,7 +297,7 @@
     <div class="form-check">
         <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="month_advance_rent"
             value="1" {{ old('month_advance_rent') ? 'checked' : '' }}>
-        <label class="form-check-label" for="flexCheckDefault">
+        <label class="form-check-label-1" for="flexCheckDefault">
             ค่าเช่าล่วงหน้า 1 เดือน <span>
                 <img class="img-info" src="{{ URL::asset('/assets/image/welcome/info.png') }}"
                     onclick="messageID('ค่าเช่าล่วงหน้า คือ ค่าเช่าในเดือน แรกที่ต้องการให้ ผู้เช่าจ่ายก่อนอยู่ ส่วนในเดือนต่อ ๆ ไปจะเป็นรูปแบบ อยู่จนครบเดือนแล้วจึงจ่าย  กฎหมายกำหนดให้เก็บได้ไม่เกิน 1 เดือน')">
@@ -307,7 +307,7 @@
     <div class="form-check">
         <input class="form-check-input" type="checkbox" value="1" id="month-advance-rent"
             {{ old('deposit_month_checkbox') ? 'checked' : '' }}>
-        <label class="form-check-label" for="flexCheckDeposit">
+        <label class="form-check-label-1" for="flexCheckDeposit">
             เงินมัดจำ <span>
                 <img class="img-info" src="{{ URL::asset('/assets/image/welcome/info.png') }}"
                     onclick="messageID('เงินมัดจำ หรือ เงินประกัน คือ ประกันความเสีย หายของทรัพย์ที่ เช่า โดยหากมีความเสียหายในวัน สิ้นสุดสัญญา เงินส่วนนี้จะถูกนำมา ชดใช้ความเสียหาย แต่หากไม่มี ความเสียหาย หรือมีแต่ความเสีย หายตาม ปกติธรรมดาของการใช้ ทรัพย์ตามปกติ เจ้าของต้องคืนเงิน ประกันนี้ ภายใน 7 วันนับแต่วันสิ้น สุดสัญญา โดยหากมีการเก็บเงิน จองไปแล้ว จะต้องจ่าย เพียงเท่าที่ ไม่ได้จ่ายไปตอนจอง เช่น หากจ่าย เงินจองแล้ว 5,000 บาท เงินมัดจำ ก็จะลดลง 5,000 บาทในภายหลัง')">
@@ -319,7 +319,7 @@
     <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="reservation-money"
             {{ old('reservation_money_checkbox') ? 'checked' : '' }}>
-        <label class="form-check-label" for="flexCheckBooking">
+        <label class="form-check-label-1" for="flexCheckBooking">
             เงินจอง <span>
                 <img class="img-info" src="{{ URL::asset('/assets/image/welcome/info.png') }}"
                     onclick="messageID('เงินจอง คือ หลักประกันว่าผู้เช่าจะ มาเช่าจริงตามที่สัญญาไว้ โดยสา- มารถริบได้ หากไม่ได้มาเช่าจริง เพื่อ เป็นค่าเสียโอกาสให้เจ้าของ  โดยทั่วไปเก็บไม่เกิน 5,000 บาท')">
