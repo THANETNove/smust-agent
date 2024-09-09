@@ -45,7 +45,7 @@
                                         @endif
                                         <div class="box-img-new">
                                             <img class="img-0831 lazy"
-                                                data-src="{{ URL::asset('/img/product/' . $imgUrl[0]) }}">
+                                                data-src="{{ URL::asset($imgUrl[0]) }}">
                                         </div>
                                         <div class="box-name-new">
                                             <p class="name-content">{{ $home2->building_name }}</p>
@@ -161,7 +161,7 @@
                                         @endif
                                         <div class="box-img-new">
                                             <img class="img-0831 lazy"
-                                                data-src="{{ URL::asset('/img/product/' . $imgUrl[0]) }}">
+                                                data-src="{{ URL::asset($imgUrl[0]) }}">
                                         </div>
                                         <div class="box-name-new">
                                             <p class="name-content">{{ $home2->building_name }}</p>
@@ -291,7 +291,7 @@
                                         @endif
                                         <div class="box-img-new">
                                             <img class="img-0831 lazy"
-                                                data-src="{{ URL::asset('/img/product/' . $imgUrl[0]) }}">
+                                                data-src="{{ URL::asset($imgUrl[0]) }}">
                                         </div>
                                         <div class="box-name-new">
                                             <p class="name-content">{{ $home->building_name }}</p>
@@ -405,7 +405,7 @@
                                         @endif
                                         <div class="box-img-new">
                                             <img class="img-0831 lazy"
-                                                data-src="{{ URL::asset('/img/product/' . $imgUrl[0]) }}">
+                                                data-src="{{ URL::asset($imgUrl[0]) }}">
                                         </div>
                                         <div class="box-name-new">
                                             <p class="name-content">{{ $home->building_name }}</p>

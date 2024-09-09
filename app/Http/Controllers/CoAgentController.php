@@ -179,10 +179,11 @@ class CoAgentController extends Controller
 
             foreach ($imagefile as $image) {
 
-                $data =   $image->move(public_path() . '/img/product', $randomText . "" . $image->getClientOriginalName());
-                $dateImg[] =  $randomText . "" . $image->getClientOriginalName();
+                $data =   $image->move(public_path() . '/img/product/', $randomText . "" . $image->getClientOriginalName());
+                $dateImg[] =  '/img/product/' . $randomText . "" . $image->getClientOriginalName();
             }
         }
+
 
         $member->image = json_encode($dateImg);
         // files
@@ -251,6 +252,8 @@ class CoAgentController extends Controller
                 $imagePath = public_path($imagePath); // Adjust if stored differently
 
                 if (file_exists($imagePath)) {
+
+
                     unlink($imagePath); // Delete the file from the server
                 }
             }
@@ -261,8 +264,8 @@ class CoAgentController extends Controller
             $filesPath = public_path($data->files); // Adjust if stored differently
 
 
-            if (file_exists($imagePath)) {
-                unlink($imagePath); // Delete the file from the server
+            if (file_exists($filesPath)) {
+                unlink($filesPath); // Delete the file from the server
             }
         }
 

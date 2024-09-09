@@ -370,7 +370,7 @@
     </div>
     <div class="row mb-3">
         <div class="input_box">
-            <input id="down_payment_amount" type="text"
+            <input id="down_payment_amount" type="number"
                 class="form-control col-12  @error('down_payment_amount') is-invalid @enderror"
                 name="down_payment_amount" value="{{ old('down_payment_amount') }}"
                 autocomplete="down_payment_amount">

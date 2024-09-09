@@ -19,7 +19,7 @@
                   <span>
                       <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/pajamas_sort-lowest.png') }}">
                       เงินดาวน์ <span class="ml-8"> {{ number_format($home->down_payment) }}
-                          บาท</span>
+                      </span>
                   </span>
               </p>
 
