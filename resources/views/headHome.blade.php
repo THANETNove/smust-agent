@@ -21,16 +21,10 @@
                     ->join('favorites', 'rent_sell_home_details.id', '=', 'favorites.id_product')
                     ->where('favorites.status_favorites', 1)
                     ->count();
-                $co_agQuery_2 = DB::table('rent_sell_home_details')
-                    ->where('rent_sell_home_details.status_home', 'on')
-                    ->where('rent_sell_home_details.user_id', Auth::user()->id)
-                    ->join('favorites', 'rent_sell_home_details.id', '=', 'favorites.id_product')
-                    ->where('favorites.status_favorites', 2)
-                    ->count();
-                //  dd($query_co, $query_home);
+   
 
                 if (Auth::user()->plans == '2') {
-                    $co_hom_count = $query_home + $query_co + $co_agQuery_1 + $co_agQuery_2;
+                    $co_hom_count = $query_home + $query_co + $co_agQuery_1;
                 } else {
                     $co_hom_count = $query_home + $query_co;
                 }
@@ -139,22 +133,7 @@
                                 อยากช่วยคุณขายทรัพย์ {{ $co_agQuery_1 }} คน <img class="icon-co-premium"
                                     src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}"></p>
                         </a>
-
-                        @if ($co_agQuery_2)
-                            <hr>
-                        @endif
-
                     @endif
-
-                    @if ($co_agQuery_2)
-                        <a href="{{ url('delete-help-co-agent') }}">
-                            <p class="text-co-home"><img class="icon-co-home"
-                                    src="{{ URL::asset('/assets/image/welcome/A4.png') }}">ทรัพย์ที่กดเข้ารายการโปรด
-                                ถูกขายไปแล้ว {{ $co_agQuery_2 }} รายการ <img class="icon-co-premium"
-                                    src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}"></p>
-                        </a>
-                    @endif
-
                 @endif
 
             </div>

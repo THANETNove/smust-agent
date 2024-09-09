@@ -20,7 +20,22 @@ class CoAgentController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            return view('co-agent.index');
+
+            $dataHomeQuery = DB::table('rent_sell_home_details')
+                ->where('rent_sell_home_details.status_home', 'on')
+                ->where('rent_sell_home_details.code_admin', Auth::user()->code)
+                ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
+                ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
+                ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
+                ->select(
+                    'rent_sell_home_details.*',
+                    'provinces.name_th AS provinces_name_th',
+                    'districts.name_th AS districts_name_th',
+                    'amphures.name_th AS amphures_name_th'
+                )->get();
+
+
+            return view('co-agent.index', compact('dataHomeQuery'));
         } else {
             return redirect('login');
         }
