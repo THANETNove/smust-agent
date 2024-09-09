@@ -263,6 +263,11 @@ class HomeController extends Controller
         });
 
 
+        $currentDate = Carbon::now(); // วันและเวลาปัจจุบัน
+        $userCreatedDate = Carbon::parse(Auth::user()->created_at); // วันที่ของผู้ใช้
+        $createdDate = $userCreatedDate->lessThan($currentDate->subDays(3));
+        $authCount = (Auth::user()->plans == 0 && $createdDate) ? 1 : 2;
+
 
         return view('home', [
             'train_station' => $train_station,
@@ -270,7 +275,8 @@ class HomeController extends Controller
             'dataHome' => $dataHome,
             'dataHome2' => $dataHome2,
             'dataCount' => $dataCount,
-            'dataCount2' =>  $dataCount2
+            'dataCount2' =>  $dataCount2,
+            'authCount' => $authCount
         ]);
     }
 
