@@ -458,17 +458,58 @@
         button.addEventListener('click', function() {
             const inputId = this.getAttribute('data-input');
             const inputElement = document.getElementById(inputId);
-            const typeInputhire = document.getElementById('rental-price');
+            //ขาย
             const typeSellingprice = document.getElementById('selling-price');
+
+            //เช่า
+            const typeInputhire = document.getElementById('rental-price');
             const minimumRental = document.getElementById('minimum-rental');
+
+            console.log('Clicked button with data-input:', inputId);
+            console.log('Data-value of clicked button:', this.getAttribute('data-value'));
 
             if (inputElement) { // ตรวจสอบว่า inputElement ไม่ใช่ null
                 if (this.classList.contains('active')) {
                     this.classList.remove('active');
                     inputElement.value = null;
+                    if (this.getAttribute('data-value') == "ขาย") {
+                        typeSellingprice.style.display = 'none';
+                    }
+                    if (this.getAttribute('data-value') == "เช่า") {
+                        typeInputhire.style.display = 'none';
+                        minimumRental.style.display = 'none';
+                    }
+
                 } else {
                     this.classList.add('active');
                     inputElement.value = this.getAttribute('data-value');
+
+                    if (this.getAttribute('data-value') == "ขาย") {
+                        typeSellingprice.style.display = 'block';
+                    }
+                    if (this.getAttribute('data-value') == "เช่า") {
+                        typeInputhire.style.display = 'block';
+                        minimumRental.style.display = 'block';
+                    }
+                }
+
+                // ตรวจสอบสถานะ active ของปุ่มอื่นๆ และซ่อนตามเงื่อนไข
+                const isSellActive = document.querySelector('#btn-sell').classList.contains('active');
+                const isHireActive = document.querySelector('#btn-hire').classList.contains('active');
+                const isHireSellActive = document.querySelector('#btn-hire_sell').classList.contains(
+                    'active');
+
+                if (!isHireSellActive) {
+                    if (isSellActive) {
+                        typeInputhire.style.display = 'none';
+                        minimumRental.style.display = 'none';
+                    } else if (isHireActive) {
+                        typeSellingprice.style.display = 'none';
+                    }
+                } else {
+                    typeInputhire.style.display = 'block';
+                    minimumRental.style.display = 'block';
+                    typeSellingprice.style.display = 'block';
                 }
             } else {
                 console.error('Element with id ' + inputId + ' not found.');
@@ -480,21 +521,21 @@
             const hireSellValue = document.getElementById('type-name-hire_sell').value;
             const hireValue = document.getElementById('type-name-hire').value;
 
-            if (hireValue !== 'null' || hireSellValue !== 'null') {
-                typeInputhire.style.display = 'block';
-            } else {
-                typeInputhire.style.display = 'none';
-            }
-            if (hireSell !== 'null' || hireSellValue !== 'null') {
-                typeSellingprice.style.display = 'block';
-            } else {
-                typeSellingprice.style.display = 'none';
-            }
-            if (hireValue !== 'null') {
-                minimumRental.style.display = 'block';
-            } else {
-                minimumRental.style.display = 'none';
-            }
+            /*   if (hireValue !== 'null' || hireSellValue !== 'null') {
+                  typeInputhire.style.display = 'block';
+              } else {
+                  typeInputhire.style.display = 'none';
+              }
+              if (hireSell !== 'null' || hireSellValue !== 'null') {
+                  typeSellingprice.style.display = 'block';
+              } else {
+                  typeSellingprice.style.display = 'none';
+              }
+              if (hireValue !== 'null') {
+                  minimumRental.style.display = 'block';
+              } else {
+                  minimumRental.style.display = 'none';
+              } */
         });
     });
 
