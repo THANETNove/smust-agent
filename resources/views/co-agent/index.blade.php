@@ -9,18 +9,14 @@
             <p class="free-trial">หา co-agent ช่วยขาย</p>
 
         </div>
-        <div class="box-announced">
+        <div class="box-announced announced-background">
             <p class="announced-property mb-3">ทรัพย์ที่ลงประกาศ</p>
             @foreach ($dataHomeQuery as $home)
                 @php
                     $imgUrl = json_decode(htmlspecialchars_decode($home->image));
                 @endphp
                 <a href="{{ url('get-detall', $home->id) }}">
-                    <div class="card-new">
-                        {{--   @if (Carbon\Carbon::parse($home->created_at)->diffInDays(Carbon\Carbon::now()) < 4)
-                            <div class="box-new">NEW</div>
-                        @endif --}}
-
+                    <div class="card-new2">
                         @php
                             $price = $home->sell_price;
                             $priceString = (string) $price;
@@ -60,7 +56,7 @@
                                 <span class="rent-sell-yellow absolute-rent-sell">{{ $home->sell }}</span>
                             @endif
                         </div>
-                        <div class="box-name-new">
+                        <div class="box-name-new2">
                             @if (($home->sell_price && $home->rent_sell == 'เช่า/ขาย') || $home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
                                 <p class="price-new">฿
                                     {{ number_format($home->rental_price) }}/m

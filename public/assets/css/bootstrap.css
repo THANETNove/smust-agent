@@ -1353,6 +1353,18 @@ input[autofocus]:focus {
 
 }
 
+.card-new2 {
+    height: auto;
+    background-color: var(--white);
+    margin-bottom: 16px;
+    border-radius: 8px;
+    display: flex;
+    padding-bottom: 16px;
+
+
+
+}
+
 .box-img-new {
     width: 84px;
     height: 100%;
@@ -1366,6 +1378,11 @@ input[autofocus]:focus {
 }
 
 .box-name-new {
+    padding: 16px 0px 18px 12px;
+    width: 100%;
+}
+
+.box-name-new2 {
     padding: 16px 0px 18px 12px;
     width: 100%;
 }
@@ -1587,4 +1604,9 @@ a {
 
 .form-check-label {
     cursor: pointer;
+}
+
+.announced-background {
+    background: #B8D7E2;
+    min-height: 100vh;
 }
