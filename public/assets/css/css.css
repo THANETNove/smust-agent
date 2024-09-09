@@ -1562,6 +1562,10 @@
     padding: 17px 16px 22px 16px;
 }
 
+.text-announced2 {
+    padding: 17px 16px 22px 16px;
+}
+
 .announced-property {
     font-size: 20px;
     font-weight: 700;
@@ -2310,4 +2314,60 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     width: 20px;
     height: 20px;
     margin-left: 8px;
+}
+
+.co-agent-user {
+    margin-top: -4px;
+    margin-bottom: -4px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #007BA7;
+    position: relative;
+
+}
+
+.co-agent-use-img {
+    width: 15px;
+    height: 15px;
+    margin-left: 13px;
+    margin-right: 6px;
+}
+
+.arrow_forward_ios {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: 10px;
+    margin-top: 4px;
+}
+
+.remove-announcement {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+    color: #E34234;
+}
+
+.box-co-uses {
+    width: 100%;
+    height: 69px;
+    background-color: #FFFFFF;
+}
+
+.box-profile-co {
+    padding: 8px 17px 8px 14px;
+    position: relative;
+}
+
+.profile-co {
+    width: 50px;
+    height: 50px;
+    z-index: 0;
+}
+
+.icon-co-user {
+    width: 13px;
+    height: 13px;
+    z-index: 1;
 }

@@ -15,8 +15,9 @@
                 @php
                     $imgUrl = json_decode(htmlspecialchars_decode($home->image));
                 @endphp
-                <a href="{{ url('get-detall', $home->id) }}">
-                    <div class="card-new2">
+
+                <div class="card-new2">
+                    <div style="display: flex">
                         @php
                             $price = $home->sell_price;
                             $priceString = (string) $price;
@@ -37,7 +38,6 @@
                                 $rental_price = number_format($home->rental_price) . ' บาท';
                             }
                         @endphp
-
                         <div class="box-img-new2">
                             <img class="img-0831 lazy mb-2" src="{{ URL::asset('/img/product/' . $imgUrl[0]) }}">
                             @if ($home->rent_sell == 'เช่า')
@@ -99,9 +99,20 @@
                                 </span>
                             </p>
                         </div>
-
                     </div>
-                </a>
+                    <div>
+                        <hr>
+                        <a href="{{ url('co-users') }}">
+                            <p class="co-agent-user"> <img class="co-agent-use-img"
+                                    src="{{ URL::asset('/assets/image/welcome/diversity_3.png') }}">ดู
+                                co-agent ที่ช่วยคุณขาย <img class="arrow_forward_ios"
+                                    src="{{ URL::asset('/assets/image/welcome/arrow_forward_ios.png') }}"></p>
+                        </a>
+
+                        <hr>
+                        <p class="remove-announcement">ลบออกจากประกาศ</p>
+                    </div>
+                </div>
             @endforeach
             <a href="{{ url('co-create') }}">
                 <img class="add-co" id="rectangle123" src="{{ URL::asset('/assets/image/welcome/add.png') }}">

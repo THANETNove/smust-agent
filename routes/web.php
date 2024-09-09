@@ -92,6 +92,7 @@ Route::get('/get-amphures/{id}', [CoAgentController::class, 'amphures'])->name('
 Route::get('co-agent', [CoAgentController::class, 'index'])->name('co-agent');
 Route::get('co-create', [CoAgentController::class, 'create'])->name('co-create');
 Route::post('co-agent-store', [CoAgentController::class, 'store'])->name('co-agent-store');
+Route::get('co-users', [CoAgentController::class, 'coUsers'])->name('co-users');
 Route::put('report-product-update/{id}', [ReportPropertySoldController::class, 'update'])->name('report-product-update');
 Route::put('caption-update/{id}', [CaptionController::class, 'update'])->name('caption-update');
 Route::get('click-favorite/{id}', [FavoriteController::class, 'update'])->name('click-favorite');

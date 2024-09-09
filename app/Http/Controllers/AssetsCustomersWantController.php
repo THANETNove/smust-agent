@@ -89,6 +89,13 @@ class AssetsCustomersWantController extends Controller
 
         // แยกข้อมูลที่ status เป็น NULL และ ไม่เป็น NULL
 
+
+        $currentDate = Carbon::now(); // วันและเวลาปัจจุบัน
+        $userCreatedDate = Carbon::parse(Auth::user()->created_at); // วันที่ของผู้ใช้
+        $createdDate = $userCreatedDate->lessThan($currentDate->subDays(3));
+        $authCount = (Auth::user()->plans == 0 && $createdDate) ? 1 : 2;
+        //dd($authCount);
+
         // สร้างสำเนาของ query สำหรับแยกข้อมูลที่ user_id เป็น NULL
         $queryForNullStatus = clone $query;
         $wantsNullStatus = $queryForNullStatus->whereNull('assets_customers_wants.user_id')->paginate(100)->appends($request->all());
@@ -97,10 +104,6 @@ class AssetsCustomersWantController extends Controller
         $queryForNotNullStatus = clone $query;
         $wantsNotNullStatus = $queryForNotNullStatus->whereNotNull('assets_customers_wants.user_id')->paginate(100)->appends($request->all());
 
-        $currentDate = Carbon::now(); // วันและเวลาปัจจุบัน
-        $userCreatedDate = Carbon::parse(Auth::user()->created_at); // วันที่ของผู้ใช้
-        $createdDate = $userCreatedDate->lessThan($currentDate->subDays(3));
-        $authCount = (Auth::user()->plans == 0 && $createdDate) ? 1 : 2;
 
 
 
@@ -108,7 +111,8 @@ class AssetsCustomersWantController extends Controller
         return view('assetsCustomer.assets_customer', [
             'wants' => $wantsNullStatus,
             'wants2' => $wantsNotNullStatus,
-            'createdDate' => $createdDate
+            'createdDate' => $createdDate,
+            'authCount' => $authCount
         ]);
     }
 

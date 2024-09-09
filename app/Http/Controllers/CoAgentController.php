@@ -75,6 +75,13 @@ class CoAgentController extends Controller
 
         return view('co-agent.create_co', compact('electricalAppliance', 'facilities', 'furniture'));
     }
+    public function coUsers()
+    {
+
+
+
+        return view('co-agent.users_co_agent');
+    }
 
     /**
      * Store a newly created resource in storage.
