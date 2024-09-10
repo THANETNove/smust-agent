@@ -14,6 +14,38 @@
 
     <title>SMUST-Agent</title>
 
+
+    <!-- Meta Description for SEO -->
+    <meta name="description"
+        content="SMUST-Agent ให้บริการฝากขายและเช่าทรัพย์สินออนไลน์ในประเทศไทย ค้นหาและเปรียบเทียบทรัพย์สินที่ดีที่สุดสำหรับการขายหรือเช่าได้ที่นี่">
+
+    <!-- Meta Keywords for SEO -->
+    <meta name="keywords"
+        content="SMUST, ฝากทรัพย์, ขายบ้าน, เช่าบ้าน, อสังหาริมทรัพย์, ซื้อขายบ้าน, ขายคอนโด, อสังหาฯ, ฝากขายบ้าน, ตัวแทนอสังหา,นายหน้า">
+
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title"
+        content="SMUST-Agent - บริการฝากขายและเช่าทรัพย์สินออนไลน์ แพลตฟอร์มรวมอสังหาริมทรัพย์ และนายหน้าฝีมือดี พร้อมช่วยคุณหาทรัพย์ที่ตรงใจ ">
+    <meta property="og:description"
+        content="SMUST-Agent ให้บริการฝากขายและเช่าทรัพย์สินในประเทศไทย ค้นหาทรัพย์สินที่เหมาะสมกับคุณ แพลตฟอร์มรวมอสังหาริมทรัพย์ และนายหน้าฝีมือดี พร้อมช่วยคุณหาทรัพย์ที่ตรงใจ">
+    <meta property="og:image" content="{{ URL::asset('/assets/image/home/SMUSTAgentlogo.png') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags for Sharing -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title"
+        content="SMUST-Agent - บริการฝากขายและเช่าทรัพย์สินในประเทศไทย  แพลตฟอร์มรวมอสังหาริมทรัพย์ และนายหน้าฝีมือดี พร้อมช่วยคุณหาทรัพย์ที่ตรงใจ">
+    <meta name="twitter:description"
+        content="SMUST-Agent บริการฝากขายและเช่าทรัพย์สิน ค้นหาบ้านและทรัพย์สินที่ดีที่สุด แพลตฟอร์มรวมอสังหาริมทรัพย์ และนายหน้าฝีมือดี พร้อมช่วยคุณหาทรัพย์ที่ตรงใจ">
+    <meta name="twitter:image" content="{{ URL::asset('/assets/image/home/SMUSTAgentlogo.png') }}">
+
+    <!-- Fonts and Stylesheets -->
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ URL::asset('/assets/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('/assets/css/css.css') }}" rel="stylesheet">
+
     <!-- Fonts -->
 
     {{-- <link rel="dns-prefetch" href="//fonts.bunny.net"> --}}
