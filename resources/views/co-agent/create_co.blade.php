@@ -120,7 +120,12 @@
                         provincesId: provincesValue
                     })
                     .then(response => {
-                        console.log(response.data); // ตรวจสอบข้อมูลที่ส่งกลับมาจาก Server
+
+                        const peopleCount = response.data.data; // เปลี่ยน peopleCount ให้ตรงกับข้อมูลที่ได้
+
+                        // อัปเดตตัวเลขใน <p> ที่มี id="people-23"
+                        document.getElementById('people-23').innerHTML =
+                            `${peopleCount} <span class="people">คน</span>`;
                     })
                     .catch(error => {
                         console.error('Error:', error); // ตรวจสอบข้อผิดพลาดถ้ามี
@@ -128,7 +133,7 @@
 
 
 
-                    
+
 
 
                 currentStep++;

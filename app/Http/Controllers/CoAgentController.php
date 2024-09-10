@@ -94,35 +94,39 @@ class CoAgentController extends Controller
     {
 
         $dataHomeQuery = DB::table('rent_sell_home_details')
-            ->where('rent_sell_home_details.status_home', 'on')
-            ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
-            ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
-            ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
-            ->select(
-                'rent_sell_home_details.*',
-                'provinces.name_th AS provinces_name_th',
-                'districts.name_th AS districts_name_th',
-                'amphures.name_th AS amphures_name_th'
-            );
+            ->where('status_home', 'on');
 
-        if ($request->has('provinces')) {
-            $dataHomeQuery->where('rent_sell_home_details.provinces', $request->input('provincesId'));
-        }
+
         if ($request->has('propertyTypeCo')) {
             $typeName =   $request->input('propertyTypeCo');
             $dataHomeQuery->where('rent_sell_home_details.property_type',   'LIKE', "%$typeName%");
         }
-        if ($request->has('typeNameSell')) {
-            $dataHomeQuery->where(function ($query) {
-                $nameSale = "ขาย";
-                $query->where('rent_sell_home_details.rent_sell',   'LIKE', "%$nameSale%")
-                    ->orWhere('rent_sell_home_details.sell', 'LIKE', "%$nameSale%");
-            });
+
+        if ($request->input('typeNameHireSell') == null) {
+
+
+            if ($request->has('typeNameSell') &&  $request->input('typeNameSell') != null) {
+                $dataHomeQuery->where(function ($query) {
+                    $nameSale = "ขาย";
+                    $query->where('rent_sell_home_details.rent_sell',   'LIKE', "%$nameSale%")
+                        ->orWhere('rent_sell_home_details.sell', 'LIKE', "%$nameSale%");
+                });
+            }
+            if ($request->has('typeNameHire') &&  $request->input('typeNameHire') != null) {
+                $dataHomeQuery->where(function ($query) {
+                    $nameRent = "เช่า";
+                    $query->where('rent_sell_home_details.rent_sell', 'LIKE', "%$nameRent%")
+                        ->orWhere('rent_sell_home_details.sell', 'LIKE', "%$nameRent%");
+                });
+            }
+        }
+        if ($request->has('provincesId') ||  $request->input('provincesId') != "จังหวัด") {
+            $dataHomeQuery->where('rent_sell_home_details.provinces', $request->input('provincesId'));
         }
 
 
 
-        dd($request->all(), $request->input('provincesId'));
+        return response()->json(['message' => 'Data received', 'data' => $dataHomeQuery->count()]);
     }
 
     /**
