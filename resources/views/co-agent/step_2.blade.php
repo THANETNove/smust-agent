@@ -1,6 +1,6 @@
 <p class="details-have-broker">จากรายละเอียดที่ให้มา</p>
 <p class="have-broker">มีนายหน้า</p>
-<p class="people-23" id="people-23">23 <span class="people">คน</span></p>
+<p class="people-23" id="people-23">0 <span class="people">คน</span></p>
 <div class="container-img-buying_house">
     <img class="img-buying_house" src="{{ URL::asset('/assets/image/welcome/buying_house.png') }}">
 </div>
