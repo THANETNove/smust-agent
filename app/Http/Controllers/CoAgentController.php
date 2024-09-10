@@ -90,6 +90,40 @@ class CoAgentController extends Controller
 
         return view('co-agent.users_co_agent', ['dataHomeQuery' => $dataHomeQuery]);
     }
+    public function submitData(Request $request)
+    {
+
+        $dataHomeQuery = DB::table('rent_sell_home_details')
+            ->where('rent_sell_home_details.status_home', 'on')
+            ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
+            ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
+            ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
+            ->select(
+                'rent_sell_home_details.*',
+                'provinces.name_th AS provinces_name_th',
+                'districts.name_th AS districts_name_th',
+                'amphures.name_th AS amphures_name_th'
+            );
+
+        if ($request->has('provinces')) {
+            $dataHomeQuery->where('rent_sell_home_details.provinces', $request->input('provincesId'));
+        }
+        if ($request->has('propertyTypeCo')) {
+            $typeName =   $request->input('propertyTypeCo');
+            $dataHomeQuery->where('rent_sell_home_details.property_type',   'LIKE', "%$typeName%");
+        }
+        if ($request->has('typeNameSell')) {
+            $dataHomeQuery->where(function ($query) {
+                $nameSale = "ขาย";
+                $query->where('rent_sell_home_details.rent_sell',   'LIKE', "%$nameSale%")
+                    ->orWhere('rent_sell_home_details.sell', 'LIKE', "%$nameSale%");
+            });
+        }
+
+
+
+        dd($request->all(), $request->input('provincesId'));
+    }
 
     /**
      * Store a newly created resource in storage.

@@ -71,7 +71,8 @@ class HomeController extends Controller
                 }
 
                 if ($request->has('property_type')) {
-                    $dataHomeQuery->where('rent_sell_home_details.property_type', $request->input('property_type'));
+                    $typeName =   $request->input('property_type');
+                    $dataHomeQuery->where('rent_sell_home_details.property_type',   'LIKE', "%$typeName%");
                 }
                 if ($request->has('usable_area')) {
 
@@ -104,9 +105,11 @@ class HomeController extends Controller
 
                     // ตรวจสอบประเภทการขายหรือเช่า
                     if ($request->input('sale_rent') == 'sale') {
+
                         $dataHomeQuery->where(function ($query) {
-                            $query->where('rent_sell_home_details.rent_sell', 'ขาย')
-                                ->orWhere('rent_sell_home_details.sell', 'ขาย');
+                            $nameSale = "ขาย";
+                            $query->where('rent_sell_home_details.rent_sell',   'LIKE', "%$nameSale%")
+                                ->orWhere('rent_sell_home_details.sell', 'LIKE', "%$nameSale%");
                         });
 
                         if ($request->has('price_range')) {
@@ -125,8 +128,9 @@ class HomeController extends Controller
                         }
                     } elseif ($request->input('sale_rent') == 'rent') {
                         $dataHomeQuery->where(function ($query) {
-                            $query->where('rent_sell_home_details.rent_sell', 'เช่า')
-                                ->orWhere('rent_sell_home_details.sell', 'เช่า');
+                            $nameRent = "เช่า";
+                            $query->where('rent_sell_home_details.rent_sell', 'LIKE', "%$nameRent%")
+                                ->orWhere('rent_sell_home_details.sell', 'LIKE', "%$nameRent%");
                         });
 
 

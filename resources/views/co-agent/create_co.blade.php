@@ -95,12 +95,48 @@
         }
 
         function nextStep() {
+
+
             if (currentStep < steps.length) { // Ensure it does not exceed the number of steps
+                console.log("currentStep", currentStep);
+
+                const sellValue = document.getElementById('type-name-sell') ? document.getElementById('type-name-sell')
+                    .value : null;
+                const hireSellValue = document.getElementById('type-name-hire_sell') ? document.getElementById(
+                    'type-name-hire_sell').value : null;
+                const hireValue = document.getElementById('type-name-hire') ? document.getElementById('type-name-hire')
+                    .value : null;
+                const typeCoValue = document.getElementById('property_type-co') ? document.getElementById(
+                    'property_type-co').value : null;
+                const provincesValue = document.getElementById('provinces-id') ? document.getElementById('provinces-id')
+                    .value : null;
+
+
+                axios.post('/submit-data', {
+                        typeNameSell: sellValue,
+                        typeNameHireSell: hireSellValue,
+                        typeNameHire: hireValue,
+                        propertyTypeCo: typeCoValue,
+                        provincesId: provincesValue
+                    })
+                    .then(response => {
+                        console.log(response.data); // ตรวจสอบข้อมูลที่ส่งกลับมาจาก Server
+                    })
+                    .catch(error => {
+                        console.error('Error:', error); // ตรวจสอบข้อผิดพลาดถ้ามี
+                    });
+
+
+
+                    
+
+
                 currentStep++;
                 showStep(currentStep);
                 updateProgress();
                 if (currentStep == 1) {
                     document.getElementById('cross').value = 0;
+
                 }
             }
         }
