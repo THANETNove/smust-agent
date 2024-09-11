@@ -37,5 +37,10 @@
             </div>
         </div>
     </nav>
-    <img class="bg-navbar" src="{{ URL::asset('/assets/image/home/bg.png') }}">
+    <div class="bg-navbar">
+
+    </div>
+    <div class="box-bg">
+
+    </div>
 @endsection

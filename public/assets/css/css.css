@@ -2490,6 +2490,23 @@ div:where(.swal2-container) div:where(.swal2-popup) {
 }
 
 .bg-navbar {
-    width: 100%;
+    background-image: url('/assets/image/home/bg.png');
+    background-size: cover;
+    /* Ensures the background covers the entire element */
+    background-position: center;
+    /* Centers the background image */
+    background-repeat: no-repeat;
+    /* Prevents the background image from repeating */
+
     height: 382px;
+    /* Set a height if needed, such as full viewport height */
+    width: 100%;
+    /* Set width to 100% */
+}
+
+.box-bg {
+    width: 100%;
+    height: 188px;
+    background: var(--Primary, #007BA7);
+
 }
