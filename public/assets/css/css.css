@@ -2490,6 +2490,8 @@ div:where(.swal2-container) div:where(.swal2-popup) {
 }
 
 .bg-navbar {
+    padding: 40px;
+
     background-image: url('/assets/image/home/bg.png');
     background-size: cover;
     /* Ensures the background covers the entire element */
@@ -2502,6 +2504,9 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     /* Set a height if needed, such as full viewport height */
     width: 100%;
     /* Set width to 100% */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .box-bg {
@@ -2509,4 +2514,170 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     height: 188px;
     background: var(--Primary, #007BA7);
 
+}
+
+.owner-allows-free {
+    background: #E34234;
+    width: 187px;
+    height: 36px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.apply-job-with-us {
+    color: #007BA7;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: underline !important;
+
+}
+
+@media only screen and (min-width: 992px) {
+    .owner-allows-free {
+        margin-left: 12px;
+    }
+
+    .apply-job-with-us {
+        margin-left: 12px;
+    }
+
+    .search-text-head::after {
+        margin-left: -80px;
+        width: 200px;
+    }
+
+    input[type="radio"]:checked+.search-text-head::after {
+        width: 200px;
+        /* แสดงเส้นใต้เต็มเมื่อเลือก */
+    }
+
+    input[type="radio"]:checked+.search-text-head2::after {
+        width: 200px;
+        margin-left: -20px;
+        /* แสดงเส้นใต้เต็มเมื่อเลือก */
+    }
+
+}
+
+@media only screen and (max-width: 991px) {
+
+    input[type="radio"]:checked+.search-text-head::after {
+        width: 50px;
+        margin-left: -10px;
+        /* แสดงเส้นใต้เต็มเมื่อเลือก */
+    }
+
+    input[type="radio"]:checked+.search-text-head2::after {
+        width: 170px;
+        margin-left: -10px;
+        /* แสดงเส้นใต้เต็มเมื่อเลือก */
+    }
+
+}
+
+.integration-platform {
+    font-size: clamp(20px, 5vw, 40px);
+    /* ขนาดต่ำสุด 20px, ขนาดที่ปรับตามหน้าจอ 5vw, และขนาดสูงสุด 40px */
+
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+}
+
+.search-welcome {
+    max-width: 880px;
+    width: 100%;
+    height: auto;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 12px;
+
+}
+
+.search-welcome-box {
+    display: flex;
+    gap: 10px;
+    justify-content: space-around;
+
+}
+
+
+.search-text-head {
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    position: relative;
+    /* กำหนดให้ใช้ relative เพื่อควบคุมตำแหน่งของ ::after */
+}
+
+.search-welcome-box {
+    display: flex;
+    gap: 20px;
+    position: relative;
+}
+
+
+
+
+
+.btn-find-out-now {
+    margin-top: 4px;
+    width: 131px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    background-color: #E34234;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 6px;
+    border: 1px solid #E34234;
+}
+
+.search-welcome-box {
+    display: flex;
+    gap: 20px;
+}
+
+.search-text-head,
+.search-text-head2 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    cursor: pointer;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.search-text-head::after,
+.search-text-head2::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    /* เริ่มต้นด้วยความยาว 0 */
+    height: 2px;
+    background-color: #E34234;
+    bottom: -7px;
+    left: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+input[type="radio"] {
+    position: absolute;
+    /* ใช้เพื่อซ่อน radio buttons */
+    opacity: 0;
+    /* ซ่อน radio button */
+    width: 0;
+    /* ขนาด 0 เพื่อไม่ให้แสดงออกมา */
+    height: 0;
+    /* ขนาด 0 เพื่อไม่ให้แสดงออกมา */
+    overflow: hidden;
+    /* ซ่อน overflow */
 }
