@@ -2490,7 +2490,7 @@ div:where(.swal2-container) div:where(.swal2-popup) {
 }
 
 .bg-navbar {
-    padding: 40px;
+    padding: 40px 16px;
 
     background-image: url('/assets/image/home/bg.png');
     background-size: cover;
@@ -2500,7 +2500,7 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     background-repeat: no-repeat;
     /* Prevents the background image from repeating */
 
-    height: 382px;
+    min-height: 382px;
     /* Set a height if needed, such as full viewport height */
     width: 100%;
     /* Set width to 100% */
@@ -2680,4 +2680,50 @@ input[type="radio"] {
     /* ขนาด 0 เพื่อไม่ให้แสดงออกมา */
     overflow: hidden;
     /* ซ่อน overflow */
+}
+
+.box-or-agent {
+    margin-top: 8px;
+    max-width: 880px;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    padding: 12px;
+    background: #FFFFFFB2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.box-or {
+    display: flex;
+    flex-direction: row;
+}
+
+.or-text {
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+}
+
+.box-agent {
+    width: auto;
+    height: auto;
+    padding: 8px 32px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #FFFFFF;
+    background-color: #007BA7;
+    margin-left: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, margin-left 0.3s ease;
+
+}
+
+.box-agent:hover {
+    background-color: #008dc0;
+    margin-left: 30px;
 }

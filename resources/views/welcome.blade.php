@@ -30,11 +30,6 @@
     <div class="bg-navbar">
         <p class="integration-platform">แพลตฟอร์มรวมอสังหาริมทรัพย์<br> และนายหน้าฝีมือดี พร้อมช่วยคุณหาทรัพย์ที่ตรงใจ</p>
         <div class="search-welcome">
-            {{--   <div class="search-welcome-box mb-1">
-                <p class="search-text-head active">เช่า</p>
-                <p class="search-text-head">ซื้อ</p>
-                <p class="search-text-head-2">ผ่อนตรงเจ้าของ <span style="color:  #E34234">(NEW)</span></p>
-            </div> --}}
             <div class="search-welcome-box mb-2">
                 <div>
                     <input type="radio" id="rent" name="property-type" value="เช่า" checked>
@@ -53,13 +48,7 @@
                     </label>
                 </div>
             </div>
-
-
-
-
-
             <div class="row">
-
                 <div class="mb-3 col-12 col-sm-4">
                     <select class="form-select" aria-label="Default select example">
                         <option selected disabled>ประเภททรัพย์</option>
@@ -80,9 +69,15 @@
 
                 </div>
             </div>
+        </div>
+        <div class="box-or-agent">
+            <div class="box-or">
+                <p class="or-text">หรือ</p>
+                <a href="{{ url('co-create') }}">
+                    <div class="box-agent">ให้สามารถเอเจนท์ (SMUST Agent) ช่วยหาทรัพย์ตรงใจ</div>
+                </a>
 
-
-
+            </div>
         </div>
     </div>
     <div class="box-bg">
