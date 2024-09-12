@@ -2969,7 +2969,7 @@ input[type="radio"] {
     margin-top: 46px;
     margin-left: 10%;
     margin-right: 10%;
-    margin-bottom: 92px;
+    margin-bottom: 48px;
 
 }
 
@@ -3002,4 +3002,34 @@ input[type="radio"] {
     max-height: 400px;
     width: 100%;
     height: 100%;
+}
+
+.full-screen-center {
+    margin-top: 48px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 125px;
+}
+
+.btn-for-sale-rent-now {
+    background-color: #007BA7;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 236px;
+    height: 40px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-for-sale-rent-now:hover {
+    background-color: #026589;
+}
+
+.box-latest-announcement {
+    background: #B8D7E2;
+    width: 100%;
+    height: 559px;
 }

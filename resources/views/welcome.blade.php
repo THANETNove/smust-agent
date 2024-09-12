@@ -84,7 +84,10 @@
         <div class="location_away-box">
             <div>
                 <img class="groups_2w" src="{{ URL::asset('/assets/image/welcome/location_away.png') }}">
-                <div class="deposit-assets-now">ฝากทรัพย์เลย</div>
+                <a href="{{ url('co-create') }}">
+                    <div class="deposit-assets-now">ฝากทรัพย์เลย</div>
+                </a>
+
             </div>
             <div class="box-the-owner">
                 <p class="text-the-owner ">สำหรับเจ้าของ</p>
@@ -156,7 +159,13 @@
                     </div>
                 </div>
 
+                <div class="full-screen-center">
+                    <a href="{{ url('co-create') }}">
+                        <div class="btn-for-sale-rent-now">ฝากขาย / เช่าเลย</div>
 
+                    </a>
+
+                </div>
             </div>
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
                 tabindex="0">
@@ -166,7 +175,15 @@
                     ให้กับนายหน้าเลยก็ว่าได้ ไม่ว่าจะเป็น....
                 </p>
                 <img class="match_easy" src="{{ URL::asset('/assets/image/home/Match_easy.png') }}">
+
+                <div class="full-screen-center">
+                    <a href="#">
+                        <div class="btn-for-sale-rent-now">สนใจรายละเอียดเพิ่มเติม</div>
+                    </a>
+
+                </div>
             </div>
         </div>
     </div>
+    <div class="box-latest-announcement"></div>
 @endsection
