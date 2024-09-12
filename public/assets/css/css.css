@@ -2513,6 +2513,8 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     width: 100%;
     height: 188px;
     background: var(--Primary, #007BA7);
+    display: flex;
+    justify-content: center;
 
 }
 
@@ -2639,6 +2641,13 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     font-weight: 700;
     border-radius: 6px;
     border: 1px solid #E34234;
+    transition: background-color 0.3s ease;
+}
+
+.btn-find-out-now:hover {
+
+    background-color: #b62e21;
+
 }
 
 .search-welcome-box {
