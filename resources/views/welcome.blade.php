@@ -81,16 +81,36 @@
         </div>
     </div>
     <div class="box-bg">
-        <div>
-            <p>เช่า</p>
-            <p>ซื้อ</p>
-            <p>ผ่อนตรงเจ้าของ (NEW)</p>
-        </div>
+        <div class="location_away-box">
+            <div>
+                <img class="groups_2w" src="{{ URL::asset('/assets/image/welcome/location_away.png') }}">
+                <div class="deposit-assets-now">ฝากทรัพย์เลย</div>
+            </div>
+            <div class="box-the-owner">
+                <p class="text-the-owner ">สำหรับเจ้าของ</p>
+                <li class="for-sale-rent-out">ฝากขาย-ปล่อยเช่ากับเราได้ภายใน 5 นาที<br>
+                    <span style="margin-left: 22px">ไม่มีสัญญาปิดผูกมัด</span>
+                </li>
+                <li class="for-sale-rent-out">ส่งที่เดียว นายหน้า <span style="color:#FAA631">102</span> คนพร้อมช่วยขาย</li>
+            </div>
 
-        <div>
-            <p>เช่า</p>
-            <p>ซื้อ</p>
-            <p>ผ่อนตรงเจ้าของ (NEW)</p>
+
+        </div>
+        <div class="box-line"></div>
+        <div class="location_away-box">
+
+            <div>
+                <img class="groups_2w" src="{{ URL::asset('/assets/image/welcome/groups_2w.png') }}">
+                <div class="deposit-assets-now">สมัครนายหน้าเลย</div>
+            </div>
+            <div class="box-the-owner">
+                <p class="text-the-owner ">สมัครนายหน้าเลย</p>
+                <li class="for-sale-rent-out">สมัครเป็นนายหน้า เพียง 299 บาท แล้วรับทรัพย์จากเจ้าของตรงมากมาย<br>
+                    <span style="margin-left: 22px;color:#FAA631">แล้วรับทรัพย์จากเจ้าของตรงมากมาย</span>
+                </li>
+                <li class="for-sale-rent-out">ไม่ต้องแชร์ค่าคอมมิชชัน <br><span
+                        style="margin-left: 22px;color:#FAA631">ไม่ต้องแชร์ค่าคอมมิชชัน ท่านรับไปเลยคนเดียว</span></li>
+            </div>
         </div>
     </div>
 @endsection
