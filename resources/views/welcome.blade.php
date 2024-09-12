@@ -113,4 +113,60 @@
             </div>
         </div>
     </div>
+    <p class="text-can-agent">SMUST Agent (สามารถเอเจนท์) คือ?</p>
+    <div class="container-we">
+
+        <ul class="nav nav-pills mb-3 box-nav-link-home-we" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link-home-we active" id="pills-home-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                    aria-selected="true">สำหรับเจ้าของ</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link-home-we" id="pills-profile-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                    aria-selected="false">สำหรับนายหน้า</button>
+            </li>
+
+        </ul>
+        <div class="right-content">
+            <p class="or-you-are">หรือท่านกำลังหาทรัพย์เช่า / หาซื้ออยู่...</p>
+            <div class="btn-find-search-now">ค้นหาเลย</div>
+        </div>
+
+
+    </div>
+
+    <div class="box-tab-content-we">
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+                tabindex="0">
+                <div class="row justify-content-center img-value_easy-margin-top">
+                    <div class="col-12 col-md-6 mb-4">
+                        <img class="img-value_easy img-fluid w-100" src="{{ URL::asset('/assets/image/home/value.png') }}"
+                            alt="Image 1">
+                    </div>
+                    <div class="col-12 col-md-6 mb-4">
+                        <img class="img-value_easy img-fluid w-100"
+                            src="{{ URL::asset('/assets/image/home/value2.png') }}" alt="Image 2">
+                    </div>
+                    <div class="col-12 text-center">
+                        <img class="img-value_easy img-fluid w-100"
+                            src="{{ URL::asset('/assets/image/home/value3.png') }}" alt="Image 3">
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
+                tabindex="0">
+
+                <p class="we-are-platform">เราคือแพลตฟอร์มที่ถือว่าเป็น <span>“เครื่องมือ”</span> หรือ
+                    <span>“ผู้ช่วยฝีมือดี”</span>
+                    ให้กับนายหน้าเลยก็ว่าได้ ไม่ว่าจะเป็น....
+                </p>
+                <img class="match_easy" src="{{ URL::asset('/assets/image/home/Match_easy.png') }}">
+            </div>
+        </div>
+    </div>
 @endsection
