@@ -357,20 +357,53 @@
 
             </ul>
         </div>
-        <p class="summary-rental-process">สรุปขั้นตอนการปล่อยเช่า / หาผู้ซื้อแสนง่าย</p>
-        <p class="comprehensive-service">บริการครบวงจร หาลูกค้า บริการสัญญา และบริการหลังการขาย</p>
+
         <div class="box-tab-content-we-2">
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home-2" role="tabpanel"
                     aria-labelledby="pills-home-tab" tabindex="0">
-                    asdasdasdasdasd
+                    <p class="summary-rental-process">สรุปขั้นตอนการปล่อยเช่า / หาผู้ซื้อแสนง่าย</p>
+                    <p class="comprehensive-service">บริการครบวงจร หาลูกค้า บริการสัญญา และบริการหลังการขาย</p>
+
+                    <div class="box-fa-all">
+                        <img class="img-fa-all" src="{{ URL::asset('/assets/image/welcome/fa1.png') }}">
+                        <img class="img-fa-all" src="{{ URL::asset('/assets/image/welcome/fa2.png') }}">
+                        <img class="img-fa-all" src="{{ URL::asset('/assets/image/welcome/fa3.png') }}">
+                        <img class="img-fa-all" src="{{ URL::asset('/assets/image/welcome/fa4.png') }}">
+                        <img class="img-fa-all" src="{{ URL::asset('/assets/image/welcome/fa5.png') }}">
+                    </div>
+
                 </div>
                 <div class="tab-pane fade" id="pills-profile-2" role="tabpanel" aria-labelledby="pills-profile-tab"
                     tabindex="0">
 
-                    5555555555
+                    <p class="summary-rental-process">นอกจากนี้ เรายังมี...</p>
+                    <div class="box-fa-all">
+                        <img class="img-wa-all" src="{{ URL::asset('/assets/image/welcome/wa1.png') }}">
+                        <img class="img-wa-all" src="{{ URL::asset('/assets/image/welcome/wa2.png') }}">
+                        <img class="img-wa-all" src="{{ URL::asset('/assets/image/welcome/wa3.png') }}">
+                        <img class="img-wa-all" src="{{ URL::asset('/assets/image/welcome/wa4.png') }}">
+                    </div>
+                    <p class="apply-premium-plan">หรือสมัคร Premium Plan เพื่อรับ....</p>
                 </div>
             </div>
+            <div class="box-have-personal-center">
+                <div class="box-have-personal">
+                    <div class="row">
+                        <div class="col-ms-12 col-md-6">
+                            <img class="img-3171-1" src="{{ URL::asset('/assets/image/welcome/IMG_3671-1.png') }}">
+                        </div>
+                        <div class="col-ms-12 col-md-6 text-36171">
+                            <p class="text-36171-head">มีเว็บไซต์ส่วนตัวแบบ นายหน้ามืออาชีพ</p>
+                            <p class="text-36171-sell">เพียง 599 บาทต่อเดือน! คุ้มค่ากว่าเยอะ</p>
+                            <p class="having-online">การมีเว็บไซต์ตัวตนออนไลน์นั้น ช่วยเพิ่มทั้งการเข้าถึงลูกค้า
+                                การแสดงตัวตน บุคลิกภาพ
+                                และบริการของนายหน้าอสังหาฯ ได้เป็นอย่างดี ดูมีความน่าเชื่อถือสูง</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <script>

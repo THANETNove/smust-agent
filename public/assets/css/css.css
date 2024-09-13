@@ -2940,7 +2940,7 @@ input[type="radio"] {
 }
 
 /* Media Queries for Mobile */
-@media (max-width: 767px) {
+@media (max-width: 961px) {
     .container-we {
         flex-direction: column;
         /* เปลี่ยนเป็นแนวตั้ง */
@@ -2978,14 +2978,14 @@ input[type="radio"] {
     margin-top: 46px;
     margin-left: 10%;
     margin-right: 10%;
-
+    margin-bottom: 75px;
 
 }
 
 .box-tab-content-we-2 {
 
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
 
 
 }
@@ -3049,6 +3049,7 @@ input[type="radio"] {
     width: 100%;
     padding-top: 86px;
     height: auto;
+
 }
 
 .box-latest-announcement-2 {
@@ -3295,4 +3296,79 @@ button.disabled {
     color: #030B2F;
     text-align: center;
 
+}
+
+.img-fa-all {
+    margin-top: 55px;
+    width: 233px;
+    height: 418px;
+
+}
+
+.box-fa-all {
+    display: flex;
+    flex-wrap: wrap;
+    /* ให้ลงบรรทัดใหม่เมื่อเกิน */
+    justify-content: center;
+    /* จัดให้อยู่ตรงกลาง */
+    margin-top: 55px;
+}
+
+.img-wa-all {
+    margin-top: 55px;
+    width: 249px;
+    height: 338px;
+    margin-left: 34px;
+    margin-right: 34px;
+}
+
+.apply-premium-plan {
+    text-align: center;
+    margin-top: 64px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.box-have-personal-center {
+    display: flex;
+    justify-content: center;
+}
+
+.box-have-personal {
+    margin-top: 64px;
+    background-color: #FFFFFF;
+    width: 1270px;
+    min-height: 490px;
+    border-radius: 20px;
+}
+
+.img-3171-1 {
+    width: 100%;
+    height: 100%;
+}
+
+.text-36171 {
+
+    padding: 92px 48px 0px 48px;
+}
+
+.text-36171-head {
+    font-size: 40px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.text-36171-sell {
+    color: #030B2F;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.having-online {
+    color: #030B2F;
+    font-size: 16px;
+    font-weight: 400;
 }
