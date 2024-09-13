@@ -491,8 +491,8 @@ input[autofocus]:focus {
 
 
 .img-icon {
-    width: 20px;
-    height: auto;
+    width: 20px !important;
+    height: auto !important;
 }
 
 .number-rooms {
@@ -903,6 +903,12 @@ input[autofocus]:focus {
     width: 20px;
     height: auto;
     margin-right: 4px;
+}
+
+.icon-content-2-we {
+    width: 20px !important;
+    height: auto !important;
+    margin-right: 4px !important;
 }
 
 .icon-content-3 {

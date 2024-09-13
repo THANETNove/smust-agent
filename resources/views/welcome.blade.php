@@ -249,10 +249,7 @@
 
 
                             <div class="box-width-rent-sell">
-
-
                                 <div class="box-price-new-we">
-
                                     @if (($que->sell_price && $que->rent_sell == 'เช่า/ขาย') || $que->rent_sell == 'เช่าซื้อ/ขายผ่อน')
                                         <p class="price-new-we">฿
                                             {{ number_format($que->rental_price) }}/m
@@ -267,8 +264,60 @@
                                             <p class="price-new-we">฿{{ $price_sell }}</p>
                                         @endif
                                     @endif
+                                </div>
+                            </div>
+                            <p class="provinces-we">
+                                <img class="location_on-we" src="{{ URL::asset('/assets/image/home/location_on.png') }}"
+                                    alt="Slide">
+                                {{ $que->districts_name_th }} {{ $que->amphures_name_th }}
+                                {{ $que->provinces_name_th }}
+                            </p>
+                            <p class="number-rooms text-ellipsis img-we">
+                                <span class="img-icon-ri2 img-we" style="margin-right: 12px">
+                                    <img class="img-icon img-icon-ri"
+                                        src="{{ URL::asset('/assets/image/home/bed.png') }}">
+                                    {{ $que->bedroom }} ห้องนอน
+                                </span>
+                                <span class="img-icon-ri2 img-we">
+                                    <img class="img-icon img-icon-ri"
+                                        src="{{ URL::asset('/assets/image/home/screenshot_frame.png') }}">
+                                    {{ $que->room_width }} ตร.ม.
+                                </span>
+                            </p>
 
+                            <div class="flex-direction-break-word margin-bottom-8 mt-wealth">
+                                <div class="box-content-icon">
+                                    <img class="icon-content-2-we"
+                                        src="{{ URL::asset('/assets/image/home/bed_2.png') }}">
+                                    <span>{{ $que->bedroom }} ห้องนอน</span>
+                                </div>
+                                <div class="box-content-icon">
+                                    <img class="icon-content-2-we"
+                                        src="{{ URL::asset('/assets/image/home/shower.png') }}">
+                                    <span>{{ $que->bathroom }} ห้องน้ำ</span>
+                                </div>
+                                <div class="box-content-icon">
+                                    <img class="icon-content-2-we"
+                                        src="{{ URL::asset('/assets/image/home/screenshot_frame2.png') }}">
+                                    <span>{{ $que->room_width }} ตร.ม.</span>
+                                </div>
+                                @if ($que->studio == 'มี')
+                                    <div class="box-content-icon">
+                                        <img class="icon-content-2-we"
+                                            src="{{ URL::asset('/assets/image/home/countertops.png') }}">
+                                        <span>สตูดิโอ</span>
+                                    </div>
+                                @endif
 
+                                <div class="box-content-icon">
+                                    <img class="icon-content-2-we"
+                                        src="{{ URL::asset('/assets/image/home/floor.png') }}">
+                                    <span>ชั้น {{ $que->number_floors }}</span>
+                                </div>
+                                <div class="box-content-icon">
+                                    <img class="icon-content-2-we"
+                                        src="{{ URL::asset('/assets/image/home/weekend.png') }}">
+                                    <span>ตกแต่ง{{ $que->decoration }}</span>
                                 </div>
                             </div>
                         </div>

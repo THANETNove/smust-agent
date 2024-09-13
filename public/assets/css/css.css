@@ -3070,7 +3070,7 @@ input[type="radio"] {
     padding: 12px 16px;
     border-radius: 10px;
     width: 250px;
-    height: 329px;
+    min-height: 329px;
 }
 
 .owl-carousel img {
@@ -3231,4 +3231,26 @@ button.disabled {
     position: absolute;
     right: 0;
     z-index: 20;
+}
+
+.location_on-we {
+    width: 20px !important;
+    height: 20px !important;
+    margin-right: 4px;
+}
+
+.provinces-we {
+
+    display: flex;
+    flex-direction: row;
+    color: #424862;
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: underline;
+    word-wrap: break-word;
+}
+
+.img-we {
+    display: flex;
+    flex-direction: row;
 }
