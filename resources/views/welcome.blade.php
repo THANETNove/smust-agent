@@ -441,6 +441,88 @@
 
         <div class="box-cross-we"></div>
         <div class="box-words-smust-users">
+            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <!-- First carousel item -->
+                    <div class="carousel-item active w-100">
+                        <div class="container my-5">
+                            <div class="row justify-content-center align-items-center">
+                                <div class="col-md-10">
+                                    <div class="card testimonial-card text-center border-0">
+                                        <div class="row-align-items-center">
+                                            <div class="">
+                                                <img src="{{ URL::asset('/assets/image/welcome/bxs_quote-left.png') }}"
+                                                    class="bxs_quote-left" alt="user">
+                                            </div>
+                                            <div class="">
+
+                                                <h5 class="card-title fw-bold">คำบอกเล่าจากผู้ใช้ <span
+                                                        class="text-primary">SMUST</span></h5>
+                                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                    elit. Aenean vel euismod magna. Sed vel nisi id turpis finibus
+                                                    malesuada.</p>
+                                                <p class="card-subtitle text-muted">คุณนิชา</p>
+                                                <p class="card-subtitle text-muted">เจ้าของคอนโดในกรุงเทพ กว่า 20 ห้อง</p>
+                                            </div>
+                                            <div>
+                                                <img src="{{ URL::asset('/assets/image/welcome/bxs_quote-right.png') }}"
+                                                    class="bxs_quote-right" alt="user">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Add more carousel items as needed -->
+                    <div class="carousel-item  w-100">
+                        <div class="container my-5">
+                            <div class="row justify-content-center align-items-center">
+                                <div class="col-md-10">
+                                    <div class="card testimonial-card text-center border-0">
+                                        <div class="row-align-items-center">
+                                            <div class="">
+                                                <img src="{{ URL::asset('/assets/image/welcome/bxs_quote-left.png') }}"
+                                                    class="bxs_quote-left" alt="user">
+                                            </div>
+                                            <div class="">
+
+                                                <h5 class="card-title fw-bold">คำบอกเล่าจากผู้ใช้ <span
+                                                        class="text-primary">SMUST</span></h5>
+                                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                    elit. Aenean vel euismod magna. Sed vel nisi id turpis finibus
+                                                    malesuada.</p>
+                                                <p class="card-subtitle text-muted">คุณนิชา</p>
+                                                <p class="card-subtitle text-muted">เจ้าของคอนโดในกรุงเทพ กว่า 20 ห้อง</p>
+                                            </div>
+                                            <div>
+                                                <img src="{{ URL::asset('/assets/image/welcome/bxs_quote-right.png') }}"
+                                                    class="bxs_quote-right" alt="user">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Carousel controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel"
+                    data-bs-slide="prev">
+                    <img src="{{ URL::asset('/assets/image/welcome/arrow_back_ios_new.png') }}"
+                        class="arrow_back_ios_new" alt="user">
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel"
+                    data-bs-slide="next">
+                    <img src="{{ URL::asset('/assets/image/welcome/arrow_next_ios_new.png') }}"
+                        class="arrow_next_ios_new" alt="user">
+                </button>
+            </div>
+
 
         </div>
     </div>

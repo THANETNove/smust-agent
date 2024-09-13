@@ -3436,18 +3436,9 @@ button.disabled {
 .carousel-inner {
     width: 100%;
     max-width: 900px;
-    background-color: red;
 }
 
-.carousel-item {
-    display: flex;
-    flex-direction: row !important;
-    /* จัดวางพื้นที่ให้แต่ละองค์ประกอบถูกแยกจากกัน */
-    align-items: center;
 
-    margin: 0 auto;
-    /* ทำให้ carousel อยู่ตรงกลาง */
-}
 
 .bxs_quote-left,
 .bxs_quote-right {
@@ -3469,4 +3460,49 @@ button.disabled {
     background-color: #000;
     width: 400px;
     height: 600px;
+}
+
+
+/* ปรับขนาดรูปโปรไฟล์ของผู้ใช้ */
+
+
+
+
+/* ปรับสไตล์การเลื่อน */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 30px;
+    height: 30px;
+}
+
+/* ทำให้พื้นที่ Carousel เต็มหน้าจอ */
+.carousel-inner {
+    width: 100%;
+    overflow: hidden;
+    /* ซ่อนส่วนที่เกินออกมา */
+}
+
+.box-carousel-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.row-align-items-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.arrow_back_ios_new {
+    width: 40px;
+    height: 40px;
+    margin-left: 8%;
+}
+
+.arrow_next_ios_new {
+    width: 40px;
+    height: 40px;
+    margin-left: 8%;
 }
