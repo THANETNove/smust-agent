@@ -391,14 +391,13 @@
                 <div class="box-have-personal">
                     <div class="row">
                         <div class="col-ms-12 col-md-6">
-                            <img class="img-3171-1" src="{{ URL::asset('/assets/image/welcome/IMG_3671-1.png') }}">
+                            <img class="img-3171-1"
+                                src="{{ URL::asset('/assets/image/welcome/' . $professionals->image) }}">
                         </div>
                         <div class="col-ms-12 col-md-6 text-36171">
-                            <p class="text-36171-head">มีเว็บไซต์ส่วนตัวแบบ นายหน้ามืออาชีพ</p>
-                            <p class="text-36171-sell">เพียง 599 บาทต่อเดือน! คุ้มค่ากว่าเยอะ</p>
-                            <p class="having-online">การมีเว็บไซต์ตัวตนออนไลน์นั้น ช่วยเพิ่มทั้งการเข้าถึงลูกค้า
-                                การแสดงตัวตน บุคลิกภาพ
-                                และบริการของนายหน้าอสังหาฯ ได้เป็นอย่างดี ดูมีความน่าเชื่อถือสูง</p>
+                            <p class="text-36171-head">{{ $professionals->website_head }}</p>
+                            <p class="text-36171-sell">{{ $professionals->website_price }}</p>
+                            <p class="having-online">{{ $professionals->website_details }}</p>
                         </div>
                     </div>
                 </div>

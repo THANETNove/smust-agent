@@ -46,8 +46,11 @@ Route::get('/', function () {
         ->limit(13) // จำกัดผลลัพธ์เป็น 12 รายการ
         ->get();
 
+    $professionals = DB::table('website_professionals')
+        ->first();
 
-    return view('welcome', compact('welcomeQuery'));
+
+    return view('welcome', compact('welcomeQuery', 'professionals'));
 });
 Route::get('/HomeLogin', function () {
 
