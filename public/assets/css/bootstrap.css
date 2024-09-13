@@ -1408,6 +1408,17 @@ input[autofocus]:focus {
     -webkit-box-orient: vertical;
 }
 
+.price-new-we {
+    margin-top: -16px;
+    font-weight: 700;
+    font-size: 12px;
+    color: #E34234;
+    overflow: hidden;
+    /* ข้อความที่เกินจะถูกซ่อน */
+    text-overflow: ellipsis;
+    margin-right: 12px;
+}
+
 .price-top {}
 
 .price-top-2 {

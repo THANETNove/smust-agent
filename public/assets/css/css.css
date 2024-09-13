@@ -3068,9 +3068,7 @@ input[type="radio"] {
 .owl-carousel .item {
     background-color: #FFFFFF;
     padding: 12px 16px;
-    text-align: center;
     border-radius: 10px;
-    color: rgb(255, 0, 0);
     width: 250px;
     height: 329px;
 }
@@ -3212,4 +3210,25 @@ button.disabled {
     /* เปลี่ยนเป็น cursor แบบไม่สามารถคลิกได้ */
     pointer-events: none;
     /* ปิดการตอบสนองของการคลิก */
+}
+
+.building_name-we {
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #000000;
+    word-wrap: break-word;
+}
+
+.box-price-new-we {
+    flex-direction: row;
+    display: flex;
+    word-wrap: break-word;
+}
+
+.rent_sell-box-we {
+    top: 0;
+    position: absolute;
+    right: 0;
+    z-index: 20;
 }

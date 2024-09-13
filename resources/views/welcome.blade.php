@@ -194,9 +194,45 @@
                 <div class="owl-carousel owl-theme">
                     @foreach ($welcomeQuery as $key => $que)
                         @php
+                            $price = $que->sell_price;
+                            $priceString = (string) $price;
+                            if (strlen($priceString) > 6) {
+                                $priceString = str_replace(',', '', $priceString);
+                                $formattedPrice = number_format($priceString / 1000000, 1) . ' ล้าน';
+                                $price_sell = $formattedPrice;
+                            } else {
+                                $price_sell = number_format($que->sell_price) . ' บาท';
+                            }
+                            $rental_ = $que->rental_price;
+                            $rental_String = (string) $rental_;
+                            if (strlen($rental_String) > 6) {
+                                $rental_String = str_replace(',', '', $rental_String);
+                                $formatted_rental = number_format($rental_String / 1000000, 1) . ' ล้าน';
+                                $rental_price = $formatted_rental;
+                            } else {
+                                $rental_price = number_format($que->rental_price) . ' บาท';
+                            }
+
                             $imgUrl = json_decode(htmlspecialchars_decode($que->image));
                         @endphp
                         <div class="item" data-index="{{ $key }}">
+                            <div class="rent_sell-box-we">
+                                @if ($que->rent_sell == 'เช่า')
+                                    <span class="rent-sell-primary absolute-rent-sell">{{ $que->rent_sell }}</span>
+                                @elseif ($que->rent_sell == 'ขาย')
+                                    <span class="rent-sell-yellow absolute-rent-sell">{{ $que->rent_sell }}</span>
+                                @elseif ($que->rent_sell == 'เช่า/ขาย' || $que->rent_sell == 'เช่าซื้อ/ขายผ่อน')
+                                    <span class="rent-sell-green absolute-rent-sell">{{ $que->rent_sell }}</span>
+                                @endif
+
+                                @if ($que->rent == 'เช่า')
+                                    <span class="rent-sell-primary absolute-rent-sell">{{ $que->rent }}</span>
+                                @endif
+
+                                @if ($que->sell == 'ขาย')
+                                    <span class="rent-sell-yellow absolute-rent-sell">{{ $que->sell }}</span>
+                                @endif
+                            </div>
                             <button class="prev-btn2" onclick="changeImage(event, -1)">
                                 <span>
                                     < </span>
@@ -208,6 +244,33 @@
                             <button class="next-btn2" onclick="changeImage(event, 1)">
                                 <span> > </span>
                             </button>
+                            <p class="building_name-we">{{ $que->building_name }}</p>
+
+
+
+                            <div class="box-width-rent-sell">
+
+
+                                <div class="box-price-new-we">
+
+                                    @if (($que->sell_price && $que->rent_sell == 'เช่า/ขาย') || $que->rent_sell == 'เช่าซื้อ/ขายผ่อน')
+                                        <p class="price-new-we">฿
+                                            {{ number_format($que->rental_price) }}/m
+                                        </p>
+                                        <p class="price-new-we">฿ {{ $price_sell }}</p>
+                                    @else
+                                        @if (($que->rental_price && $que->rent_sell == 'เช่า') || $que->rent == 'เช่า')
+                                            <p class="price-new-we">฿ {{ number_format($que->rental_price) }}/m
+                                            </p>
+                                        @endif
+                                        @if (($que->sell_price && $que->rent_sell == 'ขาย') || $que->sell == 'ขาย')
+                                            <p class="price-new-we">฿{{ $price_sell }}</p>
+                                        @endif
+                                    @endif
+
+
+                                </div>
+                            </div>
                         </div>
                     @endforeach
 
