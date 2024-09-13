@@ -17,15 +17,17 @@
                             <img class="save-link ml-16" id="link-url" src="{{ URL::asset('/assets/image/home/link.png') }}">
                             <img class="save-link" id="captureButton" src="{{ URL::asset('/assets/image/home/save.png') }}">
                         </div>
-                        <img class="popup-trigger image-detall-1" src="{{ URL::asset($imgUrl[0]) }}" data-index="0">
+                        <img class="popup-trigger image-detall-1" src="{{ URL::asset('img/product/' . $imgUrl[0]) }}"
+                            data-index="0">
                     </div>
                     @if ($count > 1)
                         <div class="flex-direction-column">
-                            <img class="popup-trigger image-detall-2" src="{{ URL::asset($imgUrl[1]) }}" data-index="1">
+                            <img class="popup-trigger image-detall-2" src="{{ URL::asset('img/product/' . $imgUrl[1]) }}"
+                                data-index="1">
                             @if ($count > 2)
                                 <div class="image-opacity">
-                                    <img class="popup-trigger image-detall-2" src="{{ URL::asset($imgUrl[2]) }}"
-                                        data-index="2">
+                                    <img class="popup-trigger image-detall-2"
+                                        src="{{ URL::asset('img/product/' . $imgUrl[2]) }}" data-index="2">
                                     <p class="number-image">+{{ $count - 2 }}</p>
                                 </div>
                             @endif

@@ -47,6 +47,8 @@
 
     function showMedia(index) {
         var mediaItems = {!! json_encode($imgUrl) !!};
+        console.log("mediaItems", mediaItems); // ตรวจสอบค่าของ mediaItems
+        console.log("mediaItems[index]", mediaItems[index]); // ตรวจสอบค่าของ mediaItems[index]
 
         var prevBtn = document.getElementById("prev-btn");
         var nextBtn = document.getElementById("next-btn");
@@ -68,11 +70,15 @@
         var popupMediaContainer = document.getElementById('popupMediaContainer');
         popupMediaContainer.innerHTML = '';
 
+        console.log("mediaItems", mediaItems); // ตรวจสอบค่าของ mediaItems
+        console.log("mediaItems[index]", mediaItems[index]); // ตรวจสอบค่าของ mediaItems[index]
+
         var assetUrl = "{{ asset('img/product') }}";
         img = document.createElement('img'); // ตัวแปร img ต้องเป็นตัวแปรที่ถูกสร้างใน scope ที่ถูกต้อง
-        img.src = mediaItems[index];
+        img.src = assetUrl + "/" + mediaItems[index];
         popupMediaContainer.appendChild(img);
     }
+
 
 
 
@@ -90,11 +96,11 @@
 
     function saveAll() {
         var mediaItems = {!! json_encode($imgUrl) !!};
-
+        var assetUrl = "{{ asset('img/product') }}";
 
         mediaItems.forEach(function(item, index) {
             var img = document.createElement('img');
-            img.src = item;
+            img.src = assetUrl + '/' + item;
             saveImage(img.src);
         });
     }
