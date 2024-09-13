@@ -83,6 +83,7 @@
             <div class="row">
                 @foreach ($dataHome as $home)
                     @php
+
                         $imgUrl = json_decode(htmlspecialchars_decode($home->image));
                     @endphp
                     <a href="{{ url('get-detall', $home->id) }}">

@@ -15,6 +15,7 @@ use App\Http\Controllers\CoAgentController;
 use App\Http\Controllers\ReportPropertySoldController;
 use App\Http\Controllers\CaptionController;
 use App\Http\Controllers\FavoriteController;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,7 +31,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
-    return view('welcome');
+    $welcomeQuery = DB::table('rent_sell_home_details')
+        ->where('rent_sell_home_details.status_home', 'on')
+        ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
+        ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
+        ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
+        ->select(
+            'rent_sell_home_details.*',
+            'provinces.name_th AS provinces_name_th',
+            'districts.name_th AS districts_name_th',
+            'amphures.name_th AS amphures_name_th'
+        )
+        ->limit(12) // จำกัดผลลัพธ์เป็น 12 รายการ
+        ->get();
+
+
+    return view('welcome', compact('welcomeQuery'));
 });
 Route::get('/HomeLogin', function () {
 

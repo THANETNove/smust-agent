@@ -185,5 +185,59 @@
             </div>
         </div>
     </div>
-    <div class="box-latest-announcement"></div>
+    <div class="box-latest-announcement">
+        <p class="text-latest-announcement-new">ประกาศล่าสุด <span>NEW</span></p>
+        <div class="carousel-container">
+            <div class="container">
+                <div class="owl-carousel owl-theme">
+                    @foreach ($welcomeQuery as $que)
+                        @php
+                            $imgUrl = json_decode(htmlspecialchars_decode($que->image));
+                            $imagePath = $imgUrl[0];
+
+                            // Check if the image path already starts with "/img/product/"
+                            if (!\Illuminate\Support\Str::startsWith($imagePath, '/img/product/')) {
+                                $imagePath = '/img/product/' . $imagePath;
+                            }
+                        @endphp
+                        <div class="item">
+
+
+                            <img src="{{ URL::asset($imagePath) }}" alt="Slide">
+                        </div>
+                    @endforeach
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                dots: true,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    },
+                    1600: {
+                        items: 4
+                    }
+                }
+            });
+        });
+    </script>
 @endsection

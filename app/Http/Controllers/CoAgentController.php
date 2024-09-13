@@ -69,6 +69,7 @@ class CoAgentController extends Controller
     public function create()
     {
 
+
         $electricalAppliance = DB::table('electrical_appliances')->get();
         $facilities = DB::table('facilities')->get();
         $furniture = DB::table('furniture')->get();
@@ -218,7 +219,7 @@ class CoAgentController extends Controller
             foreach ($imagefile as $image) {
 
                 $data =   $image->move(public_path() . '/img/product/', $randomText . "" . $image->getClientOriginalName());
-                $dateImg[] =  '/img/product/' . $randomText . "" . $image->getClientOriginalName();
+                $dateImg[] =   $randomText . "" . $image->getClientOriginalName();
             }
         }
 
