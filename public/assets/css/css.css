@@ -564,7 +564,7 @@
 
 .free-trial-box-nav {
     padding-bottom: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .frame-pro {
@@ -3378,8 +3378,9 @@ button.disabled {
 }
 
 .frequently-asked-questions {
+    margin-top: 137px;
     width: 100%;
-    height: 608px;
+    min-height: 608px;
     background-color: #FFFFFF;
 }
 
@@ -3391,5 +3392,24 @@ button.disabled {
     font-weight: 700;
     color: #000000;
     height: 608px;
+
+}
+
+.accordion-flush-box {
+    padding-top: 60px;
+    padding-right: 84px;
+}
+
+.asked_head-btn {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.text-asked-details {
+    margin-top: 17px;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 400;
 
 }
