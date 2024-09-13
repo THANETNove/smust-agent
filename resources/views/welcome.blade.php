@@ -329,9 +329,48 @@
                 </div>
             </div>
         </div>
+        <div class="full-screen-center">
+            <a href="#">
+                <div class="btn-for-sale-rent-now" style="margin-bottom: 56px">ดูเพิ่มเติม</div>
+            </a>
+        </div>
+
+
 
     </div>
 
+
+
+    <div class="box-latest-announcement-2">
+        <div class="container-we">
+            <ul class="nav nav-pills mb-3 box-nav-link-home-we-2" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link-home-we active" id="pills-home-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-home-2" type="button" role="tab" aria-controls="pills-home"
+                        aria-selected="true">สำหรับเจ้าของ</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link-home-we" id="pills-profile-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-profile-2" type="button" role="tab" aria-controls="pills-profile"
+                        aria-selected="false">สำหรับนายหน้า</button>
+                </li>
+
+            </ul>
+        </div>
+        <div class="box-tab-content-we-2">
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home-2" role="tabpanel"
+                    aria-labelledby="pills-home-tab" tabindex="0">
+                    asdasdasdasdasd
+                </div>
+                <div class="tab-pane fade" id="pills-profile-2" role="tabpanel" aria-labelledby="pills-profile-tab"
+                    tabindex="0">
+
+                    5555555555
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         $(document).ready(function() {
             $('.owl-carousel').owlCarousel({

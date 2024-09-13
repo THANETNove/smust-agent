@@ -2888,6 +2888,15 @@ input[type="radio"] {
     border-radius: 4px;
 }
 
+.box-nav-link-home-we-2 {
+    border: 1px solid #80BDD0;
+    display: inline-flex;
+    background: #ECF5F9;
+    padding: 4px;
+
+    border-radius: 4px;
+}
+
 .container-we {
     display: flex;
     position: relative;
@@ -2969,7 +2978,15 @@ input[type="radio"] {
     margin-top: 46px;
     margin-left: 10%;
     margin-right: 10%;
-    margin-bottom: 48px;
+
+
+}
+
+.box-tab-content-we-2 {
+
+    margin-left: 10%;
+    margin-right: 10%;
+
 
 }
 
@@ -3008,7 +3025,6 @@ input[type="radio"] {
     margin-top: 48px;
     display: flex;
     justify-content: center;
-    margin-bottom: 125px;
 }
 
 .btn-for-sale-rent-now {
@@ -3033,6 +3049,14 @@ input[type="radio"] {
     width: 100%;
     padding-top: 86px;
     height: auto;
+}
+
+.box-latest-announcement-2 {
+    background: rgba(128, 189, 208, 0.2);
+    height: 1500px;
+    width: 100%;
+    padding-top: 44px;
+    /*     height: auto; */
 }
 
 .text-latest-announcement-new {
