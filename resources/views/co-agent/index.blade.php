@@ -43,7 +43,7 @@
                             }
                         @endphp
                         <div class="box-img-new2">
-                            <img class="img-0831 lazy mb-2" src="{{ URL::asset($imgUrl[0]) }}">
+                            <img class="img-0831 lazy mb-2" src="{{ URL::asset('img/product/' . $imgUrl[0]) }}">
                             @if ($home->rent_sell == 'เช่า')
                                 <span class="rent-sell-primary absolute-rent-sell">{{ $home->rent_sell }}</span>
                             @elseif ($home->rent_sell == 'ขาย')
