@@ -185,27 +185,33 @@
             </div>
         </div>
     </div>
+
+
     <div class="box-latest-announcement">
         <p class="text-latest-announcement-new">ประกาศล่าสุด <span>NEW</span></p>
         <div class="carousel-container">
             <div class="container">
                 <div class="owl-carousel owl-theme">
-                    @foreach ($welcomeQuery as $que)
+                    @foreach ($welcomeQuery as $key => $que)
                         @php
                             $imgUrl = json_decode(htmlspecialchars_decode($que->image));
-                            $imagePath = $imgUrl[0];
-
-                            // Check if the image path already starts with "/img/product/"
-                            if (!\Illuminate\Support\Str::startsWith($imagePath, '/img/product/')) {
-                                $imagePath = '/img/product/' . $imagePath;
-                            }
                         @endphp
-                        <div class="item">
-
-
-                            <img src="{{ URL::asset($imagePath) }}" alt="Slide">
+                        <div class="item" data-index="{{ $key }}">
+                            <button class="prev-btn2" onclick="changeImage(event, -1)">
+                                <span>
+                                    < </span>
+                            </button>
+                            @foreach ($imgUrl as $index => $image)
+                                <img class="sliderImage" src="{{ URL::asset('img/product/' . $image) }}" alt="Slide"
+                                    style="{{ $index === 0 ? 'display: block;' : 'display: none;' }}">
+                            @endforeach
+                            <button class="next-btn2" onclick="changeImage(event, 1)">
+                                <span> > </span>
+                            </button>
                         </div>
                     @endforeach
+
+
 
 
                 </div>
@@ -217,26 +223,99 @@
     <script>
         $(document).ready(function() {
             $('.owl-carousel').owlCarousel({
-                loop: true,
-                margin: 10,
-                nav: true,
-                dots: true,
-                autoplay: true,
-                autoplayTimeout: 3000,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 2
-                    },
-                    1000: {
-                        items: 3
-                    },
-                    1600: {
-                        items: 4
-                    }
+                /*  loop: true,
+                 margin: 10,
+                 nav: true,
+                 dots: true,
+                 autoplay: true,
+                 autoplayTimeout: 3000,
+                 responsive: {
+                     0: {
+                         items: 1
+                     },
+                     600: {
+                         items: 2
+                     },
+                     1000: {
+                         items: 3
+                     },
+                     1600: {
+                         items: 4
+                     }
+                 } */
+
+                items: 4, // จำนวนไอเทมที่แสดง
+                loop: false, // ปิดการหมุนวน
+                autoplay: false, // ปิดการเลื่อนอัตโนมัติ
+                nav: false, // ซ่อนปุ่มนำทาง
+                dots: false, // ซ่อนจุดนำทาง
+                mouseDrag: false, // ปิดการลากด้วยเมาส์
+                touchDrag: false // ปิดการลากด้วยการสัมผัส
+            });
+        });
+
+
+
+        function changeImage(event, direction) {
+            const item = event.target.closest('.item');
+            if (!item) return;
+
+            const imgElements = item.querySelectorAll('.sliderImage');
+            const imgCount = imgElements.length;
+
+            let currentIndex = Array.from(imgElements).findIndex(img => img.style.display === 'block');
+            if (currentIndex === -1) currentIndex = 0;
+
+            currentIndex += direction;
+
+            // ตรวจสอบขอบเขต
+            if (currentIndex < 0) {
+                currentIndex = imgCount - 1;
+            } else if (currentIndex >= imgCount) {
+                currentIndex = 0;
+            }
+
+            // ซ่อนทุกรูปภาพ
+            imgElements.forEach(img => {
+                img.style.display = 'none';
+            });
+
+            // แสดงรูปภาพที่เลือก
+            imgElements[currentIndex].style.display = 'block';
+
+            // อัปเดตปุ่ม
+            const prevBtn2 = item.querySelector('.prev-btn2');
+            const nextBtn2 = item.querySelector('.next-btn2');
+            console.log(nextBtn2); // ตรวจสอบว่า nextBtn2 ถูกเลือก
+
+            console.log("currentIndex", currentIndex, imgCount);
+            // อัปเดตปุ่ม "ก่อนหน้า"
+            if (currentIndex == 0) {
+                prevBtn2.classList.add('disabled');
+            } else {
+                prevBtn2.classList.remove('disabled');
+            }
+
+            if (currentIndex === imgCount - 1) {
+                console.log("8888", imgCount);
+                nextBtn2.classList.add('disabled');
+            } else {
+                nextBtn2.classList.remove('disabled');
+            }
+        }
+
+
+
+
+        // เริ่มต้นแสดงภาพแรก
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.item').forEach(item => {
+                const images = item.querySelectorAll('.sliderImage');
+                if (images.length > 0) {
+                    images[0].style.display = 'block'; // แสดงรูปภาพแรก
                 }
+                // อัปเดตปุ่มเมื่อโหลดเสร็จ
+                updateButtons(item, 0, images.length);
             });
         });
     </script>

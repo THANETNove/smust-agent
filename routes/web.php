@@ -42,6 +42,7 @@ Route::get('/', function () {
             'districts.name_th AS districts_name_th',
             'amphures.name_th AS amphures_name_th'
         )
+        ->orderBy('rent_sell_home_details.id', 'DESC')
         ->limit(12) // จำกัดผลลัพธ์เป็น 12 รายการ
         ->get();
 

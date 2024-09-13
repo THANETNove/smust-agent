@@ -3137,3 +3137,74 @@ input[type="radio"] {
     /*    font-size: 84px !important; */
     /* ระยะห่างจากขอบขวา */
 }
+
+.item {
+    position: relative;
+    display: inline-block;
+    /* ใช้ inline-block เพื่อให้ตำแหน่งของปุ่มมีผล */
+}
+
+.prev-btn2,
+.next-btn2 {
+    background-color: #ffffff;
+    border: none;
+
+    cursor: pointer;
+    font-size: 18px;
+    width: 18px;
+    height: 35px;
+    position: absolute;
+    /* ใช้ absolute เพื่อจัดตำแหน่งตาม container ที่มี position relative */
+    top: 20%;
+    /* แนวนอนกลาง */
+    transform: translateY(-20%);
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.prev-btn2 span,
+.next-btn2 span {
+    font-size: 18px
+}
+
+.prev-btn2 {
+    border-bottom-right-radius: 18px;
+    border-top-right-radius: 18px;
+    color: #007BA7;
+
+    left: 16px;
+    /* วางปุ่มที่ด้านซ้าย */
+}
+
+.prev-btn2 span {
+    margin-right: 8px
+}
+
+.next-btn2 {
+    right: 16px;
+    border-bottom-left-radius: 18px;
+    border-top-left-radius: 18px;
+}
+
+.next-btn2 span {
+    margin-left: 8px;
+    /* วางปุ่มที่ด้านขวา */
+}
+
+.prev-btn2:hover,
+.next-btn2:hover {
+    background-color: #B8D7E2;
+}
+
+button.disabled {
+    background-color: #d3d3d3;
+    /* สีเทา */
+    cursor: not-allowed;
+    /* เปลี่ยนเป็น cursor แบบไม่สามารถคลิกได้ */
+    pointer-events: none;
+    /* ปิดการตอบสนองของการคลิก */
+}
