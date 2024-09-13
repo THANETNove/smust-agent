@@ -43,7 +43,7 @@ Route::get('/', function () {
             'amphures.name_th AS amphures_name_th'
         )
         ->orderBy('rent_sell_home_details.id', 'DESC')
-        ->limit(12) // จำกัดผลลัพธ์เป็น 12 รายการ
+        ->limit(13) // จำกัดผลลัพธ์เป็น 12 รายการ
         ->get();
 
 

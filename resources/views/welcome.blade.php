@@ -223,34 +223,26 @@
     <script>
         $(document).ready(function() {
             $('.owl-carousel').owlCarousel({
-                /*  loop: true,
-                 margin: 10,
-                 nav: true,
-                 dots: true,
-                 autoplay: true,
-                 autoplayTimeout: 3000,
-                 responsive: {
-                     0: {
-                         items: 1
-                     },
-                     600: {
-                         items: 2
-                     },
-                     1000: {
-                         items: 3
-                     },
-                     1600: {
-                         items: 4
-                     }
-                 } */
-
-                items: 4, // จำนวนไอเทมที่แสดง
-                loop: false, // ปิดการหมุนวน
-                autoplay: false, // ปิดการเลื่อนอัตโนมัติ
-                nav: false, // ซ่อนปุ่มนำทาง
-                dots: false, // ซ่อนจุดนำทาง
-                mouseDrag: false, // ปิดการลากด้วยเมาส์
-                touchDrag: false // ปิดการลากด้วยการสัมผัส
+                loop: true,
+                margin: 10,
+                nav: true,
+                dots: true,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    },
+                    1600: {
+                        items: 4
+                    }
+                }
             });
         });
 
