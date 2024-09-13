@@ -357,6 +357,8 @@
 
             </ul>
         </div>
+        <p class="summary-rental-process">สรุปขั้นตอนการปล่อยเช่า / หาผู้ซื้อแสนง่าย</p>
+        <p class="comprehensive-service">บริการครบวงจร หาลูกค้า บริการสัญญา และบริการหลังการขาย</p>
         <div class="box-tab-content-we-2">
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home-2" role="tabpanel"
