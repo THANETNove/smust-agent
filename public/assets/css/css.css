@@ -3081,9 +3081,13 @@ input[type="radio"] {
     height: 128px;
 }
 
+.carousel-container {
+    padding-left: 64px;
+}
+
 @media (max-width: 991px) {
     .carousel-container {
-        padding-left: 64px;
+        padding-left: 44px;
     }
 }
 
@@ -3091,7 +3095,7 @@ input[type="radio"] {
 .owl-prev,
 .owl-next {
     position: absolute;
-    top: 50%;
+    top: 40%;
     /* จัดตำแหน่งแนวตั้งที่กลางของ carousel */
     transform: translateY(-50%);
 
@@ -3127,13 +3131,13 @@ input[type="radio"] {
 
 
 .owl-prev {
-    left: -64px;
+    left: -44px;
     /* ระยะห่างจากขอบซ้าย */
     /*   font-size: 84px !important; */
 }
 
 .owl-next {
-    right: -0px;
+    right: 16px;
     /*    font-size: 84px !important; */
     /* ระยะห่างจากขอบขวา */
 }
@@ -3185,6 +3189,7 @@ input[type="radio"] {
 }
 
 .next-btn2 {
+    color: #007BA7;
     right: 16px;
     border-bottom-left-radius: 18px;
     border-top-left-radius: 18px;
