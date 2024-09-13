@@ -404,7 +404,6 @@
             </div>
         </div>
         <div class="frequently-asked-questions">
-
             <div class="row">
                 <div class="col-ms-12 col-md-6 box-text-ask">
                     @foreach ($asked as $ask)
@@ -436,16 +435,14 @@
                             @endif
                         @endforeach
                     </div>
-
-
-
-
-
                 </div>
             </div>
+        </div>
+
+        <div class="box-cross-we"></div>
+        <div class="box-words-smust-users">
 
         </div>
-        {{-- <div style="margin-top: 32px"></div> --}}
     </div>
     <script>
         $(document).ready(function() {

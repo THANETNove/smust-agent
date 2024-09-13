@@ -564,7 +564,7 @@
 
 .free-trial-box-nav {
     padding-bottom: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .frame-pro {
@@ -3381,7 +3381,7 @@ button.disabled {
     margin-top: 137px;
     width: 100%;
     min-height: 608px;
-    background-color: #FFFFFF;
+    background-color: #FFFFFFB2;
 }
 
 .box-text-ask {
@@ -3412,4 +3412,61 @@ button.disabled {
     font-size: 16px;
     font-weight: 400;
 
+}
+
+.box-cross-we {
+
+    height: 20px;
+    width: 100%;
+
+    background: rgba(128, 189, 208, 0.1);
+
+}
+
+.box-words-smust-users {
+    width: 100%;
+    height: 471px;
+    background-color: #FFFFFF;
+    padding: 63px 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-inner {
+    width: 100%;
+    max-width: 900px;
+    background-color: red;
+}
+
+.carousel-item {
+    display: flex;
+    flex-direction: row !important;
+    /* จัดวางพื้นที่ให้แต่ละองค์ประกอบถูกแยกจากกัน */
+    align-items: center;
+
+    margin: 0 auto;
+    /* ทำให้ carousel อยู่ตรงกลาง */
+}
+
+.bxs_quote-left,
+.bxs_quote-right {
+    width: 99px;
+    height: 345px;
+}
+
+.bxs_quote-left {
+    margin-right: 10%;
+    /* อาจปรับลด % นี้ลงเพื่อให้เหมาะสมกับพื้นที่ */
+}
+
+.bxs_quote-right {
+    margin-left: 10%;
+    /* อาจปรับลด % นี้ลงเพื่อให้เหมาะสมกับพื้นที่ */
+}
+
+.bxs_quote-users {
+    background-color: #000;
+    width: 400px;
+    height: 600px;
 }
