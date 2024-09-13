@@ -48,9 +48,11 @@ Route::get('/', function () {
 
     $professionals = DB::table('website_professionals')
         ->first();
+    $asked = DB::table('frequently_asked_questions')
+        ->get();
 
 
-    return view('welcome', compact('welcomeQuery', 'professionals'));
+    return view('welcome', compact('welcomeQuery', 'professionals', 'asked'));
 });
 Route::get('/HomeLogin', function () {
 
