@@ -39,7 +39,6 @@
                     <div class="mb-3  col-12 col-sm-5">
                         <input type="text" class="form-control" data-bs-toggle="modal" name="stations" id="stations"
                             data-bs-target="#exampleModalWelocome" placeholder="ค้นหาด้วยทำเล รถไฟฟ้า" readonly>
-                        {{--     @include('assetsCustomer.trainStation') --}}
                     </div>
                     <div class="mb-3  col-12 col-sm-3">
                         <button type="submit" class="btn-find-out-now">ค้นหาเลย!</button>
@@ -479,51 +478,7 @@
     @include('layouts.footer_welocome')
 
 
-    <div class="modal fade" id="exampleModalWelocome" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                        <img class="icon-filterData" src="{{ URL::asset('/assets/image/welcome/filterData.png') }}">
-
-                    </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    <p>เลือกทำเลจาก</p>
-
-                    <div class="row-box">
-                        <div class="filter-box selected" data-type="area" onclick="toggleSelection2(this)">
-                            <img class="icon-location" src="{{ URL::asset('/assets/image/welcome/location_on.png') }}">
-                            <p>ย่าน</p>
-                        </div>
-                        <div class="filter-box" data-type="station" onclick="toggleSelection2(this)">
-                            <img class="icon-location" src="{{ URL::asset('/assets/image/welcome/train.png') }}">
-                            <p>สถานีรถไฟฟ้า</p>
-                        </div>
-                    </div>
-
-                    <div class="mt-4">
-                        <input type="text" id="area-station" name="area_station" value="area"
-                            style="display: none">
-                        <div class="id-address">
-                            @include('layouts.address')
-                        </div>
-
-                        <div class="id-trainStation" style="display: none">
-                            @include('assetsCustomer.trainStation2')
-                        </div>
-
-                    </div>
-                    <button type="button" class="btn btn-primary  col-12 mt-4 mb-3" data-bs-dismiss="modal"
-                        aria-label="Close"> <span> <img class="icon-search-box"
-                                src="{{ URL::asset('/assets/image/welcome/search-box.png') }}"></span>คันหา</button>
-                </div>
-            </div>
-        </div>
-    </div>
+   
 
     <script>
         $(document).ready(function() {
@@ -616,83 +571,8 @@
             });
         });
 
-        let selectedType = null;
+      
 
-        function toggleSelection2(element) {
-            const type = element.getAttribute('data-type');
-
-            // If the same element is clicked, deselect it
-            if (selectedType === type) {
-                element.classList.remove('selected');
-                selectedType = null;
-            } else {
-                // Deselect the previously selected element, if any
-                const previouslySelected = document.querySelector('.filter-box.selected');
-                if (previouslySelected) {
-                    previouslySelected.classList.remove('selected');
-                }
-
-                // Select the clicked element
-                element.classList.add('selected');
-                selectedType = type;
-            }
-
-            // Log the selected type or perform an action based on it
-
-            if (selectedType == 'area') {
-                document.querySelector('.id-address').style.display = 'block';
-                document.querySelector('.id-trainStation').style.display = 'none';
-                document.getElementById('area-station').value = "area";
-
-            } else {
-                document.querySelector('.id-address').style.display = 'none';
-                document.querySelector('.id-trainStation').style.display = 'block';
-                document.getElementById('area-station').value = "station";
-
-            }
-
-        }
-
-
-        let text_name = "";
-
-        // ฟังก์ชันที่ใช้ในการอัปเดตค่า stations
-        function updateStations(value) {
-            console.log("updateStations called with value:", value);
-            document.getElementById('stations').value = value;
-        }
-
-        // Event listener สำหรับ provinces
-        document.getElementById('provinces-id').addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            const name_th = selectedOption.text;
-            text_name = name_th;
-
-            // ตรวจสอบการเรียกใช้ฟังก์ชัน
-            console.log("Provinces selected:", name_th);
-            updateStations(text_name);
-        });
-
-        // Event listener สำหรับ districts
-        document.getElementById('districts').addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            const name_th = selectedOption.text;
-            text_name = text_name + "," + name_th;
-
-            // ตรวจสอบการเรียกใช้ฟังก์ชัน
-            console.log("Districts selected:", name_th);
-            updateStations(text_name);
-        });
-
-        // Event listener สำหรับ amphures
-        document.getElementById('amphures').addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            const name_th = selectedOption.text;
-            text_name = text_name + "," + name_th;
-
-            // ตรวจสอบการเรียกใช้ฟังก์ชัน
-            console.log("Amphures selected:", name_th);
-            updateStations(text_name);
-        });
+       
     </script>
 @endsection

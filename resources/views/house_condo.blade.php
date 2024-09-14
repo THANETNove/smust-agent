@@ -43,8 +43,8 @@
 
                 <div class="mb-3  col-12 col-sm-5">
                     <input type="text" class="form-control" data-bs-toggle="modal" name="stations" id="stations"
-                        data-bs-target="#exampleModal" placeholder="ค้นหาด้วยทำเล รถไฟฟ้า" readonly>
-                    @include('assetsCustomer.trainStation')
+                        data-bs-target="#exampleModalWelocome" placeholder="ค้นหาด้วยทำเล รถไฟฟ้า" readonly>
+
                 </div>
                 <div class="mb-3  col-12 col-sm-3">
                     <button type="submit" class="btn-find-out-now">ค้นหาเลย!</button>
@@ -64,53 +64,4 @@
     </div>
 
     @include('layouts.footer_welocome')
-    <div class="modal fade" id="exampleModal-home-condo" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="modal-title fs-5">
-                        <img class="filter_alt-img" src="{{ URL::asset('/assets/image/home/filter_alt.png') }}">กรอง
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="user" id="myForm" method="POST" action="{{ route('search-data') }}"
-                        enctype="multipart/form-data">
-                        @csrf
-                        <p class="font-size-12-black">ประเภททรัพย์</p>
-                        <div class="flex-direction-row">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="property_type" value="คอนโด"
-                                    id="property_type1">
-                                <label class="form-check-label check-icon" for="property_type1">
-                                    <img class="property-img" src="{{ URL::asset('/assets/image/home/apartment.png') }}">
-                                    <p class="font-size-12-black text-lr">คอนโด</p>
-                                </label>
-                            </div>
-                            &nbsp; &nbsp; &nbsp; &nbsp;
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="property_type" value="บ้าน"
-                                    id="property_type2">
-                                <label class="form-check-label check-icon" for="property_type2">
-                                    <img class="property-img" src="{{ URL::asset('/assets/image/home/cottage.png') }}">
-                                    <p class="font-size-12-black text-lr-2">บ้าน</p>
-                                </label>
-                            </div>
-                        </div>
-
-                        <p class="font-size-12-black mt-21">พื้นที่</p>
-                        @include('layouts.address')
-
-                        <p class="font-size-12-black mt-21">สถานีรถไฟฟ้า</p>
-                        <img class="property-img" src="{{ URL::asset('/assets/image/home/directions_subway.png') }}">
-                        @include('layouts.train_station')
-                        <div class="box-button">
-                            <button class="btn-search">ค้นหา</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
