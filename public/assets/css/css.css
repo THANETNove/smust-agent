@@ -3653,6 +3653,61 @@ button.disabled {
     padding: 12px;
     box-shadow: 0px 0px 10px 4px #0000001A;
 }
+
 .all-search-results {
-    
+    margin-left: 5%;
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+}
+
+/* .box-all-search-results {
+    margin: 34px 5% 62px 5%;
+    display: flex;
+    flex-direction: row;
+
+}
+
+
+.item-home-condo {
+    background-color: #ff0000;
+    padding: 12px 16px;
+    border-radius: 10px;
+    width: 250px;
+    height: 329px;
+    border: 1px solid #007BA7;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 55px;
+
+} */
+.box-all-search-results {
+    margin: 34px 5% 62px 5%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* เพิ่ม flex-wrap เพื่อให้ไอเท็มแยกบรรทัดเมื่อความกว้างไม่พอ */
+    justify-content: flex-start;
+    /* จัดเรียงไอเท็มไปทางซ้าย */
+    gap: 10px;
+    /* เพิ่มระยะห่างระหว่างไอเท็ม */
+}
+
+.home-condo-item .item-home-condo {
+    background-color: #FFFFFF;
+    padding: 12px 16px;
+    border-radius: 10px;
+    width: 250px;
+    min-height: 329px;
+
+    border: 1px solid #007BA7;
+    margin-bottom: 55px;
+    position: relative;
+    display: inline-block;
+}
+
+.home-condo-item img {
+    max-width: 100%;
+    width: 212px;
+    height: 128px;
 }
