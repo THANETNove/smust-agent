@@ -259,19 +259,12 @@ class HomeController extends Controller
             return DB::table('provinces')->orderBy('name_th', 'ASC')->get();
         });
 
-        $train_station = Cache::remember('trainStationData', 0, function () {
-            return DB::table('train_station')
-                ->select('train_station.id', 'train_station.station_name_th')
-                ->orderBy('station_name_th', 'ASC')
-                ->get();
-        });
-
-
+       
 
 
 
         return view('home', [
-            'train_station' => $train_station,
+           
             'data' => $data,
             'dataHome' => $dataHome,
             'dataHome2' => $dataHome2,
@@ -341,7 +334,6 @@ class HomeController extends Controller
 
 
         return view('home', [
-            'train_station' => $train_station,
             'data' => $data,
             'dataHome' => $dataHome,
             'dataHome2' => $dataHome2,
@@ -396,17 +388,10 @@ class HomeController extends Controller
             return DB::table('provinces')->orderBy('name_th', 'ASC')->get();
         });
 
-        $train_station = Cache::remember('trainStationData', 0, function () {
-            return DB::table('train_station')
-                ->select('train_station.id', 'train_station.station_name_th')
-                ->orderBy('station_name_th', 'ASC')
-                ->get();
-        });
-
 
 
         return view('home', [
-            'train_station' => $train_station,
+
             'data' => $data,
             'dataHome' => $dataHome,
             'dataHome2' => $dataHome2,
