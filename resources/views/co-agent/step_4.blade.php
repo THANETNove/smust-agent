@@ -9,22 +9,23 @@
     </div>
 </div>
 
-<input id="file" type="file" class="form-control @error('image.*') is-invalid @enderror" name="image[]" multiple
-    placeholder="image[]" accept="image/*" style="display:none;" onchange="previewImages(event)">
-@error('image.*')
+<input id="file" type="file" class="form-control @error('image') is-invalid @enderror" name="image[]" multiple
+    placeholder="image[]" accept="image/*" style="display: none" onchange="previewImages(event)">
+@error('image')
     <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
     </span>
 @enderror
 
+
 <p class="recommend-video">แนะนำให้เพิ่มวีดีโอ เพื่อให้ลูกค้าตัดสินใจได้เร็วขึ้น</p>
 
 <div class="row mt-3 mb-3">
     <div class="col-md-12 mb-3 input_box">
-        <input id="url_video" type="url" class="form-control @error('meters_store') is-invalid @enderror"
+        <input id="url_video" type="url" class="form-control @error('url_video') is-invalid @enderror"
             name="url_video" value="{{ old('url_video') }}" autocomplete="meters_store">
         <label>ลิงก์ Video (ลิงก์ Video youtube)*</label>
-        @error('meters_store')
+        @error('url_video')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

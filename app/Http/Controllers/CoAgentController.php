@@ -136,17 +136,19 @@ class CoAgentController extends Controller
     public function store(Request $request)
     {
 
-        /* $request->validate([
-            'image.*' => ['required', 'image', 'image:jpg,png,jpeg,webp'],
+        $request->validate([
+            'image' => ['required'], // บังคับให้ต้องใส่ภาพอย่างน้อย 1 ภาพ
+            'image.*' => ['image', 'mimes:jpg,png,jpeg,webp'], // ตรวจสอบรูปแบบไฟล์ภาพ
             'user_name' => 'required',
             'user_surname' => 'required',
             'user_phone' => 'required',
-            'url_video' => ['nullable', 'regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?(\?.*)?$/'],
-            'url_gps' => ['nullable', 'regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?(\?.*)?$/'],
+            'announcement_name' => ['nullable', 'max:255'],
+            'url_video' => ['nullable', 'url'], // ตรวจสอบว่าเป็น URL ที่ถูกต้อง
+            'url_gps' => ['url'],
         ], [
-            'url_video.url' => 'The link Video must be a valid URL.',
-            'url_gps.url' => 'The link GPS must be a valid URL.',
-        ]); */
+            'url_video' => 'รูปเเบบ  URL. Video Youtube  ไม่ถูกต้อง',
+            'url_gps' => 'รูปเเบบ  URL. GPS ไม่ถูกต้อง',
+        ]);
 
 
 
@@ -243,8 +245,11 @@ class CoAgentController extends Controller
         }
         $member->save();
 
-
-        return redirect('home')->with('message', "บันทึกสำเร็จ");
+        if (Auth::check()) {
+            return redirect('home')->with('message', "บันทึกสำเร็จ");
+        } else {
+            return redirect('/')->with('message', "บันทึกสำเร็จ");
+        }
     }
 
     /**
