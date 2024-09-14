@@ -50,9 +50,11 @@ Route::get('/', function () {
         ->first();
     $asked = DB::table('frequently_asked_questions')
         ->get();
+    $words = DB::table('words_smust_users')
+        ->get();
 
 
-    return view('welcome', compact('welcomeQuery', 'professionals', 'asked'));
+    return view('welcome', compact('welcomeQuery', 'professionals', 'asked', 'words'));
 });
 Route::get('/HomeLogin', function () {
 

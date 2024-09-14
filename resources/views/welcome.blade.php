@@ -444,69 +444,41 @@
             <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <!-- First carousel item -->
-                    <div class="carousel-item active w-100">
-                        <div class="container my-5">
-                            <div class="row justify-content-center align-items-center">
-                                <div class="col-md-10">
-                                    <div class="card testimonial-card text-center border-0">
-                                        <div class="row-align-items-center">
-                                            <div class="">
-                                                <img src="{{ URL::asset('/assets/image/welcome/bxs_quote-left.png') }}"
-                                                    class="bxs_quote-left" alt="user">
-                                            </div>
-                                            <div class="">
 
-                                                <h5 class="card-title fw-bold">คำบอกเล่าจากผู้ใช้ <span
-                                                        class="text-primary">SMUST</span></h5>
-                                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                    elit. Aenean vel euismod magna. Sed vel nisi id turpis finibus
-                                                    malesuada.</p>
-                                                <p class="card-subtitle text-muted">คุณนิชา</p>
-                                                <p class="card-subtitle text-muted">เจ้าของคอนโดในกรุงเทพ กว่า 20 ห้อง</p>
-                                            </div>
-                                            <div>
-                                                <img src="{{ URL::asset('/assets/image/welcome/bxs_quote-right.png') }}"
-                                                    class="bxs_quote-right" alt="user">
+                    @foreach ($words as $key => $word)
+                        <div class="carousel-item {{ $key === 0 ? 'active' : '' }} w-100">
+                            <div class="container my-5">
+                                <div class="row justify-content-center align-items-center">
+                                    <div class="col-md-10">
+                                        <div class="card testimonial-card text-center border-0">
+                                            <div class="row-align-items-center">
+                                                <div class="">
+                                                    <img src="{{ URL::asset('/assets/image/welcome/bxs_quote-left.png') }}"
+                                                        class="bxs_quote-left" alt="user">
+                                                </div>
+                                                <div class="">
+
+                                                    <h5 class="card-title-smust">{!! $word->words_head !!}</h5>
+                                                    <img src="{{ URL::asset('/assets/image/welcome/' . $word->words_image) }}"
+                                                        class="frame-188" alt="user">
+                                                    <p class="card-text-smust">L{!! $word->words_details !!}</p>
+                                                    <p class="card-subtitle">{!! $word->words_name !!}</p>
+
+                                                </div>
+                                                <div>
+                                                    <img src="{{ URL::asset('/assets/image/welcome/bxs_quote-right.png') }}"
+                                                        class="bxs_quote-right" alt="user">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
 
 
-                    <!-- Add more carousel items as needed -->
-                    <div class="carousel-item  w-100">
-                        <div class="container my-5">
-                            <div class="row justify-content-center align-items-center">
-                                <div class="col-md-10">
-                                    <div class="card testimonial-card text-center border-0">
-                                        <div class="row-align-items-center">
-                                            <div class="">
-                                                <img src="{{ URL::asset('/assets/image/welcome/bxs_quote-left.png') }}"
-                                                    class="bxs_quote-left" alt="user">
-                                            </div>
-                                            <div class="">
 
-                                                <h5 class="card-title fw-bold">คำบอกเล่าจากผู้ใช้ <span
-                                                        class="text-primary">SMUST</span></h5>
-                                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                    elit. Aenean vel euismod magna. Sed vel nisi id turpis finibus
-                                                    malesuada.</p>
-                                                <p class="card-subtitle text-muted">คุณนิชา</p>
-                                                <p class="card-subtitle text-muted">เจ้าของคอนโดในกรุงเทพ กว่า 20 ห้อง</p>
-                                            </div>
-                                            <div>
-                                                <img src="{{ URL::asset('/assets/image/welcome/bxs_quote-right.png') }}"
-                                                    class="bxs_quote-right" alt="user">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
 
@@ -523,8 +495,10 @@
                 </button>
             </div>
 
-
         </div>
+
+
+    </div>
     </div>
     <script>
         $(document).ready(function() {
