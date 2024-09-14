@@ -78,8 +78,8 @@
                         <option value="4">1-6 เดือน</option>
                         <option value="5">6 เดือนขึ้นไป</option>
                     </select>
-                    <p style="margin-top: 12px">ลักษณะพิเศษ</p>
-                    @include('assetsCustomer.optionsJs')
+                    {{--  <p style="margin-top: 12px">ลักษณะพิเศษ</p>
+                    @include('assetsCustomer.optionsJs') --}}
                     <button type="button" class="btn btn-outline-secondary col-12 mt-4 mb-3" data-bs-dismiss="modal"
                         aria-label="Close"> บันทึกการตั้งค่า</button>
 

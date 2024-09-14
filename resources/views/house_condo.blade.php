@@ -69,6 +69,6 @@
             </div>
         </div>
     </div>
-
+    <p class="all-search-results">ผลการค้นหาทั้งหมด </p>
     @include('layouts.footer_welocome')
 @endsection
