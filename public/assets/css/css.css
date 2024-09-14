@@ -2474,7 +2474,7 @@ div:where(.swal2-container) div:where(.swal2-popup) {
 }
 
 .agentlogo-navbar {
-  
+
 
     width: 77px;
     height: 68px;
@@ -2712,7 +2712,7 @@ input[type="radio"] {
 
 .box-or-agent-we {
     margin-top: 8px;
-    max-width: 1308px;
+    max-width: 1295px;
     width: 100%;
     height: auto;
     border-radius: 12px;
@@ -2720,7 +2720,8 @@ input[type="radio"] {
     background: #FFFFFFB2;
     display: flex;
     justify-content: end;
-    align-items: center;
+    margin-right: 32px;
+
 
 }
 
@@ -3637,6 +3638,8 @@ button.disabled {
     position: relative;
     padding: 40px 16px;
     display: flex;
+    margin-left: 16px;
+    align-items: center;
     flex-direction: column;
 }
 

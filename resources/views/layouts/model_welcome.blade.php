@@ -97,10 +97,6 @@
 
 
             <div class="modal-body">
-
-
-
-
                 <div class="row-box mb-4">
                     <div class="form-check-search">
                         <input class="form-check-input" type="radio" name="too_little" value="price_min_max"
@@ -156,7 +152,8 @@
                         </label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary col-12 mt-4 mb-3"> <span> <img class="icon-search-box"
+                <button type="button" class="btn btn-primary col-12 mt-4 mb-3" data-bs-dismiss="modal"
+                    aria-label="Close"> <span> <img class="icon-search-box"
                             src="{{ URL::asset('/assets/image/welcome/search-box.png') }}"></span>คันหา</button>
 
             </div>

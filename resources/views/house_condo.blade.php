@@ -59,7 +59,7 @@
                 </div>
             </form>
         </div>
-        <div class="box-or-agent">
+        <div class="box-or-agent-we">
             <div class="box-or">
                 <p class="or-text">หรือ</p>
                 <a href="{{ url('co-create') }}">
