@@ -3555,3 +3555,61 @@ button.disabled {
     z-index: 10;
     /* หรือค่าที่สูงพอให้ปุ่มแสดงอยู่บนสุด */
 }
+
+.footer-section {
+    width: 100%;
+    min-height: 344px;
+    height: 100%;
+    position: relative;
+    background: #007BA7;
+    color: white;
+    padding: 53px 5%;
+
+}
+
+.frame-407 {
+
+    width: 304px;
+    height: 94px;
+
+}
+
+.frame-268 {
+    width: 196px;
+    height: 24px;
+
+}
+
+.frame-269-we {
+    margin-top: 12px;
+    width: 123px;
+    height: 24px;
+
+}
+
+.contact-us-we {
+    margin-top: 48px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.serve-us-we {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.text-property-owner-we {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.ic_baseline-facebook {
+    width: 35px;
+    height: 35px;
+}
+
+.custom-row {
+    display: flex;
+    justify-content: space-between;
+}
