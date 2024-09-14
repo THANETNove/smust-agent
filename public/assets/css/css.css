@@ -2213,6 +2213,10 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     margin-right: -8px;
 }
 
+.form-check-label4 {
+    cursor: pointer;
+}
+
 .form-check-label2 {
     display: inline-block;
     width: 76px;
