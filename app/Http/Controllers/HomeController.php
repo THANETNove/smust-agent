@@ -235,36 +235,23 @@ class HomeController extends Controller
 
         // Apply authorization logic if needed
         $user = Auth::user();
-        //$dataHomeQuery->where('code_admin', $user->code_admin);
 
-        // Use caching if possible for better performance
-        $dataCount = Cache::remember('dataHomeCount_with_code_admin', 0, function () use ($dataHomeQuery) {
-            return (clone $dataHomeQuery)->whereNotNull('code_admin')->count();
-        });
+        $dataCount = (clone $dataHomeQuery)->whereNotNull('code_admin')->count();
+        $dataCount2 = (clone $dataHomeQuery)->whereNull('code_admin')->count();
 
-        $dataCount2 = Cache::remember('dataHomeCount_without_code_admin', 0, function () use ($dataHomeQuery) {
-            return (clone $dataHomeQuery)->whereNull('code_admin')->count();
-        });
-        // Separate cache keys for dataHome and dataHome2 using the same base query
-        $dataHome = Cache::remember('dataHomePage_with_code_admin', 0, function () use ($dataHomeQuery) {
-            return (clone $dataHomeQuery)->whereNotNull('code_admin')->paginate(100)->appends(request()->all());
-        });
-
-        $dataHome2 = Cache::remember('dataHomePage_without_code_admin', 0, function () use ($dataHomeQuery) {
-            return (clone $dataHomeQuery)->whereNull('code_admin')->paginate(100)->appends(request()->all());
-        });
+        // แยก cache keys สำหรับ $dataHome และ $dataHome2 โดยใช้ query base เดียวกัน
+        $dataHome = (clone $dataHomeQuery)->whereNotNull('code_admin')->paginate(100)->appends(request()->all());
+        $dataHome2 = (clone $dataHomeQuery)->whereNull('code_admin')->paginate(100)->appends(request()->all());
 
         // Cache provinces and train station data
-        $data = Cache::remember('provincesData', 0, function () {
-            return DB::table('provinces')->orderBy('name_th', 'ASC')->get();
-        });
+        $data = DB::table('provinces')->orderBy('name_th', 'ASC')->get();
 
-       
+
 
 
 
         return view('home', [
-           
+
             'data' => $data,
             'dataHome' => $dataHome,
             'dataHome2' => $dataHome2,

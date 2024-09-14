@@ -34,7 +34,7 @@ class WelcomeController extends Controller
             if ($request->area_station == 'area' || $request->area_station == 'station') {
 
                 if ($request->area_station == 'area') {
-                    dd($request->all());
+
                     if ($request->has('provinces')) {
                         $dataHomeQuery->where('rent_sell_home_details.provinces', $request->input('provinces'));
                     }
@@ -55,32 +55,7 @@ class WelcomeController extends Controller
                     $typeName =   $request->input('property_type');
                     $dataHomeQuery->where('rent_sell_home_details.property_type',   'LIKE', "%$typeName%");
                 }
-                if ($request->has('usable_area')) {
 
-                    $usableArea = $request->input('usable_area');
-
-                    if ($usableArea) {
-                        if ($usableArea === '29') {
-                            // ค่าที่เลือกคือ 'น้อยกว่า 30 ตร.ม.'
-                            $dataHomeQuery->where('rent_sell_home_details.room_width', '<', 30);
-                        } elseif ($usableArea === '30-50') {
-                            // ค่าที่เลือกคือ '30-50 ตร.ม.'
-                            $dataHomeQuery->whereBetween('rent_sell_home_details.room_width', [30, 50]);
-                        } elseif ($usableArea === '50-100') {
-                            // ค่าที่เลือกคือ '50-100 ตร.ม.'
-                            $dataHomeQuery->whereBetween('rent_sell_home_details.room_width', [50, 100]);
-                        } elseif ($usableArea === '100-1000') {
-                            // ค่าที่เลือกคือ '100-1,000 ตร.ม.'
-                            $dataHomeQuery->whereBetween('rent_sell_home_details.room_width', [100, 1000]);
-                        } elseif ($usableArea === '1000-5000') {
-                            // ค่าที่เลือกคือ '1,000-5,000 ตร.ม.'
-                            $dataHomeQuery->whereBetween('rent_sell_home_details.room_width', [1000, 5000]);
-                        } elseif ($usableArea === '5001') {
-                            // ค่าที่เลือกคือ 'มากกว่า 5,000 ตร.ม.'
-                            $dataHomeQuery->where('rent_sell_home_details.room_width', '>', 5000);
-                        }
-                    }
-                }
                 if ($request->has('sale_rent')) {
                     $priceRange = $request->input('price_range');
 
@@ -92,43 +67,13 @@ class WelcomeController extends Controller
                             $query->where('rent_sell_home_details.rent_sell',   'LIKE', "%$nameSale%")
                                 ->orWhere('rent_sell_home_details.sell', 'LIKE', "%$nameSale%");
                         });
-
-                        if ($request->has('price_range')) {
-                            // ตรวจสอบช่วงราคา
-                            if (strpos($priceRange, '-') !== false) {
-                                // แยกช่วงราคา
-                                [$minPrice, $maxPrice] = explode('-', $priceRange);
-                                $dataHomeQuery->whereBetween('rent_sell_home_details.sell_price', [$minPrice, $maxPrice]);
-                            } elseif ($priceRange == '10000001') {
-                                // ราคาเกิน 10 ล้าน
-                                $dataHomeQuery->where('rent_sell_home_details.sell_price', '>', 10000000);
-                            } else {
-                                // น้อยกว่า 10,000 บาท
-                                $dataHomeQuery->where('rent_sell_home_details.sell_price', '<', 10000);
-                            }
-                        }
                     } elseif ($request->input('sale_rent') == 'rent') {
                         $dataHomeQuery->where(function ($query) {
+
                             $nameRent = "เช่า";
                             $query->where('rent_sell_home_details.rent_sell', 'LIKE', "%$nameRent%")
                                 ->orWhere('rent_sell_home_details.sell', 'LIKE', "%$nameRent%");
                         });
-
-
-                        if ($request->has('price_range')) {
-                            if (strpos($priceRange, '-') !== false) {
-                                [$minPrice, $maxPrice] = explode('-', $priceRange);
-                                $dataHomeQuery->whereBetween('rent_sell_home_details.rental_price', [$minPrice, $maxPrice]);
-                            } elseif ($priceRange == '10000001') {
-                                // ราคาเช่าเกิน 10 ล้าน
-                                $dataHomeQuery->where('rent_sell_home_details.rental_price', '>', 10000000);
-                            } else {
-                                // น้อยกว่า 10,000 บาท
-                                $dataHomeQuery->where('rent_sell_home_details.rental_price', '<', 10000);
-                            }
-                        }
-                        // การเช่าจะทำงานแบบเดียวกันกับการขาย
-
                     } else {
                         // กรณีเลือกทั้งการขายและเช่า
                         if ($request->has('price_range')) {
@@ -136,47 +81,84 @@ class WelcomeController extends Controller
                                 [$minPrice, $maxPrice] = explode('-', $priceRange);
                                 $dataHomeQuery->whereBetween('rent_sell_home_details.sell_price', [$minPrice, $maxPrice])
                                     ->orWhereBetween('rent_sell_home_details.rental_price', [$minPrice, $maxPrice]);
-                            } elseif ($priceRange == '10000001') {
-                                // เกิน 10 ล้าน
-                                $dataHomeQuery->where('rent_sell_home_details.sell_price', '>', 10000000)
-                                    ->orWhere('rent_sell_home_details.rental_price', '>', 10000000);
-                            } else {
-                                // น้อยกว่า 10,000 บาท
-                                $dataHomeQuery->where('rent_sell_home_details.sell_price', '<', 10000)
-                                    ->orWhere('rent_sell_home_details.rental_price', '<', 10000);
                             }
                         }
                     }
                 }
-
-                if ($request->has('date_posted')) {
-                    $datePosted = $request->input('date_posted');
-
-                    switch ($datePosted) {
-                        case '1':
-                            // โพสต์วันนี้
-                            $dataHomeQuery->whereDate('rent_sell_home_details.created_at', Carbon::today());
-                            break;
-                        case '2':
-                            // โพสต์ในสัปดาห์นี้
-                            $dataHomeQuery->whereBetween('rent_sell_home_details.created_at', [Carbon::now()->startOfWeek(), Carbon::now()]);
-                            break;
-                        case '3':
-                            // โพสต์ในเดือนนี้
-                            $dataHomeQuery->whereBetween('rent_sell_home_details.created_at', [Carbon::now()->startOfMonth(), Carbon::now()]);
-                            break;
-                        case '4':
-                            // โพสต์ภายใน 1-6 เดือนที่ผ่านมา
-                            $dataHomeQuery->whereBetween('rent_sell_home_details.created_at', [Carbon::now()->subMonths(6), Carbon::now()]);
-                            break;
-                        case '5':
-                            // โพสต์มากกว่า 6 เดือนที่ผ่านมา
-                            $dataHomeQuery->where('rent_sell_home_details.created_at', '<', Carbon::now()->subMonths(6));
-                            break;
-                    }
-                }
                 $dataHomeQuery->orderBy('rent_sell_home_details.id', 'DESC');
             }
+            //! ขนาดพื้นที่
+            if ($request->has('usable_area')) {
+
+                $usableArea = $request->input('usable_area');
+
+                if ($usableArea) {
+                    if ($usableArea === '29') {
+                        // ค่าที่เลือกคือ 'น้อยกว่า 30 ตร.ม.'
+                        $dataHomeQuery->where('rent_sell_home_details.room_width', '<', 30);
+                    } elseif ($usableArea === '30-50') {
+                        // ค่าที่เลือกคือ '30-50 ตร.ม.'
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.room_width', [30, 50]);
+                    } elseif ($usableArea === '50-100') {
+                        // ค่าที่เลือกคือ '50-100 ตร.ม.'
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.room_width', [50, 100]);
+                    } elseif ($usableArea === '100-1000') {
+                        // ค่าที่เลือกคือ '100-1,000 ตร.ม.'
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.room_width', [100, 1000]);
+                    } elseif ($usableArea === '1000-5000') {
+                        // ค่าที่เลือกคือ '1,000-5,000 ตร.ม.'
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.room_width', [1000, 5000]);
+                    } elseif ($usableArea === '5001') {
+                        // ค่าที่เลือกคือ 'มากกว่า 5,000 ตร.ม.'
+                        $dataHomeQuery->where('rent_sell_home_details.room_width', '>', 5000);
+                    }
+                }
+            }
+
+
+            //! ช่วงราคา
+            if ($request->has('price_range')) {
+                if (strpos($priceRange, '-') !== false) {
+                    [$minPrice, $maxPrice] = explode('-', $priceRange);
+                    $dataHomeQuery->whereBetween('rent_sell_home_details.rental_price', [$minPrice, $maxPrice]);
+                } elseif ($priceRange == '10000001') {
+                    // ราคาเช่าเกิน 10 ล้าน
+                    $dataHomeQuery->where('rent_sell_home_details.rental_price', '>', 10000000);
+                } else {
+                    // น้อยกว่า 10,000 บาท
+                    $dataHomeQuery->where('rent_sell_home_details.rental_price', '<', 10000);
+                }
+            }
+
+            //! วันที่โพสต์วันนี
+            if ($request->has('date_posted')) {
+                $datePosted = $request->input('date_posted');
+
+                switch ($datePosted) {
+                    case '1':
+                        // โพสต์วันนี้
+                        $dataHomeQuery->whereDate('rent_sell_home_details.created_at', Carbon::today());
+                        break;
+                    case '2':
+                        // โพสต์ในสัปดาห์นี้
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.created_at', [Carbon::now()->startOfWeek(), Carbon::now()]);
+                        break;
+                    case '3':
+                        // โพสต์ในเดือนนี้
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.created_at', [Carbon::now()->startOfMonth(), Carbon::now()]);
+                        break;
+                    case '4':
+                        // โพสต์ภายใน 1-6 เดือนที่ผ่านมา
+                        $dataHomeQuery->whereBetween('rent_sell_home_details.created_at', [Carbon::now()->subMonths(6), Carbon::now()]);
+                        break;
+                    case '5':
+                        // โพสต์มากกว่า 6 เดือนที่ผ่านมา
+                        $dataHomeQuery->where('rent_sell_home_details.created_at', '<', Carbon::now()->subMonths(6));
+                        break;
+                }
+            }
+
+
             //! เรียงตามน้อย - มาก/ มาก-น้อย
             if ($request->has('too_little')) {
 
@@ -213,11 +195,13 @@ class WelcomeController extends Controller
 
 
 
-
-        // Separate cache keys for dataHome and dataHome2 using the same base query
-        $weData = Cache::remember('dataHomePage_with_code_admin', 60, function () use ($dataHomeQuery) {
+        /*   // Separate cache keys for dataHome and dataHome2 using the same base query
+        $weData = Cache::remember('dataHomePage_with_code_admin', 0, function () use ($dataHomeQuery) {
             return (clone $dataHomeQuery)->paginate(100)->appends(request()->all());
         });
+ */
+        // Separate cache keys for dataHome and dataHome2 using the same base query
+        $weData = $dataHomeQuery->paginate(100)->appends(request()->except('page'));
 
 
 

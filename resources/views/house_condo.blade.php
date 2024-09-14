@@ -8,17 +8,17 @@
                 @csrf
                 <div class="search-welcome-box mb-3">
                     <div>
-                        <input type="radio" id="rent" name="property-type" value="เช่า" checked>
+                        <input type="radio" id="rent" name="sale_rent" value="rent" checked>
                         <label for="rent" class="search-text-head">เช่า</label>
                     </div>
 
                     <div>
-                        <input type="radio" id="buy" name="property-type" value="ซื้อ">
+                        <input type="radio" id="buy" name="sale_rent" value="sale">
                         <label for="buy" class="search-text-head">ซื้อ</label>
                     </div>
 
                     <div>
-                        <input type="radio" id="owner-financing" name="property-type" value="ownerFinancing">
+                        <input type="radio" id="owner-financing" name="sale_rent" value="ownerFinancing">
                         <label for="owner-financing" class="search-text-head2 head-new">ผ่อนตรงเจ้าของ
                             <span style="color: #E34234">(NEW)</span>
                         </label>
@@ -197,6 +197,12 @@
                 </div>
             </div>
         @endforeach
+        <div class="mt-5">
+            {!! $weData->links() !!}
+
+        </div>
     </div>
+
+
     @include('layouts.footer_welocome')
 @endsection
