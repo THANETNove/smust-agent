@@ -36,41 +36,7 @@
 </div>
 
 
-<div class="modal fade" id="exampleModalWelocome" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <p>เลือกทำเลจาก</p>
 
-                <div class="row-box">
-                    <div class="filter-box selected" data-type="area" onclick="toggleSelection2(this)">
-                        <img class="icon-location" src="{{ URL::asset('/assets/image/welcome/location_on.png') }}">
-                        <p>ย่าน</p>
-                    </div>
-                    <div class="filter-box" data-type="station" onclick="toggleSelection2(this)">
-                        <img class="icon-location" src="{{ URL::asset('/assets/image/welcome/train.png') }}">
-                        <p>สถานีรถไฟฟ้า</p>
-                    </div>
-                </div>
-
-                <div class="mt-4">
-                    <input type="text" id="area-station" name="area_station" value="area" style="display: none">
-                    <div class="id-address">
-                        @include('layouts.address')
-                    </div>
-
-                    <div class="id-trainStation" style="display: none">
-                        @include('assetsCustomer.trainStation2')
-                    </div>
-
-                </div>
-                <button type="button" class="btn btn-primary  col-12 mt-4 mb-3" data-bs-dismiss="modal"
-                    aria-label="Close"> <span> <img class="icon-search-box"
-                            src="{{ URL::asset('/assets/image/welcome/search-box.png') }}"></span>คันหา</button>
-            </div>
-        </div>
-    </div>
-</div>
 <script>
     let selectedType = null;
 

@@ -27,7 +27,7 @@
                 </div>
                 <div class="row">
                     <div class="mb-3 col-12 col-sm-4">
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" name="property_type">
                             <option selected disabled>ประเภททรัพย์</option>
                             <option value="บ้านเดี่ยว">บ้านเดี่ยว</option>
                             <option value="คอนโด">คอนโด </option>
@@ -40,11 +40,16 @@
                         <input type="text" class="form-control" data-bs-toggle="modal" name="stations" id="stations"
                             data-bs-target="#exampleModalWelocome" placeholder="ค้นหาด้วยทำเล รถไฟฟ้า" readonly>
                     </div>
+
+
+
                     <div class="mb-3  col-12 col-sm-3">
                         <button type="submit" class="btn-find-out-now">ค้นหาเลย!</button>
 
                     </div>
                 </div>
+                @include('layouts.model_welcome')
+
             </form>
         </div>
         <div class="box-or-agent">
@@ -478,7 +483,7 @@
     @include('layouts.footer_welocome')
 
 
-   
+
 
     <script>
         $(document).ready(function() {
@@ -570,9 +575,5 @@
                 updateButtons(item, 0, images.length);
             });
         });
-
-      
-
-       
     </script>
 @endsection
