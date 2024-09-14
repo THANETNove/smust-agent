@@ -15,6 +15,7 @@ use App\Http\Controllers\CoAgentController;
 use App\Http\Controllers\ReportPropertySoldController;
 use App\Http\Controllers\CaptionController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -61,10 +62,7 @@ Route::get('/', function () {
 
 
 
-Route::get('/house-condo', function () {
 
-    return view('house_condo');
-});
 Route::get('/HomeLogin', function () {
 
     return view('welcomeLogin');
@@ -127,6 +125,8 @@ Route::get('destroy-announcement/{id}', [CoAgentController::class, 'destroy'])->
 Route::put('report-product-update/{id}', [ReportPropertySoldController::class, 'update'])->name('report-product-update');
 Route::put('caption-update/{id}', [CaptionController::class, 'update'])->name('caption-update');
 Route::get('click-favorite/{id}', [FavoriteController::class, 'update'])->name('click-favorite');
+Route::get('house-condo', [WelcomeController::class, 'houseCondo'])->name('house-condo');
+Route::post('house-condo', [WelcomeController::class, 'houseCondo'])->name('house-condo');
 
 
 //ส่วนของ admin
