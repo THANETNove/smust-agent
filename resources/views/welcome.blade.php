@@ -119,7 +119,9 @@
         </ul>
         <div class="right-content">
             <p class="or-you-are">หรือท่านกำลังหาทรัพย์เช่า / หาซื้ออยู่...</p>
-            <div class="btn-find-search-now">ค้นหาเลย</div>
+            <a href="{{ url('house-condo') }}">
+                <div class="btn-find-search-now">ค้นหาเลย</div>
+            </a>
         </div>
 
 
