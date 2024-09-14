@@ -87,7 +87,9 @@
 
             <div>
                 <img class="groups_2w" src="{{ URL::asset('/assets/image/welcome/groups_2w.png') }}">
-                <div class="deposit-assets-now">สมัครนายหน้าเลย</div>
+                <a href="{{ url('home-login') }}">
+                    <div class="deposit-assets-now">สมัครนายหน้าเลย</div>
+                </a>
             </div>
             <div class="box-the-owner">
                 <p class="text-the-owner ">สมัครนายหน้าเลย</p>

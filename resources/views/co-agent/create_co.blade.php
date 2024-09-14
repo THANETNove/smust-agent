@@ -12,7 +12,9 @@
             </div>
 
 
-            <img class="img-smust" src="{{ URL::asset('/assets/image/welcome/SMUSTLogo.png') }}">
+            <a href="{{ url('/') }}">
+                <img class="img-smust" src="{{ URL::asset('/assets/image/welcome/SMUSTLogo.png') }}">
+            </a>
         </div>
         <div class="box-announced">
 

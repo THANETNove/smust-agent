@@ -63,7 +63,7 @@ Route::get('/', function () {
 
 
 
-Route::get('/HomeLogin', function () {
+Route::get('/home-login', function () {
 
     return view('welcomeLogin');
 });
