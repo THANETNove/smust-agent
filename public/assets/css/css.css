@@ -3693,7 +3693,7 @@ button.disabled {
     /* เพิ่มระยะห่างระหว่างไอเท็ม */
 }
 
-.home-condo-item .item-home-condo {
+.home-condo-item .item {
     background-color: #FFFFFF;
     padding: 12px 16px;
     border-radius: 10px;
@@ -3702,8 +3702,7 @@ button.disabled {
 
     border: 1px solid #007BA7;
     margin-bottom: 55px;
-    position: relative;
-    display: inline-block;
+
 }
 
 .home-condo-item img {

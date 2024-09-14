@@ -96,7 +96,7 @@
                     $imgUrl = json_decode(htmlspecialchars_decode($que->image));
                 @endphp
 
-                <div class="item-home-condo" data-index="{{ $key }}">
+                <div class="item" data-index="{{ $key }}">
                     <div class="rent_sell-box-we">
                         @if ($que->rent_sell == 'เช่า')
                             <span class="rent-sell-primary absolute-rent-sell">{{ $que->rent_sell }}</span>
@@ -198,8 +198,12 @@
                     </div>
                 </div>
             @endforeach
+
+
+
+
         </div>
+
     </div>
     @include('layouts.footer_welocome')
-
 @endsection
