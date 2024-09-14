@@ -5,7 +5,7 @@
     <div class="bg-navbar">
         <p class="integration-platform">แพลตฟอร์มรวมอสังหาริมทรัพย์<br> และนายหน้าฝีมือดี พร้อมช่วยคุณหาทรัพย์ที่ตรงใจ</p>
         <div class="search-welcome">
-            <div class="search-welcome-box mb-2">
+            <div class="search-welcome-box mb-3">
                 <div>
                     <input type="radio" id="rent" name="property-type" value="เช่า" checked>
                     <label for="rent" class="search-text-head">เช่า</label>
@@ -388,7 +388,7 @@
                     @endforeach
 
                 </div>
-                <div class="col-ms-12 col-md-6 accordion-flush-box">
+                <div class="col-ms-12 col-md-6 accordion-flush-box ">
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         @foreach ($asked as $key => $ask)
                             @if ($ask->status == 0)

@@ -56,6 +56,15 @@ Route::get('/', function () {
 
     return view('welcome', compact('welcomeQuery', 'professionals', 'asked', 'words'));
 });
+
+
+
+
+
+Route::get('/house-condo', function () {
+
+    return view('house_condo');
+});
 Route::get('/HomeLogin', function () {
 
     return view('welcomeLogin');
