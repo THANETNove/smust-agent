@@ -205,7 +205,6 @@ class WelcomeController extends Controller
                     $dataHomeQuery->orderBy('rent_sell_home_details.number_floors', 'DESC');
                 }
             }
-
         } else {
 
             $dataHomeQuery->orderBy('rent_sell_home_details.id', 'DESC');
@@ -216,7 +215,7 @@ class WelcomeController extends Controller
 
 
         // Separate cache keys for dataHome and dataHome2 using the same base query
-        $weData = Cache::remember('dataHomePage_with_code_admin', 0, function () use ($dataHomeQuery) {
+        $weData = Cache::remember('dataHomePage_with_code_admin', 60, function () use ($dataHomeQuery) {
             return (clone $dataHomeQuery)->paginate(100)->appends(request()->all());
         });
 
