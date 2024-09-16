@@ -154,6 +154,25 @@
                             {{ $home->train_name }}
                         </span>
                     </p>
+
+                    @if ($home->url_video)
+                        @php
+                            // รับ URL ของ YouTube
+                            $videoUrl = $home->url_video;
+
+                            // แปลง URL ให้เป็นรูปแบบ embed
+                            $embedUrl = preg_replace(
+                                '/^https:\/\/www\.youtube\.com\/watch\?v=/',
+                                'https://www.youtube.com/embed/',
+                                $videoUrl,
+                            );
+                        @endphp
+                        <div class="box-highlights top-highlights">
+                            <p class="head-content">Video</p>
+                            <iframe src="{{ $embedUrl }}" height="450" width="100%"
+                                title="Iframe Example"></iframe>
+                        </div>
+                    @endif
                     <div class="real-estate-information">
                         <p class="name-history-profile-p">ข้อมูลอสังหา</p>
                         <div class="flex-direction-break-word margin-bottom-8 mt-wealth">
