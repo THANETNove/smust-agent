@@ -361,7 +361,41 @@
                 @endforeach
             </div>
             <div class="col-sm-12 col-md-4">
-                Column
+                <p class="name-history-profile-p">สนใจทรัพย์นี้ ติดต่อนายหน้าเหล่านี้เลย! <a class="see-more-details"
+                        href="">ดูเพิ่มเติม</a></p>
+                <div class="interested-contact-premium">
+                    <img class="icon-user-contact" src="{{ URL::asset('/assets/image/welcome/usercontact.jpg') }}">
+                    <div class="box-user-premium"> <img class="icon-user-premium"
+                            src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}"> Premium Agent</div>
+                    <div>
+                        <p class="post-head-name text-center">กรกนก กลิ่นสุมาลี</p>
+                        <p class="premium-address text-center">
+                            <img class="icon-explore_nearby-premium"
+                                src="{{ URL::asset('/assets/image/welcome/explore_nearby.png') }}"> ลาดพร้าว รามอินทรา
+                            ปทุม...
+                        </p>
+                        <p class="text-content-dark_000 text-center">ผู้เชี่ยวชาญ ให้คำปรึกษาเรื่องคอนโด
+                            เชี่ยวชาญในย่านลาดพร้าวรามอินทรา...</p>
+                        <div class="btn-box-profile-center">
+                            <a href="">
+                                <div class="btn-box-profile">ดูโปรไฟล์</div>
+                            </a>
+                        </div>
+
+
+                        <div class="btn-box-profile-center">
+                            <div class="box-contact-agent"></div>
+                        </div>
+                        <div class="btn-box-profile-center">
+                            <div class="box-contact-agent"></div>
+                        </div>
+                        <div class="btn-box-profile-center">
+                            <div class="box-contact-agent"></div>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
 
 

@@ -3546,6 +3546,21 @@ button.disabled {
         padding: 63px 0 !important;
     }
 
+    .wel-image-detall-2 {
+
+        height: 80px;
+    }
+
+}
+
+@media (max-width: 576px) {
+
+
+    .wel-image-detall-2 {
+
+        height: 85px;
+    }
+
 }
 
 .frame-188 {
@@ -3769,6 +3784,19 @@ button.disabled {
     .wel-name-home-condo {
         margin-top: 16px;
     }
+
+
+
+}
+
+@media (min-width: 576px) and (max-width: 1999px) {
+
+
+    .wel-image-detall-2 {
+
+        height: 110px;
+    }
+
 }
 
 .property-highlights-information {
@@ -3788,4 +3816,112 @@ button.disabled {
     font-weight: 700;
     margin-top: 60px;
     margin-bottom: 45px;
+}
+
+.see-more-details {
+    font-size: 14px;
+    color: #007BA7 !important;
+    font-weight: 400;
+    text-decoration: underline !important;
+    margin-left: 23px;
+}
+
+.interested-contact-premium {
+    border: 1.5px solid #FAA631;
+    background: #FAFAFA;
+    border-radius: 10px;
+    max-width: 364px;
+    width: 100%;
+    min-height: 411px;
+    height: auto;
+    position: relative;
+    padding: 58px 16px 28px 16px;
+    margin-top: 56px;
+    display: flex;
+    justify-content: center;
+
+
+}
+
+
+
+
+.icon-user-contact {
+    width: 74px;
+    height: 74px;
+    border-radius: 100px;
+    position: absolute;
+    border: 1px solid #007BA7;
+    top: -35px;
+    z-index: 3;
+
+}
+
+.box-user-premium {
+    padding: 7px 9px;
+
+    border: 1px solid #FEE8C7;
+    background-color: #FEE8C7;
+    color: #CB7D10;
+    font-size: 12px;
+    font-weight: 400;
+    max-width: 130px;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    border-radius: 8px;
+    z-index: 0;
+}
+
+.icon-user-premium {
+    width: 15px;
+    height: 15px;
+    margin-right: 2.5px;
+}
+
+.icon-explore_nearby-premium {
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+}
+
+.premium-address {
+    color: #CB7D10;
+    font-size: 14px;
+    font-weight: 400;
+
+}
+
+.btn-box-profile {
+    margin-top: 11px;
+    margin-bottom: 24px;
+    width: 126px;
+    height: 36px;
+    border: 2px solid #EBCA7B;
+    color: #CB7D10 !important;
+
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-box-profile-center {
+    display: flex;
+    justify-content: center;
+
+}
+
+
+.box-contact-agent {
+    width: 214px;
+    height: 48px;
+    border: 1px solid #7C7C7C;
+    border-radius: 10px;
+    margin-bottom: 8px;
 }

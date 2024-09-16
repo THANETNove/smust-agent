@@ -472,17 +472,40 @@
 
             if (inputElement) { // ตรวจสอบว่า inputElement ไม่ใช่ null
                 if (this.classList.contains('active')) {
+                    // ถ้าปุ่มถูกคลิกซ้ำ ให้ลบ active และซ่อนฟิลด์
                     this.classList.remove('active');
                     inputElement.value = null;
+
                     if (this.getAttribute('data-value') == "ขาย") {
-                        typeSellingprice.style.display = 'none';
+                        if (!document.querySelector('#btn-hire_sell').classList.contains(
+                                'active')) {
+                            typeSellingprice.style.display = 'none';
+                        }
                     }
                     if (this.getAttribute('data-value') == "เช่า") {
-                        typeInputhire.style.display = 'none';
-                        minimumRental.style.display = 'none';
+                        if (!document.querySelector('#btn-hire_sell').classList.contains(
+                                'active')) {
+                            typeInputhire.style.display = 'none';
+                            minimumRental.style.display = 'none';
+                        }
                     }
+                    if (this.getAttribute('data-value') == "เช่าซื้อ/ขายผ่อน") {
+                        // เช็คว่าปุ่มอื่นๆ ยัง active อยู่หรือไม่ก่อนที่จะซ่อนฟิลด์
+                        if (!document.querySelector('#btn-sell').classList.contains('active')) {
 
+                            typeSellingprice.style.display = 'none';
+
+                        }
+                        if (!document.querySelector('#btn-hire').classList.contains('active')) {
+
+                            typeInputhire.style.display = 'none';
+                            minimumRental.style.display = 'none';
+
+
+                        }
+                    }
                 } else {
+                    // ตั้งค่าให้ active และแสดงฟิลด์ที่ถูกต้อง
                     this.classList.add('active');
                     inputElement.value = this.getAttribute('data-value');
 
@@ -493,26 +516,44 @@
                         typeInputhire.style.display = 'block';
                         minimumRental.style.display = 'block';
                     }
+                    if (this.getAttribute('data-value') == "เช่าซื้อ/ขายผ่อน") {
+                        // แสดงทั้งสองฟิลด์สำหรับ "เช่าซื้อ/ขายผ่อน"
+                        typeSellingprice.style.display = 'block';
+                        typeInputhire.style.display = 'block';
+                        minimumRental.style.display = 'block';
+                    }
                 }
 
-                // ตรวจสอบสถานะ active ของปุ่มอื่นๆ และซ่อนตามเงื่อนไข
-                const isSellActive = document.querySelector('#btn-sell').classList.contains('active');
-                const isHireActive = document.querySelector('#btn-hire').classList.contains('active');
-                const isHireSellActive = document.querySelector('#btn-hire_sell').classList.contains(
-                    'active');
+                // ตรวจสอบสถานะของปุ่ม "ขาย", "เช่า", และ "เช่าซื้อ/ขายผ่อน"
+                if (isSellActive) {
+                    typeSellingprice.style.display = 'block';
+                } else if (!document.querySelector('#btn-sell').classList.contains('active')) {
+                    typeSellingprice.style.display = 'none';
+                }
 
-                if (!isHireSellActive) {
-                    if (isSellActive) {
-                        typeInputhire.style.display = 'none';
-                        minimumRental.style.display = 'none';
-                    } else if (isHireActive) {
-                        typeSellingprice.style.display = 'none';
-                    }
-                } else {
+                if (isHireActive) {
                     typeInputhire.style.display = 'block';
                     minimumRental.style.display = 'block';
-                    typeSellingprice.style.display = 'block';
+                } else if (!document.querySelector('#btn-hire').classList.contains('active')) {
+                    typeInputhire.style.display = 'none';
+                    minimumRental.style.display = 'none';
                 }
+
+                if (isHireSellActive || this.getAttribute('data-value') == "เช่าซื้อ/ขายผ่อน") {
+                    // ถ้า "เช่าซื้อ/ขายผ่อน" ถูกเลือก ให้แสดงทั้งสองฟิลด์
+                    typeSellingprice.style.display = 'block';
+                    typeInputhire.style.display = 'block';
+                    minimumRental.style.display = 'block';
+                } else if (!document.querySelector('#btn-hire_sell').classList.contains('active')) {
+                    if (!isSellActive) {
+                        typeSellingprice.style.display = 'none';
+                    }
+                    if (!isHireActive) {
+                        typeInputhire.style.display = 'none';
+                        minimumRental.style.display = 'none';
+                    }
+                }
+
             } else {
                 console.error('Element with id ' + inputId + ' not found.');
             }
