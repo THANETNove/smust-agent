@@ -302,13 +302,51 @@
                     <div class="property-highlights-information">
                         <p class="name-history-profile-p">สถานที่สำคัญใกล้เคียง</p>
                         <div class="col-ms-12 col-md-4">
-                            <p class="post-head-name">เครื่องใช้ไฟฟ้า</p>
+                            @php
+                                // ตรวจสอบและแก้ไขข้อมูล
+                                $shoppingCenters = is_array($home->shopping_center)
+                                    ? $home->shopping_center
+                                    : json_decode(str_replace("\n", '', $home->shopping_center), true);
+                                $schools = is_array($home->school)
+                                    ? $home->school
+                                    : json_decode(str_replace("\n", '', $home->school), true);
+                            @endphp
+                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                <img class="icon-content-2"
+                                    src="{{ URL::asset('/assets/image/welcome/local_mall.png') }}">
+                                ศูนย์การค้า
+                            </p>
+                            @foreach ($shoppingCenters as $shopping_center)
+                                <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
+
+                                    {{ $shopping_center }}
+                                </li>
+                            @endforeach
+
                         </div>
                         <div class="col-ms-12 col-md-4">
-                            <p class="post-head-name">เครื่องใช้ไฟฟ้า</p>
+                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                <img class="icon-content-2" src="{{ URL::asset('/assets/image/welcome/school.png') }}">
+                                สถานศึกษา
+                            </p>
+                            @foreach ($schools as $school)
+                                <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
+                                    {{ $school }}
+                                </li>
+                            @endforeach
                         </div>
                         <div class="col-ms-12 col-md-4">
-                            <p class="post-head-name">เครื่องใช้ไฟฟ้า</p>
+                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                <img class="icon-content-2"
+                                    src="{{ URL::asset('/assets/image/welcome/storefront.png') }}">
+                                ร้านสะดวกซื้อ
+                            </p>
+
+                            @if ($home->meters_store)
+                                <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
+                                    {{ $home->meters_store }}
+                                </li>
+                            @endif
                         </div>
                     </div>
                 @endforeach

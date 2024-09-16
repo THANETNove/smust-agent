@@ -433,7 +433,7 @@
                                     <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
                                         <img class="icon-content-2"
                                             src="{{ URL::asset('/assets/image/welcome/school.png') }}">
-
+                                        สถานศึกษา
                                     </p>
                                     @foreach ($schools as $school)
                                         <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
