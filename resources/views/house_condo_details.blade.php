@@ -46,31 +46,91 @@
 
                         </div>
                     </div>
-                    <div class="wel-box-name-details row">
-                        <div class="col-sm-12 col-md-3 rent-sell-wel">
-                            <div class="flex-direction-column">
-                                <div class="flex-direction-row ">
-                                    <span class="rent-sell-primary width-rent-sell mb-8">
-                                        เช่า
+                    <div class="wel-box-name-details ">
+                        <div class="rent-sell-wel">
+                            @if ($home->rent_sell == 'เช่า')
+                                <div class="flex-direction-row">
+                                    <span class="rent-sell-primary width-rent-sell">
+                                        {{ $home->rent_sell }}
                                     </span>
                                 </div>
-                            </div>
-                            <div class="flex-direction-row">
-                                <span class="rent-sell-yellow width-rent-sell">
-                                    ขาย
-                                </span>
-                            </div>
-                            <div class="flex-direction-row">
-                                <span class="rent-sell-green width-rent-sell">
-                                    เช่า/ขาย
-                                </span>
-                            </div>
+                            @endif
+
+                            @if ($home->rent_sell == 'ขาย')
+                                <div class="flex-direction-row">
+                                    <span class="rent-sell-yellow width-rent-sell">
+                                        {{ $home->rent_sell }}
+                                    </span>
+                                </div>
+                            @endif
+
+                            @if ($home->rent_sell == 'เช่า/ขาย')
+                                <div class="flex-direction-column">
+                                    <div class="flex-direction-row">
+                                        <span class="rent-sell-primary width-rent-sell mb-8">
+                                            เช่า
+                                        </span>
+                                    </div>
+                                    <div class="flex-direction-row">
+                                        <span class="rent-sell-green width-rent-sell">
+                                            {{ $home->rent_sell }}
+                                        </span>
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if ($home->rent == 'เช่า')
+                                <div class="flex-direction-row">
+                                    <span class="rent-sell-primary width-rent-sell">
+                                        {{ $home->rent }}
+                                    </span>
+                                </div>
+                            @endif
+
+                            @if ($home->sell == 'ขาย')
+                                <div class="flex-direction-row">
+                                    <span class="rent-sell-yellow width-rent-sell">
+                                        {{ $home->sell }}
+                                    </span>
+                                </div>
+                            @endif
+
+                            @if ($home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
+                                <div class="flex-direction-row">
+                                    <span class="rent-sell-green width-rent-sell">
+                                        {{ $home->rent_sell }}
+                                    </span>
+                                </div>
+                            @endif
+
                         </div>
-                        <div class="col-sm-12 col-md-9">
-                            รีเจ้นท์ โฮม สุขมวิท 81 พร้อมอยู่ ห้องแต่งสวย เฟอร์ครบ
+                        <div class="wel-name-home-condo">
+                            {{ $home->building_name }}
                         </div>
+                        <!-- Corrected the col-md class here -->
+
                     </div>
-                    <p class="rent-sell-wel-price"> $ 1000 บาท</p>
+
+
+
+
+
+                    @if ($home->rent_sell == 'เช่า/ขาย' || $home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
+                        <p class="rent-sell-wel-price">$ {{ number_format($home->rental_price) }}/m</p>
+                        <p class="rent-sell-wel-price" style="margin-top: -8px">$ {{ number_format($home->sell_price) }}
+                            บาท</p>
+                    @else
+                        @if ($home->rent_sell == 'เช่า' || $home->rent == 'เช่า')
+                            <p class="rent-sell-wel-price">$ {{ number_format($home->rental_price) }}/m</p>
+                        @endif
+                        @if ($home->rent_sell == 'ขาย' || $home->sell == 'ขาย')
+                            <p class="rent-sell-wel-price"
+                                @if ($home->rent_sell == 'เช่า' || $home->rent == 'เช่า') style="margin-top: -8px" @endif>$
+                                {{ number_format($home->sell_price) }} บาท</p>
+                        @endif
+                    @endif
+
+
                     <p class="name-details">
                         <img class="img-icon " src="{{ URL::asset('/assets/image/home/location_on.png') }}">
                         asdasdadasdadasdasd

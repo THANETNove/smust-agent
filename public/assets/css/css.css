@@ -3732,6 +3732,8 @@ button.disabled {
 }
 
 .wel-box-name-details {
+    display: flex;
+    flex-direction: row;
     margin-top: 16px;
     padding: 24px 22px;
     border: 2.59px solid #007BA7;
@@ -3763,4 +3765,19 @@ button.disabled {
     border-radius: 10px;
     padding: 24px;
 
+}
+
+.wel-name-home-condo {
+    margin-left: 17px;
+}
+
+@media (max-width: 992px) {
+    .wel-box-name-details {
+        flex-direction: column;
+        /* สามารถปรับระยะห่างได้ตามต้องการ */
+    }
+
+    .wel-name-home-condo {
+        margin-top: 16px;
+    }
 }
