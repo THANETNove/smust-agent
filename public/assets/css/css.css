@@ -3764,6 +3764,7 @@ button.disabled {
     height: auto;
     border-radius: 10px;
     padding: 24px;
+    margin-bottom: 24px;
 
 }
 
@@ -3783,8 +3784,8 @@ button.disabled {
 }
 
 .property-highlights-information {
-    margin-top: 25px;
-    background: #EFF6F9;
+    border: 1.92px solid #DCDCDC;
+    margin-bottom: 24px;
     width: 100%;
     min-height: 160px;
     height: auto;

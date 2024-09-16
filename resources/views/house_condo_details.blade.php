@@ -295,6 +295,10 @@
                         </div>
 
                     </div>
+                    <div class="property-highlights-information">
+                        <p class="name-history-profile-p">ไฮไลท์อสังหา</p>
+                        <p> {{ $home->details }}</p>
+                    </div>
                 @endforeach
             </div>
             <div class="col-sm-12 col-md-4">
