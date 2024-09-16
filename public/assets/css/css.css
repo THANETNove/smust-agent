@@ -3920,8 +3920,30 @@ button.disabled {
 
 .box-contact-agent {
     width: 214px;
-    height: 48px;
+    min-height: 48px;
     border: 1px solid #7C7C7C;
     border-radius: 10px;
     margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    color: #014158;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+
+}
+
+.box-contact-agent span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+    /* ทำให้ข้อความใช้พื้นที่ที่เหลือใน flex container */
+}
+
+.btn-box-profile-icon-line {
+    width: 32px;
+    height: 32px;
+    margin-right: 16px;
 }

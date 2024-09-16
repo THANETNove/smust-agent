@@ -382,39 +382,119 @@
             <div class="col-sm-12 col-md-4">
                 <p class="name-history-profile-p">สนใจทรัพย์นี้ ติดต่อนายหน้าเหล่านี้เลย! <a class="see-more-details"
                         href="">ดูเพิ่มเติม</a></p>
-                <div class="interested-contact-premium">
-                    <img class="icon-user-contact" src="{{ URL::asset('/assets/image/welcome/usercontact.jpg') }}">
-                    <div class="box-user-premium"> <img class="icon-user-premium"
-                            src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}"> Premium Agent</div>
-                    <div>
-                        <p class="post-head-name text-center">กรกนก กลิ่นสุมาลี</p>
-                        <p class="premium-address text-center">
-                            <img class="icon-explore_nearby-premium"
-                                src="{{ URL::asset('/assets/image/welcome/explore_nearby.png') }}"> ลาดพร้าว รามอินทรา
-                            ปทุม...
-                        </p>
-                        <p class="text-content-dark_000 text-center">ผู้เชี่ยวชาญ ให้คำปรึกษาเรื่องคอนโด
-                            เชี่ยวชาญในย่านลาดพร้าวรามอินทรา...</p>
-                        <div class="btn-box-profile-center">
-                            <a href="">
-                                <div class="btn-box-profile">ดูโปรไฟล์</div>
-                            </a>
+                @foreach ($favoritesQuery as $fav)
+                    <div class="interested-contact-premium">
+                        <img class="icon-user-contact" src="{{ URL::asset('/assets/image/welcome/usercontact.jpg') }}">
+                        <div class="box-user-premium"> <img class="icon-user-premium"
+                                src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}"> Premium Agent</div>
+                        <div>
+                            <p class="post-head-name text-center">กรกนก กลิ่นสุมาลี</p>
+                            <p class="premium-address text-center">
+                                <img class="icon-explore_nearby-premium"
+                                    src="{{ URL::asset('/assets/image/welcome/explore_nearby.png') }}"> ลาดพร้าว รามอินทรา
+                                ปทุม...
+                            </p>
+                            <p class="text-content-dark_000 text-center">ผู้เชี่ยวชาญ ให้คำปรึกษาเรื่องคอนโด
+                                เชี่ยวชาญในย่านลาดพร้าวรามอินทรา...</p>
+                            <div class="btn-box-profile-center">
+                                <a href="">
+                                    <div class="btn-box-profile">ดูโปรไฟล์</div>
+                                </a>
+                            </div>
+
+                            @php
+                                $lineIsUrl = filter_var($fav->line_id, FILTER_VALIDATE_URL);
+                                $facebookIsUrl = filter_var($fav->facebook_id, FILTER_VALIDATE_URL);
+                            @endphp
+                            @if ($fav->line_id)
+                                <div class="btn-box-profile-center">
+                                    <a
+                                        @if ($lineIsUrl) href="{{ $fav->line_id }}"  @else onclick="copyLineID()" @endif>
+                                        <div class="box-contact-agent">
+                                            <img class="btn-box-profile-icon-line"
+                                                src="{{ URL::asset('/assets/image/home/line.png') }}">
+                                            <span> LINE ID:
+                                                {{ $fav->line_id }}</span>
+                                        </div>
+                                    </a>
+
+                                </div>
+                                <script>
+                                    function copyLineID() {
+                                        var lineName = "{{ Auth::user()->line_id }}";
+                                        Swal.fire({
+                                            title: lineName,
+                                            text: "Line ID" + "\n\nถูกคัดลอกแล้ว!",
+                                            icon: 'success',
+                                            /*   showConfirmButton: false,
+                                              timer: 2000 */
+                                            showConfirmButton: true, // ปุ่มยืนยันจะไม่หายไปเอง
+                                            confirmButtonText: 'ปิด', // ข้อความบนปุ่มยืนยัน
+                                            customClass: {
+                                                confirmButton: 'swal-btn-down' // ตั้งชื่อคลาสสำหรับปุ่มยืนยัน
+                                            }
+                                        });
+                                        navigator.clipboard.writeText(lineName).then(function() {
+                                            console.log('Line ID ถูกคัดลอกไปยัง clipboard แล้ว');
+                                        }, function(err) {
+                                            console.error('ไม่สามารถคัดลอกข้อความได้:', err);
+                                        });
+                                    }
+                                </script>
+                            @endif
+
+                            @if ($fav->facebook_id)
+                                <div class="btn-box-profile-center">
+                                    <a
+                                        @if ($lineIsUrl) href="{{ $fav->facebook_id }}"  @else onclick="copyFacebookID()" @endif>
+                                        <div class="box-contact-agent">
+                                            <img class="btn-box-profile-icon-line"
+                                                src="{{ URL::asset('/assets/image/home/line.png') }}">
+                                            <span> FB:
+                                                {{ $fav->facebook_id }}</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <script>
+                                    function copyFacebookID() {
+                                        var fbName = "{{ Auth::user()->facebook_id }}";
+                                        Swal.fire({
+                                            title: fbName,
+                                            text: "Facebook ID" + "\n\nถูกคัดลอกแล้ว!",
+                                            icon: 'success',
+                                            showConfirmButton: true, // ปุ่มยืนยันจะไม่หายไปเอง
+                                            confirmButtonText: 'ปิด', // ข้อความบนปุ่มยืนยัน
+                                            customClass: {
+                                                confirmButton: 'swal-btn-down' // ตั้งชื่อคลาสสำหรับปุ่มยืนยัน
+                                            }
+                                        });
+                                        navigator.clipboard.writeText(fbName).then(function() {
+                                            console.log('Facebook ID ถูกคัดลอกไปยัง clipboard แล้ว');
+                                        }, function(err) {
+                                            console.error('ไม่สามารถคัดลอกข้อความได้:', err);
+                                        });
+                                    }
+                                </script>
+                            @endif
+
+                            @if ($fav->phone)
+                                <div class="btn-box-profile-center">
+                                    <a href="tel:{{ $fav->phone }}" target="_blank" rel="noopener noreferrer"></a>
+                                    <div class="box-contact-agent">
+                                        <img class="btn-box-profile-icon-line"
+                                            src="{{ URL::asset('/assets/image/home/thone.png') }}">
+                                        <span> Tel:
+                                            {{ $fav->phone }}</span>
+                                    </div>
+                                </div>
+                            @endif
+
                         </div>
 
 
-                        <div class="btn-box-profile-center">
-                            <div class="box-contact-agent"></div>
-                        </div>
-                        <div class="btn-box-profile-center">
-                            <div class="box-contact-agent"></div>
-                        </div>
-                        <div class="btn-box-profile-center">
-                            <div class="box-contact-agent"></div>
-                        </div>
                     </div>
+                @endforeach
 
-
-                </div>
             </div>
 
 

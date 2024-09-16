@@ -236,6 +236,18 @@ class WelcomeController extends Controller
             ->limit(13) // จำกัดผลลัพธ์เป็น 12 รายการ
             ->get();
 
-        return view('house_condo_details', compact('dataHome', 'welcomeQuery'));
+        $favoritesQuery = DB::table('favorites')
+            ->where('favorites.id_product', $id)
+            //->where('favorites.plans', '>', '0')
+            ->leftJoin('users', 'favorites.user_id', '=', 'users.id')
+            ->select(
+                'users.*'
+            )
+            ->orderBy('users.plans', 'DESC')
+            ->orderBy('favorites.id', 'ASC')
+            ->limit(4) // จำกัดผลลัพธ์เป็น 12 รายการ
+            ->get();
+
+        return view('house_condo_details', compact('dataHome', 'welcomeQuery', 'favoritesQuery'));
     }
 }
