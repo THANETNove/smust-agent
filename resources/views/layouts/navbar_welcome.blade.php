@@ -16,7 +16,7 @@
                     <a class="nav-link  apply-job-with-us" aria-current="page" href="#">ศูนย์รวมนายหน้าฝีมือดี</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link apply-job-with-us" href="#">สมัครงานกับเรา</a>
+                    <a class="nav-link apply-job-with-us" href="{{ url('home-login') }}">สมัครงานกับเรา</a>
                 </li>
 
                 <li class="nav-item">

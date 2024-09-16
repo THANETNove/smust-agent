@@ -943,6 +943,12 @@ input[autofocus]:focus {
     margin-right: 4px;
 }
 
+.icon-content-2-wel-details {
+    width: 30px;
+    height: 30;
+    margin-right: 8px;
+}
+
 .icon-content-2-we {
     width: 20px !important;
     height: auto !important;
@@ -983,6 +989,23 @@ input[autofocus]:focus {
 
 
 }
+
+.box-content-icon-wel {
+
+    color: #000000;
+    font-size: 18px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 72px;
+    margin-bottom: 16px;
+
+
+
+}
+
+
 
 .flex-direction-break-word {
     display: flex;

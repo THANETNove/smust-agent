@@ -3781,3 +3781,14 @@ button.disabled {
         margin-top: 16px;
     }
 }
+
+.property-highlights-information {
+    margin-top: 25px;
+    background: #EFF6F9;
+    width: 100%;
+    min-height: 160px;
+    height: auto;
+    border-radius: 10px;
+    padding: 24px;
+
+}

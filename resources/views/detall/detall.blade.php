@@ -319,15 +319,7 @@
                                             </p>
                                         </div>
                                     @endif
-                                    @if ($home->electricalAppliance)
-                                        <div class="w-50">
-                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                                <img class="icon-content-2"
-                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                                {{ $home->electricalAppliance }}
-                                            </p>
-                                        </div>
-                                    @endif
+
                                     @if ($home->fitness)
                                         <div class="w-50">
                                             <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
@@ -382,6 +374,24 @@
                                             </p>
                                         </div>
                                     @endif
+
+
+
+                                </div>
+                                <p class="head-content">เครื่องใช้ไฟฟ้า </p>
+                                <div class="flex-direction-break-word">
+                                    @if ($home->electricalAppliance)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                {{ $home->electricalAppliance }}
+                                            </p>
+                                        </div>
+                                    @endif
+                                </div>
+                                <p class="head-content">เฟอร์นิเจอร์ </p>
+                                <div class="flex-direction-break-word">
                                     @if ($home->furniture)
                                         <div class="w-50">
                                             <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
@@ -391,30 +401,6 @@
                                             </p>
                                         </div>
                                     @endif
-
-                                    {{-- <div class="w-50">
-                                    @if ($home->bed)
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            เตียง
-                                        </p>
-                                    @endif
-                                    @if ($home->wardrobe)
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            ตู้เสื้อผ้า
-                                        </p>
-                                    @endif
-                                    @if ($home->air_conditioner)
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            เครื่องปรับอากาศ
-                                        </p>
-                                    @endif
-                                </div> --}}
                                 </div>
                             </div>
                             @if ($home->shopping_center)

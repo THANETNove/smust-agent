@@ -133,22 +133,80 @@
 
                     <p class="name-details">
                         <img class="img-icon " src="{{ URL::asset('/assets/image/home/location_on.png') }}">
-                        asdasdadasdadasdasd
+                        {{ $home->address }} &nbsp; {{ $home->districts_name_th }}&nbsp;
+                        {{ $home->amphures_name_th }} &nbsp; {{ $home->provinces_name_th }}
+                        &nbsp;
+                        {{ $home->zip_code }}
                     </p>
                     <div class="flex-direction-row mb-2">
                         <img class="icon-content" src="{{ URL::asset('/assets/image/home/map.png') }}">
-                        <a target="_blank" rel="noopener noreferrer"{{--  href="{{ $home->url_gps }}" --}}
+                        <a target="_blank" rel="noopener noreferrer" href="{{ $home->url_gps }}"
                             class="text-content-dark_100  text-ellipsis">
-                            asdasdasd
+                            {{ $home->url_gps }}
                         </a>
                     </div>
                     <p class="text-content-dark_100 margin-bottom-8  text-ellipsis">
 
                         <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/directions_subway.png') }}">
-                        555 mins to <span class="text-decoration"> adadasd
+                        @if ($home->time_arrive)
+                            {{ $home->time_arrive }} mins to
+                        @endif <span class="text-decoration">
+                            {{ $home->train_name }}
                         </span>
                     </p>
-                    <div class="real-estate-information"> </div>
+                    <div class="real-estate-information">
+                        <p class="name-history-profile-p">ข้อมูลอสังหา</p>
+                        <div class="flex-direction-break-word margin-bottom-8 mt-wealth">
+                            <div class="box-content-icon-wel">
+                                <img class="icon-content-2-wel-details"
+                                    src="{{ URL::asset('/assets/image/welcome/bed.png') }}">
+                                <span>{{ $home->bedroom }} ห้องนอน</span>
+                            </div>
+                            <div class="box-content-icon-wel">
+                                <img class="icon-content-2-wel-details"
+                                    src="{{ URL::asset('/assets/image/welcome/shower.png') }}">
+                                <span>{{ $home->bathroom }} ห้องน้ำ</span>
+                            </div>
+                            <div class="box-content-icon-wel">
+                                <img class="icon-content-2-wel-details"
+                                    src="{{ URL::asset('/assets/image/welcome/screenshot_frame.png') }}">
+                                <span>{{ $home->room_width }} ตร.ม.</span>
+                            </div>
+                            @if ($home->studio == 'มี')
+                                <div class="box-content-icon-wel">
+                                    <img class="icon-content-2-wel-details"
+                                        src="{{ URL::asset('/assets/image/welcome/countertops.png') }}">
+                                    <span>สตูดิโอ</span>
+                                </div>
+                            @endif
+
+                            <div class="box-content-icon-wel">
+                                <img class="icon-content-2-wel-details"
+                                    src="{{ URL::asset('/assets/image/welcome/floor.png') }}">
+                                <span>ชั้น {{ $home->number_floors }}</span>
+                            </div>
+                            <div class="box-content-icon-wel">
+                                <img class="icon-content-2-wel-details"
+                                    src="{{ URL::asset('/assets/image/welcome/weekend.png') }}">
+                                <span>ตกแต่ง{{ $home->decoration }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-highlights-information">
+                        <p class="name-history-profile-p">ไฮไลท์อสังหา</p>
+                        <div class="row">
+                            <div class="col-ms-12 col-md-4">
+                                <p>สิ่งอำนวยความสะดวก</p>
+                            </div>
+                            <div class="col-ms-12 col-md-4">
+                                <p>เครื่องใช้ไฟฟ้า</p>
+                            </div>
+                            <div class="col-ms-12 col-md-4">
+                                <p>เฟอร์นิเจอร์</p>
+                            </div>
+                        </div>
+                        asdasdasd
+                    </div>
                 @endforeach
             </div>
             <div class="col-sm-12 col-md-4">
