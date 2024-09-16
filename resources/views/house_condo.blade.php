@@ -95,7 +95,7 @@
 
                 $imgUrl = json_decode(htmlspecialchars_decode($que->image));
             @endphp
-            <a href="{{ url('house-condo-details', 1) }}">
+            <a href="{{ url('house-condo-details', $que->id) }}">
                 <div class="item item-home-condo" data-index="{{ $key }}">
                     <div class="rent_sell-box-we">
                         @if ($que->rent_sell == 'เช่า')

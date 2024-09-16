@@ -28,7 +28,9 @@
                                 <div class="image-opacity">
                                     <img class="popup-trigger image-detall-2"
                                         src="{{ URL::asset('img/product/' . $imgUrl[2]) }}" data-index="2">
-                                    <p class="number-image">+{{ $count - 2 }}</p>
+                                    @if ($count > 3)
+                                        <p class="number-image">+{{ $count - 3 }}</p>
+                                    @endif
                                 </div>
                             @endif
                         </div>
