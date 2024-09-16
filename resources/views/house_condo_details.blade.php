@@ -299,6 +299,18 @@
                         <p class="name-history-profile-p">ไฮไลท์อสังหา</p>
                         <p> {{ $home->details }}</p>
                     </div>
+                    <div class="property-highlights-information">
+                        <p class="name-history-profile-p">สถานที่สำคัญใกล้เคียง</p>
+                        <div class="col-ms-12 col-md-4">
+                            <p class="post-head-name">เครื่องใช้ไฟฟ้า</p>
+                        </div>
+                        <div class="col-ms-12 col-md-4">
+                            <p class="post-head-name">เครื่องใช้ไฟฟ้า</p>
+                        </div>
+                        <div class="col-ms-12 col-md-4">
+                            <p class="post-head-name">เครื่องใช้ไฟฟ้า</p>
+                        </div>
+                    </div>
                 @endforeach
             </div>
             <div class="col-sm-12 col-md-4">

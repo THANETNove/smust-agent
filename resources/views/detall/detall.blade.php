@@ -417,33 +417,42 @@
                                     @endphp
 
                                     {{-- แสดง Shopping Centers --}}
+                                    <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                        <img class="icon-content-2"
+                                            src="{{ URL::asset('/assets/image/welcome/local_mall.png') }}">
+                                        ศูนย์การค้า
+                                    </p>
                                     @foreach ($shoppingCenters as $shopping_center)
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/welcome/local_mall.png') }}">
+                                        <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
+
                                             {{ $shopping_center }}
-                                        </p>
+                                        </li>
                                     @endforeach
 
                                     {{-- แสดง Schools --}}
+                                    <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                        <img class="icon-content-2"
+                                            src="{{ URL::asset('/assets/image/welcome/school.png') }}">
+
+                                    </p>
                                     @foreach ($schools as $school)
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/welcome/school.png') }}">
+                                        <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
                                             {{ $school }}
-                                        </p>
+                                        </li>
                                     @endforeach
 
 
 
-
+                                    <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                        <img class="icon-content-2"
+                                            src="{{ URL::asset('/assets/image/welcome/storefront.png') }}">
+                                        ร้านสะดวกซื้อ
+                                    </p>
 
                                     @if ($home->meters_store)
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/welcome/storefront.png') }}">
+                                        <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
                                             {{ $home->meters_store }}
-                                        </p>
+                                        </li>
                                     @endif
                                 </div>
                             @endif

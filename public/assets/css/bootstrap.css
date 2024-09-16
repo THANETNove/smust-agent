@@ -931,6 +931,12 @@ input[autofocus]:focus {
     font-weight: 400;
 }
 
+.text-content-dark_000 {
+    color: #000000;
+    font-size: 14px;
+    font-weight: 400;
+}
+
 .icon-content {
     width: 20px;
     height: auto;
