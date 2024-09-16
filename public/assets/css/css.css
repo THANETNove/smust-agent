@@ -3713,3 +3713,53 @@ button.disabled {
     width: 212px;
     height: 128px;
 }
+
+.box-all-details-wel {
+    padding: 20px 5%;
+
+}
+
+.return-search {
+    font-size: 20px;
+    font-weight: 400;
+    color: #000000;
+}
+
+.east-img {
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+}
+
+.wel-box-name-details {
+    margin-top: 16px;
+    padding: 24px 22px;
+    border: 2.59px solid #007BA7;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
+    text-align: left;
+}
+
+.rent-sell-wel {
+    display: flex;
+    flex-direction: row;
+}
+
+.rent-sell-wel-price {
+    margin-top: 16px;
+    color: #E34234;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.real-estate-information {
+    margin-top: 25px;
+    background: #EFF6F9;
+    width: 100%;
+    min-height: 160px;
+    height: auto;
+    border-radius: 10px;
+
+}
