@@ -196,16 +196,104 @@
                         <p class="name-history-profile-p">ไฮไลท์อสังหา</p>
                         <div class="row">
                             <div class="col-ms-12 col-md-4">
-                                <p>สิ่งอำนวยความสะดวก</p>
+                                <p class="post-head-name">สิ่งอำนวยความสะดวก</p>
+                                <div class="flex-direction-break-word">
+                                    @if ($home->kitchen)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                ห้องครัว
+                                            </p>
+                                        </div>
+                                    @endif
+
+                                    @if ($home->fitness)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                ฟิตเนส
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->parking)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                ที่จอดรถ
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->bed)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                เตียง
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->wardrobe)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                ตู้เสื้อผ้า
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->air_conditioner)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                เครื่องปรับอากาศ
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->facilities)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                {{ $home->facilities }}
+                                            </p>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                             <div class="col-ms-12 col-md-4">
-                                <p>เครื่องใช้ไฟฟ้า</p>
+                                <p class="post-head-name">เครื่องใช้ไฟฟ้า</p>
+                                <div class="flex-direction-break-word">
+                                    @if ($home->electricalAppliance)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                {{ $home->electricalAppliance }}
+                                            </p>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                             <div class="col-ms-12 col-md-4">
-                                <p>เฟอร์นิเจอร์</p>
+                                <p class="post-head-name">เฟอร์นิเจอร์</p>
+                                <div class="flex-direction-break-word">
+                                    @if ($home->furniture)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                {{ $home->furniture }}
+                                            </p>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                        asdasdasd
+
                     </div>
                 @endforeach
             </div>
