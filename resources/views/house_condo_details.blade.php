@@ -388,14 +388,14 @@
                         <div class="box-user-premium"> <img class="icon-user-premium"
                                 src="{{ URL::asset('/assets/image/welcome/iconPremium.png') }}"> Premium Agent</div>
                         <div>
-                            <p class="post-head-name text-center">กรกนก กลิ่นสุมาลี</p>
+                            <p class="post-head-name text-center">{{ $fav->first_name }} {{ $fav->last_name }}</p>
                             <p class="premium-address text-center">
                                 <img class="icon-explore_nearby-premium"
-                                    src="{{ URL::asset('/assets/image/welcome/explore_nearby.png') }}"> ลาดพร้าว รามอินทรา
-                                ปทุม...
+                                    src="{{ URL::asset('/assets/image/welcome/explore_nearby.png') }}">
+                                {{ $fav->provinces }}
                             </p>
                             <p class="text-content-dark_000 text-center">ผู้เชี่ยวชาญ ให้คำปรึกษาเรื่องคอนโด
-                                เชี่ยวชาญในย่านลาดพร้าวรามอินทรา...</p>
+                                เชี่ยวชาญในย่าน {{ $fav->provinces }}...</p>
                             <div class="btn-box-profile-center">
                                 <a href="">
                                     <div class="btn-box-profile">ดูโปรไฟล์</div>
