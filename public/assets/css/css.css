@@ -4015,6 +4015,9 @@ button.disabled {
 
 }
 
+.ml-model {
+    margin-left: 5%;
+}
 
 
 .premium-address {
@@ -4036,4 +4039,10 @@ button.disabled {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.tel-model {
+    font-size: 14px;
+    color: #000000;
+    font-weight: 400;
 }

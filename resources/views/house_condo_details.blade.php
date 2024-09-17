@@ -412,8 +412,9 @@
                                 @endphp
                                 @if ($fav->line_id)
                                     <div class="btn-box-profile-center">
+
                                         <a
-                                            @if ($lineIsUrl) href="{{ $fav->line_id }}"  @else onclick="copyLineID()" @endif>
+                                            @if ($lineIsUrl) href="{{ $fav->line_id }}"  target="_blank" @else onclick="copyLineID()" @endif>
                                             <div class="box-contact-agent">
                                                 <img class="btn-box-profile-icon-line"
                                                     src="{{ URL::asset('/assets/image/home/line.png') }}">
@@ -450,12 +451,11 @@
                                 @if ($fav->facebook_id)
                                     <div class="btn-box-profile-center">
                                         <a
-                                            @if ($lineIsUrl) href="{{ $fav->facebook_id }}"  @else onclick="copyFacebookID()" @endif>
+                                            @if ($facebookIsUrl) href="{{ $fav->facebook_id }}" target="_blank" @else onclick="copyFacebookID()" @endif>
                                             <div class="box-contact-agent">
                                                 <img class="btn-box-profile-icon-line"
-                                                    src="{{ URL::asset('/assets/image/home/line.png') }}">
-                                                <span> FB:
-                                                    {{ $fav->facebook_id }}</span>
+                                                    src="{{ URL::asset('/assets/image/home/facbook.png') }}">
+                                                <span> FB: {{ $fav->facebook_id }}</span>
                                             </div>
                                         </a>
                                     </div>
@@ -483,15 +483,16 @@
 
                                 @if ($fav->phone)
                                     <div class="btn-box-profile-center">
-                                        <a href="tel:{{ $fav->phone }}" target="_blank" rel="noopener noreferrer"></a>
-                                        <div class="box-contact-agent">
-                                            <img class="btn-box-profile-icon-line"
-                                                src="{{ URL::asset('/assets/image/home/thone.png') }}">
-                                            <span> Tel:
-                                                {{ $fav->phone }}</span>
-                                        </div>
+                                        <a href="tel:{{ $fav->phone }}" target="_blank" rel="noopener noreferrer">
+                                            <div class="box-contact-agent">
+                                                <img class="btn-box-profile-icon-line"
+                                                    src="{{ URL::asset('/assets/image/home/thone.png') }}">
+                                                <span> Tel: {{ $fav->phone }}</span>
+                                            </div>
+                                        </a>
                                     </div>
                                 @endif
+
 
                             </div>
 
@@ -549,157 +550,238 @@
                                             ให้คำปรึกษาเรื่อง{{ $fav->property_type }} เชี่ยวชาญในย่าน
                                             {{ $fav->provinces }}
                                             มีฐานลูกค้าอยู่แล้วจากประสบการณ์การทำงาน 3 ปี
-                                            <br>
                                             รู้วิธีการพาลูกค้ายื่นสินเชื่อ
                                         </p>
 
+                                        <p class="text-content-dark_000 ml-model">
+                                            <img class="contract" src="/assets/image/welcome/contract.png">ประเภทสัญญา:
+                                            {{ $fav->contract_type }}
+                                        </p>
+                                        <p class="text-content-dark_000 ml-model"> <img class="contract"
+                                                src="/assets/image/welcome/domain.png"> ประเภททรัพย์:
+                                            {{ $fav->property_type }}</p>
+                                        <p class="text-content-dark_000 ml-model"><img class="contract"
+                                                src="/assets/image/welcome/domain.png">ลักษณะเฉพาะ:{{ $fav->characteristics }}
+                                        </p>
+                                        @if ($fav->line_id)
+                                            <a
+                                                @if ($lineIsUrl) href="{{ $fav->line_id }}"  target="_blank" @else onclick="copyLineID()" @endif>
+                                                <img class="btn-box-profile-icon-line ml-model"
+                                                    src="{{ URL::asset('/assets/image/home/line.png') }}">
+                                            </a>
+                                            <script>
+                                                function copyLineID() {
+                                                    var lineName = "{{ $fav->line_id }}";
+                                                    Swal.fire({
+                                                        title: lineName,
+                                                        text: "Line ID" + "\n\nถูกคัดลอกแล้ว!",
+                                                        icon: 'success',
+                                                        /*   showConfirmButton: false,
+                                                          timer: 2000 */
+                                                        showConfirmButton: true, // ปุ่มยืนยันจะไม่หายไปเอง
+                                                        confirmButtonText: 'ปิด', // ข้อความบนปุ่มยืนยัน
+                                                        customClass: {
+                                                            confirmButton: 'swal-btn-down' // ตั้งชื่อคลาสสำหรับปุ่มยืนยัน
+                                                        }
+                                                    });
+                                                    navigator.clipboard.writeText(lineName).then(function() {
+                                                        console.log('Line ID ถูกคัดลอกไปยัง clipboard แล้ว');
+                                                    }, function(err) {
+                                                        console.error('ไม่สามารถคัดลอกข้อความได้:', err);
+                                                    });
+                                                }
+                                            </script>
+                                        @endif
 
+                                        @if ($fav->facebook_id)
+                                            <a
+                                                @if ($facebookIsUrl) href="{{ $fav->facebook_id }}" target="_blank" @else onclick="copyFacebookID()" @endif>
+
+                                                <img class="btn-box-profile-icon-line"
+                                                    src="{{ URL::asset('/assets/image/home/facbook.png') }}">
+
+                                            </a>
+
+                                            <script>
+                                                function copyFacebookID() {
+                                                    var fbName = "{{ $fav->facebook_id }}";
+                                                    Swal.fire({
+                                                        title: fbName,
+                                                        text: "Facebook ID" + "\n\nถูกคัดลอกแล้ว!",
+                                                        icon: 'success',
+                                                        showConfirmButton: true, // ปุ่มยืนยันจะไม่หายไปเอง
+                                                        confirmButtonText: 'ปิด', // ข้อความบนปุ่มยืนยัน
+                                                        customClass: {
+                                                            confirmButton: 'swal-btn-down' // ตั้งชื่อคลาสสำหรับปุ่มยืนยัน
+                                                        }
+                                                    });
+                                                    navigator.clipboard.writeText(fbName).then(function() {
+                                                        console.log('Facebook ID ถูกคัดลอกไปยัง clipboard แล้ว');
+                                                    }, function(err) {
+                                                        console.error('ไม่สามารถคัดลอกข้อความได้:', err);
+                                                    });
+                                                }
+                                            </script>
+                                        @endif
+                                        @if ($fav->phone)
+                                            <a href="tel:{{ $fav->phone }}" target="_blank" rel="noopener noreferrer"
+                                                class="tel-model">
+
+                                                <img class="btn-box-profile-icon-line"
+                                                    src="{{ URL::asset('/assets/image/home/call2.png') }}">
+                                                โทรศัพท์:
+                                                <span style="text-decoration: underline">
+                                                    {{ $fav->phone }}</span>
+                                            </a>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
                     @endif
-                @endforeach
 
             </div>
-
-
         </div>
+    </div>
+    </div>
+    @endif
+    @endforeach
 
-        <p class="property-nearby-area">ทรัพย์ในพื้นที่ใกล้เคียง</p>
-        <div>
-            <div class="owl-carousel owl-theme">
-                @foreach ($welcomeQuery as $key => $que)
-                    @php
-                        $price = $que->sell_price;
-                        $priceString = (string) $price;
-                        if (strlen($priceString) > 6) {
-                            $priceString = str_replace(',', '', $priceString);
-                            $formattedPrice = number_format($priceString / 1000000, 1) . ' ล้าน';
-                            $price_sell = $formattedPrice;
-                        } else {
-                            $price_sell = number_format($que->sell_price) . ' บาท';
-                        }
-                        $rental_ = $que->rental_price;
-                        $rental_String = (string) $rental_;
-                        if (strlen($rental_String) > 6) {
-                            $rental_String = str_replace(',', '', $rental_String);
-                            $formatted_rental = number_format($rental_String / 1000000, 1) . ' ล้าน';
-                            $rental_price = $formatted_rental;
-                        } else {
-                            $rental_price = number_format($que->rental_price) . ' บาท';
-                        }
-
-                        $imgUrl = json_decode(htmlspecialchars_decode($que->image));
-                    @endphp
-                    <div class="item-home-condo item" data-index="{{ $key }}">
-                        <div class="rent_sell-box-we">
-                            @if ($que->rent_sell == 'เช่า')
-                                <span class="rent-sell-primary absolute-rent-sell">{{ $que->rent_sell }}</span>
-                            @elseif ($que->rent_sell == 'ขาย')
-                                <span class="rent-sell-yellow absolute-rent-sell">{{ $que->rent_sell }}</span>
-                            @elseif ($que->rent_sell == 'เช่า/ขาย' || $que->rent_sell == 'เช่าซื้อ/ขายผ่อน')
-                                <span class="rent-sell-green absolute-rent-sell">{{ $que->rent_sell }}</span>
-                            @endif
-
-                            @if ($que->rent == 'เช่า')
-                                <span class="rent-sell-primary absolute-rent-sell">{{ $que->rent }}</span>
-                            @endif
-
-                            @if ($que->sell == 'ขาย')
-                                <span class="rent-sell-yellow absolute-rent-sell">{{ $que->sell }}</span>
-                            @endif
-                        </div>
-                        <button class="prev-btn2" onclick="changeImage(event, -1)">
-                            <span>
-                                < </span>
-                        </button>
-                        @foreach ($imgUrl as $index => $image)
-                            <img class="sliderImage" src="{{ URL::asset('img/product/' . $image) }}" alt="Slide"
-                                style="{{ $index === 0 ? 'display: block;' : 'display: none;' }}">
-                        @endforeach
-                        <button class="next-btn2" onclick="changeImage(event, 1)">
-                            <span> > </span>
-                        </button>
-                        <p class="building_name-we">{{ $que->building_name }}</p>
+    </div>
 
 
+    </div>
 
-                        <div class="box-width-rent-sell">
-                            <div class="box-price-new-we">
-                                @if (($que->sell_price && $que->rent_sell == 'เช่า/ขาย') || $que->rent_sell == 'เช่าซื้อ/ขายผ่อน')
-                                    <p class="price-new-we">฿
-                                        {{ number_format($que->rental_price) }}/m
+    <p class="property-nearby-area">ทรัพย์ในพื้นที่ใกล้เคียง</p>
+    <div>
+        <div class="owl-carousel owl-theme">
+            @foreach ($welcomeQuery as $key => $que)
+                @php
+                    $price = $que->sell_price;
+                    $priceString = (string) $price;
+                    if (strlen($priceString) > 6) {
+                        $priceString = str_replace(',', '', $priceString);
+                        $formattedPrice = number_format($priceString / 1000000, 1) . ' ล้าน';
+                        $price_sell = $formattedPrice;
+                    } else {
+                        $price_sell = number_format($que->sell_price) . ' บาท';
+                    }
+                    $rental_ = $que->rental_price;
+                    $rental_String = (string) $rental_;
+                    if (strlen($rental_String) > 6) {
+                        $rental_String = str_replace(',', '', $rental_String);
+                        $formatted_rental = number_format($rental_String / 1000000, 1) . ' ล้าน';
+                        $rental_price = $formatted_rental;
+                    } else {
+                        $rental_price = number_format($que->rental_price) . ' บาท';
+                    }
+
+                    $imgUrl = json_decode(htmlspecialchars_decode($que->image));
+                @endphp
+                <div class="item-home-condo item" data-index="{{ $key }}">
+                    <div class="rent_sell-box-we">
+                        @if ($que->rent_sell == 'เช่า')
+                            <span class="rent-sell-primary absolute-rent-sell">{{ $que->rent_sell }}</span>
+                        @elseif ($que->rent_sell == 'ขาย')
+                            <span class="rent-sell-yellow absolute-rent-sell">{{ $que->rent_sell }}</span>
+                        @elseif ($que->rent_sell == 'เช่า/ขาย' || $que->rent_sell == 'เช่าซื้อ/ขายผ่อน')
+                            <span class="rent-sell-green absolute-rent-sell">{{ $que->rent_sell }}</span>
+                        @endif
+
+                        @if ($que->rent == 'เช่า')
+                            <span class="rent-sell-primary absolute-rent-sell">{{ $que->rent }}</span>
+                        @endif
+
+                        @if ($que->sell == 'ขาย')
+                            <span class="rent-sell-yellow absolute-rent-sell">{{ $que->sell }}</span>
+                        @endif
+                    </div>
+                    <button class="prev-btn2" onclick="changeImage(event, -1)">
+                        <span>
+                            < </span>
+                    </button>
+                    @foreach ($imgUrl as $index => $image)
+                        <img class="sliderImage" src="{{ URL::asset('img/product/' . $image) }}" alt="Slide"
+                            style="{{ $index === 0 ? 'display: block;' : 'display: none;' }}">
+                    @endforeach
+                    <button class="next-btn2" onclick="changeImage(event, 1)">
+                        <span> > </span>
+                    </button>
+                    <p class="building_name-we">{{ $que->building_name }}</p>
+
+
+
+                    <div class="box-width-rent-sell">
+                        <div class="box-price-new-we">
+                            @if (($que->sell_price && $que->rent_sell == 'เช่า/ขาย') || $que->rent_sell == 'เช่าซื้อ/ขายผ่อน')
+                                <p class="price-new-we">฿
+                                    {{ number_format($que->rental_price) }}/m
+                                </p>
+                                <p class="price-new-we">฿ {{ $price_sell }}</p>
+                            @else
+                                @if (($que->rental_price && $que->rent_sell == 'เช่า') || $que->rent == 'เช่า')
+                                    <p class="price-new-we">฿ {{ number_format($que->rental_price) }}/m
                                     </p>
-                                    <p class="price-new-we">฿ {{ $price_sell }}</p>
-                                @else
-                                    @if (($que->rental_price && $que->rent_sell == 'เช่า') || $que->rent == 'เช่า')
-                                        <p class="price-new-we">฿ {{ number_format($que->rental_price) }}/m
-                                        </p>
-                                    @endif
-                                    @if (($que->sell_price && $que->rent_sell == 'ขาย') || $que->sell == 'ขาย')
-                                        <p class="price-new-we">฿{{ $price_sell }}</p>
-                                    @endif
                                 @endif
-                            </div>
-                        </div>
-                        <p class="provinces-we">
-                            <img class="location_on-we" src="{{ URL::asset('/assets/image/home/location_on.png') }}"
-                                alt="Slide">
-                            {{ $que->districts_name_th }} {{ $que->amphures_name_th }}
-                            {{ $que->provinces_name_th }}
-                        </p>
-                        <p class="number-rooms text-ellipsis img-we">
-                            <span class="img-icon-ri2 img-we" style="margin-right: 12px">
-                                <img class="img-icon img-icon-ri" src="{{ URL::asset('/assets/image/home/bed.png') }}">
-                                {{ $que->bedroom }} ห้องนอน
-                            </span>
-                            <span class="img-icon-ri2 img-we">
-                                <img class="img-icon img-icon-ri"
-                                    src="{{ URL::asset('/assets/image/home/screenshot_frame.png') }}">
-                                {{ $que->room_width }} ตร.ม.
-                            </span>
-                        </p>
-
-                        <div class="flex-direction-break-word margin-bottom-8 mt-wealth">
-                            <div class="box-content-icon">
-                                <img class="icon-content-2-we" src="{{ URL::asset('/assets/image/home/bed_2.png') }}">
-                                <span>{{ $que->bedroom }} ห้องนอน</span>
-                            </div>
-                            <div class="box-content-icon">
-                                <img class="icon-content-2-we" src="{{ URL::asset('/assets/image/home/shower.png') }}">
-                                <span>{{ $que->bathroom }} ห้องน้ำ</span>
-                            </div>
-                            <div class="box-content-icon">
-                                <img class="icon-content-2-we"
-                                    src="{{ URL::asset('/assets/image/home/screenshot_frame2.png') }}">
-                                <span>{{ $que->room_width }} ตร.ม.</span>
-                            </div>
-                            @if ($que->studio == 'มี')
-                                <div class="box-content-icon">
-                                    <img class="icon-content-2-we"
-                                        src="{{ URL::asset('/assets/image/home/countertops.png') }}">
-                                    <span>สตูดิโอ</span>
-                                </div>
+                                @if (($que->sell_price && $que->rent_sell == 'ขาย') || $que->sell == 'ขาย')
+                                    <p class="price-new-we">฿{{ $price_sell }}</p>
+                                @endif
                             @endif
-
-                            <div class="box-content-icon">
-                                <img class="icon-content-2-we" src="{{ URL::asset('/assets/image/home/floor.png') }}">
-                                <span>ชั้น {{ $que->number_floors }}</span>
-                            </div>
-                            <div class="box-content-icon">
-                                <img class="icon-content-2-we" src="{{ URL::asset('/assets/image/home/weekend.png') }}">
-                                <span>ตกแต่ง{{ $que->decoration }}</span>
-                            </div>
                         </div>
                     </div>
-                @endforeach
+                    <p class="provinces-we">
+                        <img class="location_on-we" src="{{ URL::asset('/assets/image/home/location_on.png') }}"
+                            alt="Slide">
+                        {{ $que->districts_name_th }} {{ $que->amphures_name_th }}
+                        {{ $que->provinces_name_th }}
+                    </p>
+                    <p class="number-rooms text-ellipsis img-we">
+                        <span class="img-icon-ri2 img-we" style="margin-right: 12px">
+                            <img class="img-icon img-icon-ri" src="{{ URL::asset('/assets/image/home/bed.png') }}">
+                            {{ $que->bedroom }} ห้องนอน
+                        </span>
+                        <span class="img-icon-ri2 img-we">
+                            <img class="img-icon img-icon-ri"
+                                src="{{ URL::asset('/assets/image/home/screenshot_frame.png') }}">
+                            {{ $que->room_width }} ตร.ม.
+                        </span>
+                    </p>
+
+                    <div class="flex-direction-break-word margin-bottom-8 mt-wealth">
+                        <div class="box-content-icon">
+                            <img class="icon-content-2-we" src="{{ URL::asset('/assets/image/home/bed_2.png') }}">
+                            <span>{{ $que->bedroom }} ห้องนอน</span>
+                        </div>
+                        <div class="box-content-icon">
+                            <img class="icon-content-2-we" src="{{ URL::asset('/assets/image/home/shower.png') }}">
+                            <span>{{ $que->bathroom }} ห้องน้ำ</span>
+                        </div>
+                        <div class="box-content-icon">
+                            <img class="icon-content-2-we"
+                                src="{{ URL::asset('/assets/image/home/screenshot_frame2.png') }}">
+                            <span>{{ $que->room_width }} ตร.ม.</span>
+                        </div>
+                        @if ($que->studio == 'มี')
+                            <div class="box-content-icon">
+                                <img class="icon-content-2-we"
+                                    src="{{ URL::asset('/assets/image/home/countertops.png') }}">
+                                <span>สตูดิโอ</span>
+                            </div>
+                        @endif
+
+                        <div class="box-content-icon">
+                            <img class="icon-content-2-we" src="{{ URL::asset('/assets/image/home/floor.png') }}">
+                            <span>ชั้น {{ $que->number_floors }}</span>
+                        </div>
+                        <div class="box-content-icon">
+                            <img class="icon-content-2-we" src="{{ URL::asset('/assets/image/home/weekend.png') }}">
+                            <span>ตกแต่ง{{ $que->decoration }}</span>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
 
 
 
 
-            </div>
         </div>
+    </div>
     </div>
 
     <div class="popup" id="imagePopup">
