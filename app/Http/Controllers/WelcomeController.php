@@ -238,7 +238,7 @@ class WelcomeController extends Controller
 
         $favoritesQuery = DB::table('favorites')
             ->where('favorites.id_product', $id)
-            //->where('favorites.plans', '>', '0')
+            ->where('users.plans', '>', 0)
             ->leftJoin('users', 'favorites.user_id', '=', 'users.id')
             ->select(
                 'users.*'

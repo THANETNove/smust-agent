@@ -3854,7 +3854,7 @@ button.disabled {
     position: absolute;
     border: 1px solid #FAA631;
     top: -35px;
-    z-index: 3;
+    z-index: 1;
 
 }
 
@@ -4001,7 +4001,7 @@ button.disabled {
     position: absolute;
     border: 1px solid #014158;
     top: -35px;
-    z-index: 3;
+    z-index: 1;
 
 }
 
