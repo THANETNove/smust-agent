@@ -23,7 +23,7 @@
     <div class="box-brokers-search">
         <p class="find-broker">หรือตามหานายหน้าที่ตรงใจเลย</p>
         <div class="search-welcome">
-            <form method="POST" action="{{ route('house-condo') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('contact-premium') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="search-welcome-box mb-3">
                     <div>

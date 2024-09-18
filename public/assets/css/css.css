@@ -4171,3 +4171,29 @@ button.disabled {
     margin-right: 10%;
     margin-bottom: 257px;
 }
+
+.box-premium-all {
+    min-height: 284px;
+    width: 100%;
+    background-image: url('/assets/image/home/imaged-17-design.png');
+    /* ใส่เส้นทางของภาพที่ต้องการใช้ */
+    background-size: cover;
+    /* ปรับขนาดภาพให้พอดีกับพื้นที่ */
+    background-position: center;
+    /* จัดตำแหน่งภาพให้อยู่ตรงกลาง */
+    background-repeat: no-repeat;
+    padding: 42px 5%;
+
+}
+
+.looking-broker {
+    font-size: 40px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.looking-broker-sub {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+}

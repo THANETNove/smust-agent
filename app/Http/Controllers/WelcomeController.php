@@ -269,14 +269,17 @@ class WelcomeController extends Controller
 
         return view('skilled_brokers', compact('userQuery', 'provincesQuery', 'favoritesQuery'));
     }
-    function contactPremium()
+    function contactPremium(Request $request)
     {
+        $provincesQuery = DB::table('provinces')
 
+            ->get();
         $userQuery = DB::table('users')
             ->where('users.plans', '>', 0)
+            ->orderBy('plans', 'DESC')
             ->get();
 
 
-        return view('contactPremiumAll', compact('userQuery'));
+        return view('contactPremiumAll', compact('userQuery', 'provincesQuery'));
     }
 }
