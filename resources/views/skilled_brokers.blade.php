@@ -35,13 +35,6 @@
                         <input type="radio" id="buy" name="sale_rent" value="sale">
                         <label for="buy" class="search-text-head">ซื้อ</label>
                     </div>
-
-                    <div>
-                        <input type="radio" id="owner-financing" name="sale_rent" value="ownerFinancing">
-                        <label for="owner-financing" class="search-text-head2 head-new">ผ่อนตรงเจ้าของ
-                            <span style="color: #E34234">(NEW)</span>
-                        </label>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="mb-3 col-12 col-sm-3">
@@ -124,7 +117,7 @@
         </div>
     </div>
     <div class="container-box-free">
-        <a href="">
+        <a href="{{ url('contact-premium') }}">
             <div class="interested-contact-premium-all">ดูทั้งหมด</div>
         </a>
 

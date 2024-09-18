@@ -263,12 +263,20 @@ class WelcomeController extends Controller
             ->get();
 
         $favoritesQuery = DB::table('users')
-            /*     ->where('favorites.id_product', $id)
-            ->where('users.plans', '>', 0) */
-
+            ->where('plans', '>', 1)
             ->limit(12) // จำกัดผลลัพธ์เป็น 12 รายการ
             ->get();
 
         return view('skilled_brokers', compact('userQuery', 'provincesQuery', 'favoritesQuery'));
+    }
+    function contactPremium()
+    {
+
+        $userQuery = DB::table('users')
+            ->where('users.plans', '>', 0)
+            ->get();
+
+
+        return view('contactPremiumAll', compact('userQuery'));
     }
 }

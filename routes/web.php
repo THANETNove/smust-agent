@@ -129,6 +129,7 @@ Route::get('house-condo', [WelcomeController::class, 'houseCondo'])->name('house
 Route::post('house-condo', [WelcomeController::class, 'houseCondo'])->name('house-condo');
 Route::get('house-condo-details/{id}', [WelcomeController::class, 'houseCondoDetails'])->name('house-condo-details');
 Route::get('skilled-brokers', [WelcomeController::class, 'skilledBrokers'])->name('skilled-brokers');
+Route::get('contact-premium', [WelcomeController::class, 'contactPremium'])->name('contact-premium');
 
 
 //ส่วนของ admin
