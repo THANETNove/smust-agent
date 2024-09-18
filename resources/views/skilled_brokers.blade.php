@@ -10,11 +10,65 @@
                 <p class="text-skilled-head">เว็บไซต์นี้จะช่วยให้ท่านตามหานายหน้าได้ทั่วประเทศ
                     ตามความเชี่ยวชาญที่คุณต้องการ</p>
                 <p class="brokers-search">นายหน้าให้ค้นหา <br><span class="brokers-search-number">{{ $userQuery }}</span>
-                    <span class="brokers-search-text">คน</span></p>
+                    <span class="brokers-search-text">คน</span>
+                </p>
             </div>
         </div>
         <div class="col-ms-12 col-md-6">
             <img class="image-17" src="{{ URL::asset('/assets/image/home/image-17.png') }}">
+        </div>
+    </div>
+
+
+    <div class="box-brokers-search">
+        <p class="find-broker">หรือตามหานายหน้าที่ตรงใจเลย</p>
+        <div class="search-welcome">
+            <form method="POST" action="{{ route('house-condo') }}" enctype="multipart/form-data">
+                @csrf
+                <div class="search-welcome-box mb-3">
+                    <div>
+                        <input type="radio" id="rent" name="sale_rent" value="rent" checked>
+                        <label for="rent" class="search-text-head">เช่า</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="buy" name="sale_rent" value="sale">
+                        <label for="buy" class="search-text-head">ซื้อ</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="owner-financing" name="sale_rent" value="ownerFinancing">
+                        <label for="owner-financing" class="search-text-head2 head-new">ผ่อนตรงเจ้าของ
+                            <span style="color: #E34234">(NEW)</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-12 col-sm-4">
+                        <select class="form-select" aria-label="Default select example" name="property_type">
+                            <option selected disabled>ประเภททรัพย์</option>
+                            <option value="บ้านเดี่ยว">บ้านเดี่ยว</option>
+                            <option value="คอนโด">คอนโด </option>
+                            <option value="ทาวน์เฮ้าส์">ทาวน์เฮ้าส์</option>
+                            <option value="ที่ดิน">ที่ดิน</option>
+                            <option value="พาณิชย์">พาณิชย์</option>
+                        </select>
+                    </div>
+                    <div class="mb-3  col-12 col-sm-5">
+                        <input type="text" class="form-control" data-bs-toggle="modal" name="stations" id="stations"
+                            data-bs-target="#exampleModalWelocome" placeholder="ค้นหาด้วยทำเล รถไฟฟ้า" readonly>
+                    </div>
+
+
+
+                    <div class="mb-3  col-12 col-sm-3">
+                        <button type="submit" class="btn-find-out-now">ค้นหาเลย!</button>
+
+                    </div>
+                </div>
+                @include('layouts.model_welcome')
+
+            </form>
         </div>
     </div>
     @include('layouts.footer_welocome')
