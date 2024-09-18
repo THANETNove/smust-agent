@@ -4102,3 +4102,40 @@ button.disabled {
     font-weight: 700;
     color: #FFFFFF;
 }
+
+.contact-a-broker {
+    margin: 92px 10% 100px 10%;
+    font-size: 64px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.contact-a-broker span {
+    color: #E34234;
+}
+
+
+.interested-contact-premium-carousel {
+    border: 1.5px solid #FAA631;
+    background: #FAFAFA;
+    border-radius: 10px;
+    max-width: 364px;
+    width: 100%;
+    min-height: 215px;
+    height: auto;
+    position: relative;
+    padding: 58px 16px 28px 16px;
+    margin-top: 56px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+
+.carousel-mb-64 {
+    margin-bottom: 64px;
+}
+
+.interested-contact-premium-all{
+    
+}

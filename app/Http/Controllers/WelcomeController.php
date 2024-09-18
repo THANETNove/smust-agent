@@ -258,7 +258,17 @@ class WelcomeController extends Controller
             ->where('users.plans', '>', 0)
             ->limit(4) // จำกัดผลลัพธ์เป็น 12 รายการ
             ->count();
+        $provincesQuery = DB::table('provinces')
 
-        return view('skilled_brokers', compact('userQuery'));
+            ->get();
+
+        $favoritesQuery = DB::table('users')
+            /*     ->where('favorites.id_product', $id)
+            ->where('users.plans', '>', 0) */
+
+            ->limit(12) // จำกัดผลลัพธ์เป็น 12 รายการ
+            ->get();
+
+        return view('skilled_brokers', compact('userQuery', 'provincesQuery', 'favoritesQuery'));
     }
 }
