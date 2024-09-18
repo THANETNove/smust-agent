@@ -13,7 +13,8 @@
                     <a class="nav-link apply-job-with-us" aria-current="page" href="#">หาบ้าน/คอนโดที่ถูกใจ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  apply-job-with-us" aria-current="page" href="#">ศูนย์รวมนายหน้าฝีมือดี</a>
+                    <a class="nav-link  apply-job-with-us" aria-current="page"
+                        href="{{ url('skilled-brokers') }}">ศูนย์รวมนายหน้าฝีมือดี</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link apply-job-with-us" href="{{ url('home-login') }}">สมัครงานกับเรา</a>

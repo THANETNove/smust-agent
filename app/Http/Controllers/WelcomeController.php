@@ -250,4 +250,15 @@ class WelcomeController extends Controller
 
         return view('house_condo_details', compact('dataHome', 'welcomeQuery', 'favoritesQuery'));
     }
+
+    function skilledBrokers()
+    {
+
+        $userQuery = DB::table('users')
+            ->where('users.plans', '>', 0)
+            ->limit(4) // จำกัดผลลัพธ์เป็น 12 รายการ
+            ->count();
+
+        return view('skilled_brokers', compact('userQuery'));
+    }
 }

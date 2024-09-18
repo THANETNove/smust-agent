@@ -128,6 +128,7 @@ Route::get('click-favorite/{id}', [FavoriteController::class, 'update'])->name('
 Route::get('house-condo', [WelcomeController::class, 'houseCondo'])->name('house-condo');
 Route::post('house-condo', [WelcomeController::class, 'houseCondo'])->name('house-condo');
 Route::get('house-condo-details/{id}', [WelcomeController::class, 'houseCondoDetails'])->name('house-condo-details');
+Route::get('skilled-brokers', [WelcomeController::class, 'skilledBrokers'])->name('skilled-brokers');
 
 
 //ส่วนของ admin

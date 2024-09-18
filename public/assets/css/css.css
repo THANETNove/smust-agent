@@ -4046,3 +4046,43 @@ button.disabled {
     color: #000000;
     font-weight: 400;
 }
+
+.image-17 {
+    max-width: 700px;
+    max-height: 454px;
+    width: 100%;
+    height: 100%;
+}
+
+.box-skilled-head {
+    margin: 72px 10%;
+}
+
+.text-skilled-head {
+    font-size: 24px;
+    font-weight: 400;
+    color: #000000CC;
+
+}
+
+.brokers-search {
+    margin-top: 32px;
+    color: #007BA7;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.brokers-search-number {
+    color: #E34234;
+    font-size: 64px;
+    font-weight: 700;
+
+}
+
+.brokers-search-text {
+    color: #007BA7;
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 20px;
+
+}
