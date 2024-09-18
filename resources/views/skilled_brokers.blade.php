@@ -123,5 +123,17 @@
             @endforeach
         </div>
     </div>
+    <div class="container-box-free">
+        <a href="">
+            <div class="interested-contact-premium-all">ดูทั้งหมด</div>
+        </a>
+
+    </div>
+    <div class="container-box-free">
+        <img class="image-square_1" src="{{ URL::asset('/assets/image/home/square_1.png') }}">
+    </div>
+    <div class="container-box-free">
+        <img class="image-square_2" src="{{ URL::asset('/assets/image/home/square_2.png') }}">
+    </div>
     @include('layouts.footer_welocome')
 @endsection
