@@ -140,11 +140,11 @@
                     <div class="box-suct-number">
                         <div style="margin-right: 40px">
                             <p class="property-for-rent">ทรัพย์ให้เช่า</p>
-                            <p class="text-for-rent">45</p>
+                            <p class="text-for-rent">{{ $countRent }}</p>
                         </div>
                         <div>
                             <p class="property-for-rent">ทรัพย์พร้อมขาย</p>
-                            <p class="text-for-rent">21</p>
+                            <p class="text-for-rent">{{ $countSell }}</p>
                         </div>
                     </div>
                 </div>

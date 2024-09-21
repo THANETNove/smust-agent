@@ -364,12 +364,27 @@ class WelcomeController extends Controller
 
         $countRentQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.code_admin', $userQuery[0]->code)
+            ->where(function ($query) {
+                $query->where('rent_sell_home_details.rent_sell', "ขาย")
+                    ->orWhere('rent_sell_home_details.sell', "ขาย");
+            })
             ->count();
         $countSellQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.code_admin', $userQuery[0]->code)
+            ->where(function ($query) {
+                $query->where('rent_sell_home_details.rent_sell', "เช่า")
+                    ->orWhere('rent_sell_home_details.rent', "เช่า");
+            })
             ->count();
-
-
-        return view('premiumAgentHome', compact('userQuery', 'welcomeQuery'));
+        $countSellRentQuery = DB::table('rent_sell_home_details')
+            ->where('rent_sell_home_details.code_admin', $userQuery[0]->code)
+            ->where(function ($query) {
+                $query->where('rent_sell_home_details.rent_sell', "เช่าซื้อ/ขายผ่อน")
+                    ->orWhere('rent_sell_home_details.rent_sell', "เช่า/ขาย");
+            })
+            ->count();
+        $countRent =  $countRentQuery + $countSellRentQuery;
+        $countSell =  $countSellQuery + $countSellRentQuery;
+        return view('premiumAgentHome', compact('userQuery', 'welcomeQuery', 'countRent', 'countSell'));
     }
 }
