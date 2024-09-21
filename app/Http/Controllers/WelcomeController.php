@@ -277,8 +277,8 @@ class WelcomeController extends Controller
         $provincesQuery = DB::table('provinces')
             ->get();
 
-        $userQuery = DB::table('users');
-        //  ->where('users.plans', '>', 0);
+        $userQuery = DB::table('users')
+            ->where('users.plans', '>', 0);
 
 
         if ($request->all()) {
