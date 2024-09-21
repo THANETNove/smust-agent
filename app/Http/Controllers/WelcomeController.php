@@ -333,11 +333,33 @@ class WelcomeController extends Controller
     function premiumAgentHome($id)
     {
 
+        $userQuery = DB::table('users')
+            ->where('users.id', $id)
+            ->leftJoin('personal_websites', 'users.id', '=', 'personal_websites.user_id')
+            ->select(
+                'users.*',
+                'personal_websites.history_work',
+            )
+            ->get();
+
+
+        $welcomeQuery = DB::table('rent_sell_home_details')
+            ->where('rent_sell_home_details.status_home', 'on')
+            ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
+            ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
+            ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
+            ->select(
+                'rent_sell_home_details.*',
+                'provinces.name_th AS provinces_name_th',
+                'districts.name_th AS districts_name_th',
+                'amphures.name_th AS amphures_name_th'
+            )
+            ->orderBy('rent_sell_home_details.id', 'DESC')
+            ->limit(13) // จำกัดผลลัพธ์เป็น 12 รายการ
+            ->get();
 
 
 
-
-
-        return view('premiumAgentHome');
+        return view('premiumAgentHome', compact('userQuery', 'welcomeQuery'));
     }
 }
