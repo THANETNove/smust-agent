@@ -397,9 +397,7 @@
                                         src="{{ URL::asset('/assets/image/welcome/explore_nearby.png') }}">
                                     {{ $fav->provinces }}
                                 </p>
-                                <p class="text-content-dark_000 text-center">ผู้เชี่ยวชาญ
-                                    ให้คำปรึกษาเรื่อง{{ $fav->property_type }}
-                                    เชี่ยวชาญในย่าน {{ $fav->provinces }}...</p>
+                                <p class="text-content-dark_000 text-center">{{ $fav->history_work }}</p>
                                 <div class="btn-box-profile-center">
                                     <a href="{{ url('premium-agent-home', $fav->id) }}">
                                         <div class="btn-box-profile">ดูโปรไฟล์</div>

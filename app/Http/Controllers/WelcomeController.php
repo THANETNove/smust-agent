@@ -240,8 +240,10 @@ class WelcomeController extends Controller
             ->where('favorites.id_product', $id)
             ->where('users.plans', '>', 0)
             ->leftJoin('users', 'favorites.user_id', '=', 'users.id')
+            ->leftJoin('personal_websites', 'favorites.user_id', '=', 'personal_websites.user_id')
             ->select(
-                'users.*'
+                'users.*',
+                'personal_websites.history_work'
             )
             ->orderBy('users.plans', 'DESC')
             ->orderBy('favorites.id', 'ASC')
@@ -256,6 +258,7 @@ class WelcomeController extends Controller
 
         $userQuery = DB::table('users')
             ->where('users.plans', '>', 0)
+
             ->limit(4) // จำกัดผลลัพธ์เป็น 12 รายการ
             ->count();
         $provincesQuery = DB::table('provinces')
@@ -264,7 +267,13 @@ class WelcomeController extends Controller
 
         $favoritesQuery = DB::table('users')
             ->where('plans', '>', 1)
+            ->leftJoin('personal_websites', 'users.id', '=', 'personal_websites.user_id')
             ->limit(12) // จำกัดผลลัพธ์เป็น 12 รายการ
+            ->select(
+                'users.*',
+                'personal_websites.history_work',
+
+            )
             ->get();
 
         return view('skilled_brokers', compact('userQuery', 'provincesQuery', 'favoritesQuery'));
@@ -278,8 +287,13 @@ class WelcomeController extends Controller
             ->get();
 
         $userQuery = DB::table('users')
-            ->where('users.plans', '>', 0);
+            ->where('users.plans', '>', 0)
+            ->leftJoin('personal_websites', 'users.id', '=', 'personal_websites.user_id')
+            ->select(
+                'users.*',
+                'personal_websites.history_work',
 
+            );
 
         if ($request->all()) {
 
