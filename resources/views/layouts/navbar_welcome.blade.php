@@ -10,7 +10,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 navbar-nav-white">
                 <li class="nav-item">
-                    <a class="nav-link apply-job-with-us" aria-current="page" href="#">หาบ้าน/คอนโดที่ถูกใจ</a>
+                    <a class="nav-link apply-job-with-us" aria-current="page"
+                        href="{{ url('house-condo') }}">หาบ้าน/คอนโดที่ถูกใจ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  apply-job-with-us" aria-current="page"
