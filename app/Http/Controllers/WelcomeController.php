@@ -316,4 +316,14 @@ class WelcomeController extends Controller
 
         return view('contactPremiumAll', compact('userQuery', 'provincesQuery', 'userQuery1', 'statusShow'));
     }
+    function premiumAgentHome($id)
+    {
+
+
+
+
+
+
+        return view('premiumAgentHome');
+    }
 }

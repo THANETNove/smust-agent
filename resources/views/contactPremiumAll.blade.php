@@ -101,7 +101,7 @@
                             ให้คำปรึกษาเรื่อง{{ $fav->property_type }}
                             เชี่ยวชาญในย่าน {{ $fav->provinces }}...</p>
                         <div class="btn-box-profile-center">
-                            <a href="">
+                            <a href="{{ url('premium-agent-home', $fav->id) }}">
                                 <div class="btn-box-profile">ดูโปรไฟล์</div>
                             </a>
                         </div>
@@ -191,7 +191,7 @@
                             ให้คำปรึกษาเรื่อง{{ $fav->property_type }}
                             เชี่ยวชาญในย่าน {{ $fav->provinces }}...</p>
                         <div class="btn-box-profile-center">
-                            <a href="">
+                            <a href="{{ url('premium-agent-home', $fav->id) }}">
                                 <div class="btn-box-profile">ดูโปรไฟล์</div>
                             </a>
                         </div>

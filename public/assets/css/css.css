@@ -4239,3 +4239,11 @@ button.disabled {
     box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
     margin-right: 40px;
 }
+
+.drame23 {
+    max-width: 342px;
+    height: 36px;
+    width: 100%;
+    margin-bottom: 8px;
+    margin-top: 24px;
+}

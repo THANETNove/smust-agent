@@ -54,10 +54,15 @@
     </div>
 
     <div class="content-image">
-        <a href="http://" target="_blank" rel="noopener noreferrer" class="no-underline">
+        <a href="{{ url('premium-agent-home', Auth::user()->id) }}" target="_blank" rel="noopener noreferrer"
+            class="no-underline">
             <img class="frame660" src="{{ URL::asset('/assets/image/welcome/frame660.png') }}">
         </a>
         <p class="steps-3">แก้ไขเว็บของคุณง่าย ๆ 3 ขั้นตอน</p>
+        <a href="{{ url('premium-agent-home', Auth::user()->id) }}" target="_blank">
+            <img class="drame23" src="{{ URL::asset('/assets/image/welcome/drame23.png') }}">
+        </a>
+
         <a href="{{ url('create-personal') }}" rel="noopener noreferrer" class="no-underline">
             <img class="parttoedit" src="{{ URL::asset('/assets/image/welcome/parttoedit.png') }}">
         </a>
@@ -73,7 +78,6 @@
 
 
     <script>
- 
         function toggleContent(element) {
             const content = element.nextElementSibling;
             element.classList.toggle('active');
