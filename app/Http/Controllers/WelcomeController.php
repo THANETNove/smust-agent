@@ -343,7 +343,10 @@ class WelcomeController extends Controller
             ->get();
 
 
+
+
         $welcomeQuery = DB::table('rent_sell_home_details')
+            ->where('rent_sell_home_details.code_admin', $userQuery[0]->code)
             ->where('rent_sell_home_details.status_home', 'on')
             ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
             ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
@@ -358,6 +361,13 @@ class WelcomeController extends Controller
             ->limit(13) // จำกัดผลลัพธ์เป็น 12 รายการ
             ->get();
 
+
+        $countRentQuery = DB::table('rent_sell_home_details')
+            ->where('rent_sell_home_details.code_admin', $userQuery[0]->code)
+            ->count();
+        $countSellQuery = DB::table('rent_sell_home_details')
+            ->where('rent_sell_home_details.code_admin', $userQuery[0]->code)
+            ->count();
 
 
         return view('premiumAgentHome', compact('userQuery', 'welcomeQuery'));
