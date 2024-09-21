@@ -72,12 +72,15 @@
             </div>
         </div>
     </div>
-    <div class="box-premium-head-conten">
-        <p class="text-36171-head">นายหน้าที่ถนัด...</p>
-        <p class="text-premium-conten">หาผู้.. <span>เช่า</span> .. ทรัพย์ประเภท.. <span>คอนโด</span> .. ใน.. <span>กทม.
-                และปริมณฑล</span> ..
-            ที่มีลักษณะ.. <span>คอนโดแนวรถไฟฟ้า</span> ..</p>
-    </div>
+    @if ($statusShow)
+        <div class="box-premium-head-conten">
+            <p class="text-36171-head">นายหน้าที่ถนัด...</p>
+            <p class="text-premium-conten">หาผู้.. <span>เช่า</span> .. ทรัพย์ประเภท.. <span>คอนโด</span> .. ใน.. <span>กทม.
+                    และปริมณฑล</span> ..
+                ที่มีลักษณะ.. <span>คอนโดแนวรถไฟฟ้า</span> ..</p>
+        </div>
+    @endif
+
     <div class="box-premium-broker">
         @foreach ($userQuery1 as $fav)
             @if ($fav->plans == 2)

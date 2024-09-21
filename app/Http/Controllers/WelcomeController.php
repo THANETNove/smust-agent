@@ -305,12 +305,15 @@ class WelcomeController extends Controller
                         ->orWhere('characteristics', 'LIKE', "%$request->characteristics%");
                 })
                 ->get();
+            $statusShow = true;
         } else {
             $userQuery = (clone $userQuery)->orderBy('plans', 'DESC')
                 ->get();
+            $userQuery1 = collect();
+            $statusShow = false;
         }
 
 
-        return view('contactPremiumAll', compact('userQuery', 'provincesQuery', 'userQuery1'));
+        return view('contactPremiumAll', compact('userQuery', 'provincesQuery', 'userQuery1', 'statusShow'));
     }
 }
