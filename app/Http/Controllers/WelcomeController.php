@@ -271,15 +271,46 @@ class WelcomeController extends Controller
     }
     function contactPremium(Request $request)
     {
+
+
+
         $provincesQuery = DB::table('provinces')
-
-            ->get();
-        $userQuery = DB::table('users')
-            ->where('users.plans', '>', 0)
-            ->orderBy('plans', 'DESC')
             ->get();
 
+        $userQuery = DB::table('users');
+        //  ->where('users.plans', '>', 0);
 
-        return view('contactPremiumAll', compact('userQuery', 'provincesQuery'));
+
+        if ($request->all()) {
+
+
+            // กรณีใช้เงื่อนไขแบบ and
+            $userQuery1 = (clone $userQuery)
+                ->where('contract_type', $request->sale_rent)
+                ->where('property_type', $request->property_type)  // สมมติว่ามีฟิลด์ `property_type`
+                ->where('provinces', $request->province)
+                ->where('characteristics', $request->characteristics)
+                ->get();
+
+            // ดึง id ทั้งหมดจาก $userQuery1 เพื่อไม่แสดงใน $userQuery
+            $idsToExclude = $userQuery1->pluck('id')->toArray();
+
+            // กรณีใช้เงื่อนไขแบบ or แต่ไม่เอา id ที่มีอยู่ใน $userQuery1 มาแสดง
+            $userQuery = (clone $userQuery)
+                ->whereNotIn('id', $idsToExclude)  // ไม่เอา id ที่มีอยู่ใน $userQuery1
+                ->where(function ($query) use ($request) {
+                    $query->where('contract_type', 'LIKE', "%$request->sale_rent%")
+                        ->orWhere('property_type',  'LIKE', "%$request->property_type%")
+                        ->orWhere('provinces', 'LIKE', "%$request->province%")
+                        ->orWhere('characteristics', 'LIKE', "%$request->characteristics%");
+                })
+                ->get();
+        } else {
+            $userQuery = (clone $userQuery)->orderBy('plans', 'DESC')
+                ->get();
+        }
+
+
+        return view('contactPremiumAll', compact('userQuery', 'provincesQuery', 'userQuery1'));
     }
 }

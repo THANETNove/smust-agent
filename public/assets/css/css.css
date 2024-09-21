@@ -4197,3 +4197,45 @@ button.disabled {
     font-weight: 700;
     color: #ffffff;
 }
+
+.box-premium-head-conten {
+    padding: 59px 5% 85px 5%;
+}
+
+.text-premium-conten {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.text-premium-conten span {
+    color: #007BA7;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.box-premium-broker {
+    padding: 0px 5% 171px 5%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* ให้ไอเท็มย้ายลงบรรทัดใหม่ถ้าพื้นที่ไม่เพียงพอ */
+    justify-content: center;
+    /* จัดระยะห่างระหว่างไอเท็ม */
+}
+
+.interested-contact-premium-carousel-broker {
+    border: 1.5px solid #FAA631;
+    background: #FAFAFA;
+    border-radius: 10px;
+    width: 364px;
+    min-height: 215px;
+    height: auto;
+    position: relative;
+    padding: 58px 16px 28px 16px;
+    margin-top: 56px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
+    margin-right: 40px;
+}
