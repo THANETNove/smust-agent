@@ -1256,6 +1256,12 @@
     border-radius: 8px;
     padding: 8px 12px;
     margin-bottom: 4px;
+    white-space: nowrap;
+    /* ไม่ให้ข้อความขึ้นบรรทัดใหม่ */
+    overflow: hidden;
+    /* ซ่อนข้อความที่ยาวเกิน */
+    text-overflow: ellipsis;
+    /* แสดง ... เมื่อข้อความยาวเกิน */
 }
 
 .img-imageLine {
@@ -4246,4 +4252,15 @@ button.disabled {
     width: 100%;
     margin-bottom: 8px;
     margin-top: 24px;
+}
+
+.img-rectangle-1234 {
+    background-image: url('/assets/image/welcome/Rectangle1234.png');
+    /* ใส่เส้นทางของภาพที่ต้องการใช้ */
+    background-size: cover;
+    /* ปรับขนาดภาพให้พอดีกับพื้นที่ */
+    background-position: center;
+    /* จัดตำแหน่งภาพให้อยู่ตรงกลาง */
+    background-repeat: no-repeat;
+    min-height: 304px;
 }
