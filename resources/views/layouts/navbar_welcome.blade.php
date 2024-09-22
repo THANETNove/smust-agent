@@ -22,7 +22,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link owner-allows-free" aria-disabled="true">เจ้าของให้เราช่วยขายได้ ฟรี</a>
+                    <a class="nav-link owner-allows-free" aria-disabled="true"
+                        href="{{ url('co-create') }}">เจ้าของให้เราช่วยขายได้ ฟรี</a>
                 </li>
             </ul>
         </div>
