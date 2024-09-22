@@ -339,6 +339,15 @@ class WelcomeController extends Controller
             ->select(
                 'users.*',
                 'personal_websites.history_work',
+                'personal_websites.image_1',
+                'personal_websites.name_1',
+                'personal_websites.details_1',
+                'personal_websites.image_2',
+                'personal_websites.name_2',
+                'personal_websites.details_2',
+                'personal_websites.image_3',
+                'personal_websites.name_3',
+                'personal_websites.details_3',
             )
             ->get();
 
@@ -385,6 +394,14 @@ class WelcomeController extends Controller
             ->count();
         $countRent =  $countRentQuery + $countSellRentQuery;
         $countSell =  $countSellQuery + $countSellRentQuery;
-        return view('premiumAgentHome', compact('userQuery', 'welcomeQuery', 'countRent', 'countSell'));
+
+
+
+        $postQuery = DB::table('post_contents')
+            ->where('user_id', $id)
+            ->orderBy('updated_at', 'DESC')
+            ->get();
+
+        return view('premiumAgentHome', compact('userQuery', 'welcomeQuery', 'countRent', 'countSell', 'postQuery'));
     }
 }

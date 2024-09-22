@@ -4349,11 +4349,27 @@ button.disabled {
     margin-bottom: 41px;
 }
 
-.img-services-as {
+.box-img-services-as {
     max-width: 369px;
     max-height: 549px;
     width: 100%;
     height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    border-radius: 30px;
+    align-items: center;
+    flex-direction: column;
+    padding: 0px 5% 32px 5%;
+
+}
+
+.img-services-as {
+    max-width: 334px;
+    max-height: 334px;
+    width: 100%;
+    height: 100%;
+
+
 }
 
 .contact-now-as {
@@ -4420,4 +4436,117 @@ button.disabled {
     max-width: 100%;
     width: 212px;
     height: 128px;
+}
+
+.highlight-as {
+    margin-top: 60px;
+    text-align: center;
+    color: #000000;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 60px;
+}
+
+.box-left-as {
+    margin-top: 53px;
+    width: 15%;
+
+    height: 365px;
+    background: #D9D9D9;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.box-right-as {
+    margin-top: 53px;
+    width: 15%;
+    height: 365px;
+    background: #D9D9D9;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+}
+
+.box-center-as {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* จัดกึ่งกลางทั้งแนวตั้งและแนวนอน */
+
+    min-height: 472px;
+
+}
+
+.box-highlight-post-as {
+    display: flex;
+}
+
+.post-query-image {
+    max-width: 867px;
+    max-height: 472px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.name-as {
+    margin-top: 24px;
+    text-align: start !important;
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
+}
+
+
+.details-post-as {
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.details-post-as-all {
+    margin-top: 24px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+}
+
+.posts-as {
+    margin-top: 74px;
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+
+}
+
+.box-posts-as-all {
+    padding: 32px 40px;
+    background-color: #ffffff;
+    max-width: 713px;
+    width: 100%;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+    overflow: hidden;
+    /* ป้องกันการล้นขององค์ประกอบภายใน */
+}
+
+.name-1-as {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.details-1-as {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
 }

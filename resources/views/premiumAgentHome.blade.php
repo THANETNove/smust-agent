@@ -121,15 +121,39 @@
     <div class="services-such">
         <p class="services-such-as-text">บริการ อาทิ</p>
         <div class="row">
-            <div class="col-sm-12 col-md-4">
-                <img class="img-services-as" src="{{ URL::asset('/assets/image/welcome/image-1.png') }}">
-            </div>
-            <div class="col-sm-12 col-md-4">
+            @foreach ($userQuery as $userQ)
+                <div class="col-sm-12 col-md-4">
+                    <div class="box-img-services-as">
+                        <img class="img-services-as" src="{{ URL::asset($userQ->image_1) }}">
+                        <p class="name-1-as">{{ $userQ->name_1 }}</p>
+                        <p class="details-1-as">{{ $userQ->details_1 }}</p>
+                    </div>
+
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="box-img-services-as">
+                        <img class="img-services-as" src="{{ URL::asset($userQ->image_2) }}">
+                        <p class="name-1-as">{{ $userQ->name_2 }}</p>
+                        <p class="details-1-as">{{ $userQ->details_2 }}</p>
+                    </div>
+
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="box-img-services-as">
+                        <img class="img-services-as" src="{{ URL::asset($userQ->image_3) }}">
+                        <p class="name-1-as">{{ $userQ->name_3 }}</p>
+                        <p class="details-1-as">{{ $userQ->details_3 }}</p>
+                    </div>
+
+                </div>
+            @endforeach
+
+            {{--  <div class="col-sm-12 col-md-4">
                 <img class="img-services-as" src="{{ URL::asset('/assets/image/welcome/image-2.png') }}">
             </div>
             <div class="col-sm-12 col-md-4">
                 <img class="img-services-as" src="{{ URL::asset('/assets/image/welcome/image-3.png') }}">
-            </div>
+            </div> --}}
         </div>
         <div class="btn-box-profile-center">
             <div class="contact-now-as">ติดต่อเลย</div>
@@ -291,6 +315,39 @@
                 </div>
             </div>
         </div>
+
+
+    </div>
+    <p class="highlight-as">Highlight</p>
+    <div class="box-highlight-post-as">
+
+        <div class="box-left-as"></div>
+
+
+        <div class="box-center-as">
+
+            @if ($postQuery->count() > 0)
+                <img class="post-query-image" src="{{ URL::asset($postQuery[0]->image) }}">
+                <div style="padding: 0px 10%">
+                    <p class="name-as">{{ $postQuery[0]->name }}</p>
+                    <p class="details-post-as">{{ $postQuery[0]->details_post }}</p>
+                </div>
+            @endif
+            <p class="posts-as">Posts</p>
+
+            @foreach ($postQuery as $postQ)
+                <div class="box-posts-as-all">
+                    <p class="name-as">{{ $postQ->name }}</p>
+                    <img class="post-query-image" src="{{ URL::asset($postQ->image) }}">
+                    <p class="details-post-as-all">{{ $postQ->details_post }}</p>
+                </div>
+            @endforeach
+
+
+        </div>
+
+        <div class="box-right-as"></div>
+
     </div>
 
     @include('layouts.footer_welocome')
