@@ -4798,3 +4798,31 @@ button.disabled {
     font-weight: 400;
     margin-top: 32px;
 }
+
+.ready-receive {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+}
+
+.ready-receive-1 {
+    font-size: 64px;
+    font-weight: 800;
+    color: #E34234;
+    text-align: center;
+}
+
+.ready-receive-2 {
+    font-size: 40px;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+}
+
+.ready-receive-3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+}

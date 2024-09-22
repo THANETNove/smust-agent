@@ -74,10 +74,11 @@
                                 ที่พร้อมให้คุณนำไปเสนอลูกค้าในมือ</p>
                             <li class="no-need-to-find-text">กรองได้สะดวก</li>
                             <li class="no-need-to-find-text">ติดต่อเจ้าของตรงได้เลย</li>
-
-                            <div class="want-receive-wealth">
-                                ฉันอยากรับทรัพย์ และเริ่มทำงานนายหน้า
-                            </div>
+                            <a href="{{ url('home-login') }}">
+                                <div class="want-receive-wealth">
+                                    ฉันอยากรับทรัพย์ และเริ่มทำงานนายหน้า
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -92,9 +93,12 @@
                             <p class="no-need-to-find">ลูกค้ามาหาคุณเอง</p>
                             <p class="no-need-to-find-text">“หาลูกค้ายากใช่หรือไม่?” เรามีลูกค้าที่มีความต้องการ
                                 มาแสดงถึงมือคุณแล้ว แยกออกมาให้ทั้งจากลูกค้า ตรง และ agent ที่มาถามหา</p>
-                            <div class="want-receive-wealth">
-                                ฉันอยากติดต่อลูกค้า
-                            </div>
+                            <a href="{{ url('home-login') }}">
+                                <div class="want-receive-wealth">
+                                    ฉันอยากติดต่อลูกค้า
+                                </div>
+                            </a>
+
                         </div>
                     </div>
                 </div>
@@ -104,7 +108,12 @@
 
     </div>
 
-    <div class="box-commission-wi-as"></div>
+    <div class="box-commission-wi-as">
+        <p class="ready-receive">พร้อมรับ</p>
+        <p class="ready-receive-1">ค่าคอมมิชชัน 100%</p>
+        <p class="ready-receive-2">ไม่ต้องแบ่ง ไม่ต้องแชร์</p>
+        <p class="ready-receive-3">เหมือนมีผู้ช่วยส่วนตัวช่วยทำงาน แบบไม่ต้องจ้าง 20,000+</p>
+    </div>
 
     @include('layouts.footer_welocome')
 @endsection
