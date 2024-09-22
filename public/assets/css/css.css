@@ -4555,5 +4555,17 @@ button.disabled {
     background: #007BA7;
     width: 100%;
     min-height: 323px;
+    padding: 40px 5%;
+}
 
+.search-for-assets {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+}
+
+.box-all-assets-conter {
+    margin: 61px 5% 260px 5%;
+    background-color: #FFFFFF;
 }

@@ -407,8 +407,40 @@ class WelcomeController extends Controller
     function viewAllAssets($id)
     {
 
+        $userQuery = DB::table('users')
+            ->where('users.id', $id)
+            ->leftJoin('personal_websites', 'users.id', '=', 'personal_websites.user_id')
+            ->select(
+                'users.*',
+                'personal_websites.history_work',
+                'personal_websites.image_1',
+                'personal_websites.name_1',
+                'personal_websites.details_1',
+                'personal_websites.image_2',
+                'personal_websites.name_2',
+                'personal_websites.details_2',
+                'personal_websites.image_3',
+                'personal_websites.name_3',
+                'personal_websites.details_3',
+            )
+            ->get();
 
 
-        return view('viewAllAssets');
+        $welcomeQuery = DB::table('rent_sell_home_details')
+            ->where('rent_sell_home_details.code_admin', $userQuery[0]->code)
+            ->where('rent_sell_home_details.status_home', 'on')
+            ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
+            ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
+            ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
+            ->select(
+                'rent_sell_home_details.*',
+                'provinces.name_th AS provinces_name_th',
+                'districts.name_th AS districts_name_th',
+                'amphures.name_th AS amphures_name_th'
+            )
+            ->orderBy('rent_sell_home_details.id', 'DESC')
+            ->get();
+
+        return view('viewAllAssets', compact('userQuery', 'welcomeQuery'));
     }
 }
