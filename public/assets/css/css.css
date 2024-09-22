@@ -4550,3 +4550,10 @@ button.disabled {
     font-weight: 400;
     color: #000000;
 }
+
+.box-all-assets-head {
+    background: #007BA7;
+    width: 100%;
+    min-height: 323px;
+
+}

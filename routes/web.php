@@ -132,6 +132,7 @@ Route::get('skilled-brokers', [WelcomeController::class, 'skilledBrokers'])->nam
 Route::get('contact-premium', [WelcomeController::class, 'contactPremium'])->name('contact-premium');
 Route::post('contact-premium', [WelcomeController::class, 'contactPremium'])->name('contact-premium');
 Route::get('premium-agent-home/{id}', [WelcomeController::class, 'premiumAgentHome'])->name('premium-agent-home');
+Route::get('view-all-assets/{id}', [WelcomeController::class, 'viewAllAssets'])->name('view-all-assets');
 
 
 //ส่วนของ admin

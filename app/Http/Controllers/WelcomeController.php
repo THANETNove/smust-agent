@@ -404,4 +404,11 @@ class WelcomeController extends Controller
 
         return view('premiumAgentHome', compact('userQuery', 'welcomeQuery', 'countRent', 'countSell', 'postQuery'));
     }
+    function viewAllAssets($id)
+    {
+
+
+
+        return view('viewAllAssets');
+    }
 }

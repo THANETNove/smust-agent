@@ -147,13 +147,6 @@
 
                 </div>
             @endforeach
-
-            {{--  <div class="col-sm-12 col-md-4">
-                <img class="img-services-as" src="{{ URL::asset('/assets/image/welcome/image-2.png') }}">
-            </div>
-            <div class="col-sm-12 col-md-4">
-                <img class="img-services-as" src="{{ URL::asset('/assets/image/welcome/image-3.png') }}">
-            </div> --}}
         </div>
         <div class="btn-box-profile-center">
             <div class="contact-now-as">ติดต่อเลย</div>
@@ -172,7 +165,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="contact-now-as-2">ดูทรัพย์ทั้งหมด</div>
+                <a href="{{ url('view-all-assets', $userQuery[0]->id) }}">
+                    <div class="contact-now-as-2">ดูทรัพย์ทั้งหมด</div>
+                </a>
+
 
             </div>
             <div class="col-sm-12 col-md-9">
