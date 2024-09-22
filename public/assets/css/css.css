@@ -4569,3 +4569,148 @@ button.disabled {
     margin: 61px 5% 260px 5%;
     background-color: #FFFFFF;
 }
+
+.box-us-agent-info-head {
+
+    background-image: url('/assets/image/welcome/Group69.png');
+    /* ใส่เส้นทางของภาพที่ต้องการใช้ */
+    background-size: cover;
+    /* ปรับขนาดภาพให้พอดีกับพื้นที่ */
+    background-position: right;
+    /* จัดตำแหน่งภาพให้อยู่ตรงกลาง */
+    background-repeat: no-repeat;
+    min-height: 550px;
+    padding: 68px 5%;
+    display: flex;
+    flex-direction: column;
+}
+
+.us-agent-inf-text {
+    color: #030B2F;
+    font-size: 64px;
+    font-weight: 800;
+
+}
+
+.us-info-text {
+    margin-top: -16px;
+    color: #030B2F;
+    font-size: 24px;
+    font-weight: 700;
+
+}
+
+.us-commission-text {
+    margin-top: -8px;
+    color: #E34234;
+    font-size: 40px;
+    font-weight: 700;
+
+}
+
+.property-favorite-location {
+    color: #030B2F;
+    font-size: 20px;
+    font-weight: 400;
+
+}
+
+.frame-149 {
+    margin-top: 31px;
+    margin-left: -32px;
+    width: 299px;
+    height: 106px;
+
+}
+
+.frame-235 {
+    margin-top: -31px;
+    max-width: 382px;
+    width: 100%;
+    height: 45px;
+
+}
+
+.box-supported-by {
+    padding: 62px 5% 101px 5%;
+}
+
+.supported-by {
+    margin-top: 83px;
+    max-width: 627px;
+    max-height: 134px;
+    width: 100%;
+    height: 100%;
+}
+
+.who-are-we {
+    color: #030B2F;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.can-agent {
+    margin-top: 31px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #000000CC;
+
+}
+
+.can-agent span {
+    color: #007BA7;
+}
+
+.text-li {
+    font-size: 20px;
+    font-weight: 400;
+    color: #000000CC;
+}
+
+.text-li span {
+    font-weight: 700;
+}
+
+.rectangle1130 {
+    max-width: 824px;
+    width: 100%;
+    height: auto;
+}
+
+.box-supported-by-1130 {
+    padding: 62px 5% 0 5%;
+    background: #F6F6F8;
+    position: relative;
+
+
+
+}
+
+@media only screen and (min-width: 1200px) {
+    .who-are-we-1130 {
+        position: absolute;
+        margin-left: 10%;
+        margin-top: 80px;
+    }
+
+    .who-are-we-text-1130 {
+
+        position: absolute;
+        margin-left: 15%;
+        margin-top: 138px;
+    }
+}
+
+.who-are-we-1130 {
+    font-size: 40px;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+}
+
+.who-are-we-text-1130 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+}

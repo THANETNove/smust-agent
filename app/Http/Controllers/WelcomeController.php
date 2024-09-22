@@ -443,4 +443,10 @@ class WelcomeController extends Controller
 
         return view('viewAllAssets', compact('userQuery', 'welcomeQuery'));
     }
+    function interestedMore()
+    {
+
+
+        return view('InterestedMoreDetails');
+    }
 }

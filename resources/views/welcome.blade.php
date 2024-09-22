@@ -164,7 +164,7 @@
                 <img class="match_easy" src="{{ URL::asset('/assets/image/home/Match_easy.png') }}">
 
                 <div class="full-screen-center">
-                    <a href="#">
+                    <a href="{{ url('interested-more') }}">
                         <div class="btn-for-sale-rent-now">สนใจรายละเอียดเพิ่มเติม</div>
                     </a>
 
