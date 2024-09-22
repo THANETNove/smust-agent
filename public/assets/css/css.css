@@ -4826,3 +4826,18 @@ button.disabled {
     color: #000000;
     text-align: center;
 }
+
+.box-pricing {
+    padding: 132px 5% 161px 5%;
+    background-color: #007BA7;
+    display: flex;
+    justify-content: center;
+}
+
+.business1 {
+    max-width: 488px;
+    max-height: 827px;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}

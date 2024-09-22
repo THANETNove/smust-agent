@@ -115,5 +115,20 @@
         <p class="ready-receive-3">เหมือนมีผู้ช่วยส่วนตัวช่วยทำงาน แบบไม่ต้องจ้าง 20,000+</p>
     </div>
 
+    <div class="box-pricing">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <a href="{{ url('home-login') }}">
+                    <img src="{{ URL::asset('/assets/image/welcome/business1.png') }}" class="business1" alt="user">
+                </a>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <a href="{{ url('home-login') }}">
+                    <img src="{{ URL::asset('/assets/image/welcome/business2.png') }}" class="business1" alt="user">
+                </a>
+            </div>
+        </div>
+    </div>
+
     @include('layouts.footer_welocome')
 @endsection
