@@ -72,7 +72,7 @@
                 <select class="form-control" aria-label="Default select example" name="provinces">
                     <option selected disabled>เขตพื้นที่ที่สะดวกทำงาน</option>
                     @foreach ($dataProvinces as $data)
-                        <option value="{{ $data->id }}" @if ($data->id == $personal->provinces) selected @endif>
+                        <option value="{{ $data->id }}" @if (isset($personal->provinces) && $data->id == $personal->provinces) selected @endif>
                             {{ $data->name_th }}
                         </option>
                     @endforeach

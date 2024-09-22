@@ -67,10 +67,13 @@ class PersonalWebsiteController extends Controller
 
         $member = new PersonalWebsite;
         $member->user_id = Auth::user()->id;
+
         for ($i = 1; $i <= 3; $i++) {
             if ($request->hasFile('image_' . $i)) {
+
                 $file = $request->file('image_' . $i);
-                $filename = date('i_d_m_Y') . '_' . time() . '.' . $file->getClientOriginalExtension();
+                // แทนที่การใช้ time() ด้วย uniqid() เพื่อสร้างชื่อไฟล์ที่ไม่ซ้ำกัน
+                $filename = uniqid() . '.' . $file->getClientOriginalExtension();
                 $filePath = '/assets/img/history_work/' . $filename;
                 $file->move(public_path('/assets/img/history_work/'), $filename);
                 $member->{'image_' . $i} = $filePath;
@@ -78,12 +81,7 @@ class PersonalWebsiteController extends Controller
             $member->{'name_' . $i} = $request['name_' . $i];
             $member->{'details_' . $i} = $request['details_' . $i];
         }
-        $member->name_1 = $request['name_1'];
-        $member->details_1 = $request['details_1'];
-        $member->name_2 = $request['name_2'];
-        $member->details_2 = $request['details_2'];
-        $member->name_3 = $request['name_3'];
-        $member->details_3 = $request['details_3'];
+
         $member->save();
         return redirect('create-personal')->with('message', "บันทึกสำเร็จ");
     }
@@ -134,7 +132,7 @@ class PersonalWebsiteController extends Controller
     public function updateServices(Request $request, string $id)
     {
         $member =  PersonalWebsite::find($id);
-
+        //  dd($request->all());
         for ($i = 1; $i <= 3; $i++) {
             if ($request->hasFile('image_' . $i)) {
 
@@ -145,9 +143,9 @@ class PersonalWebsiteController extends Controller
                     }
                 }
 
-
                 $file = $request->file('image_' . $i);
-                $filename = date('i_d_m_Y') . '_' . time() . '.' . $file->getClientOriginalExtension();
+                // แทนที่การใช้ time() ด้วย uniqid() เพื่อสร้างชื่อไฟล์ที่ไม่ซ้ำกัน
+                $filename = uniqid() . '.' . $file->getClientOriginalExtension();
                 $filePath = '/assets/img/history_work/' . $filename;
                 $file->move(public_path('/assets/img/history_work/'), $filename);
                 $member->{'image_' . $i} = $filePath;
@@ -155,12 +153,7 @@ class PersonalWebsiteController extends Controller
             $member->{'name_' . $i} = $request['name_' . $i];
             $member->{'details_' . $i} = $request['details_' . $i];
         }
-        $member->name_1 = $request['name_1'];
-        $member->details_1 = $request['details_1'];
-        $member->name_2 = $request['name_2'];
-        $member->details_2 = $request['details_2'];
-        $member->name_3 = $request['name_3'];
-        $member->details_3 = $request['details_3'];
+
         $member->save();
         return redirect('create-personal')->with('success', "บันทึกสำเร็จ");
     }
