@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string('number_parking')->nullable()->comment('จำนวนที่จอดรถ')->after('alley');
             $table->string('rent_baht_month')->nullable()->comment('ค่าเช่า* (บาท/เดือน)')->after('number_parking');
             $table->string('month_advance_rent')->nullable()->comment('ค่าเช่าล่วงหน้า 1 เดือน')->after('rent_baht_month');
-            $table->string('electricalAppliance')->nullable()->comment('เครื่องใช้ไฟฟ้า')->after('month_advance_rent');
-            $table->string('facilities')->nullable()->comment('สิ่งอำนวยความสะดวก')->after('electricalAppliance');
-            $table->string('furniture')->nullable()->comment('เฟอร์นิเจอร์')->after('facilities');
+            $table->text('electricalAppliance')->nullable()->comment('เครื่องใช้ไฟฟ้า')->after('month_advance_rent');
+            $table->text('facilities')->nullable()->comment('สิ่งอำนวยความสะดวก')->after('electricalAppliance');
+            $table->text('furniture')->nullable()->comment('เฟอร์นิเจอร์')->after('facilities');
             $table->text('shopping_center')->nullable()->comment('ศูนย์การค้า')->after('furniture');
             $table->text('school')->nullable()->comment('สถานศึกษา')->after('shopping_center');
             $table->text('meters_store')->nullable()->comment('ร้านสะดวกซื้อที่ใกล้ที่สุด')->after('school');

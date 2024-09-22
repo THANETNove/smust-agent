@@ -1,6 +1,6 @@
 <p class="step-skipped">ขั้นตอนนี้สามารถข้ามได้</p>
 <p class="head-name-co mb-3">ไฮไลท์อสังหา</p>
-<div class="mb-3">
+{{-- <div class="mb-3">
     <select class="form-select" aria-label="Default select example" name="electricalAppliance">
         <option selected disabled>สิ่งอำนวยความสะดวก</option>
         @foreach ($electricalAppliance as $ele)
@@ -27,7 +27,64 @@
         @endforeach
 
     </select>
+</div> --}}
+
+<!-- Checkboxes for Electrical Appliance -->
+<!-- Checkboxes for Electrical Appliance -->
+<div class="mb-3 checkbox-group">
+    <p class="price-range">สิ่งอำนวยความสะดวก:</p>
+    <div class="row">
+        @foreach ($electricalAppliance as $ele)
+            <div class="col-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="electricalAppliance[]"
+                        value="{{ $ele->name }}" id="electricalAppliance_{{ $ele->id }}">
+                    <label class="form-check-label" for="electricalAppliance_{{ $ele->id }}">
+                        {{ $ele->name }}
+                    </label>
+                </div>
+            </div>
+        @endforeach
+    </div>
 </div>
+
+<!-- Checkboxes for Facilities -->
+<div class="mb-3 checkbox-group">
+    <p class="price-range">เครื่องใช้ไฟฟ้า:</p>
+    <div class="row">
+        @foreach ($facilities as $fac)
+            <div class="col-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="facilities[]" value="{{ $fac->name }}"
+                        id="facilities_{{ $fac->id }}">
+                    <label class="form-check-label" for="facilities_{{ $fac->id }}">
+                        {{ $fac->name }}
+                    </label>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
+
+<!-- Checkboxes for Furniture -->
+<div class="mb-3 checkbox-group">
+    <p class="price-range">เฟอร์นิเจอร์:</p>
+    <div class="row">
+        @foreach ($furniture as $fur)
+            <div class="col-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="furniture[]" value="{{ $fur->name }}"
+                        id="furniture_{{ $fur->id }}">
+                    <label class="form-check-label" for="furniture_{{ $fur->id }}">
+                        {{ $fur->name }}
+                    </label>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
+
+
 <p class="head-name-co mb-3 " style="margin-top: 58px">สถานที่สำคัญใกล้เคียง</p>
 <p class="shopping-center"> <img class="image-local_mall"
         src="{{ URL::asset('/assets/image/welcome/bed.png') }}">ศูนย์การค้า</p>

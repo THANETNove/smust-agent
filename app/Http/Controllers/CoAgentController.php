@@ -135,7 +135,7 @@ class CoAgentController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $request->validate([
             'image' => ['required'], // บังคับให้ต้องใส่ภาพอย่างน้อย 1 ภาพ
             'image.*' => ['image', 'mimes:jpg,png,jpeg,webp'], // ตรวจสอบรูปแบบไฟล์ภาพ
@@ -193,9 +193,9 @@ class CoAgentController extends Controller
         $member->down_payment = $request['down_payment_amount'];  //เงินดาวน์ (ขาย)	
         $member->installments = $request['many_installments'];  //ผ่อนได้กี่งวด* (เดือน)
         $member->each_installment = $request['each_installment_baht'];  //งวดละ* (บาท)
-        $member->electricalAppliance = $request['electricalAppliance'];  //TODO: add สิ่งอำนวยความสะดวก
-        $member->facilities = $request['facilities'];  //TODO: add เครื่องใช้ไฟฟ้า
-        $member->furniture = $request['furniture'];  //TODO: add เฟอร์นิเจอร์
+        $member->electricalAppliance = json_encode($request['electricalAppliance']);  //TODO: add สิ่งอำนวยความสะดวก
+        $member->facilities = json_encode($request['facilities']);  //TODO: add เครื่องใช้ไฟฟ้า
+        $member->furniture = json_encode($request['furniture']);  //TODO: add เฟอร์นิเจอร์
         $member->shopping_center = json_encode($request['shopping_center']);  //TODO: add สถานที่สำคัญใกล้เคียง
         $member->school = json_encode($request['school']);  //TODO: add สถานศึกษา
         $member->meters_store = $request['meters_store'];  //TODO: add ร้านสะดวกซื้อที่ใกล้ที่สุด

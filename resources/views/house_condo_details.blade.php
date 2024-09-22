@@ -273,20 +273,32 @@
                                         </div>
                                     @endif
                                     @if ($home->facilities)
-                                        <div class="w-50">
-                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                                <img class="icon-content-2"
-                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                                {{ $home->facilities }}
-                                            </p>
-                                        </div>
+                                        @php
+                                            // แปลง JSON เป็น array
+                                            $facilitiesArray = json_decode($home->facilities, true);
+                                        @endphp
+
+                                        @if (is_array($facilitiesArray) && count($facilitiesArray) > 0)
+                                            <div class="w-50">
+                                                @foreach ($facilitiesArray as $facility)
+                                                    <p rel="noopener noreferrer"
+                                                        class="text-content-dark_100 margin-bottom-8">
+                                                        <img class="icon-content-2"
+                                                            src="{{ URL::asset('/assets/image/home/check.png') }}">
+
+                                                        {{ $facility }}
+
+                                                    </p>
+                                                @endforeach
+                                            </div>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
                             <div class="col-ms-12 col-md-4">
                                 <p class="post-head-name">เครื่องใช้ไฟฟ้า</p>
                                 <div class="flex-direction-break-word">
-                                    @if ($home->electricalAppliance)
+                                    {{--  @if ($home->electricalAppliance)
                                         <div class="w-50">
                                             <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
                                                 <img class="icon-content-2"
@@ -294,28 +306,63 @@
                                                 {{ $home->electricalAppliance }}
                                             </p>
                                         </div>
+                                    @endif --}}
+
+                                    @if ($home->electricalAppliance)
+                                        @php
+                                            // แปลง JSON เป็น array
+                                            $electricalApplianceArray = json_decode($home->electricalAppliance, true);
+                                        @endphp
+
+                                        @if (is_array($electricalApplianceArray) && count($electricalApplianceArray) > 0)
+                                            <div class="w-50">
+                                                @foreach ($electricalApplianceArray as $appliance)
+                                                    <p rel="noopener noreferrer"
+                                                        class="text-content-dark_100 margin-bottom-8">
+                                                        <img class="icon-content-2"
+                                                            src="{{ URL::asset('/assets/image/home/check.png') }}">
+
+                                                        {{ $appliance }}
+                                                    </p>
+                                                @endforeach
+                                            </div>
+                                        @endif
                                     @endif
+
                                 </div>
                             </div>
                             <div class="col-ms-12 col-md-4">
                                 <p class="post-head-name">เฟอร์นิเจอร์</p>
                                 <div class="flex-direction-break-word">
                                     @if ($home->furniture)
-                                        <div class="w-50">
-                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                                <img class="icon-content-2"
-                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                                {{ $home->furniture }}
-                                            </p>
-                                        </div>
+                                        @php
+                                            // แปลง JSON เป็น array
+                                            $furnitureArray = json_decode($home->furniture, true);
+                                        @endphp
+
+                                        @if (is_array($furnitureArray) && count($furnitureArray) > 0)
+                                            <div class="w-50">
+                                                @foreach ($furnitureArray as $furn)
+                                                    <p rel="noopener noreferrer"
+                                                        class="text-content-dark_100 margin-bottom-8">
+                                                        <img class="icon-content-2"
+                                                            src="{{ URL::asset('/assets/image/home/check.png') }}">
+
+                                                        {{ $furn }}
+
+                                                    </p>
+                                                @endforeach
+                                            </div>
+                                        @endif
                                     @endif
+
                                 </div>
                             </div>
                         </div>
 
                     </div>
                     <div class="property-highlights-information">
-                        <p class="name-history-profile-p">ไฮไลท์อสังหา</p>
+                        <p class="name-history-profile-p">รายละเอียดจากเจ้าของ</p>
                         <p> {!! $home->details !!}</p>
                     </div>
                     <div class="property-highlights-information">
@@ -381,7 +428,7 @@
             </div>
             <div class="col-sm-12 col-md-4">
                 <p class="name-history-profile-p">สนใจทรัพย์นี้ ติดต่อนายหน้าเหล่านี้เลย! <a class="see-more-details"
-                        href="">ดูเพิ่มเติม</a></p>
+                        href="{{ url('contact-premium') }}">ดูเพิ่มเติม</a></p>
                 @foreach ($favoritesQuery as $fav)
                     @if ($fav->plans == 2)
                         <div class="interested-contact-premium">
