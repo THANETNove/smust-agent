@@ -18,7 +18,7 @@
                         href="{{ url('skilled-brokers') }}">ศูนย์รวมนายหน้าฝีมือดี</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link apply-job-with-us" href="{{ url('home-login') }}">สมัครงานกับเรา</a>
+                    <a class="nav-link apply-job-with-us" href="{{ url('interested-more') }}">สมัครงานกับเรา</a>
                 </li>
 
                 <li class="nav-item">
