@@ -4714,3 +4714,87 @@ button.disabled {
     color: #000000;
     text-align: center;
 }
+
+.box-these-problems {
+    padding: 82px 5% 124px 5%;
+}
+
+.problems {
+    max-width: 1297px;
+    max-height: 312px;
+    width: 100%;
+    height: 100%;
+    margin-top: 31px;
+}
+
+.box-what-we-have {
+    padding: 75px 0 0 0;
+    background-color: #007BA7;
+    max-height: 900px;
+}
+
+.text-what-we-have {
+    font-size: 40px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.text-what-we-have-2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.box-pills-as {
+    margin-top: 60px;
+    margin-left: 32px;
+
+}
+
+@media only screen and (min-width: 992px) {
+    .box-pills-as {
+        margin-left: 142px;
+    }
+}
+
+.mockup {
+    max-width: 616px;
+    max-height: 672px;
+    width: 100%;
+    height: 100%;
+
+}
+
+.mockup {
+    max-width: 616px;
+    max-height: 672px;
+    width: 100%;
+    height: 100%;
+
+}
+
+.no-need-to-find {
+    font-size: 24px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 24px;
+}
+
+.no-need-to-find-text {
+    font-size: 20px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+.want-receive-wealth {
+    background: #B8D7E2;
+    padding: 8px 16px;
+    border-radius: 6px;
+    display: inline-block;
+    color: #014158;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 32px;
+}
