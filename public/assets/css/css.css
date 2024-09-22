@@ -2689,18 +2689,13 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     transition: width 0.3s ease-in-out;
 }
 
-input[type="radio"] {
+/* input[type="radio"] {
     position: absolute;
-    /* ใช้เพื่อซ่อน radio buttons */
     opacity: 0;
-    /* ซ่อน radio button */
     width: 0;
-    /* ขนาด 0 เพื่อไม่ให้แสดงออกมา */
     height: 0;
-    /* ขนาด 0 เพื่อไม่ให้แสดงออกมา */
     overflow: hidden;
-    /* ซ่อน overflow */
-}
+} */
 
 .box-or-agent {
     margin-top: 8px;

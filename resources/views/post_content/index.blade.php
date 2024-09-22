@@ -45,17 +45,12 @@
             <div class="posts-view" id="post-{{ $index }}">
                 <div class="box-radio-name">
                     <p class="post-head-name">{{ $daPo->name }}</p>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            Default radio
-                        </label>
-                    </div>
-                    {{--   <input class="form-check-input" type="radio" name="exampleRadios{{ $index }}"
+
+                    <input class="form-check-input" type="radio" name="exampleRadios{{ $index }}"
                         id="exampleRadios{{ $index }}" value="option{{ $index }}"
                         @if ($index <= 2) checked @endif onclick="updateRadio({{ $daPo->id }})"
                         style="display: none;">
- --}}
+
 
                 </div>
                 <img class="add-frame7-2" id="rectangle123" src="{{ URL::asset($daPo->image) }}">
