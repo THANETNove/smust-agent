@@ -390,7 +390,7 @@
                 </div>
             </div>
         </div>
-        <div class="frequently-asked-questions">
+         <div class="frequently-asked-questions">
             <div class="row">
                 <div class="col-ms-12 col-md-6 box-text-ask">
                     @foreach ($asked as $ask)
@@ -426,7 +426,7 @@
             </div>
         </div>
 
-        <div class="box-cross-we"></div>
+         <div class="box-cross-we"></div>
         <div class="box-words-smust-users">
             <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">

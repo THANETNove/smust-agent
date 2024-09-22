@@ -445,8 +445,11 @@ class WelcomeController extends Controller
     }
     function interestedMore()
     {
+        $asked = DB::table('frequently_asked_questions')
+            ->get();
+        $words = DB::table('words_smust_users')
+            ->get();
 
-
-        return view('InterestedMoreDetails');
+        return view('InterestedMoreDetails', compact('asked', 'words'));
     }
 }

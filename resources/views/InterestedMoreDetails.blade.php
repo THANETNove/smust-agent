@@ -130,5 +130,99 @@
         </div>
     </div>
 
+    <div class="frequently-asked-questions">
+        <div class="row">
+            <div class="col-ms-12 col-md-6 box-text-ask">
+                @foreach ($asked as $ask)
+                    @if ($ask->status == 1)
+                        <p>{!! $ask->asked_head !!}</p>
+                    @endif
+                @endforeach
+
+            </div>
+            <div class="col-ms-12 col-md-6 accordion-flush-box ">
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    @foreach ($asked as $key => $ask)
+                        @if ($ask->status == 0)
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading{{ $key }}">
+                                    <button class="accordion-button collapsed asked_head-btn" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ $key }}"
+                                        aria-expanded="false" aria-controls="flush-collapse{{ $key }}">
+                                        {!! $ask->asked_head !!}
+                                    </button>
+                                </h2>
+                                <div id="flush-collapse{{ $key }}" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body text-asked-details">
+                                        {!! $ask->asked_details !!}
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-cross-we"></div>
+    <div class="box-words-smust-users">
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <!-- First carousel item -->
+
+                @foreach ($words as $key => $word)
+                    <div class="carousel-item {{ $key === 0 ? 'active' : '' }} w-100">
+                        <div class="container my-5">
+                            <div class="row justify-content-center align-items-center">
+                                <div class="col-md-10">
+                                    <div class="card testimonial-card text-center border-0">
+                                        <div class="row-align-items-center">
+                                            <div class="">
+                                                <img src="{{ URL::asset('/assets/image/welcome/bxs_quote-left.png') }}"
+                                                    class="bxs_quote-left" alt="user">
+                                            </div>
+                                            <div class="">
+
+                                                <h5 class="card-title-smust">{!! $word->words_head !!}</h5>
+                                                <img src="{{ URL::asset('/assets/image/welcome/' . $word->words_image) }}"
+                                                    class="frame-188" alt="user">
+                                                <p class="card-text-smust">L{!! $word->words_details !!}</p>
+                                                <p class="card-subtitle">{!! $word->words_name !!}</p>
+
+                                            </div>
+                                            <div>
+                                                <img src="{{ URL::asset('/assets/image/welcome/bxs_quote-right.png') }}"
+                                                    class="bxs_quote-right" alt="user">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+
+
+
+            </div>
+
+            <!-- Carousel controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel"
+                data-bs-slide="prev">
+                <img src="{{ URL::asset('/assets/image/welcome/arrow_back_ios_new.png') }}" class="arrow_back_ios_new"
+                    alt="user">
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel"
+                data-bs-slide="next">
+                <img src="{{ URL::asset('/assets/image/welcome/arrow_next_ios_new.png') }}" class="arrow_next_ios_new"
+                    alt="user">
+            </button>
+        </div>
+
+    </div>
+
     @include('layouts.footer_welocome')
 @endsection
