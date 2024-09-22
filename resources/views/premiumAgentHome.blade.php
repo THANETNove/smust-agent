@@ -172,7 +172,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="contact-now-as-2">ติดต่อเลย</div>
+                <div class="contact-now-as-2">ดูทรัพย์ทั้งหมด</div>
 
             </div>
             <div class="col-sm-12 col-md-9">
