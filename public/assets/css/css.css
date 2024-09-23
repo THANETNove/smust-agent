@@ -3202,7 +3202,7 @@ div:where(.swal2-container) div:where(.swal2-popup) {
 .next-btn2 {
     background-color: #ffffff;
     border: none;
-
+    margin-top: -16px;
     cursor: pointer;
     font-size: 18px;
     width: 18px;
@@ -3713,8 +3713,7 @@ button.disabled {
 }
 
 .item-home-condo img {
-    max-width: 100%;
-    width: 212px;
+    width: 100%;
     height: 128px;
 }
 

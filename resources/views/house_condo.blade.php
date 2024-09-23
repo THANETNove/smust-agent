@@ -95,36 +95,38 @@
 
                 $imgUrl = json_decode(htmlspecialchars_decode($que->image));
             @endphp
-            <a href="{{ url('house-condo-details', $que->id) }}">
-                <div class="item item-home-condo" data-index="{{ $key }}">
-                    <div class="rent_sell-box-we">
-                        @if ($que->rent_sell == 'เช่า')
-                            <span class="rent-sell-primary absolute-rent-sell">{{ $que->rent_sell }}</span>
-                        @elseif ($que->rent_sell == 'ขาย')
-                            <span class="rent-sell-yellow absolute-rent-sell">{{ $que->rent_sell }}</span>
-                        @elseif ($que->rent_sell == 'เช่า/ขาย' || $que->rent_sell == 'เช่าซื้อ/ขายผ่อน')
-                            <span class="rent-sell-green absolute-rent-sell">{{ $que->rent_sell }}</span>
-                        @endif
 
-                        @if ($que->rent == 'เช่า')
-                            <span class="rent-sell-primary absolute-rent-sell">{{ $que->rent }}</span>
-                        @endif
+            <div class="item item-home-condo" data-index="{{ $key }}">
+                <div class="rent_sell-box-we">
+                    @if ($que->rent_sell == 'เช่า')
+                        <span class="rent-sell-primary absolute-rent-sell">{{ $que->rent_sell }}</span>
+                    @elseif ($que->rent_sell == 'ขาย')
+                        <span class="rent-sell-yellow absolute-rent-sell">{{ $que->rent_sell }}</span>
+                    @elseif ($que->rent_sell == 'เช่า/ขาย' || $que->rent_sell == 'เช่าซื้อ/ขายผ่อน')
+                        <span class="rent-sell-green absolute-rent-sell">{{ $que->rent_sell }}</span>
+                    @endif
 
-                        @if ($que->sell == 'ขาย')
-                            <span class="rent-sell-yellow absolute-rent-sell">{{ $que->sell }}</span>
-                        @endif
-                    </div>
-                    <button class="prev-btn2" onclick="changeImage(event, -1)">
-                        <span>
-                            < </span>
-                    </button>
-                    @foreach ($imgUrl as $index => $image)
-                        <img class="sliderImage" src="{{ URL::asset('img/product/' . $image) }}" alt="Slide"
-                            style="{{ $index === 0 ? 'display: block;' : 'display: none;' }}">
-                    @endforeach
-                    <button class="next-btn2" onclick="changeImage(event, 1)">
-                        <span> > </span>
-                    </button>
+                    @if ($que->rent == 'เช่า')
+                        <span class="rent-sell-primary absolute-rent-sell">{{ $que->rent }}</span>
+                    @endif
+
+                    @if ($que->sell == 'ขาย')
+                        <span class="rent-sell-yellow absolute-rent-sell">{{ $que->sell }}</span>
+                    @endif
+                </div>
+                <button class="prev-btn2" onclick="changeImage(event, -1)">
+                    <span>
+                        < </span>
+                </button>
+                @foreach ($imgUrl as $index => $image)
+                    <img class="sliderImage" src="{{ URL::asset('img/product/' . $image) }}" alt="Slide"
+                        style="{{ $index === 0 ? 'display: block;' : 'display: none;' }}">
+                @endforeach
+                <button class="next-btn2" onclick="changeImage(event, 1)">
+                    <span> > </span>
+                </button>
+
+                <a href="{{ url('house-condo-details', $que->id) }}">
                     <p class="building_name-we">{{ $que->building_name }}</p>
 
 
@@ -196,8 +198,8 @@
                             <span>ตกแต่ง{{ $que->decoration }}</span>
                         </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
         @endforeach
         <div class="mt-5">
             {!! $weData->links() !!}
