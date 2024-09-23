@@ -4835,3 +4835,7 @@ button.disabled {
     height: 100%;
     cursor: pointer;
 }
+
+.popup-trigger {
+    cursor: pointer;
+}

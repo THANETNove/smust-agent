@@ -1,15 +1,23 @@
 <script>
     var currentMedia = 0;
+    var currentImages = []; // ตัวแปรนี้จะเก็บภาพสำหรับรายการปัจจุบัน
+
     document.querySelectorAll('.popup-trigger').forEach(function(element) {
         element.addEventListener('click', function() {
-            openPopup(parseInt(element.getAttribute('data-index')));
+            // ดึงข้อมูลภาพจาก data-attribute ของ wel-image-box
+            var imageBox = element.closest('.wel-image-box');
+            var images = JSON.parse(imageBox.getAttribute('data-images'));
+
+            // เปิด popup และแสดงภาพ
+            openPopup(parseInt(element.getAttribute('data-index')), images);
         });
     });
 
-    function openPopup(index) {
-        console.log("aaa", index);
+    function openPopup(index, images) {
+        console.log("Opening popup with images: ", images);
         currentMedia = index;
-        showMedia(index);
+        currentImages = images; // เก็บภาพใน currentImages
+        showMedia(currentMedia, currentImages);
 
         var popup = document.getElementById('imagePopup');
         popup.style.display = 'flex';
@@ -24,87 +32,68 @@
 
     function changeMedia(direction) {
         currentMedia += direction;
-        showMedia(currentMedia);
+
+        // ตรวจสอบว่า currentMedia ไม่เกินขอบเขตของ images array
+        if (currentMedia < 0) {
+            currentMedia = 0;
+        }
+        if (currentMedia >= currentImages.length) {
+            currentMedia = currentImages.length - 1;
+        }
+
+        showMedia(currentMedia, currentImages);
     }
 
-
-    // กำหนด event listener ไว้นอกฟังก์ชัน showMedia
-    var saveBtn = document.getElementById('save-image-btn');
-    saveBtn.addEventListener('click', function() {
-        if (img) {
-            saveImage(img.src);
-
-        } else {
-            console.error('Image not defined.');
-        }
-    });
-
-    var saveAllBtn = document.getElementById('save-all-images-btn');
-    saveAllBtn.addEventListener('click', function() {
-        saveAll();
-    });
-
-
-    function showMedia(index) {
-        var mediaItems = {!! json_encode($imgUrl) !!};
-        console.log("mediaItems", mediaItems); // ตรวจสอบค่าของ mediaItems
-        console.log("mediaItems[index]", mediaItems[index]); // ตรวจสอบค่าของ mediaItems[index]
-
+    function showMedia(index, images) {
         var prevBtn = document.getElementById("prev-btn");
         var nextBtn = document.getElementById("next-btn");
-        if (index >= mediaItems.length - 1) {
+
+        // ตรวจสอบการแสดงผลปุ่ม next และ prev
+        if (index >= images.length - 1) {
             nextBtn.style.display = "none";
         } else {
             nextBtn.style.display = "block";
         }
-        if (index < 1) {
+        if (index <= 0) {
             prevBtn.style.display = "none";
         } else {
             prevBtn.style.display = "block";
         }
 
-        var popup = document.getElementById('imagePopup');
-        var popupImage = document.getElementById('popupImage');
-
-        popup.style.display = 'flex';
+        // แสดงภาพที่เลือก
         var popupMediaContainer = document.getElementById('popupMediaContainer');
         popupMediaContainer.innerHTML = '';
 
-        console.log("mediaItems", mediaItems); // ตรวจสอบค่าของ mediaItems
-        console.log("mediaItems[index]", mediaItems[index]); // ตรวจสอบค่าของ mediaItems[index]
-
         var assetUrl = "{{ asset('img/product') }}";
-        img = document.createElement('img'); // ตัวแปร img ต้องเป็นตัวแปรที่ถูกสร้างใน scope ที่ถูกต้อง
-        img.src = assetUrl + "/" + mediaItems[index];
+        var img = document.createElement('img');
+        img.src = assetUrl + "/" + images[index];
         popupMediaContainer.appendChild(img);
     }
 
 
-
-
-    /* function saveAllImages() {
-        // Check if imagesToSave is defined
-        if (window.imagesToSave && window.imagesToSave.length > 0) {
-            window.imagesToSave.forEach(function(img, index) {
-                saveImage(img.src, index + 1);
-            });
+    document.getElementById('save-image-btn').addEventListener('click', function() {
+        if (currentImages[currentMedia]) {
+            var assetUrl = "{{ asset('img/product') }}";
+            var imageUrl = assetUrl + "/" + currentImages[currentMedia];
+            saveImage(imageUrl);
         } else {
-            console.error('No images to save.');
+            console.error('No image found to save.');
         }
-    } */
+    });
+
+
+
+
 
 
     function saveAll() {
-        var mediaItems = {!! json_encode($imgUrl) !!};
         var assetUrl = "{{ asset('img/product') }}";
 
-        mediaItems.forEach(function(item, index) {
-            var img = document.createElement('img');
-            img.src = assetUrl + '/' + item;
-            saveImage(img.src);
+        currentImages.forEach(function(item) {
+            var imageUrl = assetUrl + '/' + item;
+            saveImage(imageUrl);
         });
     }
-
 
     function saveImage(imageUrl) {
         var downloadLink = document.createElement('a');
@@ -124,4 +113,30 @@
         downloadLink.click();
         document.body.removeChild(downloadLink);
     }
+
+    $(document).ready(function() {
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            dots: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                },
+                1200: {
+                    items: 4
+                }
+
+            }
+        });
+    });
 </script>

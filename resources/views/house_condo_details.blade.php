@@ -18,11 +18,12 @@
                     @php
 
                         $imgUrl = json_decode(htmlspecialchars_decode($home->image));
+
                         $count = count($imgUrl);
 
                     @endphp
                     <div id="container" style="margin-top: 22px">
-                        <div class="wel-image-box">
+                        {{--  <div class="wel-image-box" data-images="{{ json_encode($imgUrl) }}">
                             <div class="mr-4">
                                 <img class="popup-trigger wel-image-detall-1"
                                     src="{{ URL::asset('img/product/' . $imgUrl[0]) }}" data-index="0">
@@ -44,6 +45,27 @@
                                 </div>
                             @endif
 
+                        </div> --}}
+                        <div class="wel-image-box" data-images="{{ json_encode($imgUrl) }}">
+                            <div class="mr-4">
+                                <img class="popup-trigger wel-image-detall-1"
+                                    src="{{ URL::asset('img/product/' . $imgUrl[0]) }}" data-index="0">
+                            </div>
+                            @if (count($imgUrl) > 1)
+                                <div class="flex-direction-column">
+                                    <img class="popup-trigger wel-image-detall-2"
+                                        src="{{ URL::asset('img/product/' . $imgUrl[1]) }}" data-index="1">
+                                    @if (count($imgUrl) > 2)
+                                        <div class="wel-image-opacity">
+                                            <img class="popup-trigger wel-image-detall-2"
+                                                src="{{ URL::asset('img/product/' . $imgUrl[2]) }}" data-index="2">
+                                            @if (count($imgUrl) > 3)
+                                                <p class="number-image">+{{ count($imgUrl) - 3 }}</p>
+                                            @endif
+                                        </div>
+                                    @endif
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class="wel-box-name-details ">
@@ -766,37 +788,14 @@
         </div>
     </div>
 
+
+
+
     @include('detall.javascript_popupImage')
 
 
 
 
     @include('layouts.footer_welocome')
-    <script>
-        $(document).ready(function() {
-            $('.owl-carousel').owlCarousel({
-                loop: true,
-                margin: 10,
-                nav: true,
-                dots: true,
-                autoplay: true,
-                autoplayTimeout: 3000,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 2
-                    },
-                    1000: {
-                        items: 3
-                    },
-                    1200: {
-                        items: 4
-                    }
 
-                }
-            });
-        });
-    </script>
 @endsection
