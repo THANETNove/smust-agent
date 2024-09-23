@@ -39,7 +39,7 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="electricalAppliance[]"
                         value="{{ $ele->name }}" id="electricalAppliance_{{ $ele->id }}">
-                    <label class="form-check-label" for="electricalAppliance_{{ $ele->id }}">
+                    <label class="form-check-label-" for="electricalAppliance_{{ $ele->id }}">
                         {{ $ele->name }}
                     </label>
                 </div>
@@ -57,7 +57,7 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="facilities[]" value="{{ $fac->name }}"
                         id="facilities_{{ $fac->id }}">
-                    <label class="form-check-label" for="facilities_{{ $fac->id }}">
+                    <label class="form-check-label-" for="facilities_{{ $fac->id }}">
                         {{ $fac->name }}
                     </label>
                 </div>
@@ -75,7 +75,7 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="furniture[]" value="{{ $fur->name }}"
                         id="furniture_{{ $fur->id }}">
-                    <label class="form-check-label" for="furniture_{{ $fur->id }}">
+                    <label class="form-check-label-" for="furniture_{{ $fur->id }}">
                         {{ $fur->name }}
                     </label>
                 </div>
