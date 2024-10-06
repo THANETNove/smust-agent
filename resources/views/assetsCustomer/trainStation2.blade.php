@@ -34,7 +34,7 @@
         </label>
         <select class="form-select mt-3 station-select station_name" name="stations" id="station_{{ $lineCode }}"
             style="color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
-            <option selected disabled>สถานีรถไฟฟ้าที่ใกล้ที่สุด</option>
+            {{--   <option selected disabled>สถานีรถไฟฟ้าที่ใกล้ที่สุด</option> --}}
 
             @foreach ($stations as $station)
                 @php
