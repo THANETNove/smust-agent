@@ -21,7 +21,7 @@
             </div>
 
 
-
+            <p class="history-work-text">{{ $userQuery[0]->history_work }}</p>
         </div>
         <div class="col-md-12 col-lg-4  mt-lg-agent-2">
 

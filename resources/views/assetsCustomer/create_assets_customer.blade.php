@@ -85,7 +85,7 @@
                     <div id="station-select" style="display: none;">
                         {{--  @include('assetsCustomer.trainStation') --}}
                         <select class="form-select mt-3" name="station" id="station">
-                            <option selected disabled>สถานีรถไฟฟ้าที่ใกล้ที่สุด</option>
+                            {{-- <option selected disabled>สถานีรถไฟฟ้าที่ใกล้ที่สุด</option> --}}
                             @foreach ($train as $station)
                                 @php
                                     // ตรวจสอบสีเพื่อตรวจว่าเป็น BTS, MRT หรือ ARL
