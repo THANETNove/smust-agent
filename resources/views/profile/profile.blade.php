@@ -167,64 +167,244 @@
                             @enderror
                         </div>
                     </div>
+
+                    <!-- ประเภทสัญญา -->
                     <p class="font-size-12-black mt-21">
                         <img class="contract" src="{{ URL::asset('/assets/image/welcome/contract.png') }}">
                         ประเภทสัญญา
                     </p>
                     <div class="flex-direction-row mb-3">
-                        <select class="form-select" aria-label="Default select example" name="contract_type">
-                            <option value="เช่า" @if (Auth::user()->contract_type == 'เช่า') selected @endif>เช่า</option>
-                            <option value="ขาย" @if (Auth::user()->contract_type == 'ขาย') selected @endif>ขาย</option>
-                            <option value="เช่า/ขาย" @if (Auth::user()->contract_type == 'เช่า/ขาย') selected @endif>เช่า/ขาย</option>
-                        </select>
-
+                        <input type="text" class="form-control" id="contract_type_input"
+                            value="{{ Auth::user()->contract_type }}" name="contract_type" data-bs-toggle="modal"
+                            data-bs-target="#contractTypeModal" placeholder="เลือกประเภทสัญญา" readonly>
 
                     </div>
 
+                    <!-- Modal ประเภทสัญญา (Checkbox) -->
+                    <div class="modal fade" id="contractTypeModal" tabindex="-1"
+                        aria-labelledby="contractTypeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="contractTypeModalLabel">เลือกประเภทสัญญา</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="contract_type_option"
+                                            value="เช่า" id="contract_type_rent">
+                                        <label class="form-check-label-profile" for="contract_type_rent">เช่า</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="contract_type_option"
+                                            value="ขาย" id="contract_type_sell">
+                                        <label class="form-check-label-profile" for="contract_type_sell">ขาย</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="contract_type_option"
+                                            value="เช่า/ขาย" id="contract_type_rent_sell">
+                                        <label class="form-check-label-profile"
+                                            for="contract_type_rent_sell">เช่า/ขาย</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                                    <button type="button" class="btn btn-primary" id="saveContractType">บันทึก</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            // แยกค่า contract_type เป็นอาเรย์
+                            const contractType = "{{ Auth::user()->contract_type }}".split(',');
+
+                            // ตรวจสอบว่า checkbox ใดตรงกับค่าใน contractType และตั้งค่า checked
+                            contractType.forEach(type => {
+                                // Trim ค่าเพื่อให้ไม่มีช่องว่าง
+                                const trimmedType = type.trim();
+                                const checkbox = document.querySelector(`input[type="checkbox"][value="${trimmedType}"]`);
+                                if (checkbox) {
+                                    checkbox.checked = true; // ใส่ checked ถ้าตรงกัน
+                                }
+                            });
+                        });
+                    </script>
+
+
+                    <!-- ประเภททรัพย์ -->
                     <p class="font-size-12-black">
                         <img class="contract" src="{{ URL::asset('/assets/image/welcome/domain.png') }}">
                         ประเภททรัพย์
                     </p>
                     <div class="flex-direction-row mb-3">
-                        <select class="form-select" aria-label="Default select example" name="property_type">
-                            <option value="บ้านเดี่ยว" @if (Auth::user()->property_type == 'บ้านเดี่ยว') selected @endif>บ้านเดี่ยว
-                            </option>
-                            <option value="คอนโด" @if (Auth::user()->property_type == 'คอนโด') selected @endif>คอนโด</option>
-                            <option value="ทาวน์เฮ้าส์" @if (Auth::user()->property_type == 'ทาวน์เฮ้าส์') selected @endif>ทาวน์เฮ้าส์
-                            </option>
-                            <option value="ที่ดิน" @if (Auth::user()->property_type == 'ที่ดิน') selected @endif>ที่ดิน</option>
-                            <option value="พาณิชย์" @if (Auth::user()->property_type == 'พาณิชย์') selected @endif>พาณิชย์</option>
+                        <input type="text" class="form-control" value="{{ Auth::user()->property_type }}"
+                            id="property_type_input" name="property_type" data-bs-toggle="modal"
+                            data-bs-target="#propertyTypeModal" placeholder="เลือกประเภททรัพย์" readonly>
 
-                        </select>
                     </div>
+
+                    <!-- Modal ประเภททรัพย์ (Checkbox) -->
+                    <div class="modal fade" id="propertyTypeModal" tabindex="-1"
+                        aria-labelledby="propertyTypeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="propertyTypeModalLabel">เลือกประเภททรัพย์</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="property_type_option"
+                                            value="บ้านเดี่ยว" id="property_type_house">
+                                        <label class="form-check-label-profile"
+                                            for="property_type_house">บ้านเดี่ยว</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="property_type_option"
+                                            value="คอนโด" id="property_type_condo">
+                                        <label class="form-check-label-profile" for="property_type_condo">คอนโด</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="property_type_option"
+                                            value="ทาวน์เฮ้าส์" id="property_type_townhouse">
+                                        <label class="form-check-label-profile"
+                                            for="property_type_townhouse">ทาวน์เฮ้าส์</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="property_type_option"
+                                            value="ที่ดิน" id="property_type_land">
+                                        <label class="form-check-label-profile" for="property_type_land">ที่ดิน</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="property_type_option"
+                                            value="พาณิชย์" id="property_type_commercial">
+                                        <label class="form-check-label-profile"
+                                            for="property_type_commercial">พาณิชย์</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                                    <button type="button" class="btn btn-primary" id="savePropertyType">บันทึก</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            // แยกค่า property_type เป็นอาเรย์
+                            const propertyType = "{{ Auth::user()->property_type }}".split(',');
+
+                            // ตรวจสอบว่า checkbox ใดตรงกับค่าใน propertyType และตั้งค่า checked
+                            propertyType.forEach(type => {
+                                // Trim ค่าเพื่อให้ไม่มีช่องว่าง
+                                const trimmedType = type.trim();
+                                const checkbox = document.querySelector(`input[type="checkbox"][value="${trimmedType}"]`);
+                                if (checkbox) {
+                                    checkbox.checked = true; // ใส่ checked ถ้าตรงกัน
+                                }
+                            });
+                        });
+                    </script>
+
+                    <!-- ลักษณะเฉพาะ -->
                     <p class="font-size-12-black">
                         <img class="contract" src="{{ URL::asset('/assets/image/welcome/domain.png') }}">
                         ลักษณะเฉพาะ
                     </p>
                     <div class="flex-direction-row">
-                        <select class="form-select" name="characteristics" aria-label="Default select example">
-                            <option value="ผ่อนตรง" @if (Auth::user()->characteristics == 'ผ่อนตรง') selected @endif>ผ่อนตรง</option>
-                            <option value="ทรัพย์มือหนึ่ง" @if (Auth::user()->characteristics == 'ทรัพย์มือหนึ่ง') selected @endif>
-                                ทรัพย์มือหนึ่ง
-                            </option>
-                            <option value="เช่าออม" @if (Auth::user()->characteristics == 'เช่าออม') selected @endif>เช่าออม</option>
-                            <option value="ตกแต่งสวยเว่อร์" @if (Auth::user()->characteristics == 'ตกแต่งสวยเว่อร์') selected @endif>
-                                ตกแต่งสวยเว่อร์
-                            </option>
-                            <option value="เช่าระยะสั้นได้ (น้อยกว่า 6 เดือน)"
-                                @if (Auth::user()->characteristics == 'เช่าระยะสั้นได้ (น้อยกว่า 6 เดือน)') selected @endif>เช่าระยะสั้นได้ (น้อยกว่า 6 เดือน)
-                            </option>
-                            <option value="ใกล้มหาวิทยาลัยดัง" @if (Auth::user()->characteristics == 'ใกล้มหาวิทยาลัยดัง') selected @endif>
-                                ใกล้มหาวิทยาลัยดัง</option>
-                            <option value="ห้องเปล่า" @if (Auth::user()->characteristics == 'ห้องเปล่า') selected @endif>ห้องเปล่า
-                            </option>
-                            <option value="ขายขาดทุน" @if (Auth::user()->characteristics == 'ขายขาดทุน') selected @endif>ขายขาดทุน
-                            </option>
+                        <input type="text" class="form-control" id="characteristics_input"
+                            value="{{ Auth::user()->characteristics }}" name="characteristics" data-bs-toggle="modal"
+                            data-bs-target="#characteristicsModal" placeholder="เลือกลักษณะเฉพาะ" readonly>
 
-
-                        </select>
                     </div>
+
+                    <!-- Modal ลักษณะเฉพาะ (Checkbox) -->
+                    <div class="modal fade" id="characteristicsModal" tabindex="-1"
+                        aria-labelledby="characteristicsModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="characteristicsModalLabel">เลือกลักษณะเฉพาะ</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="characteristics_option"
+                                            value="ผ่อนตรง" id="characteristics_payon">
+                                        <label class="form-check-label-profile"
+                                            for="characteristics_payon">ผ่อนตรง</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="characteristics_option"
+                                            value="ทรัพย์มือหนึ่ง" id="characteristics_new_property">
+                                        <label class="form-check-label-profile"
+                                            for="characteristics_new_property">ทรัพย์มือหนึ่ง</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="characteristics_option"
+                                            value="เช่าออม" id="characteristics_rent_save">
+                                        <label class="form-check-label-profile"
+                                            for="characteristics_rent_save">เช่าออม</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="characteristics_option"
+                                            value="ตกแต่งสวยเว่อร์" id="characteristics_decorated">
+                                        <label class="form-check-label-profile"
+                                            for="characteristics_decorated">ตกแต่งสวยเว่อร์</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="characteristics_option"
+                                            value="เช่าระยะสั้นได้ (น้อยกว่า 6 เดือน)" id="characteristics_short_rent">
+                                        <label class="form-check-label-profile"
+                                            for="characteristics_short_rent">เช่าระยะสั้นได้
+                                            (น้อยกว่า 6 เดือน)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="characteristics_option"
+                                            value="ใกล้มหาวิทยาลัยดัง" id="characteristics_near_university">
+                                        <label class="form-check-label-profile"
+                                            for="characteristics_near_university">ใกล้มหาวิทยาลัยดัง</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="characteristics_option"
+                                            value="ห้องเปล่า" id="characteristics_empty_room">
+                                        <label class="form-check-label-profile"
+                                            for="characteristics_empty_room">ห้องเปล่า</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                                    <button type="button" class="btn btn-primary"
+                                        id="saveCharacteristics">บันทึก</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            // แยกค่า characteristics เป็นอาเรย์
+                            const characteristics = "{{ Auth::user()->characteristics }}".split(',');
+
+                            // ตรวจสอบว่า checkbox ใดตรงกับค่าใน characteristics และตั้งค่า checked
+                            characteristics.forEach(characteristic => {
+                                // Trim ค่าเพื่อให้ไม่มีช่องว่าง
+                                const trimmedCharacteristic = characteristic.trim();
+                                const checkbox = document.querySelector(
+                                    `input[type="checkbox"][value="${trimmedCharacteristic}"]`);
+                                if (checkbox) {
+                                    checkbox.checked = true; // ใส่ checked ถ้าตรงกัน
+                                }
+                            });
+                        });
+                    </script>
+
+
                     <div class="submit-box">
                         <button type="submit" class="btn btn-register">
                             บันทึกการแก้ไข
@@ -255,6 +435,37 @@
                 };
                 reader.readAsDataURL(file);
             }
+        });
+
+
+        // Function to save the selected checkboxes and display the values
+        function saveCheckedValues(modalId, checkboxName, inputId) {
+            const selectedCheckboxes = document.querySelectorAll(`input[name="${checkboxName}"]:checked`);
+            const values = Array.from(selectedCheckboxes).map(cb => cb.value).join(', ');
+            document.getElementById(inputId).value = values;
+            const modal = bootstrap.Modal.getInstance(document.getElementById(modalId));
+            modal.hide();
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove(); // ลบ modal-backdrop
+                document.body.classList.remove('modal-open'); // ลบคลาส modal-open ออกจาก body
+                document.body.style.overflow = ''; // คืนค่า overflow กลับให้เป็นปกติ
+            }
+        }
+
+        // Save contract type selections
+        document.getElementById('saveContractType').addEventListener('click', function() {
+            saveCheckedValues('contractTypeModal', 'contract_type_option', 'contract_type_input');
+        });
+
+        // Save property type selections
+        document.getElementById('savePropertyType').addEventListener('click', function() {
+            saveCheckedValues('propertyTypeModal', 'property_type_option', 'property_type_input');
+        });
+
+        // Save characteristics selections
+        document.getElementById('saveCharacteristics').addEventListener('click', function() {
+            saveCheckedValues('characteristicsModal', 'characteristics_option', 'characteristics_input');
         });
     </script>
     @include('auth.profileButton')
