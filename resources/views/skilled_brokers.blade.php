@@ -84,9 +84,8 @@
 
     <p class="contact-a-broker">ติดต่อนายหน้า<br>
         ระดับ <span>premium</span></p>
-    <div>
-        <div class="carousel carousel-mb-64"
-            data-flickity='{ "cellAlign": "center", "contain": true, "groupCells": 5, "wrapAround": true }'>
+    <div class="favorites-query">
+        <div class="carousel carousel-mb-64" data-flickity='{ "cellAlign": "center", "contain": true }'>
             @foreach ($favoritesQuery as $fav)
                 {{-- <div class="carousel-cell"> --}}
                 <div class="interested-contact-premium-carousel">
@@ -114,11 +113,12 @@
             @endforeach
         </div>
     </div>
-    <div class="container-box-free">
-        <a href="{{ url('contact-premium') }}">
-            <div class="interested-contact-premium-all">ดูทั้งหมด</div>
-        </a>
-
+    <div class="favorites-query">
+        <div class="container-box-free">
+            <a href="{{ url('contact-premium') }}">
+                <div class="interested-contact-premium-all">ดูทั้งหมด</div>
+            </a>
+        </div>
     </div>
     <div class="container-box-free">
         <img class="image-square_1" src="{{ URL::asset('/assets/image/home/square_1.png') }}">

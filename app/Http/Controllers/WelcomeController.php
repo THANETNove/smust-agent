@@ -257,10 +257,8 @@ class WelcomeController extends Controller
     {
 
         $userQuery = DB::table('users')
-            /* ->where('users.plans', '>', 0) */
             ->count();
         $provincesQuery = DB::table('provinces')
-
             ->get();
 
         $favoritesQuery = DB::table('users')

@@ -4146,16 +4146,28 @@ button.disabled {
 
 .interested-contact-premium-all {
     background: #E34234;
-    max-width: 505px;
+    width: 505px;
     height: 48px;
     display: flex;
-    padding: 8px 150px;
+    padding: 8px 32px;
     justify-content: center;
     align-items: center;
     font-size: 24px;
     color: #FFFFFF;
     font-weight: 700;
     border-radius: 6px;
+}
+
+@media only screen and (max-width: 576px) {
+    .interested-contact-premium-all {
+
+        width: 350px !important;
+
+    }
+}
+
+.favorites-query {
+    padding: 0px 16px;
 }
 
 .image-square_1 {
