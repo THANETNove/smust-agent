@@ -99,7 +99,7 @@ Route::get('/edit-profile', [ProfileController::class, 'index'])->name('/edit-pr
 Route::put('/new-setup-profile/{id}', [ProfileController::class, 'update'])->name('new-setup-profile');
 Route::get('/assets-customer', [AssetsCustomersWantController::class, 'index'])->name('assets-customer');
 Route::get('/create-assets-customer', [AssetsCustomersWantController::class, 'create'])->name('create-assets-customer');
-Route::post('/co-agent-store', [AssetsCustomersWantController::class, 'store'])->name('co-agent-store');
+Route::post('/assets-customer-store', [AssetsCustomersWantController::class, 'store'])->name('assets-customer-store');
 Route::post('/assets-customer', [AssetsCustomersWantController::class, 'index'])->name('assets-customer');
 Route::get('/personal-website', [PersonalWebsiteController::class, 'index'])->name('personal-website');
 Route::get('/create-personal', [PersonalWebsiteController::class, 'create'])->name('create-personal');
