@@ -210,28 +210,14 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
-                                    <button type="button" class="btn btn-primary" id="saveContractType">บันทึก</button>
+                                    <button type="button" class="btn btn-primary" id="saveContractType"
+                                        data-bs-dismiss="modal">บันทึก</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                            // แยกค่า contract_type เป็นอาเรย์
-                            const contractType = "{{ Auth::user()->contract_type }}".split(',');
 
-                            // ตรวจสอบว่า checkbox ใดตรงกับค่าใน contractType และตั้งค่า checked
-                            contractType.forEach(type => {
-                                // Trim ค่าเพื่อให้ไม่มีช่องว่าง
-                                const trimmedType = type.trim();
-                                const checkbox = document.querySelector(`input[type="checkbox"][value="${trimmedType}"]`);
-                                if (checkbox) {
-                                    checkbox.checked = true; // ใส่ checked ถ้าตรงกัน
-                                }
-                            });
-                        });
-                    </script>
 
 
                     <!-- ประเภททรัพย์ -->
@@ -288,28 +274,14 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
-                                    <button type="button" class="btn btn-primary" id="savePropertyType">บันทึก</button>
+                                    <button type="button" class="btn btn-primary" id="savePropertyType"
+                                        data-bs-dismiss="modal">บันทึก</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                            // แยกค่า property_type เป็นอาเรย์
-                            const propertyType = "{{ Auth::user()->property_type }}".split(',');
 
-                            // ตรวจสอบว่า checkbox ใดตรงกับค่าใน propertyType และตั้งค่า checked
-                            propertyType.forEach(type => {
-                                // Trim ค่าเพื่อให้ไม่มีช่องว่าง
-                                const trimmedType = type.trim();
-                                const checkbox = document.querySelector(`input[type="checkbox"][value="${trimmedType}"]`);
-                                if (checkbox) {
-                                    checkbox.checked = true; // ใส่ checked ถ้าตรงกัน
-                                }
-                            });
-                        });
-                    </script>
 
                     <!-- ลักษณะเฉพาะ -->
                     <p class="font-size-12-black">
@@ -380,29 +352,13 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
-                                    <button type="button" class="btn btn-primary"
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
                                         id="saveCharacteristics">บันทึก</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                            // แยกค่า characteristics เป็นอาเรย์
-                            const characteristics = "{{ Auth::user()->characteristics }}".split(',');
 
-                            // ตรวจสอบว่า checkbox ใดตรงกับค่าใน characteristics และตั้งค่า checked
-                            characteristics.forEach(characteristic => {
-                                // Trim ค่าเพื่อให้ไม่มีช่องว่าง
-                                const trimmedCharacteristic = characteristic.trim();
-                                const checkbox = document.querySelector(
-                                    `input[type="checkbox"][value="${trimmedCharacteristic}"]`);
-                                if (checkbox) {
-                                    checkbox.checked = true; // ใส่ checked ถ้าตรงกัน
-                                }
-                            });
-                        });
-                    </script>
 
 
                     <div class="submit-box">
@@ -445,12 +401,7 @@
             document.getElementById(inputId).value = values;
             const modal = bootstrap.Modal.getInstance(document.getElementById(modalId));
             modal.hide();
-            const backdrop = document.querySelector('.modal-backdrop');
-            if (backdrop) {
-                backdrop.remove(); // ลบ modal-backdrop
-                document.body.classList.remove('modal-open'); // ลบคลาส modal-open ออกจาก body
-                document.body.style.overflow = ''; // คืนค่า overflow กลับให้เป็นปกติ
-            }
+
         }
 
         // Save contract type selections
@@ -466,6 +417,55 @@
         // Save characteristics selections
         document.getElementById('saveCharacteristics').addEventListener('click', function() {
             saveCheckedValues('characteristicsModal', 'characteristics_option', 'characteristics_input');
+        });
+
+        //  <!-- Modal ประเภททรัพย์ (Checkbox) -->
+        document.addEventListener('DOMContentLoaded', function() {
+            // แยกค่า property_type เป็นอาเรย์
+            const propertyType = "{{ Auth::user()->property_type }}".split(',');
+
+            // ตรวจสอบว่า checkbox ใดตรงกับค่าใน propertyType และตั้งค่า checked
+            propertyType.forEach(type => {
+                // Trim ค่าเพื่อให้ไม่มีช่องว่าง
+                const trimmedType = type.trim();
+                const checkbox = document.querySelector(`input[type="checkbox"][value="${trimmedType}"]`);
+                if (checkbox) {
+                    checkbox.checked = true; // ใส่ checked ถ้าตรงกัน
+                }
+            });
+        });
+
+        //  <!-- ประเภทสัญญา -->
+        document.addEventListener('DOMContentLoaded', function() {
+            // แยกค่า contract_type เป็นอาเรย์
+            const contractType = "{{ Auth::user()->contract_type }}".split(',');
+
+            // ตรวจสอบว่า checkbox ใดตรงกับค่าใน contractType และตั้งค่า checked
+            contractType.forEach(type => {
+                // Trim ค่าเพื่อให้ไม่มีช่องว่าง
+                const trimmedType = type.trim();
+                const checkbox = document.querySelector(`input[type="checkbox"][value="${trimmedType}"]`);
+                if (checkbox) {
+                    checkbox.checked = true; // ใส่ checked ถ้าตรงกัน
+                }
+            });
+        });
+
+        // <!-- Modal ลักษณะเฉพาะ (Checkbox) -->
+        document.addEventListener('DOMContentLoaded', function() {
+            // แยกค่า characteristics เป็นอาเรย์
+            const characteristics = "{{ Auth::user()->characteristics }}".split(',');
+
+            // ตรวจสอบว่า checkbox ใดตรงกับค่าใน characteristics และตั้งค่า checked
+            characteristics.forEach(characteristic => {
+                // Trim ค่าเพื่อให้ไม่มีช่องว่าง
+                const trimmedCharacteristic = characteristic.trim();
+                const checkbox = document.querySelector(
+                    `input[type="checkbox"][value="${trimmedCharacteristic}"]`);
+                if (checkbox) {
+                    checkbox.checked = true; // ใส่ checked ถ้าตรงกัน
+                }
+            });
         });
     </script>
     @include('auth.profileButton')
