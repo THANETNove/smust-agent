@@ -77,7 +77,12 @@
                 <li class="for-sale-rent-out">ฝากขาย-ปล่อยเช่ากับเราได้ภายใน 5 นาที<br>
                     <span style="margin-left: 22px">ไม่มีสัญญาปิดผูกมัด</span>
                 </li>
-                <li class="for-sale-rent-out">ส่งที่เดียว นายหน้า <span style="color:#FAA631">102</span> คนพร้อมช่วยขาย</li>
+                <li class="for-sale-rent-out">ส่งที่เดียว นายหน้า <span style="color:#FAA631">
+                        @php
+                            $userQuery = DB::table('users')->count();
+                        @endphp
+                        {{ $userQuery }}
+                    </span> คนพร้อมช่วยขาย</li>
             </div>
 
 

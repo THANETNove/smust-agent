@@ -257,9 +257,7 @@ class WelcomeController extends Controller
     {
 
         $userQuery = DB::table('users')
-            ->where('users.plans', '>', 0)
-
-            ->limit(4) // จำกัดผลลัพธ์เป็น 12 รายการ
+            /* ->where('users.plans', '>', 0) */
             ->count();
         $provincesQuery = DB::table('provinces')
 
