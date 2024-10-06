@@ -160,6 +160,14 @@ class CoAgentController extends Controller
         if (Auth::check()) {
             $member->code_admin = Auth::user()->code;
             $member->user_id = Auth::user()->id; // add
+
+            if (Auth::user()->status > 2) {
+                $member->status_admin = 1; // status_admin
+            } else {
+                $member->status_admin = 0; // status_admin
+            }
+        } else {
+            $member->status_admin = 1; // status_admin
         }
 
         $member->cross = $request['cross']; //TODO:  add ข้ามการกรอกข้อมูลใหม

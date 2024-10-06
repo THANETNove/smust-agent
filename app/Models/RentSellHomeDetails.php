@@ -11,6 +11,7 @@ class RentSellHomeDetails extends Model
 
     protected $fillable = [
         'code_admin',
+        'status_admin',
         'property_type',
         'building_name',
         'rent_sell',

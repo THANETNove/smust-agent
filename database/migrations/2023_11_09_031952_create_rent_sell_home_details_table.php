@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('rent_sell_home_details', function (Blueprint $table) {
             $table->id();
             $table->string('code_admin')->nullable()->comment('code Admin');
+            $table->string('status_admin')->nullable()->comment('status_admin');
             $table->string('building_name')->nullable()->comment('ชื่ออาคาร/สถานที่');
             $table->string('property_type')->nullable()->comment('เลือก บ้านหรือคอนโด');
             $table->string('rent_sell')->nullable()->comment('เลือก เช่า ขาย เช่า/ขาย');
@@ -67,5 +68,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('rent_sell_home_details');
     }
-
 };

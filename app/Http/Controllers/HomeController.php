@@ -236,12 +236,12 @@ class HomeController extends Controller
         // Apply authorization logic if needed
         $user = Auth::user();
 
-        $dataCount = (clone $dataHomeQuery)->whereNotNull('code_admin')->count();
-        $dataCount2 = (clone $dataHomeQuery)->whereNull('code_admin')->count();
+        $dataCount = (clone $dataHomeQuery)->where('status_admin', 0)->count();
+        $dataCount2 = (clone $dataHomeQuery)->where('status_admin', 1)->count();
 
         // แยก cache keys สำหรับ $dataHome และ $dataHome2 โดยใช้ query base เดียวกัน
-        $dataHome = (clone $dataHomeQuery)->whereNotNull('code_admin')->paginate(100)->appends(request()->all());
-        $dataHome2 = (clone $dataHomeQuery)->whereNull('code_admin')->paginate(100)->appends(request()->all());
+        $dataHome = (clone $dataHomeQuery)->where('status_admin', 0)->paginate(100)->appends(request()->all());
+        $dataHome2 = (clone $dataHomeQuery)->where('status_admin', 1)->paginate(100)->appends(request()->all());
 
         // Cache provinces and train station data
         $data = DB::table('provinces')->orderBy('name_th', 'ASC')->get();
@@ -290,13 +290,12 @@ class HomeController extends Controller
 
         // Use caching if possible for better performance
 
-        $dataCount = (clone $dataHomeQuery)->whereNotNull('code_admin')->count();
-        $dataCount2 = (clone $dataHomeQuery)->whereNull('code_admin')->count();
+        $dataCount = (clone $dataHomeQuery)->where('status_admin', 0)->count();
+        $dataCount2 = (clone $dataHomeQuery)->where('status_admin', 1)->count();
 
         // แยก cache keys สำหรับ $dataHome และ $dataHome2 โดยใช้ query base เดียวกัน
-        $dataHome = (clone $dataHomeQuery)->whereNotNull('code_admin')->paginate(100)->appends(request()->all());
-        $dataHome2 = (clone $dataHomeQuery)->whereNull('code_admin')->paginate(100)->appends(request()->all());
-
+        $dataHome = (clone $dataHomeQuery)->where('status_admin', 0)->paginate(100)->appends(request()->all());
+        $dataHome2 = (clone $dataHomeQuery)->where('status_admin', 1)->paginate(100)->appends(request()->all());
         // Cache provinces and train station data
         $data = DB::table('provinces')->orderBy('name_th', 'ASC')->get();
 
@@ -336,13 +335,12 @@ class HomeController extends Controller
         $user = Auth::user();
         //$dataHomeQuery->where('code_admin', $user->code_admin);
 
-        $dataCount = (clone $dataHomeQuery)->whereNotNull('code_admin')->count();
-        $dataCount2 = (clone $dataHomeQuery)->whereNull('code_admin')->count();
+        $dataCount = (clone $dataHomeQuery)->where('status_admin', 0)->count();
+        $dataCount2 = (clone $dataHomeQuery)->where('status_admin', 1)->count();
 
         // แยก cache keys สำหรับ $dataHome และ $dataHome2 โดยใช้ query base เดียวกัน
-        $dataHome = (clone $dataHomeQuery)->whereNotNull('code_admin')->paginate(100)->appends(request()->all());
-        $dataHome2 = (clone $dataHomeQuery)->whereNull('code_admin')->paginate(100)->appends(request()->all());
-
+        $dataHome = (clone $dataHomeQuery)->where('status_admin', 0)->paginate(100)->appends(request()->all());
+        $dataHome2 = (clone $dataHomeQuery)->where('status_admin', 1)->paginate(100)->appends(request()->all());
         // Cache provinces and train station data
         $data = DB::table('provinces')->orderBy('name_th', 'ASC')->get();
 
@@ -359,7 +357,7 @@ class HomeController extends Controller
         ]);
     }
 
- 
+
 
 
 

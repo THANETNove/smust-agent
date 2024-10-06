@@ -49,12 +49,12 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link-home-we active" id="pills-home-tab" data-bs-toggle="pill"
                         data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                        aria-selected="true">สำหรับเจ้าของ</button>
+                        aria-selected="true">หาทรัพย์</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link-home-we" id="pills-profile-tab" data-bs-toggle="pill"
                         data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
-                        aria-selected="false">สำหรับนายหน้า</button>
+                        aria-selected="false">หาลูกค้า</button>
                 </li>
 
             </ul>
