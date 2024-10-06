@@ -16,7 +16,15 @@
                 @csrf
 
                 <div class="box-free-customer">
-                    <p class="co-agent">สร้างโพสประกาศหา co-agent ที่มีทรัพย์</p>
+
+                    <p class="co-agent">
+                        @if (Auth::check())
+                            สร้างโพสประกาศหา co-agent ที่มีทรัพย์
+                        @else
+                            บอกลักษณะทรัพย์ที่คุณต้องการ แล้วเราจะติดต่อกลับไป
+                        @endif
+                    </p>
+
                     <p class="contract-type">ประเภทสัญญา <span style="color: red">*</span></p>
                     <div class="row-box">
                         <div class="filter-box-input2 form-check selected" data-type="sell">
