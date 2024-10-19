@@ -136,6 +136,8 @@
                         </div>
 
 
+
+
                         <!-- Bootstrap modal -->
                         <div class="modal fade" id="stationModal" tabindex="-1" aria-labelledby="stationModalLabel"
                             aria-hidden="true">
@@ -145,8 +147,12 @@
                                         <h5 class="modal-title" id="stationModalLabel">เลือกสถานี</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
+
                                     </div>
+                                    <p style="margin-left: 16px" id="station_name_select"></p>
+
                                     <div class="modal-body">
+
                                         @php
                                             $groupedTrain = $train->groupBy('line_code');
 
@@ -171,14 +177,18 @@
                                             ];
                                         @endphp
                                         @foreach ($groupedTrain as $lineCode => $stations)
-                                            <div class="input-group">
-                                                <label class="input-group-icon" for="">
+                                            <div class="row-station">
+
+                                                <div class="input-group-icon" for="">
                                                     <i class="fa-solid fa-train-subway"
                                                         style="color: {{ $lineStyles[$lineCode]['bgColor'] ?? '#FFFFFF' }};"></i>
-                                                </label>
-                                                <select class="form-select select-station station-select"
-                                                    id="station_{{ $lineCode }}">
-                                                    <option selected disabled>สถานีรถไฟฟ้า</option>
+                                                </div>
+                                                <select class="form-select  station-select"
+                                                    aria-label="Small select example">
+
+                                                    <!-- แสดงชื่อสายใน option ที่ถูกเลือก -->
+                                                    <option selected disabled>
+                                                        {{ $stations[0]->line_name }}</option>
                                                     <!-- เพิ่ม option นี้ -->
                                                     @foreach ($stations as $station)
                                                         @php
@@ -235,10 +245,15 @@
                     // ดึงค่าที่เลือกจาก dropdown ปัจจุบัน
                     const selectedStation = this.value;
 
+                    // แสดงค่า selectedStation ใน console เพื่อการตรวจสอบ
+                    console.log("Selected Station:", selectedStation);
+
                     // ตรวจสอบว่ามีค่าที่เลือกใหม่
-                    if (selectedStation !== 'สถานีรถไฟฟ้า') {
+                    if (selectedStation !==
+                        '') { // ตรวจสอบว่าไม่ใช่ค่าว่าง (ซึ่งอาจเกิดจาก <option> ที่ disabled)
                         // ลบค่าที่อยู่ใน input field (ลบค่าเก่าทิ้ง)
                         document.getElementById('train_station_input').value = '';
+                        document.getElementById('station_name_select').innerText = '';
 
                         // รีเซ็ต dropdown อื่น ๆ ให้เป็นค่าเริ่มต้น ยกเว้นอันที่ถูกเลือก
                         document.querySelectorAll('.station-select').forEach(otherSelect => {
@@ -249,6 +264,8 @@
 
                         // ใส่ค่าที่เลือกใหม่ลงใน input field
                         document.getElementById('train_station_input').value = selectedStation;
+                        document.getElementById('station_name_select').innerText = "เลือกสถานี " +
+                            selectedStation;
 
                         // ปิด modal หลังจากเลือก (ถ้าต้องการใช้งาน)
                         /* const modal = bootstrap.Modal.getInstance(document.getElementById('stationModal'));

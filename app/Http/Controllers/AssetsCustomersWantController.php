@@ -127,8 +127,7 @@ class AssetsCustomersWantController extends Controller
 
         $train = DB::table('train_station')
             ->get();
-        $train = DB::table('train_station')
-            ->get();
+
 
         return view('assetsCustomer.create_assets_customer', compact('train'));
     }

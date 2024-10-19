@@ -1835,12 +1835,13 @@ textarea {
     width: 236px !important;
 }
 
-.input-group-icon {
-    background-color: #00000061;
-    margin-top: 16px;
 
-    padding: 16px;
+.input-group-icon {
+    background-color: #6a66666b;
+    margin-top: 6px;
+    padding: 8px 16px 16px 16px;
     border-top-left-radius: 10px;
+    height: 38px;
     border-bottom-left-radius: 10px;
 }
 

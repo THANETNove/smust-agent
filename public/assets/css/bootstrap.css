@@ -1704,3 +1704,10 @@ a {
     height: 64px !important;
     margin-top: 16px !important;
 }
+
+.row-station {
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: row;
+    height: 44px;
+}
