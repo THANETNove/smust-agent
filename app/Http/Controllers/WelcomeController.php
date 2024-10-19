@@ -334,6 +334,7 @@ class WelcomeController extends Controller
             ->leftJoin('personal_websites', 'users.id', '=', 'personal_websites.user_id')
             ->select(
                 'users.*',
+                'personal_websites.imageHade',
                 'personal_websites.history_work',
                 'personal_websites.image_1',
                 'personal_websites.name_1',

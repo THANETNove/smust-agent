@@ -1228,7 +1228,7 @@
     margin-right: 24px;
     background-color: #007BA7;
     width: 330px;
-    height: 108px;
+    height: auto;
     padding: 16px 20px 16px 20px;
     color: #ffffff;
     font-size: 12px;
@@ -4269,7 +4269,7 @@ button.disabled {
 }
 
 .img-rectangle-1234 {
-    background-image: url('/assets/image/welcome/Rectangle1234.png');
+    /* background-image: url('/assets/image/welcome/Rectangle1234.png'); */
     /* ใส่เส้นทางของภาพที่ต้องการใช้ */
     background-size: cover;
     /* ปรับขนาดภาพให้พอดีกับพื้นที่ */
@@ -4329,7 +4329,7 @@ button.disabled {
 .box-type-agent {
     background: #007BA7;
     width: 330px;
-    height: 136px;
+    height: auto;
     margin-top: -150px;
     margin-bottom: 32px;
     border-radius: 10px;
