@@ -202,7 +202,7 @@
                                                                 $prefix = 'ARL';
                                                             }
                                                         @endphp
-                                                        <option value="{{ $station->station_name_th }}">
+                                                        <option value="{{ $station->id }}">
                                                             {{ $prefix }} {{ $station->station_name_th }}
                                                         </option>
                                                     @endforeach
