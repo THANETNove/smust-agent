@@ -73,7 +73,7 @@
 <div class="row mb-3">
     <div class="col-md-12 mb-3">
         <input id="files" type="file" class="form-control @error('files') is-invalid @enderror" name="files"
-            value="{{ old('files') }}" autocomplete="files" accept=".pdf,.jpg,.jpeg,.png,.docx"
+            value="{{ old('files') }}" autocomplete="files" accept=".jpg,.jpeg,.png"
             onchange="validateFileSize(this)">
         @error('meters_store')
             <span class="invalid-feedback" role="alert">
