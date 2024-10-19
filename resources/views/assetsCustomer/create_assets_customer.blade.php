@@ -84,8 +84,8 @@
 
                     <div id="station-select" style="display: none;">
                         {{--  @include('assetsCustomer.trainStation') --}}
-                        <select class="form-select mt-3" name="station" id="station">
-                            {{-- <option selected disabled>สถานีรถไฟฟ้าที่ใกล้ที่สุด</option> --}}
+                        {{--  <select class="form-select mt-3" name="station" id="station">
+              
                             @foreach ($train as $station)
                                 @php
                                     // ตรวจสอบสีเพื่อตรวจว่าเป็น BTS, MRT หรือ ARL
@@ -102,17 +102,103 @@
                                     {{ $prefix }} {{ $station->station_name_th }}
                                 </option>
                             @endforeach
-                        </select>
+                        </select> --}}
+                        @php
+                            // Group the train data by line_code
+                            $groupedTrain = $train->groupBy('line_code');
+
+                            // Define background colors and text colors for each line_code
+                            $lineStyles = [
+                                'ARL' => ['bgColor' => '#C41230', 'textColor' => '#696969'],
+                                'Blue' => ['bgColor' => '#0000FF', 'textColor' => '#696969'],
+                                'Brown' => ['bgColor' => '#874514', 'textColor' => '#696969'],
+                                'Dark green' => ['bgColor' => '#06402B', 'textColor' => '#696969'],
+                                'Light green' => ['bgColor' => '#90EE90', 'textColor' => '#696969'],
+                                'Gold' => ['bgColor' => '#FFD700', 'textColor' => '#696969'],
+                                'Grey' => ['bgColor' => '#D3D3D3', 'textColor' => '#696969'],
+                                'Pink' => ['bgColor' => '#FFC0CB', 'textColor' => '#696969'],
+                                'Orange' => ['bgColor' => '#FFA500', 'textColor' => '#696969'],
+                                'Purple' => ['bgColor' => '#800080', 'textColor' => '#696969'],
+                                'Red east' => ['bgColor' => '#FF4500', 'textColor' => '#696969'],
+                                'Red north' => ['bgColor' => '#DC143C', 'textColor' => '#696969'],
+                                'Red south' => ['bgColor' => '#B22222', 'textColor' => '#696969'],
+                                'Red west' => ['bgColor' => '#FF6347', 'textColor' => '#696969'],
+                                'Red west south' => ['bgColor' => '#CD5C5C', 'textColor' => '#696969'],
+                                'Yellow' => ['bgColor' => '#FFFF00', 'textColor' => '#696969'],
+                            ];
+                        @endphp
+                        <!-- ปุ่ม input ที่จะเปิด modal -->
+                        <div class="input-group">
+                            <input type="text" id="train_station_input" class="form-control"
+                                placeholder="เลือกสถานีรถไฟฟ้า" readonly>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#stationModal">
+                                เลือกสถานี
+                            </button>
+                        </div>
+
+
+                        <!-- Bootstrap modal -->
+                        <div class="modal fade" id="stationModal" tabindex="-1" aria-labelledby="stationModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="stationModalLabel">เลือกสถานี</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        @php
+                                            $groupedTrain = $train->groupBy('line_code');
+                                            $lineStyles = [
+                                                'ARL' => ['bgColor' => '#C41230', 'textColor' => '#696969'],
+                                                'Blue' => ['bgColor' => '#0000FF', 'textColor' => '#696969'],
+                                                // เพิ่มตามที่คุณตั้งไว้
+                                            ];
+                                        @endphp
+                                        @foreach ($groupedTrain as $lineCode => $stations)
+                                            <div class="input-group">
+                                                <label class="input-group-icon" for="">
+                                                    <i class="fa-solid fa-train-subway"
+                                                        style="color: {{ $lineStyles[$lineCode]['bgColor'] ?? '#FFFFFF' }};"></i>
+                                                </label>
+                                                <select class="form-select station-select" id="station_{{ $lineCode }}">
+                                                    <option selected disabled>สถานีรถไฟฟ้า</option>
+                                                    <!-- เพิ่ม option นี้ -->
+                                                    @foreach ($stations as $station)
+                                                        @php
+                                                            $prefix = '';
+                                                            if (in_array($lineCode, ['Light green', 'Dark green'])) {
+                                                                $prefix = 'BTS';
+                                                            } elseif (in_array($lineCode, ['Blue', 'Purple'])) {
+                                                                $prefix = 'MRT';
+                                                            } elseif (in_array($lineCode, ['ARL'])) {
+                                                                $prefix = 'ARL';
+                                                            }
+                                                        @endphp
+                                                        <option value="{{ $station->station_name_th }}">
+                                                            {{ $prefix }} {{ $station->station_name_th }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <p class="price-range mt-3">ลักษณะพิเศษ</p>
+                        @include('assetsCustomer.optionsJs')
+                        <p class="price-range mt-3">ข้อความจากลูกค้า</p>
+                        <textarea class="form-control mt-3" id="exampleFormControlTextarea1" rows="5" name="message_customer"
+                            placeholder="ลูกค้าต่างชาติตามหาคอนโด อยู่ 1 สิงหา - 31 ธันวาคม"></textarea>
+                        <button type="submit" class="btn btn-primary col-12 mt-5 mb-5"> </span>ลงประกาศ</button>
                     </div>
-
-
-                    <p class="price-range mt-3">ลักษณะพิเศษ</p>
-                    @include('assetsCustomer.optionsJs')
-                    <p class="price-range mt-3">ข้อความจากลูกค้า</p>
-                    <textarea class="form-control mt-3" id="exampleFormControlTextarea1" rows="5" name="message_customer"
-                        placeholder="ลูกค้าต่างชาติตามหาคอนโด อยู่ 1 สิงหา - 31 ธันวาคม"></textarea>
-                    <button type="submit" class="btn btn-primary col-12 mt-5 mb-5"> </span>ลงประกาศ</button>
-                </div>
             </form>
         </div>
 
@@ -128,6 +214,27 @@
             document.addEventListener('DOMContentLoaded', function() {
                 const provinceSelect = document.getElementById('provinces-id');
 
+            });
+
+            document.querySelectorAll('.station-select').forEach(select => {
+                select.addEventListener('change', function() {
+                    // ดึงค่าที่เลือก
+                    const selectedStation = this.value;
+
+                    // ตรวจสอบว่ามีค่าที่เลือกหรือไม่
+                    if (selectedStation !== 'สถานีรถไฟฟ้าที่ใกล้ที่สุด') {
+                        // ใส่ค่าที่เลือกลงใน input field
+                        document.getElementById('train_station_input').value = selectedStation;
+
+                        // Reset ค่า dropdown ให้กลับไปที่ค่าเริ่มต้น
+                        this.value = 'สถานีรถไฟฟ้าที่ใกล้ที่สุด';
+
+                        // ปิด modal หลังจากเลือก
+                        /*   const modalElement = document.getElementById('stationModal');
+                          const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                          modalInstance.hide(); */
+                    }
+                });
             });
         </script>
     </div>

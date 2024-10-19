@@ -250,8 +250,8 @@
                         <option selected disabled>เลือก</option>
                         <option value="สตูดิโอ" {{ old('studio_name') == 'สตูดิโอ' ? 'selected' : '' }}>สตูดิโอ
                         </option>
-                        <option value="ไม่สตูดิโอ" {{ old('studio_name') == 'ไม่สตูดิโอ' ? 'selected' : '' }}>
-                            ไม่สตูดิโอ
+                        <option value="ไม่มีสตูดิโอ" {{ old('studio_name') == 'ไม่มีสตูดิโอ' ? 'selected' : '' }}>
+                            ไม่มีสตูดิโอ
                         </option>
                     </select>
                 </div>
