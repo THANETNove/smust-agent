@@ -1699,3 +1699,8 @@ a {
     margin-top: 164px;
     margin-bottom: 76px;
 }
+
+.select-station {
+    height: 64px !important;
+    margin-top: 16px !important;
+}

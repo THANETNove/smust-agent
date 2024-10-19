@@ -82,7 +82,7 @@
 
                     @endphp
 
-                    <div id="station-select" style="display: none;">
+                    <div {{-- id="station-select" style="display: none;" --}}>
                         {{--  @include('assetsCustomer.trainStation') --}}
                         {{--  <select class="form-select mt-3" name="station" id="station">
               
@@ -129,12 +129,10 @@
                         @endphp
                         <!-- ปุ่ม input ที่จะเปิด modal -->
                         <div class="input-group">
-                            <input type="text" id="train_station_input" class="form-control"
-                                placeholder="เลือกสถานีรถไฟฟ้า" readonly>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#stationModal">
-                                เลือกสถานี
-                            </button>
+                            <input type="text" id="train_station_input" name="station" class="form-control"
+                                data-bs-toggle="modal" data-bs-target="#stationModal" placeholder="เลือกสถานีรถไฟฟ้า"
+                                readonly>
+
                         </div>
 
 
@@ -151,10 +149,25 @@
                                     <div class="modal-body">
                                         @php
                                             $groupedTrain = $train->groupBy('line_code');
+
+                                            // Define background colors and text colors for each line_code
                                             $lineStyles = [
                                                 'ARL' => ['bgColor' => '#C41230', 'textColor' => '#696969'],
                                                 'Blue' => ['bgColor' => '#0000FF', 'textColor' => '#696969'],
-                                                // เพิ่มตามที่คุณตั้งไว้
+                                                'Brown' => ['bgColor' => '#874514', 'textColor' => '#696969'],
+                                                'Dark green' => ['bgColor' => '#06402B', 'textColor' => '#696969'],
+                                                'Light green' => ['bgColor' => '#90EE90', 'textColor' => '#696969'],
+                                                'Gold' => ['bgColor' => '#FFD700', 'textColor' => '#696969'],
+                                                'Grey' => ['bgColor' => '#D3D3D3', 'textColor' => '#696969'],
+                                                'Pink' => ['bgColor' => '#FFC0CB', 'textColor' => '#696969'],
+                                                'Orange' => ['bgColor' => '#FFA500', 'textColor' => '#696969'],
+                                                'Purple' => ['bgColor' => '#800080', 'textColor' => '#696969'],
+                                                'Red east' => ['bgColor' => '#FF4500', 'textColor' => '#696969'],
+                                                'Red north' => ['bgColor' => '#DC143C', 'textColor' => '#696969'],
+                                                'Red south' => ['bgColor' => '#B22222', 'textColor' => '#696969'],
+                                                'Red west' => ['bgColor' => '#FF6347', 'textColor' => '#696969'],
+                                                'Red west south' => ['bgColor' => '#CD5C5C', 'textColor' => '#696969'],
+                                                'Yellow' => ['bgColor' => '#FFFF00', 'textColor' => '#696969'],
                                             ];
                                         @endphp
                                         @foreach ($groupedTrain as $lineCode => $stations)
@@ -163,7 +176,8 @@
                                                     <i class="fa-solid fa-train-subway"
                                                         style="color: {{ $lineStyles[$lineCode]['bgColor'] ?? '#FFFFFF' }};"></i>
                                                 </label>
-                                                <select class="form-select station-select" id="station_{{ $lineCode }}">
+                                                <select class="form-select select-station station-select"
+                                                    id="station_{{ $lineCode }}">
                                                     <option selected disabled>สถานีรถไฟฟ้า</option>
                                                     <!-- เพิ่ม option นี้ -->
                                                     @foreach ($stations as $station)
@@ -218,21 +232,27 @@
 
             document.querySelectorAll('.station-select').forEach(select => {
                 select.addEventListener('change', function() {
-                    // ดึงค่าที่เลือก
+                    // ดึงค่าที่เลือกจาก dropdown ปัจจุบัน
                     const selectedStation = this.value;
 
-                    // ตรวจสอบว่ามีค่าที่เลือกหรือไม่
-                    if (selectedStation !== 'สถานีรถไฟฟ้าที่ใกล้ที่สุด') {
-                        // ใส่ค่าที่เลือกลงใน input field
+                    // ตรวจสอบว่ามีค่าที่เลือกใหม่
+                    if (selectedStation !== 'สถานีรถไฟฟ้า') {
+                        // ลบค่าที่อยู่ใน input field (ลบค่าเก่าทิ้ง)
+                        document.getElementById('train_station_input').value = '';
+
+                        // รีเซ็ต dropdown อื่น ๆ ให้เป็นค่าเริ่มต้น ยกเว้นอันที่ถูกเลือก
+                        document.querySelectorAll('.station-select').forEach(otherSelect => {
+                            if (otherSelect !== select) { // ตรวจสอบว่าไม่ใช่ dropdown ที่เพิ่งเลือก
+                                otherSelect.selectedIndex = 0; // คืนค่า dropdown อื่นเป็นค่าเริ่มต้น
+                            }
+                        });
+
+                        // ใส่ค่าที่เลือกใหม่ลงใน input field
                         document.getElementById('train_station_input').value = selectedStation;
 
-                        // Reset ค่า dropdown ให้กลับไปที่ค่าเริ่มต้น
-                        this.value = 'สถานีรถไฟฟ้าที่ใกล้ที่สุด';
-
-                        // ปิด modal หลังจากเลือก
-                        /*   const modalElement = document.getElementById('stationModal');
-                          const modalInstance = bootstrap.Modal.getInstance(modalElement);
-                          modalInstance.hide(); */
+                        // ปิด modal หลังจากเลือก (ถ้าต้องการใช้งาน)
+                        /* const modal = bootstrap.Modal.getInstance(document.getElementById('stationModal'));
+                           modal.hide(); */
                     }
                 });
             });
