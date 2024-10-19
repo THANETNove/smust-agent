@@ -1,6 +1,7 @@
 @php
     $train_station = Cache::remember('trainStationData', 0, function () {
         return DB::table('train_station')
+            ->where('status', 1)
             ->select('train_station.id', 'train_station.station_name_th')
             ->orderBy('station_name_th', 'ASC')
             ->get();

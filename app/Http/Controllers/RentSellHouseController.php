@@ -16,25 +16,22 @@ class RentSellHouseController extends Controller
      * Display a listing of the resource.
      */
 
-     public function __construct()
-     {
-         $this->middleware('auth');
-     }
-
-
-    public function index()
+    public function __construct()
     {
-
+        $this->middleware('auth');
     }
+
+
+    public function index() {}
     public function profileAdmin()
     {
 
         $user = DB::table('users')
-        ->where('code', '!=', Auth::user()->code)
-        ->where('code_admin',Auth::user()->code)
-        ->get();
+            ->where('code', '!=', Auth::user()->code)
+            ->where('code_admin', Auth::user()->code)
+            ->get();
 
-        return view('admin.profile',['user' =>  $user ]);//
+        return view('admin.profile', ['user' =>  $user]); //
     }
 
     /**
@@ -42,9 +39,9 @@ class RentSellHouseController extends Controller
      */
     public function create()
     {
-        $data = DB::table('provinces')->orderBy('name_th','ASC')->get();
-        $train_station = DB::table('train_station')->select('train_station.id', 'train_station.station_name_th')->get();
-        return view('admin.create',['train_station' => $train_station,'data' => $data]);//
+        $data = DB::table('provinces')->orderBy('name_th', 'ASC')->get();
+        $train_station = DB::table('train_station')->where('status', 1)->select('train_station.id', 'train_station.station_name_th')->get();
+        return view('admin.create', ['train_station' => $train_station, 'data' => $data]); //
     }
 
     /**
@@ -103,19 +100,19 @@ class RentSellHouseController extends Controller
 
 
         $dateImg = [];
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $imagefile = $request->file('image');
 
             foreach ($imagefile as $image) {
-              $data =   $image->move(public_path().'/img/product',$randomText."".$image->getClientOriginalName());
-              $dateImg[] =  $randomText."".$image->getClientOriginalName();
+                $data =   $image->move(public_path() . '/img/product', $randomText . "" . $image->getClientOriginalName());
+                $dateImg[] =  $randomText . "" . $image->getClientOriginalName();
             }
         }
-    $member->image = json_encode($dateImg);
-    $member->save();
+        $member->image = json_encode($dateImg);
+        $member->save();
 
 
-    return redirect('home')->with('message', "บันทึกสำเร็จ" );
+        return redirect('home')->with('message', "บันทึกสำเร็จ");
     }
 
     /**
@@ -131,23 +128,29 @@ class RentSellHouseController extends Controller
      */
     public function edit(string $id)
     {
-      /*   $dataProduct = RentSellHomeDetails::find($id); */
+        /*   $dataProduct = RentSellHomeDetails::find($id); */
 
         $dataProduct = DB::table('rent_sell_home_details')
-        ->where('id', $id)->get();
+            ->where('id', $id)->get();
 
 
         $data = DB::table('provinces')
-        ->orderBy('name_th','ASC')->get();
-        $dataAmphures= DB::table('amphures')->where('id',$dataProduct[0]->districts)
-        ->orderBy('name_th','ASC')
-        ->get();
-        $dataDistricts= DB::table('districts')->where('id',$dataProduct[0]->amphures)
-        ->orderBy('name_th','ASC')->get();
+            ->orderBy('name_th', 'ASC')->get();
+        $dataAmphures = DB::table('amphures')->where('id', $dataProduct[0]->districts)
+            ->orderBy('name_th', 'ASC')
+            ->get();
+        $dataDistricts = DB::table('districts')->where('id', $dataProduct[0]->amphures)
+            ->orderBy('name_th', 'ASC')->get();
 
-        $train_station = DB::table('train_station')->select('train_station.id', 'train_station.station_name_th')->get();
-        return view('admin.edit',['data' => $data,'train_station'=>$train_station ,'id'=>$id ,
-        'dataProduct' => $dataProduct,'dataAmphures'=>$dataAmphures ,'dataDistricts'=>$dataDistricts]);
+        $train_station = DB::table('train_station')->where('status', 1)->select('train_station.id', 'train_station.station_name_th')->get();
+        return view('admin.edit', [
+            'data' => $data,
+            'train_station' => $train_station,
+            'id' => $id,
+            'dataProduct' => $dataProduct,
+            'dataAmphures' => $dataAmphures,
+            'dataDistricts' => $dataDistricts
+        ]);
     }
 
     /**
@@ -203,13 +206,13 @@ class RentSellHouseController extends Controller
 
 
         $dateImg = [];
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
 
 
-           $img = json_decode($member->image);
+            $img = json_decode($member->image);
 
-            foreach( $img as $image) {
-                $image_path = public_path().'/img/product/'.$image;
+            foreach ($img as $image) {
+                $image_path = public_path() . '/img/product/' . $image;
                 if (file_exists($image_path)) {
                     // ถ้ามีไฟล์อยู่จริง จึงลบ
                     unlink($image_path);
@@ -218,15 +221,15 @@ class RentSellHouseController extends Controller
 
             $imagefile = $request->file('image');
             foreach ($imagefile as $image) {
-              $data =   $image->move(public_path().'/img/product',$randomText."".$image->getClientOriginalName());
-              $dateImg[] =  $randomText."".$image->getClientOriginalName();
+                $data =   $image->move(public_path() . '/img/product', $randomText . "" . $image->getClientOriginalName());
+                $dateImg[] =  $randomText . "" . $image->getClientOriginalName();
             }
             $member->image = json_encode($dateImg);
         }
 
 
-     $member->save();
-    return redirect('home')->with('message', "บันทึกสำเร็จ" );
+        $member->save();
+        return redirect('home')->with('message', "บันทึกสำเร็จ");
     }
 
     /**
@@ -237,13 +240,13 @@ class RentSellHouseController extends Controller
         $member =  RentSellHomeDetails::find($id);
         $member->status_home = 'off';
         $member->save();
-        return redirect('home')->with('message', "ยกเลิกสำเร็จ" );
+        return redirect('home')->with('message', "ยกเลิกสำเร็จ");
     }
     public function destroyCode(string $id)
     {
         $member =  User::find($id);
         $member->code_admin = NULL;
         $member->save();
-        return redirect('profile-admin')->with('message', " ลบสำเร็จ" );
+        return redirect('profile-admin')->with('message', " ลบสำเร็จ");
     }
 }

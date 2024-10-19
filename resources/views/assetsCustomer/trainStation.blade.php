@@ -1,6 +1,6 @@
 @php
 
-    $train = DB::table('train_station')->get();
+    $train = DB::table('train_station')->where('status', 1)->get();
 @endphp
 @php
     // Group the train data by line_code

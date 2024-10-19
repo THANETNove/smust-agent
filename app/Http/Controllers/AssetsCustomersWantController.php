@@ -126,6 +126,7 @@ class AssetsCustomersWantController extends Controller
     {
 
         $train = DB::table('train_station')
+            ->where('status', 1)
             ->get();
 
 
@@ -157,6 +158,7 @@ class AssetsCustomersWantController extends Controller
 
         if ($request->has('station') && $request['station'] != 'null') {
             $train = DB::table('train_station')
+                ->where('status', 1)
                 ->where('id', $request['station'])
                 ->get();
 

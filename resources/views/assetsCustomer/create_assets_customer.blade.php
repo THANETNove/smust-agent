@@ -128,11 +128,12 @@
                             ];
                         @endphp
                         <!-- ปุ่ม input ที่จะเปิด modal -->
-                        <div class="input-group">
-                            <input type="text" id="train_station_input" name="station" class="form-control"
-                                data-bs-toggle="modal" data-bs-target="#stationModal" placeholder="เลือกสถานีรถไฟฟ้า"
-                                readonly>
-
+                        <div id="station-select" style="display: none;">
+                            <div class="input-group">
+                                <input type="text" id="train_station_input" name="station" class="form-control col-12"
+                                    data-bs-toggle="modal" data-bs-target="#stationModal" placeholder="เลือกสถานีรถไฟฟ้า"
+                                    readonly>
+                            </div>
                         </div>
 
 
