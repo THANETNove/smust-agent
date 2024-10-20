@@ -127,7 +127,7 @@
         <p class="services-such-as-text">บริการ อาทิ</p>
         <div class="row">
             @foreach ($userQuery as $userQ)
-                <div class="col-sm-12 col-md-4">
+                <div class="col-sm-12 col-md-4 mb-5">
                     <div class="box-img-services-as">
                         <img class="img-services-as" src="{{ URL::asset($userQ->image_1) }}">
                         <p class="name-1-as">{{ $userQ->name_1 }}</p>
@@ -135,7 +135,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-12 col-md-4">
+                <div class="col-sm-12 col-md-4 mb-5">
                     <div class="box-img-services-as">
                         <img class="img-services-as" src="{{ URL::asset($userQ->image_2) }}">
                         <p class="name-1-as">{{ $userQ->name_2 }}</p>
@@ -143,7 +143,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-12 col-md-4">
+                <div class="col-sm-12 col-md-4 mb-5">
                     <div class="box-img-services-as">
                         <img class="img-services-as" src="{{ URL::asset($userQ->image_3) }}">
                         <p class="name-1-as">{{ $userQ->name_3 }}</p>

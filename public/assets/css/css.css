@@ -4374,9 +4374,15 @@ button.disabled {
     max-width: 334px;
     max-height: 334px;
     width: 100%;
+    object-fit: contain;
+
     height: 100%;
 
 
+}
+
+.owl-carousel .owl-item img {
+    object-fit: cover !important;
 }
 
 .contact-now-as {
