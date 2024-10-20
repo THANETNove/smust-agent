@@ -11,7 +11,7 @@
             @endphp
             <div id="container">
 
-                <div class="image-box">
+                <div class="image-box" data-images="{{ json_encode($imgUrl) }}">
                     <div class="mr-4">
                         <div class="sava-image">
                             <img class="save-link ml-16" id="link-url" src="{{ URL::asset('/assets/image/home/link.png') }}">
@@ -44,24 +44,6 @@
                     <a href="{{ url('/home') }}" class="box-call">
                         กลับ
                     </a>
-
-
-
-
-
-                    {{--   @if (Auth::user()->status != '0')
-                        &nbsp; &nbsp;
-                        <a href="{{ url('/edit', $home->id) }}" class="box-call">
-                            เเก้ไข
-                        </a>
-                        &nbsp; &nbsp;
-                        <a href="{{ url('destroy', $home->id) }}" class="box-call2 ">
-                            ยกเลิก
-                        </a>
-                    @endif --}}
-
-
-
 
                 </div>
                 @if (session('message'))
@@ -495,29 +477,7 @@
                                 <div class="box-report-property-sold" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">รายงานทรัพย์ขายแล้ว</div>
 
-                                {{--  <a href="{{ $home->make_appointment_location }}" target="_blank"
-                                    class="box-appointment">
-                                    <img class="icon-content-3"
-                                        src="{{ URL::asset('/assets/image/home/calendar_add_on.png') }}">
-                                    นัดดูสถานที่
-                                </a>
-                                <a href="{{ $home->send_customers }}" target="_blank" class="box-appointment">
-                                    <img class="icon-content-3"
-                                        src="{{ URL::asset('/assets/image/home/person_add.png') }}">
-                                    ส่งลูกค้า
-                                </a>
-                                <div class="flex-direction-row mb-5">
-                                    <a href="{{ $home->ask_more }}" target="_blank" class="box-ask-more">
-                                        <img class="icon-content-2"
-                                            src="{{ URL::asset('/assets/image/home/calendar_add_on.png') }}">
-                                        ถามเพิ่ม
-                                    </a>
-                                    <a href="tel:{{ $home->contact_number }}" class="box-call">
-                                        <img class="icon-content-2"
-                                            src="{{ URL::asset('/assets/image/home/call.png') }}">
-                                        โทร
-                                    </a>
-                                </div> --}}
+
                             </div>
 
                             <p class="contact-owner">พื้นที่ร่าง caption</p>
@@ -752,13 +712,9 @@
 
     </div>
 
-    <div class="popup" id="imagePopup">
-        <div class="popup-content">
-            <img id="popupImage" src="" alt="Popup Image">
-            <span class="close-btn" onclick="closePopup()">&times;</span>
-        </div>
-    </div>
-    @include('detall.javascript_popupImage')
+
+
+
     <script>
         document.getElementById('edit2-btn').addEventListener('click', function() {
             var submitBtn = document.getElementById('submitBtn-textarea');
@@ -778,6 +734,147 @@
                 alert('ข้อความถูกคัดลอกแล้ว!');
             }).catch(function(error) {
                 console.error('การคัดลอกข้อความล้มเหลว:', error);
+            });
+        });
+
+        var currentMedia = 0;
+        var currentImages = []; // ตัวแปรนี้จะเก็บภาพสำหรับรายการปัจจุบัน
+
+        document.querySelectorAll('.popup-trigger').forEach(function(element) {
+            element.addEventListener('click', function() {
+                // ดึงข้อมูลภาพจาก data-attribute ของ wel-image-box
+                var imageBox = element.closest('.image-box');
+                var images = JSON.parse(imageBox.getAttribute('data-images'));
+                console.log("images", images);
+                // เปิด popup และแสดงภาพ
+                openPopup(parseInt(element.getAttribute('data-index')), images);
+            });
+        });
+
+        function openPopup(index, images) {
+            console.log("Opening popup with images: ", images);
+            currentMedia = index;
+            currentImages = images; // เก็บภาพใน currentImages
+            showMedia(currentMedia, currentImages);
+
+            var popup = document.getElementById('imagePopup');
+            popup.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePopup() {
+            var popup = document.getElementById('imagePopup');
+            popup.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeMedia(direction) {
+            currentMedia += direction;
+
+            // ตรวจสอบว่า currentMedia ไม่เกินขอบเขตของ images array
+            if (currentMedia < 0) {
+                currentMedia = 0;
+            }
+            if (currentMedia >= currentImages.length) {
+                currentMedia = currentImages.length - 1;
+            }
+
+            showMedia(currentMedia, currentImages);
+        }
+
+        function showMedia(index, images) {
+            var prevBtn = document.getElementById("prev-btn");
+            var nextBtn = document.getElementById("next-btn");
+
+            // ตรวจสอบการแสดงผลปุ่ม next และ prev
+            if (index >= images.length - 1) {
+                nextBtn.style.display = "none";
+            } else {
+                nextBtn.style.display = "block";
+            }
+            if (index <= 0) {
+                prevBtn.style.display = "none";
+            } else {
+                prevBtn.style.display = "block";
+            }
+
+            // แสดงภาพที่เลือก
+            var popupMediaContainer = document.getElementById('popupMediaContainer');
+            popupMediaContainer.innerHTML = '';
+
+            var assetUrl = "{{ asset('img/product') }}";
+            var img = document.createElement('img');
+            img.src = assetUrl + "/" + images[index];
+            popupMediaContainer.appendChild(img);
+        }
+
+
+        document.getElementById('save-image-btn').addEventListener('click', function() {
+            if (currentImages[currentMedia]) {
+                var assetUrl = "{{ asset('img/product') }}";
+                var imageUrl = assetUrl + "/" + currentImages[currentMedia];
+                saveImage(imageUrl);
+            } else {
+                console.error('No image found to save.');
+            }
+        });
+
+
+
+
+
+
+        function saveAll() {
+            var assetUrl = "{{ asset('img/product') }}";
+
+            currentImages.forEach(function(item) {
+                var imageUrl = assetUrl + '/' + item;
+                saveImage(imageUrl);
+            });
+        }
+
+        function saveImage(imageUrl) {
+            var downloadLink = document.createElement('a');
+            downloadLink.href = imageUrl;
+            downloadLink.download = 'image.jpg';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
+
+
+        function captureContainer(imageUrl) {
+            var downloadLink = document.createElement('a');
+            downloadLink.href = imageUrl;
+            downloadLink.download = 'image.jpg';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
+
+        $(document).ready(function() {
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                dots: true,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    },
+                    1200: {
+                        items: 4
+                    }
+
+                }
             });
         });
     </script>
