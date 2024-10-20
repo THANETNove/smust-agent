@@ -321,7 +321,7 @@ class WelcomeController extends Controller
 
             // กรณีใช้เงื่อนไขแบบ or แต่ไม่เอา id ที่มีอยู่ใน $userQuery1 มาแสดง
             $userQuery = (clone $userQuery)
-                ->whereNotIn('id', $idsToExclude)  // ไม่เอา id ที่มีอยู่ใน $userQuery1
+                ->whereNotIn('users.id', $idsToExclude)  // ไม่เอา id ที่มีอยู่ใน $userQuery1
                 ->where(function ($query) use ($request) {
                     $query->where('users.contract_type', 'LIKE', "%$request->sale_rent%")
                         ->orWhere('users.property_type',  'LIKE', "%$request->property_type%")
@@ -329,6 +329,7 @@ class WelcomeController extends Controller
                         ->orWhere('users.characteristics', 'LIKE', "%$request->characteristics%");
                 })
                 ->get();
+
             $statusShow = true;
         } else {
             $userQuery = (clone $userQuery)->orderBy('plans', 'DESC')
