@@ -8,6 +8,8 @@
         $createdDate = $userCreatedDate->lessThan($currentDate->subDays(3));
         $authCount = Auth::user()->plans == 0 && $createdDate ? 1 : 2;
     @endphp
+
+
     <div class="home-background">
         @include('headHome')
         @if (session('message'))
@@ -834,5 +836,6 @@
             </div>
         </div>
     </div>
+
     @include('jsHome')
 @endsection
