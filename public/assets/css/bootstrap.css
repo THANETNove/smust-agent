@@ -1711,3 +1711,7 @@ a {
     flex-direction: row;
     height: 44px;
 }
+
+.text-left {
+    text-align: left !important;
+}

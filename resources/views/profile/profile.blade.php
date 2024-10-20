@@ -169,7 +169,7 @@
                     </div>
 
                     <!-- ประเภทสัญญา -->
-                    <p class="font-size-12-black mt-21">
+                    <p class="font-size-12-black mt-21 text-left">
                         <img class="contract" src="{{ URL::asset('/assets/image/welcome/contract.png') }}">
                         ประเภทสัญญา
                     </p>
@@ -221,7 +221,7 @@
 
 
                     <!-- ประเภททรัพย์ -->
-                    <p class="font-size-12-black">
+                    <p class="font-size-12-black text-left">
                         <img class="contract" src="{{ URL::asset('/assets/image/welcome/domain.png') }}">
                         ประเภททรัพย์
                     </p>
@@ -284,7 +284,7 @@
 
 
                     <!-- ลักษณะเฉพาะ -->
-                    <p class="font-size-12-black">
+                    <p class="font-size-12-black text-left">
                         <img class="contract" src="{{ URL::asset('/assets/image/welcome/domain.png') }}">
                         ลักษณะเฉพาะ
                     </p>
