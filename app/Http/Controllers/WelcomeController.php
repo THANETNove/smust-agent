@@ -295,12 +295,26 @@ class WelcomeController extends Controller
 
 
             // กรณีใช้เงื่อนไขแบบ and
-            $userQuery1 = (clone $userQuery)
-                ->where('contract_type', $request->sale_rent)
-                ->where('property_type', $request->property_type)  // สมมติว่ามีฟิลด์ `property_type`
-                ->where('provinces', $request->province)
-                ->where('characteristics', $request->characteristics)
-                ->get();
+            $userQuery1 = (clone $userQuery);
+
+            if ($request->has('sale_rent')) {
+                $userQuery1->where('users.contract_type', $request->sale_rent);
+            }
+
+            if ($request->has('property_type')) {
+                $userQuery1->where('users.property_type', $request->property_type);
+            }
+
+            if ($request->has('province')) {
+                $userQuery1->where('users.provinces', $request->province);
+            }
+
+            if ($request->has('characteristics')) {
+                $userQuery1->where('users.characteristics', $request->characteristics);
+            }
+
+            $userQuery1 = $userQuery1->get();
+
 
             // ดึง id ทั้งหมดจาก $userQuery1 เพื่อไม่แสดงใน $userQuery
             $idsToExclude = $userQuery1->pluck('id')->toArray();
@@ -309,10 +323,10 @@ class WelcomeController extends Controller
             $userQuery = (clone $userQuery)
                 ->whereNotIn('id', $idsToExclude)  // ไม่เอา id ที่มีอยู่ใน $userQuery1
                 ->where(function ($query) use ($request) {
-                    $query->where('contract_type', 'LIKE', "%$request->sale_rent%")
-                        ->orWhere('property_type',  'LIKE', "%$request->property_type%")
-                        ->orWhere('provinces', 'LIKE', "%$request->province%")
-                        ->orWhere('characteristics', 'LIKE', "%$request->characteristics%");
+                    $query->where('users.contract_type', 'LIKE', "%$request->sale_rent%")
+                        ->orWhere('users.property_type',  'LIKE', "%$request->property_type%")
+                        ->orWhere('users.provinces', 'LIKE', "%$request->province%")
+                        ->orWhere('users.characteristics', 'LIKE', "%$request->characteristics%");
                 })
                 ->get();
             $statusShow = true;
