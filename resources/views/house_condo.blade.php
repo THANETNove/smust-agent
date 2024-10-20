@@ -119,7 +119,7 @@
                         < </span>
                 </button>
                 @foreach ($imgUrl as $index => $image)
-                    <img class="sliderImage" src="{{ URL::asset('img/product/' . $image) }}" alt="Slide"
+                    <img class="sliderImage" src="{{ URL::asset('img/product/' . $image) }}" loading="lazy" alt="Slide"
                         style="{{ $index === 0 ? 'display: block;' : 'display: none;' }}">
                 @endforeach
                 <button class="next-btn2" onclick="changeImage(event, 1)">

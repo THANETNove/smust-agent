@@ -46,13 +46,13 @@
                                             <div class="box-new">NEW</div>
                                         @endif
                                         <div class="box-img-new">
-                                            <img class="img-0831 lazy"
+                                            <img class="img-0831 lazy" loading="lazy"
                                                 data-src="{{ URL::asset('img/product/' . $imgUrl[0]) }}">
                                         </div>
                                         <div class="box-name-new">
                                             <p class="name-content">{{ $home2->building_name }}</p>
                                             <p class="name-details">
-                                                <img class="img-icon "
+                                                <img class="img-icon " loading="lazy"
                                                     src="{{ URL::asset('/assets/image/home/location_on.png') }}">
                                                 {{ $home2->districts_name_th }} {{ $home2->amphures_name_th }}
                                                 {{ $home2->provinces_name_th }}
@@ -60,7 +60,7 @@
                                             @if ($home2->train_name != 'ไม่มี' && $home2->train_name)
                                                 @if ($home2->time_arrive < '61')
                                                     <p class="name-details">
-                                                        <img class="img-icon"
+                                                        <img class="img-icon" loading="lazy"
                                                             src="{{ URL::asset('/assets/image/home/directions_subway.png') }}">
                                                         {{ $home2->train_name }}
                                                     </p>
@@ -69,12 +69,12 @@
 
                                             <p class="number-rooms text-ellipsis">
                                                 <span class="img-icon-ri2">
-                                                    <img class="img-icon img-icon-ri"
+                                                    <img class="img-icon img-icon-ri" loading="lazy"
                                                         src="{{ URL::asset('/assets/image/home/bed.png') }}">
                                                     {{ $home2->bedroom }} ห้องนอน
                                                 </span>
                                                 <span>
-                                                    <img class="img-icon img-icon-ri"
+                                                    <img class="img-icon img-icon-ri" loading="lazy"
                                                         src="{{ URL::asset('/assets/image/home/screenshot_frame.png') }}">
                                                     {{ $home2->room_width }} ตร.ม.
                                                 </span>
@@ -162,7 +162,7 @@
                                             <div class="box-new">NEW</div>
                                         @endif
                                         <div class="box-img-new">
-                                            <img class="img-0831 lazy"
+                                            <img class="img-0831 lazy" loading="lazy"
                                                 data-src="{{ URL::asset('img/product/' . $imgUrl[0]) }}">
                                         </div>
                                         <div class="box-name-new">
@@ -176,7 +176,7 @@
                                             @if ($home2->train_name != 'ไม่มี' && $home2->train_name)
                                                 @if ($home2->time_arrive < '61')
                                                     <p class="name-details">
-                                                        <img class="img-icon"
+                                                        <img class="img-icon" loading="lazy"
                                                             src="{{ URL::asset('/assets/image/home/directions_subway.png') }}">
                                                         {{ $home2->train_name }}
                                                     </p>
@@ -185,12 +185,12 @@
 
                                             <p class="number-rooms text-ellipsis">
                                                 <span class="img-icon-ri2">
-                                                    <img class="img-icon img-icon-ri"
+                                                    <img class="img-icon img-icon-ri" loading="lazy"
                                                         src="{{ URL::asset('/assets/image/home/bed.png') }}">
                                                     {{ $home2->bedroom }} ห้องนอน
                                                 </span>
                                                 <span>
-                                                    <img class="img-icon img-icon-ri"
+                                                    <img class="img-icon img-icon-ri" loading="lazy"
                                                         src="{{ URL::asset('/assets/image/home/screenshot_frame.png') }}">
                                                     {{ $home2->room_width }} ตร.ม.
                                                 </span>
@@ -292,7 +292,7 @@
                                             <div class="box-new">NEW</div>
                                         @endif
                                         <div class="box-img-new">
-                                            <img class="img-0831 lazy"
+                                            <img class="img-0831 lazy" loading="lazy"
                                                 data-src="{{ URL::asset('img/product/' . $imgUrl[0]) }}">
                                         </div>
                                         <div class="box-name-new">
@@ -306,7 +306,7 @@
                                             @if ($home->train_name != 'ไม่มี' && $home->train_name)
                                                 @if ($home->time_arrive < '61')
                                                     <p class="name-details">
-                                                        <img class="img-icon"
+                                                        <img class="img-icon" loading="lazy"
                                                             src="{{ URL::asset('/assets/image/home/directions_subway.png') }}">
                                                         {{ $home->train_name }}
                                                     </p>
@@ -315,12 +315,12 @@
 
                                             <p class="number-rooms text-ellipsis">
                                                 <span class="img-icon-ri2">
-                                                    <img class="img-icon img-icon-ri"
+                                                    <img class="img-icon img-icon-ri" loading="lazy"
                                                         src="{{ URL::asset('/assets/image/home/bed.png') }}">
                                                     {{ $home->bedroom }} ห้องนอน
                                                 </span>
                                                 <span>
-                                                    <img class="img-icon img-icon-ri"
+                                                    <img class="img-icon img-icon-ri" loading="lazy"
                                                         src="{{ URL::asset('/assets/image/home/screenshot_frame.png') }}">
                                                     {{ $home->room_width }} ตร.ม.
                                                 </span>
@@ -406,13 +406,13 @@
                                             <div class="box-new">NEW</div>
                                         @endif
                                         <div class="box-img-new">
-                                            <img class="img-0831 lazy"
+                                            <img class="img-0831 lazy" loading="lazy"
                                                 data-src="{{ URL::asset('img/product/' . $imgUrl[0]) }}">
                                         </div>
                                         <div class="box-name-new">
                                             <p class="name-content">{{ $home->building_name }}</p>
                                             <p class="name-details">
-                                                <img class="img-icon "
+                                                <img class="img-icon" loading="lazy"
                                                     src="{{ URL::asset('/assets/image/home/location_on.png') }}">
                                                 {{ $home->districts_name_th }} {{ $home->amphures_name_th }}
                                                 {{ $home->provinces_name_th }}
@@ -420,7 +420,7 @@
                                             @if ($home->train_name != 'ไม่มี' && $home->train_name)
                                                 @if ($home->time_arrive < '61')
                                                     <p class="name-details">
-                                                        <img class="img-icon"
+                                                        <img class="img-icon" loading="lazy"
                                                             src="{{ URL::asset('/assets/image/home/directions_subway.png') }}">
                                                         {{ $home->train_name }}
                                                     </p>
@@ -429,12 +429,12 @@
 
                                             <p class="number-rooms text-ellipsis">
                                                 <span class="img-icon-ri2">
-                                                    <img class="img-icon img-icon-ri"
+                                                    <img class="img-icon img-icon-ri" loading="lazy"
                                                         src="{{ URL::asset('/assets/image/home/bed.png') }}">
                                                     {{ $home->bedroom }} ห้องนอน
                                                 </span>
                                                 <span>
-                                                    <img class="img-icon img-icon-ri"
+                                                    <img class="img-icon img-icon-ri" loading="lazy"
                                                         src="{{ URL::asset('/assets/image/home/screenshot_frame.png') }}">
                                                     {{ $home->room_width }} ตร.ม.
                                                 </span>
@@ -526,81 +526,14 @@
 
     </div>
 
-    <!-- Modal -->
-    {{--     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="modal-title fs-5">
-                        <img class="filter_alt-img" src="{{ URL::asset('/assets/image/home/filter_alt.png') }}">กรอง
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="user" id="myForm" method="POST" action="{{ route('search-data') }}"
-                        enctype="multipart/form-data">
-                        @csrf
-                        <p class="font-size-12-black">ประเภททรัพย์</p>
-                        <div class="flex-direction-row">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="property_type" value="คอนโด"
-                                    id="property_type1">
-                                <label class="form-check-label check-icon" for="property_type1">
-                                    <img class="property-img" src="{{ URL::asset('/assets/image/home/apartment.png') }}">
-                                    <p class="font-size-12-black text-lr">คอนโด</p>
-                                </label>
-                            </div>
-                            &nbsp; &nbsp; &nbsp; &nbsp;
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="property_type" value="บ้าน"
-                                    id="property_type2">
-                                <label class="form-check-label check-icon" for="property_type2">
-                                    <img class="property-img" src="{{ URL::asset('/assets/image/home/cottage.png') }}">
-                                    <p class="font-size-12-black text-lr-2">บ้าน</p>
-                                </label>
-                            </div>
-                        </div>
-                        <p class="font-size-12-black mt-21">ประเภทสัญญา</p>
-                        <div class="flex-direction-row">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="rent_sell" value="เช่า"
-                                    id="rent_sell1">
-                                <label class="form-check-label" for="rent_sell1">เช่า</label>
-                            </div>
-                            &nbsp; &nbsp; &nbsp; &nbsp;
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="rent_sell" value="ขาย"
-                                    id="rent_sell2">
-                                <label class="form-check-label" for="rent_sell2">ขาย</label>
-                            </div>
-                            &nbsp; &nbsp; &nbsp; &nbsp;
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="rent_sell" value="เช่า/ขาย"
-                                    id="rent_sell3">
-                                <label class="form-check-label" for="rent_sell3">เช่า/ขาย</label>
-                            </div>
-                        </div>
-                        <p class="font-size-12-black mt-21">พื้นที่</p>
-                        @include('layouts.address')
 
-                        <p class="font-size-12-black mt-21">สถานีรถไฟฟ้า</p>
-                        <img class="property-img" src="{{ URL::asset('/assets/image/home/directions_subway.png') }}">
-                        @include('layouts.train_station')
-                        <div class="box-button">
-                            <button class="btn-search">ค้นหา</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    @include('layouts.home_address') --}}
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">
-                        <img class="icon-filterData" src="{{ URL::asset('/assets/image/welcome/filterData.png') }}">
+                        <img class="icon-filterData" loading="lazy"
+                            src="{{ URL::asset('/assets/image/welcome/filterData.png') }}">
 
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -613,12 +546,13 @@
 
                         <div class="row-box">
                             <div class="filter-box selected" data-type="area" onclick="toggleSelection(this)">
-                                <img class="icon-location"
+                                <img class="icon-location" loading="lazy"
                                     src="{{ URL::asset('/assets/image/welcome/location_on.png') }}">
                                 <p>ย่าน</p>
                             </div>
                             <div class="filter-box" data-type="station" onclick="toggleSelection(this)">
-                                <img class="icon-location" src="{{ URL::asset('/assets/image/welcome/train.png') }}">
+                                <img class="icon-location" loading="lazy"
+                                    src="{{ URL::asset('/assets/image/welcome/train.png') }}">
                                 <p>สถานีรถไฟฟ้า</p>
                             </div>
                         </div>
@@ -670,7 +604,8 @@
                                 <input class="form-check-input" type="radio" name="property_type" value="บ้าน"
                                     id="property_type2" style="display: none">
                                 <label class="form-check-label2" for="property_type2">
-                                    <img class="property-img" src="{{ URL::asset('/assets/image/home/cottage.png') }}">
+                                    <img class="property-img" loading="lazy"
+                                        src="{{ URL::asset('/assets/image/home/cottage.png') }}">
                                     <p class="font-size-12-black">บ้าน</p>
                                 </label>
                             </div>
@@ -678,7 +613,8 @@
                                 <input class="form-check-input" type="radio" name="property_type" value="คอนโด"
                                     id="property_type1" style="display: none">
                                 <label class="form-check-label2 check-icon" for="property_type1">
-                                    <img class="property-img" src="{{ URL::asset('/assets/image/home/apartment.png') }}">
+                                    <img class="property-img" loading="lazy"
+                                        src="{{ URL::asset('/assets/image/home/apartment.png') }}">
                                     <p class="font-size-12-black text-center">คอนโด</p>
                                 </label>
                             </div>
@@ -688,7 +624,7 @@
                                 <input class="form-check-input" type="radio" name="property_type" value="ทาวน์เฮาส์"
                                     id="property_type3" style="display: none">
                                 <label class="form-check-label2" for="property_type3">
-                                    <img class="property-img"
+                                    <img class="property-img" loading="lazy"
                                         src="{{ URL::asset('/assets/image/welcome/fluent_.png') }}">
                                     <p class="font-size-12-black">ทาวน์เฮาส์</p>
                                 </label>
@@ -697,7 +633,7 @@
                                 <input class="form-check-input" type="radio" name="property_type" value="ที่ดิน"
                                     id="property_type4" style="display: none">
                                 <label class="form-check-label2" for="property_type4">
-                                    <img class="property-img"
+                                    <img class="property-img" loading="lazy"
                                         src="{{ URL::asset('/assets/image/welcome/group_49.png') }}">
                                     <p class="font-size-12-black">ที่ดิน</p>
                                 </label>
@@ -706,7 +642,7 @@
                                 <input class="form-check-input" type="radio" name="property_type" value="พาณิชย์"
                                     id="property_type5" style="display: none">
                                 <label class="form-check-label2" for="property_type5">
-                                    <img class="property-img"
+                                    <img class="property-img" loading="lazy"
                                         src="{{ URL::asset('/assets/image/welcome/location_city.png') }}">
                                     <p class="font-size-12-black">พาณิชย์</p>
                                 </label>
@@ -761,7 +697,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">
-                        <img class="icon-filterData" src="{{ URL::asset('/assets/image/welcome/filter.png') }}">
+                        <img class="icon-filterData" loading="lazy"
+                            src="{{ URL::asset('/assets/image/welcome/filter.png') }}">
 
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
