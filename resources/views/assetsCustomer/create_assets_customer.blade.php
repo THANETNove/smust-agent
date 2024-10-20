@@ -73,7 +73,7 @@
                     </div>
                     <p class="price-range mt-3 mb-3">ทำเล</p>
                     @include('layouts.address')
-                    <p class="price-range mt-3">สถานีรถไฟฟ้า</p>
+
                     @php
                         // Group the train data by line_code
                         $groupedTrain = $train->groupBy('line_code');
@@ -129,6 +129,7 @@
                         @endphp
                         <!-- ปุ่ม input ที่จะเปิด modal -->
                         <div id="station-select" style="display: none;">
+                            <p class="price-range mt-3">สถานีรถไฟฟ้า</p>
                             <div class="input-group">
                                 <input type="text" id="train_station_input" class="form-control col-12"
                                     data-bs-toggle="modal" data-bs-target="#stationModal" placeholder="เลือกสถานีรถไฟฟ้า"
