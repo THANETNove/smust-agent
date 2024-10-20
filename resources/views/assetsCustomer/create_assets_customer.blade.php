@@ -150,8 +150,8 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="stationModalLabel">เลือกสถานี</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <button type="button" class="btn-close" id="btn-close-train"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
 
                                     </div>
                                     <p style="margin-left: 16px" id="station_name_select"></p>
@@ -270,6 +270,11 @@
                             }
                         });
 
+
+                        const button = document.getElementById('btn-close-train');
+
+                        // Trigger a click event on the button
+                        button.click();
                         // ใส่ค่า stationId และ stationName ที่แยกแล้วลงใน input field
                         document.getElementById('train_station_input').value = stationName;
                         document.getElementById('train_station_input_id').value = stationId;
