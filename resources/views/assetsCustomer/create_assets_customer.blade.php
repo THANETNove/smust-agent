@@ -130,10 +130,13 @@
                         <!-- ปุ่ม input ที่จะเปิด modal -->
                         <div id="station-select" style="display: none;">
                             <div class="input-group">
-                                <input type="text" id="train_station_input" name="station" class="form-control col-12"
+                                <input type="text" id="train_station_input" class="form-control col-12"
                                     data-bs-toggle="modal" data-bs-target="#stationModal" placeholder="เลือกสถานีรถไฟฟ้า"
                                     readonly>
                             </div>
+
+                            <input type="text" id="train_station_input_id" name="station" class="form-control col-12"
+                                style="display: none">
                         </div>
 
 
@@ -202,7 +205,8 @@
                                                                 $prefix = 'ARL';
                                                             }
                                                         @endphp
-                                                        <option value="{{ $station->id }}">
+                                                        <option
+                                                            value="{{ $station->id }}/{{ $station->station_name_th }}">
                                                             {{ $prefix }} {{ $station->station_name_th }}
                                                         </option>
                                                     @endforeach
@@ -244,14 +248,16 @@
             document.querySelectorAll('.station-select').forEach(select => {
                 select.addEventListener('change', function() {
                     // ดึงค่าที่เลือกจาก dropdown ปัจจุบัน
-                    const selectedStation = this.value;
+                    const selectedValue = this.value;
 
-                    // แสดงค่า selectedStation ใน console เพื่อการตรวจสอบ
-                    console.log("Selected Station:", selectedStation);
+                    // แสดงค่า selectedValue ใน console เพื่อการตรวจสอบ
+                    console.log("Selected Value:", selectedValue);
+
+                    // แยกค่า station_id และ station_name_th ด้วยการ split
+                    const [stationId, stationName] = selectedValue.split('/');
 
                     // ตรวจสอบว่ามีค่าที่เลือกใหม่
-                    if (selectedStation !==
-                        '') { // ตรวจสอบว่าไม่ใช่ค่าว่าง (ซึ่งอาจเกิดจาก <option> ที่ disabled)
+                    if (stationId && stationName) { // ตรวจสอบว่าไม่ใช่ค่าว่าง
                         // ลบค่าที่อยู่ใน input field (ลบค่าเก่าทิ้ง)
                         document.getElementById('train_station_input').value = '';
                         document.getElementById('station_name_select').innerText = '';
@@ -263,14 +269,12 @@
                             }
                         });
 
-                        // ใส่ค่าที่เลือกใหม่ลงใน input field
-                        document.getElementById('train_station_input').value = selectedStation;
-                        document.getElementById('station_name_select').innerText = "เลือกสถานี " +
-                            selectedStation;
+                        // ใส่ค่า stationId และ stationName ที่แยกแล้วลงใน input field
+                        document.getElementById('train_station_input').value = stationName;
+                        document.getElementById('train_station_input_id').value = stationId;
+                        document.getElementById('station_name_select').innerText = "เลือกสถานี " + stationName;
 
-                        // ปิด modal หลังจากเลือก (ถ้าต้องการใช้งาน)
-                        /* const modal = bootstrap.Modal.getInstance(document.getElementById('stationModal'));
-                           modal.hide(); */
+
                     }
                 });
             });
