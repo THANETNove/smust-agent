@@ -488,6 +488,9 @@ input[autofocus]:focus {
     -webkit-box-orient: vertical;
 }
 
+.right-align {
+    text-align: right;
+}
 
 
 .img-icon {

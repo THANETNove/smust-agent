@@ -127,14 +127,25 @@
 
                         </div>
                         <div class="wel-name-home-condo">
+
                             {{ $home->building_name }}
+
+
                         </div>
                         <!-- Corrected the col-md class here -->
 
                     </div>
 
-
-
+                    @php
+                        $createdAt = \Carbon\Carbon::parse($home->created_at);
+                    @endphp
+                    <p class="period-text mt-align-condo">โพสเมื่อ:
+                        @if ($createdAt->isToday())
+                            {{ $createdAt->format('H:i') }}
+                        @else
+                            {{ $createdAt->format('d-m-Y') }}
+                        @endif
+                    </p>
 
 
                     @if ($home->rent_sell == 'เช่า/ขาย' || $home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
