@@ -40,6 +40,7 @@
                 <button type="button" class="btn-close" id="btn-close-train" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
+            <p style="margin-left: 16px" id="station_name_select"></p>
             <div class="modal-body">
                 @foreach ($groupedTrain as $lineCode => $stations)
                     <div class="input-group mb-2">
@@ -83,6 +84,8 @@
             // Get the selected value
             let selectedValue = this.value;
             document.getElementById('stations').value = selectedValue;
+            document.getElementById('station_name_select').innerText = "เลือกสถานี " + selectedValue;
+
 
             // Reset all other select elements to default (empty)
             document.querySelectorAll('.station-select').forEach(otherSelect => {
