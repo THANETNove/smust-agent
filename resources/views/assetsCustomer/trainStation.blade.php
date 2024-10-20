@@ -42,13 +42,12 @@
             </div>
             <div class="modal-body">
                 @foreach ($groupedTrain as $lineCode => $stations)
-                    <div class="input-group">
+                    <div class="input-group mb-2">
                         <label class="input-group-icon" for="">
                             <i class="fa-solid fa-train-subway"
                                 style="color: {{ $lineStyles[$lineCode]['bgColor'] ?? '#FFFFFF' }};"></i>
                         </label>
-                        <select class="form-select mt-3 station-select"{{--  name="stations" --}}
-                            id="station_{{ $lineCode }}"
+                        <select class="form-select station-select"{{--  name="stations" --}} id="station_{{ $lineCode }}"
                             style="color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
                             <option selected disabled> {{ $stations[0]->line_name }}</option>
 
