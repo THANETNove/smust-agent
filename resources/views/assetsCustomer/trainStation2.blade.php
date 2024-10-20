@@ -27,7 +27,7 @@
     ];
 @endphp
 
-
+<p style="margin-top: 12px">สถานีรถไฟ</p>
 <input type="text" id="stations" class="form-control col-12 mb-3" name="stations" onclick="showTrainStations()"
     placeholder="เลือกสถานีรถไฟฟ้า" readonly>
 <div id="groupedTrain" style="display: none">
