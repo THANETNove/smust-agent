@@ -79,7 +79,7 @@
             // Get the selected value
             let selectedValue = this.value;
             document.getElementById('stations-name').value = selectedValue;
-
+            document.getElementById('stations').value = selectedValue;
             // document.getElementById('station_name_select').innerText = "เลือกสถานี " + selectedValue;
 
 
