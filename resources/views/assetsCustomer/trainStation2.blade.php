@@ -27,53 +27,69 @@
     ];
 @endphp
 
-@foreach ($groupedTrain as $lineCode => $stations)
-    <div class="input-group">
-        <label class="input-group-icon" for="">
-            <i class="fa-solid fa-train-subway" style="color: {{ $lineStyles[$lineCode]['bgColor'] ?? '#FFFFFF' }};"></i>
-        </label>
-        <select class="form-select mt-3 station-select station_name" name="stations" id="station_{{ $lineCode }}"
-            style="color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
-            {{--   <option selected disabled>สถานีรถไฟฟ้าที่ใกล้ที่สุด</option> --}}
 
-            @foreach ($stations as $station)
-                @php
-                    $prefix = '';
-                    if (in_array($lineCode, ['Light green', 'Dark green'])) {
-                        $prefix = 'BTS';
-                    } elseif (in_array($lineCode, ['Blue', 'Purple'])) {
-                        $prefix = 'MRT';
-                    } elseif (in_array($lineCode, ['ARL'])) {
-                        $prefix = 'ARL';
-                    }
-                @endphp
-                <option value="{{ $station->station_name_th }}"
-                    style="color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
-                    {{ $prefix }} {{ $station->station_name_th }}
-                </option>
-            @endforeach
-        </select>
-    </div>
-@endforeach
+<input type="text" id="stations" class="form-control col-12 mb-3" name="stations" onclick="showTrainStations()"
+    placeholder="เลือกสถานีรถไฟฟ้า" readonly>
+<div id="groupedTrain" style="display: none">
+    @foreach ($groupedTrain as $lineCode => $stations)
+        <div class="input-group mb-2">
+            <label class="input-group-icon" for="">
+                <i class="fa-solid fa-train-subway"
+                    style="color: {{ $lineStyles[$lineCode]['bgColor'] ?? '#FFFFFF' }};"></i>
+            </label>
+            <select class="form-select station-select"{{--  name="stations" --}} id="station_{{ $lineCode }}"
+                style="color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
+                <option selected disabled> {{ $stations[0]->line_name }}</option>
+
+                @foreach ($stations as $station)
+                    @php
+                        $prefix = '';
+                        if (in_array($lineCode, ['Light green', 'Dark green'])) {
+                            $prefix = 'BTS';
+                        } elseif (in_array($lineCode, ['Blue', 'Purple'])) {
+                            $prefix = 'MRT';
+                        } elseif (in_array($lineCode, ['ARL'])) {
+                            $prefix = 'ARL';
+                        }
+                    @endphp
+                    <option value="{{ $station->station_name_th }}"
+                        style="color: {{ $lineStyles[$lineCode]['textColor'] ?? '#000000' }};">
+                        {{ $prefix }} {{ $station->station_name_th }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+    @endforeach
+</div>
 
 <script>
+    function showTrainStations() {
+        // แสดง div ที่ซ่อนอยู่
+        const groupedTrainDiv = document.getElementById('groupedTrain');
+        if (groupedTrainDiv.style.display === 'none' || groupedTrainDiv.style.display === '') {
+            groupedTrainDiv.style.display = 'block'; // เปลี่ยน display เป็น block เพื่อแสดง
+        } else {
+            groupedTrainDiv.style.display = 'none'; // ซ่อนถ้ามีการคลิกซ้ำ
+        }
+    }
+
     // Add an event listener for each select element
     document.querySelectorAll('.station-select').forEach(selectElement => {
         selectElement.addEventListener('change', function() {
             // Get the selected value
             let selectedValue = this.value;
             document.getElementById('stations').value = selectedValue;
+            // document.getElementById('station_name_select').innerText = "เลือกสถานี " + selectedValue;
+
 
             // Reset all other select elements to default (empty)
             document.querySelectorAll('.station-select').forEach(otherSelect => {
                 if (otherSelect !== this) {
                     otherSelect.selectedIndex = 0; // Set to the first option (Select Station)
+                    const groupedTrainDiv = document.getElementById('groupedTrain');
+                    groupedTrainDiv.style.display = 'none';
                 }
             });
-            const button = document.getElementById('btn-close-train');
-
-            // Trigger a click event on the button
-            button.click();
         });
 
     });
