@@ -57,17 +57,21 @@ class AssetsCustomersWantController extends Controller
                 )
                 ->orderBy('assets_customers_wants.created_at', 'DESC');
 
-            if ($request->all()) {
+            /*   if ($request->all()) {
+
                 $query->when($request->area_station == "area", function ($query) use ($request) {
+                    // Filter by province, district, and amphure if area is selected
                     $query->when($request->has('provinces'), function ($q) use ($request) {
                         $q->where('assets_customers_wants.provinces', $request->input('provinces'));
-                    })
-                        ->when($request->has('districts'), function ($q) use ($request) {
-                            $q->where('assets_customers_wants.districts', $request->input('districts'));
-                        })
-                        ->when($request->has('amphures'), function ($q) use ($request) {
-                            $q->where('assets_customers_wants.amphures', $request->input('amphures'));
-                        });
+                    });
+
+                    $query->when($request->has('districts'), function ($q) use ($request) {
+                        $q->where('assets_customers_wants.districts', $request->input('districts'));
+                    });
+
+                    $query->when($request->has('amphures'), function ($q) use ($request) {
+                        $q->where('assets_customers_wants.amphures', $request->input('amphures'));
+                    });
                 }, function ($query) use ($request) {
                     $query->when($request->has('stations'), function ($q) use ($request) {
                         $q->where('assets_customers_wants.station_name', $request->input('stations'));
@@ -83,7 +87,47 @@ class AssetsCustomersWantController extends Controller
                         $query->whereRaw('JSON_CONTAINS(assets_customers_wants.options, ?)', [json_encode($option)]);
                     }
                 }
+            } */
+            if ($request->all()) {
+
+
+                $query->when($request->area_station == "area", function ($query) use ($request) {
+                    // Filter by province, district, and amphure if area is selected
+                    $query->when($request->has('provinces'), function ($q) use ($request) {
+                        $q->where('assets_customers_wants.provinces', $request->input('provinces'));
+                    });
+
+                    $query->when($request->has('districts'), function ($q) use ($request) {
+                        $q->where('assets_customers_wants.districts', $request->input('districts'));
+                    });
+
+                    $query->when($request->has('amphures'), function ($q) use ($request) {
+                        $q->where('assets_customers_wants.amphures', $request->input('amphures'));
+                    });
+                }, function ($query) use ($request) {
+
+                    // Filter by station if area is not selected
+                    $query->when($request->has('stations'), function ($q) use ($request) {
+
+                        $q->where('assets_customers_wants.station', $request->input('stations'));
+                    });
+                });
+
+                // Filter by sale or rent status
+                $query->when($request->has('sale_rent') && $request->input('sale_rent') !== 'sale_rent', function ($query) use ($request) {
+                    $query->where('assets_customers_wants.sale_rent', $request->input('sale_rent'));
+                });
+
+                // Filter by options if provided
+                if ($request->has('options') && !empty($request->input('options'))) {
+
+
+                    foreach ($request->input('options') as $option) {
+                        $query->whereRaw('JSON_CONTAINS(assets_customers_wants.options, ?)', [json_encode($option)]);
+                    }
+                }
             }
+
 
 
 
