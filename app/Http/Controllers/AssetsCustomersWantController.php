@@ -109,7 +109,7 @@ class AssetsCustomersWantController extends Controller
                     // Filter by station if area is not selected
                     $query->when($request->has('stations'), function ($q) use ($request) {
 
-                        $q->where('assets_customers_wants.station', $request->input('stations'));
+                        $q->where('assets_customers_wants.station_name', $request->input('stations'));
                     });
                 });
 

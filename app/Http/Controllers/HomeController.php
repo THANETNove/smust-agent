@@ -278,10 +278,11 @@ class HomeController extends Controller
                 'rent_sell_home_details.*',
                 'provinces.name_th AS provinces_name_th',
                 'districts.name_th AS districts_name_th',
-                'amphures.name_th AS amphures_name_th'
-            )->orderBy('rent_sell_home_details.id', 'DESC');
+                'amphures.name_th AS amphures_name_th',
+                'favorites.id as favoritesId'
+            )->orderBy('favorites.id', 'DESC');
 
-        /*  dd($dataHomeQuery->get()); */
+        //dd($dataHomeQuery->get());
 
         // dd($request->all());
 
