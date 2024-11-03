@@ -273,6 +273,7 @@ class HomeController extends Controller
             ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
             ->join('favorites', 'rent_sell_home_details.id', '=', 'favorites.id_product')
             ->where('favorites.user_id', Auth::user()->id)
+            ->where('favorites.status_favorites', 1)
             ->select(
                 'rent_sell_home_details.*',
                 'provinces.name_th AS provinces_name_th',
@@ -280,7 +281,7 @@ class HomeController extends Controller
                 'amphures.name_th AS amphures_name_th'
             )->orderBy('rent_sell_home_details.id', 'DESC');
 
-       /*  dd($dataHomeQuery->get()); */
+        /*  dd($dataHomeQuery->get()); */
 
         // dd($request->all());
 
