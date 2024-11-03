@@ -200,7 +200,7 @@ class AssetsCustomersWantController extends Controller
         $member->amphures = $request['amphures'];
         $member->notifications = 1;
 
-        if ($request->has('station') && $request['station'] != 'null') {
+        if ($request->has('station') && $request['station'] != null) {
             $train = DB::table('train_station')
                 ->where('status', 1)
                 ->where('id', $request['station'])

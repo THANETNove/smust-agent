@@ -13,9 +13,10 @@
                 if (selectedProvinceId == '1') {
                     stationSelect.style.display = 'block';
                 } else {
+                    stationSelect.style.display = 'none';
                     const station = document.getElementById('station');
                     if (station) { // Check if station exists
-                        stationSelect.style.display = 'none';
+
                         station.value = 'null';
                     }
                 }
