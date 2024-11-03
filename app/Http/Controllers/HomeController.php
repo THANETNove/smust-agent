@@ -268,11 +268,11 @@ class HomeController extends Controller
         // Create base query
         $dataHomeQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.status_home', 'on')
-            ->where('rent_sell_home_details.user_id', Auth::user()->id)
             ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
             ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
             ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
             ->join('favorites', 'rent_sell_home_details.id', '=', 'favorites.id_product')
+            ->where('favorites.user_id', Auth::user()->id)
             ->select(
                 'rent_sell_home_details.*',
                 'provinces.name_th AS provinces_name_th',
@@ -280,7 +280,7 @@ class HomeController extends Controller
                 'amphures.name_th AS amphures_name_th'
             )->orderBy('rent_sell_home_details.id', 'DESC');
 
-
+       /*  dd($dataHomeQuery->get()); */
 
         // dd($request->all());
 
