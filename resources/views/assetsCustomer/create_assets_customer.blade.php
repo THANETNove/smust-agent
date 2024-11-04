@@ -28,14 +28,14 @@
                     <p class="contract-type">ประเภทสัญญา <span style="color: red">*</span></p>
                     <div class="row-box">
                         <div class="filter-box-input2 form-check selected" data-type="sell">
-                            <input class="form-check-input" type="radio" name="sale_rent" value="sale"
-                                id="filterStation" onclick="toggleSelectionBox(this)" checked>
+                            <input {{-- class="form-check-input" --}} type="radio" name="sale_rent" value="sale" id="filterStation"
+                                onclick="toggleSelectionBox(this)" checked>
                             <label class="form-check-label" for="filterStation">
                                 ขาย
                             </label>
                         </div>
                         <div class="filter-box-input2 form-check" data-type="area">
-                            <input class="form-check-input" type="radio" name="sale_rent" value="rent" id="filterArea"
+                            <input {{-- class="form-check-input" --}} type="radio" name="sale_rent" value="rent" id="filterArea"
                                 onclick="toggleSelectionBox(this)">
                             <label class="form-check-label" for="filterArea">
 
@@ -206,8 +206,7 @@
                                                                 $prefix = 'ARL';
                                                             }
                                                         @endphp
-                                                        <option
-                                                            value="{{ $station->id }}/{{ $station->station_name_th }}">
+                                                        <option value="{{ $station->id }}/{{ $station->station_name_th }}">
                                                             {{ $prefix }} {{ $station->station_name_th }}
                                                         </option>
                                                     @endforeach
