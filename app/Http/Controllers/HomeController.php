@@ -202,25 +202,29 @@ class HomeController extends Controller
 
                 //TODO ราคา
                 if ($request->too_little == 'price_min_max') {
-                    $dataHomeQuery->orderBy('rent_sell_home_details.rental_price', 'ASC')
-                        ->orderBy('rent_sell_home_details.sell_price', 'ASC');
+
+                    /* dd("aa"); */
+                    $dataHomeQuery->orderByRaw('GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price) ASC');
                 }
                 if ($request->too_little == 'price_max_min') {
-                    $dataHomeQuery->orderBy('rent_sell_home_details.rental_price', 'DESC')
-                        ->orderBy('rent_sell_home_details.sell_price', 'DESC');
+                    $dataHomeQuery->orderByRaw('GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price) DESC');
                 }
                 //TODO พื้นที่
+
+
                 if ($request->too_little == 'area_min_max') {
+
                     $dataHomeQuery->orderBy('rent_sell_home_details.room_width', 'ASC');
                 }
                 if ($request->too_little == 'area_max_min') {
                     $dataHomeQuery->orderBy('rent_sell_home_details.room_width', 'DESC');
                 }
                 //TODO จํานวนชั้น
-                if ($request->too_little == 'area_min_max') {
+                if ($request->too_little == 'floors_min_max') {
                     $dataHomeQuery->orderBy('rent_sell_home_details.number_floors', 'ASC');
                 }
-                if ($request->too_little == 'area_max_min') {
+                if ($request->too_little == 'floors_max_min') {
+
                     $dataHomeQuery->orderBy('rent_sell_home_details.number_floors', 'DESC');
                 }
             }

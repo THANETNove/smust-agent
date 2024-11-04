@@ -79,6 +79,16 @@
                                                     {{ $home2->room_width }} ตร.ม.
                                                 </span>
                                             </p>
+                                            @if ($home2->number_floors)
+                                                <p class="number-rooms text-ellipsis">
+                                                    <span class="img-icon-ri2">
+                                                        <img class="img-icon img-icon-ri" loading="lazy"
+                                                            src="{{ URL::asset('/assets/image/home/floor.png') }}">
+                                                        {{ $home2->number_floors }} ชั้น
+                                                    </span>
+                                                </p>
+                                            @endif
+
                                         </div>
 
                                         @php
@@ -195,6 +205,16 @@
                                                     {{ $home2->room_width }} ตร.ม.
                                                 </span>
                                             </p>
+                                            @if ($home2->number_floors)
+                                                <p class="number-rooms text-ellipsis">
+                                                    <span class="img-icon-ri2">
+                                                        <img class="img-icon img-icon-ri" loading="lazy"
+                                                            src="{{ URL::asset('/assets/image/home/floor.png') }}">
+                                                        {{ $home2->number_floors }} ชั้น
+                                                    </span>
+                                                </p>
+                                            @endif
+
                                         </div>
 
                                         @php
@@ -325,6 +345,15 @@
                                                     {{ $home->room_width }} ตร.ม.
                                                 </span>
                                             </p>
+                                            @if ($home->number_floors)
+                                                <p class="number-rooms text-ellipsis">
+                                                    <span class="img-icon-ri2">
+                                                        <img class="img-icon img-icon-ri" loading="lazy"
+                                                            src="{{ URL::asset('/assets/image/home/floor.png') }}">
+                                                        {{ $home->number_floors }} ชั้น
+                                                    </span>
+                                                </p>
+                                            @endif
                                         </div>
 
                                         @php
@@ -439,6 +468,15 @@
                                                     {{ $home->room_width }} ตร.ม.
                                                 </span>
                                             </p>
+                                            @if ($home->number_floors)
+                                                <p class="number-rooms text-ellipsis">
+                                                    <span class="img-icon-ri2">
+                                                        <img class="img-icon img-icon-ri" loading="lazy"
+                                                            src="{{ URL::asset('/assets/image/home/floor.png') }}">
+                                                        {{ $home->number_floors }} ชั้น
+                                                    </span>
+                                                </p>
+                                            @endif
                                         </div>
 
                                         @php

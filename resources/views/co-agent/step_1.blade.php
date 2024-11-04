@@ -159,7 +159,7 @@
     </div>
 
 </div>
-<div class="mb-3">
+<div class="mb-3" id="station-select" style="display: none;">
     <input type="text" class="form-control" data-bs-toggle="modal" name="stations" id="stations"
         data-bs-target="#exampleModal" placeholder="สถานีรถไฟฟ้าที่ใกล้ที่สุด" readonly>
     @include('assetsCustomer.trainStation')

@@ -22,7 +22,7 @@
 
 <div class="row mt-3 mb-3">
     <div class="col-md-12 mb-3 input_box">
-        <input id="url_video" type="url" class="form-control @error('url_video') is-invalid @enderror"
+        <input id="url_video" type="text" class="form-control @error('url_video') is-invalid @enderror"
             name="url_video" value="{{ old('url_video') }}" autocomplete="meters_store">
         <label>ลิงก์ Video (ลิงก์ Video youtube)*</label>
         @error('url_video')
@@ -47,7 +47,7 @@
 </div>
 <div class="row mb-3">
     <div class="col-md-12 mb-3 input_box">
-        <input id="url_gps" type="url" class="form-control @error('url_gps') is-invalid @enderror" name="url_gps"
+        <input id="url_gps" type="text" class="form-control @error('url_gps') is-invalid @enderror" name="url_gps"
             value="{{ old('url_gps') }}" autocomplete="url_gps">
         <label>พิกัดที่ตั้ง (ลิงก์ Google Maps)*</label>
         @error('url_gps')
