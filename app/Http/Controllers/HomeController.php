@@ -135,6 +135,7 @@ class HomeController extends Controller
 
 
                         if ($request->has('price_range')) {
+
                             if (strpos($priceRange, '-') !== false) {
                                 [$minPrice, $maxPrice] = explode('-', $priceRange);
                                 $dataHomeQuery->whereBetween('rent_sell_home_details.rental_price', [$minPrice, $maxPrice]);
@@ -149,6 +150,7 @@ class HomeController extends Controller
                         // การเช่าจะทำงานแบบเดียวกันกับการขาย
 
                     } else {
+
                         // กรณีเลือกทั้งการขายและเช่า
                         if ($request->has('price_range')) {
                             if (strpos($priceRange, '-') !== false) {
@@ -199,12 +201,16 @@ class HomeController extends Controller
             //! เรียงตามน้อย - มาก/ มาก-น้อย
             if ($request->has('too_little')) {
 
-
                 //TODO ราคา
                 if ($request->too_little == 'price_min_max') {
-
-                    /* dd("aa"); */
-                    $dataHomeQuery->orderByRaw('GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price) ASC');
+                    $dataHomeQuery->orderByRaw('
+                    CASE 
+                        WHEN GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price) > 0 THEN 0
+                        ELSE 1
+                    END ASC,
+                    GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price) ASC
+                ');
+                    /*  $dataHomeQuery->orderByRaw('GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price) ASC'); */
                 }
                 if ($request->too_little == 'price_max_min') {
                     $dataHomeQuery->orderByRaw('GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price) DESC');
@@ -249,7 +255,6 @@ class HomeController extends Controller
 
         // Cache provinces and train station data
         $data = DB::table('provinces')->orderBy('name_th', 'ASC')->get();
-
 
 
 
