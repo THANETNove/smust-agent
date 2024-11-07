@@ -290,6 +290,9 @@
                         @endif
 
                     </div>
+                    {{-- @php
+                        dd($request['area_station']);
+                    @endphp --}}
                     @if ($authCount == 2)
                         <div class="mt-5">
                             {!! $dataHome2->links() !!}
@@ -564,31 +567,34 @@
 
     </div>
 
+    <form method="POST" action="{{ route('search-data') }}">
+        @csrf
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                        <img class="icon-filterData" loading="lazy"
-                            src="{{ URL::asset('/assets/image/welcome/filterData.png') }}">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            <img class="icon-filterData" loading="lazy"
+                                src="{{ URL::asset('/assets/image/welcome/filterData.png') }}">
 
-                    </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="POST" action="{{ route('search-data') }}">
-                    @csrf
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
 
                     <div class="modal-body">
                         <p>เลือกทำเลจาก</p>
 
                         <div class="row-box">
-                            <div class="filter-box selected" data-type="area" onclick="toggleSelection(this)">
+                            <div class="filter-box {{ isset($request['area_station']) && $request['area_station'] == 'area' ? 'selected' : '' }}"
+                                data-type="area" onclick="toggleSelection(this)">
                                 <img class="icon-location" loading="lazy"
                                     src="{{ URL::asset('/assets/image/welcome/location_on.png') }}">
                                 <p>ย่าน</p>
                             </div>
-                            <div class="filter-box" data-type="station" onclick="toggleSelection(this)">
+                            <div class="filter-box {{ isset($request['area_station']) && $request['area_station'] == 'station' ? 'selected' : '' }}"
+                                data-type="station" onclick="toggleSelection(this)">
                                 <img class="icon-location" loading="lazy"
                                     src="{{ URL::asset('/assets/image/welcome/train.png') }}">
                                 <p>สถานีรถไฟฟ้า</p>
@@ -686,63 +692,83 @@
                                 </label>
                             </div>
                         </div>
-
+                        @php
+                            $usableArea = $request['usable_area'] ?? null;
+                            $priceRange = $request['price_range'] ?? null;
+                            $datePosted = $request['date_posted'] ?? null;
+                        @endphp
                         <select class="form-select mb-3" aria-label="Default select example" name="usable_area">
-                            <option selected disabled>พื้นที่ใช้สอย</option>
-                            <option value="29">น้อยกว่า 30 ตร.ม.</option>
-                            <option value="30-50">30-50 ตร.ม.</option>
-                            <option value="50-100">50-100 ตร.ม.</option>
-                            <option value="100-1000">100-1,000 ตร.ม.</option>
-                            <option value="1000-5000">1,000-5,000 ตร.ม.</option>
-                            <option value="5001">มากกว่า 5,000 ตร.ม.</option>
+                            <option disabled {{ is_null($usableArea) ? 'selected' : '' }}>พื้นที่ใช้สอย</option>
+                            <option value="29" {{ $usableArea == '29' ? 'selected' : '' }}>น้อยกว่า 30 ตร.ม.</option>
+                            <option value="30-50" {{ $usableArea == '30-50' ? 'selected' : '' }}>30-50 ตร.ม.</option>
+                            <option value="50-100" {{ $usableArea == '50-100' ? 'selected' : '' }}>50-100 ตร.ม.</option>
+                            <option value="100-1000" {{ $usableArea == '100-1000' ? 'selected' : '' }}>100-1,000 ตร.ม.
+                            </option>
+                            <option value="1000-5000" {{ $usableArea == '1000-5000' ? 'selected' : '' }}>1,000-5,000
+                                ตร.ม.</option>
+                            <option value="5001" {{ $usableArea == '5001' ? 'selected' : '' }}>มากกว่า 5,000 ตร.ม.
+                            </option>
                         </select>
                         <select class="form-select mb-3" aria-label="Default select example" name="price_range">
-                            <option selected disabled>ช่วงราคา</option>
-                            <option value="9999">น้อยกว่า 10,000 บาท</option>
-                            <option value="10000-15000">10,000-15,0000 บาท</option>
-                            <option value="15000-20000">15,000-20,000 บาท</option>
-                            <option value="20000-30000">20,000-30,000 บาท</option>
-                            <option value="30000-50000">30,000-50,000 บาท</option>
-                            <option value="50000-100000">50,000-100,000 บาท</option>
-                            <option value="100000-500000">100,000-500,000 บาท</option>
-                            <option value="500000-1000000">500,000-1,000,000 บาท</option>
-                            <option value="1000000-2000000">1-2 ล้าน</option>
-                            <option value="2000000-3000000">2-3 ล้าน</option>
-                            <option value="3000000-5000000">3-5 ล้าน</option>
-                            <option value="5000000-10000000">5-10 ล้าน</option>
-                            <option value="10000001">มากกว่า 10 ล้าน</option>
+                            <option disabled {{ is_null($priceRange) ? 'selected' : '' }}>ช่วงราคา</option>
+                            <option value="9999" {{ $priceRange == '9999' ? 'selected' : '' }}>น้อยกว่า 10,000 บาท
+                            </option>
+                            <option value="10000-15000" {{ $priceRange == '10000-15000' ? 'selected' : '' }}>
+                                10,000-15,000 บาท</option>
+                            <option value="15000-20000" {{ $priceRange == '15000-20000' ? 'selected' : '' }}>
+                                15,000-20,000 บาท</option>
+                            <option value="20000-30000" {{ $priceRange == '20000-30000' ? 'selected' : '' }}>
+                                20,000-30,000 บาท</option>
+                            <option value="30000-50000" {{ $priceRange == '30000-50000' ? 'selected' : '' }}>
+                                30,000-50,000 บาท</option>
+                            <option value="50000-100000" {{ $priceRange == '50000-100000' ? 'selected' : '' }}>
+                                50,000-100,000 บาท</option>
+                            <option value="100000-500000" {{ $priceRange == '100000-500000' ? 'selected' : '' }}>
+                                100,000-500,000 บาท</option>
+                            <option value="500000-1000000" {{ $priceRange == '500000-1000000' ? 'selected' : '' }}>
+                                500,000-1,000,000 บาท</option>
+                            <option value="1000000-2000000" {{ $priceRange == '1000000-2000000' ? 'selected' : '' }}>1-2
+                                ล้าน</option>
+                            <option value="2000000-3000000" {{ $priceRange == '2000000-3000000' ? 'selected' : '' }}>2-3
+                                ล้าน</option>
+                            <option value="3000000-5000000" {{ $priceRange == '3000000-5000000' ? 'selected' : '' }}>3-5
+                                ล้าน</option>
+                            <option value="5000000-10000000" {{ $priceRange == '5000000-10000000' ? 'selected' : '' }}>
+                                5-10 ล้าน</option>
+                            <option value="10000001" {{ $priceRange == '10000001' ? 'selected' : '' }}>มากกว่า 10 ล้าน
+                            </option>
                         </select>
                         <select class="form-select" aria-label="Default select example" name="date_posted">
-                            <option selected disabled>วันที่โพส</option>
-                            <option value="1">วันนี้</option>
-                            <option value="2">สัปดาห์นี้</option>
-                            <option value="3">เดือนนี้</option>
-                            <option value="4">1-6 เดือน</option>
-                            <option value="5">6 เดือนขึ้นไป</option>
+                            <option disabled {{ is_null($datePosted) ? 'selected' : '' }}>วันที่โพส</option>
+                            <option value="1" {{ $datePosted == '1' ? 'selected' : '' }}>วันนี้</option>
+                            <option value="2" {{ $datePosted == '2' ? 'selected' : '' }}>สัปดาห์นี้</option>
+                            <option value="3" {{ $datePosted == '3' ? 'selected' : '' }}>เดือนนี้</option>
+                            <option value="4" {{ $datePosted == '4' ? 'selected' : '' }}>1-6 เดือน</option>
+                            <option value="5" {{ $datePosted == '5' ? 'selected' : '' }}>6 เดือนขึ้นไป</option>
                         </select>
                         <button type="submit" class="btn btn-primary col-12 mt-4 mb-3"> <span> <img
                                     class="icon-search-box"
                                     src="{{ URL::asset('/assets/image/welcome/search-box.png') }}"></span>คันหา</button>
 
                     </div>
-                </form>
+
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                        <img class="icon-filterData" loading="lazy"
-                            src="{{ URL::asset('/assets/image/welcome/filter.png') }}">
+        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            <img class="icon-filterData" loading="lazy"
+                                src="{{ URL::asset('/assets/image/welcome/filter.png') }}">
 
-                    </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="POST" action="{{ route('search-data') }}">
-                    @csrf
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
 
                     <div class="modal-body">
 
@@ -807,10 +833,198 @@
                         <button type="submit" class="btn btn-primary col-12 mt-4 mb-3"> <span> <img
                                     class="icon-search-box"
                                     src="{{ URL::asset('/assets/image/welcome/search-box.png') }}"></span>คันหา</button>
-                </form>
-            </div>
-        </div>
-    </div>
 
+                    </div>
+                </div>
+            </div>
+    </form>
     @include('jsHome')
+
+
+
+    <script>
+        // รับข้อมูลจาก PHP ไปยัง JavaScript โดยใช้ JSON
+        let requestData = @json($request);
+
+        console.log("requestData", requestData);
+
+        if (requestData) {
+            // ตรวจสอบว่า element ใดมีคลาส selected และเรียก toggleSelection
+            document.querySelectorAll('.filter-box.selected').forEach(function(element) {
+                toggleSelection(element);
+            });
+
+
+            //จังหวัด อำเภอ เขต
+            if (requestData.provinces) {
+                document.querySelector("#provinces-id").value = requestData.provinces;
+            }
+
+
+            // เมื่อเลือก "แขวง/ อำเภอ"
+
+            $.ajax({
+                url: "/get-districts/" + requestData.provinces,
+                type: "GET",
+
+                success: function(res) {
+                    // อัปเดตตัวเลือก "เขต/อำเภอ"
+                    var districtsSelect = $("#districts");
+                    districtsSelect.find("option").remove();
+                    districtsSelect.append(
+                        $("<option selected disabled>เขต/อำเภอ</option>")
+                    );
+
+                    $.each(res, function(index, district) {
+
+
+                        districtsSelect.append(
+                            $("<option>", {
+                                value: district.id,
+                                text: district.name_th,
+                                selected: district.id == requestData.districts
+                            })
+                        );
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                },
+            });
+
+
+            $.ajax({
+                url: "/get-amphures/" + requestData.districts,
+                type: "GET",
+                success: function(res) {
+                    // อัปเดตตัวเลือก "แขวง/ อำเภอ"
+                    var amphuresSelect = $("#amphures");
+                    amphuresSelect.find("option").remove();
+                    amphuresSelect.append(
+                        $("<option selected disabled>แขวง/ตำบล</option>")
+                    );
+
+                    $.each(res, function(index, data) {
+
+                        amphuresSelect.append(
+                            $("<option>", {
+                                value: data.id,
+                                text: data.name_th,
+                                selected: data.id == requestData.amphures
+                            })
+                        );
+                        if (data.zip_code) {
+                            document.getElementById("zip_code").value =
+                                data.zip_code;
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                },
+            });
+
+            //  ประเภทสัญญา ชื้อ ขาย ทั้งหมด
+            let saleRent = requestData['sale_rent'] ?? '';
+
+
+            // ตรวจสอบว่า sale_rent มีค่าเป็น 'sale' และคลิกที่ปุ่ม filterStation อัตโนมัติ
+            if (saleRent == 'sale') {
+                const filterStationButton = document.getElementById('filterStation');
+                if (filterStationButton) {
+                    filterStationButton.click(); // คลิกที่ปุ่ม filterStation
+                }
+            }
+            if (saleRent == 'rent') {
+                const filterStationButton = document.getElementById('filterArea');
+                if (filterStationButton) {
+                    filterStationButton.click(); // คลิกที่ปุ่ม filterStation
+                }
+            }
+            if (saleRent == 'sale_rent') {
+                const filterStationButton = document.getElementById('filterAll');
+                if (filterStationButton) {
+                    filterStationButton.click(); // คลิกที่ปุ่ม filterStation
+                }
+            }
+
+            //  ประเภททรัพย์
+            let propertytypeName = requestData['property_type'] ?? '';
+
+            if (propertytypeName == 'บ้าน') {
+                const propertyType2 = document.getElementById('property_type2');
+                if (propertyType2) {
+                    propertyType2.click(); // คลิกที่ปุ่ม filterStation
+                    //propertyType2.value = propertytypeName;
+                }
+            }
+            if (propertytypeName == 'คอนโด') {
+                const propertyType1 = document.getElementById('property_type1');
+                if (propertyType1) {
+                    propertyType1.click(); // คลิกที่ปุ่ม filterStation
+                    //  propertyType2.value = propertytypeName;
+                }
+            }
+            if (propertytypeName == 'ทาวน์เฮาส์') {
+                const propertyType3 = document.getElementById('property_type3');
+                if (propertyType3) {
+                    propertyType3.click(); // คลิกที่ปุ่ม filterStation
+                }
+            }
+            if (propertytypeName == 'ที่ดิน') {
+                const propertyType4 = document.getElementById('property_type4');
+                if (propertyType4) {
+                    propertyType4.click(); // คลิกที่ปุ่ม filterStation
+                }
+            }
+            if (propertytypeName == 'พาณิชย์') {
+                const propertyType5 = document.getElementById('property_type5');
+                if (propertyType5) {
+                    propertyType5.click(); // คลิกที่ปุ่ม filterStation
+                }
+            }
+
+            // สถานี้รถไฟ  stations
+
+            let stationsName = requestData['stations'] ?? '';
+            if (stationsName) {
+                const station_name = document.getElementById('stations-name');
+                if (station_name) {
+                    station_name.value = stationsName;
+                }
+            }
+            // จัดเรียงตามน้อย - มาก/ มาก-น้อย 
+
+            let tooLittle = requestData['too_little'] ?? '';
+
+            // ราคา
+            if (tooLittle == 'price_min_max') {
+                document.getElementById('filter1').click();
+
+            }
+            if (tooLittle == 'price_max_min') {
+                document.getElementById('filter2').click();
+            }
+
+            //พื้นที่ใช้สอย
+            if (tooLittle == 'area_max_min') {
+                document.getElementById('filter3').click();
+
+            }
+            if (tooLittle == 'area_min_max') {
+                document.getElementById('filter4').click();
+            }
+
+            //จํานวนชั้น / ชั้น
+            if (tooLittle == 'floors_max_min') {
+                document.getElementById('filter5').click();
+
+            }
+            if (tooLittle == 'floors_min_max') {
+                document.getElementById('filter6').click();
+            }
+
+        }
+    </script>
+
 @endsection

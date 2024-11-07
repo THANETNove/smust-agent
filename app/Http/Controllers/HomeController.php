@@ -46,9 +46,9 @@ class HomeController extends Controller
                 'districts.name_th AS districts_name_th',
                 'amphures.name_th AS amphures_name_th'
             );
-
+        // dd($request->all());
         // ตรวจสอบค่าที่รับจาก request
-        if ($request->all()) {
+        /*   if ($request->all()) {
 
             //! คันหา
             if ($request->area_station == 'area' || $request->area_station == 'station') {
@@ -200,38 +200,162 @@ class HomeController extends Controller
             }
             //! เรียงตามน้อย - มาก/ มาก-น้อย
             if ($request->has('too_little')) {
-
-                //TODO ราคา
+                // จัดเรียงราคาจากน้อยไปมาก
                 if ($request->too_little == 'price_min_max') {
                     $dataHomeQuery->orderByRaw('
-                    CASE 
-                        WHEN GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price) > 0 THEN 0
-                        ELSE 1
-                    END ASC,
-                    GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price) ASC
-                ');
-                    /*  $dataHomeQuery->orderByRaw('GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price) ASC'); */
+                        CASE 
+                            WHEN COALESCE(GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price), 0) > 0 THEN 0
+                            ELSE 1
+                        END ASC,
+                        COALESCE(GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price), 0) ASC
+                    ');
                 }
+
+                // จัดเรียงราคาจากมากไปน้อย
                 if ($request->too_little == 'price_max_min') {
-                    $dataHomeQuery->orderByRaw('GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price) DESC');
+                    $dataHomeQuery->orderByRaw('
+                        COALESCE(GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price), 0) DESC
+                    ');
                 }
-                //TODO พื้นที่
 
-
+                // จัดเรียงพื้นที่จากน้อยไปมาก
                 if ($request->too_little == 'area_min_max') {
-
                     $dataHomeQuery->orderBy('rent_sell_home_details.room_width', 'ASC');
                 }
+
+                // จัดเรียงพื้นที่จากมากไปน้อย
                 if ($request->too_little == 'area_max_min') {
                     $dataHomeQuery->orderBy('rent_sell_home_details.room_width', 'DESC');
                 }
-                //TODO จํานวนชั้น
+
+                // จัดเรียงจำนวนชั้นจากน้อยไปมาก
                 if ($request->too_little == 'floors_min_max') {
                     $dataHomeQuery->orderBy('rent_sell_home_details.number_floors', 'ASC');
                 }
-                if ($request->too_little == 'floors_max_min') {
 
+                // จัดเรียงจำนวนชั้นจากมากไปน้อย
+                if ($request->too_little == 'floors_max_min') {
                     $dataHomeQuery->orderBy('rent_sell_home_details.number_floors', 'DESC');
+                }
+            }
+        } else {
+
+            $dataHomeQuery->orderBy('rent_sell_home_details.id', 'DESC');
+        } */
+
+        if ($request->all()) {
+            if ($request->area_station == 'area' || $request->area_station == 'station') {
+                if ($request->area_station == 'area') {
+                    if ($request->has('provinces')) {
+                        $dataHomeQuery->where('rent_sell_home_details.provinces', $request->input('provinces'));
+                    }
+                    if ($request->has('amphures')) {
+                        $dataHomeQuery->where('rent_sell_home_details.amphures', $request->input('amphures'));
+                    }
+                    if ($request->has('districts')) {
+                        $dataHomeQuery->where('rent_sell_home_details.districts', $request->input('districts'));
+                    }
+                } else {
+                    if ($request->has('stations')) {
+                        $dataHomeQuery->where('rent_sell_home_details.train_name', $request->input('stations'));
+                    }
+                }
+
+                if ($request->has('property_type')) {
+                    $typeName = $request->input('property_type');
+                    $dataHomeQuery->where('rent_sell_home_details.property_type', 'LIKE', "%$typeName%");
+                }
+                if ($request->has('usable_area')) {
+                    $usableArea = $request->input('usable_area');
+                    if ($usableArea) {
+                        if ($usableArea === '29') {
+                            $dataHomeQuery->where('rent_sell_home_details.room_width', '<', 30);
+                        } elseif ($usableArea === '30-50') {
+                            $dataHomeQuery->whereBetween('rent_sell_home_details.room_width', [30, 50]);
+                        } elseif ($usableArea === '50-100') {
+                            $dataHomeQuery->whereBetween('rent_sell_home_details.room_width', [50, 100]);
+                        } elseif ($usableArea === '100-1000') {
+                            $dataHomeQuery->whereBetween('rent_sell_home_details.room_width', [100, 1000]);
+                        } elseif ($usableArea === '1000-5000') {
+                            $dataHomeQuery->whereBetween('rent_sell_home_details.room_width', [1000, 5000]);
+                        } elseif ($usableArea === '5001') {
+                            $dataHomeQuery->where('rent_sell_home_details.room_width', '>', 5000);
+                        }
+                    }
+                }
+                if ($request->has('sale_rent')) {
+                    $priceRange = $request->input('price_range');
+
+                    if ($request->input('sale_rent') == 'sale') {
+                        $dataHomeQuery->where(function ($query) {
+                            $nameSale = "ขาย";
+                            $query->where('rent_sell_home_details.rent_sell', 'LIKE', "%$nameSale%")
+                                ->orWhere('rent_sell_home_details.sell', 'LIKE', "%$nameSale%");
+                        });
+
+                        if ($request->has('price_range')) {
+                            if (strpos($priceRange, '-') !== false) {
+                                [$minPrice, $maxPrice] = explode('-', $priceRange);
+                                $dataHomeQuery->whereBetween('rent_sell_home_details.sell_price', [$minPrice, $maxPrice]);
+                            } elseif ($priceRange == '10000001') {
+                                $dataHomeQuery->where('rent_sell_home_details.sell_price', '>', 10000000);
+                            } else {
+                                $dataHomeQuery->where('rent_sell_home_details.sell_price', '<', 10000);
+                            }
+                        }
+                    } elseif ($request->input('sale_rent') == 'rent') {
+                        $dataHomeQuery->where(function ($query) {
+                            $nameRent = "เช่า";
+                            $query->where('rent_sell_home_details.rent_sell', 'LIKE', "%$nameRent%")
+                                ->orWhere('rent_sell_home_details.sell', 'LIKE', "%$nameRent%");
+                        });
+
+                        if ($request->has('price_range')) {
+                            if (strpos($priceRange, '-') !== false) {
+                                [$minPrice, $maxPrice] = explode('-', $priceRange);
+                                $dataHomeQuery->whereBetween('rent_sell_home_details.rental_price', [$minPrice, $maxPrice]);
+                            } elseif ($priceRange == '10000001') {
+                                $dataHomeQuery->where('rent_sell_home_details.rental_price', '>', 10000000);
+                            } else {
+                                $dataHomeQuery->where('rent_sell_home_details.rental_price', '<', 10000);
+                            }
+                        }
+                    } else {
+                        if ($request->has('price_range')) {
+                            if (strpos($priceRange, '-') !== false) {
+                                [$minPrice, $maxPrice] = explode('-', $priceRange);
+                                $dataHomeQuery->whereBetween('rent_sell_home_details.sell_price', [$minPrice, $maxPrice])
+                                    ->orWhereBetween('rent_sell_home_details.rental_price', [$minPrice, $maxPrice]);
+                            } elseif ($priceRange == '10000001') {
+                                $dataHomeQuery->where('rent_sell_home_details.sell_price', '>', 10000000)
+                                    ->orWhere('rent_sell_home_details.rental_price', '>', 10000000);
+                            } else {
+                                $dataHomeQuery->where('rent_sell_home_details.sell_price', '<', 10000)
+                                    ->orWhere('rent_sell_home_details.rental_price', '<', 10000);
+                            }
+                        }
+                    }
+                }
+
+                if ($request->has('date_posted')) {
+                    $datePosted = $request->input('date_posted');
+                    switch ($datePosted) {
+                        case '1':
+                            $dataHomeQuery->whereDate('rent_sell_home_details.created_at', Carbon::today());
+                            break;
+                        case '2':
+                            $dataHomeQuery->whereBetween('rent_sell_home_details.created_at', [Carbon::now()->startOfWeek(), Carbon::now()]);
+                            break;
+                        case '3':
+                            $dataHomeQuery->whereBetween('rent_sell_home_details.created_at', [Carbon::now()->startOfMonth(), Carbon::now()]);
+                            break;
+                        case '4':
+                            $dataHomeQuery->whereBetween('rent_sell_home_details.created_at', [Carbon::now()->subMonths(6), Carbon::now()]);
+                            break;
+                        case '5':
+                            $dataHomeQuery->where('rent_sell_home_details.created_at', '<', Carbon::now()->subMonths(6));
+                            break;
+                    }
                 }
             }
         } else {
@@ -239,9 +363,34 @@ class HomeController extends Controller
             $dataHomeQuery->orderBy('rent_sell_home_details.id', 'DESC');
         }
 
+        //! จัดเรียงตามน้อย - มาก/ มาก-น้อย
+        if ($request->has('too_little')) {
+            if ($request->too_little == 'price_min_max') {
+                $dataHomeQuery->orderByRaw('
+            CASE 
+                WHEN COALESCE(GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price), 0) > 0 THEN 0
+                ELSE 1
+            END ASC,
+            COALESCE(GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price), 0) ASC
+        ');
+            } elseif ($request->too_little == 'price_max_min') {
+                $dataHomeQuery->orderByRaw('
+            COALESCE(GREATEST(rent_sell_home_details.rental_price, rent_sell_home_details.sell_price), 0) DESC
+        ');
+            } elseif ($request->too_little == 'area_min_max') {
+                $dataHomeQuery->orderBy('rent_sell_home_details.room_width', 'ASC');
+            } elseif ($request->too_little == 'area_max_min') {
+                $dataHomeQuery->orderBy('rent_sell_home_details.room_width', 'DESC');
+            } elseif ($request->too_little == 'floors_min_max') {
+                $dataHomeQuery->orderBy('rent_sell_home_details.number_floors', 'ASC');
+            } elseif ($request->too_little == 'floors_max_min') {
+                $dataHomeQuery->orderBy('rent_sell_home_details.number_floors', 'DESC');
+            }
+        }
 
 
-        // dd($request->all());
+
+
 
         // Apply authorization logic if needed
         $user = Auth::user();
@@ -257,10 +406,8 @@ class HomeController extends Controller
         $data = DB::table('provinces')->orderBy('name_th', 'ASC')->get();
 
 
-
-
         return view('home', [
-
+            'request' => $request->all(),
             'data' => $data,
             'dataHome' => $dataHome,
             'dataHome2' => $dataHome2,
@@ -268,6 +415,9 @@ class HomeController extends Controller
             'dataCount2' =>  $dataCount2
         ]);
     }
+
+
+
 
 
 
