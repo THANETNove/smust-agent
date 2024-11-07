@@ -139,6 +139,9 @@ class CoAgentController extends Controller
         $request->validate([
             'image' => ['required'], // บังคับให้ต้องใส่ภาพอย่างน้อย 1 ภาพ
             'image.*' => ['image', 'mimes:jpg,png,jpeg,webp'], // ตรวจสอบรูปแบบไฟล์ภาพ
+            'provinces' => 'required',
+            'districts' => 'required',
+            'amphures' => 'required',
             'user_name' => 'required',
             'user_surname' => 'required',
             'user_phone' => 'required',
