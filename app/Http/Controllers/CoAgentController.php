@@ -136,23 +136,31 @@ class CoAgentController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
+        $rules = [
             'image' => ['required'], // บังคับให้ต้องใส่ภาพอย่างน้อย 1 ภาพ
             'image.*' => ['image', 'mimes:jpg,png,jpeg,webp'], // ตรวจสอบรูปแบบไฟล์ภาพ
-            /* 'provinces' => 'required',
-            'districts' => 'required',
-            'amphures' => 'required', */
             'user_name' => 'required',
             'user_surname' => 'required',
             'user_phone' => 'required',
             'announcement_name' => ['nullable', 'max:255'],
             'url_video' => ['nullable', 'url'], // ตรวจสอบว่าเป็น URL ที่ถูกต้อง
             'url_gps' => ['url'],
-        ], [
+        ];
+
+        $messages = [
             'url_video' => 'รูปเเบบ  URL. Video Youtube  ไม่ถูกต้อง',
             'url_gps' => 'รูปเเบบ  URL. GPS ไม่ถูกต้อง',
-        ]);
+        ];
 
+        if ($request->cross != "1") {
+            $rules = array_merge($rules, [
+                'provinces' => 'required',
+                'districts' => 'required',
+                'amphures' => 'required',
+            ]);
+        }
+
+        $request->validate($rules, $messages);
 
 
 
