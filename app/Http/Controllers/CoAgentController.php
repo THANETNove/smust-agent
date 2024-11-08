@@ -136,6 +136,7 @@ class CoAgentController extends Controller
     public function store(Request $request)
     {
 
+
         $rules = [
             'image' => ['required'], // บังคับให้ต้องใส่ภาพอย่างน้อย 1 ภาพ
             'image.*' => ['image', 'mimes:jpg,png,jpeg,webp'], // ตรวจสอบรูปแบบไฟล์ภาพ
@@ -158,11 +159,18 @@ class CoAgentController extends Controller
                 'districts' => 'required',
                 'amphures' => 'required',
             ]);
+
+            if ($request->name_have_radio == "1") {
+                $rules = array_merge($rules, [
+
+                    'name_have' => 'required',
+                ]);
+            }
         }
 
         $request->validate($rules, $messages);
 
-
+        dd($request->all());
 
 
 

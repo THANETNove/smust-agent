@@ -45,32 +45,46 @@
     </label>
 
     <div style="display: flex; align-items: center;">
-        <div class="box-btn-have {{ old('name_have') == 'ไม่มี' ? 'active' : '' }}" style="margin-right: 10px;">
+        {{--  <div class="box-btn-have {{ old('name_have') == 'ไม่มี' ? 'active' : '' }}" style="margin-right: 10px;">
             ไม่มี
         </div>
         <div class="box-btn-have {{ old('name_have') == 'มี' ? 'active' : 'active' }}" style="margin-right: 10px;">
             มี
+        </div> --}}
+        <div class="box-btn-have {{ old('name_have_radio') == '0' ? 'active' : '' }}" style="margin-right: 10px;">
+            <input type="radio" id="no" name="name_have_radio" value="0"
+                {{ old('name_have_radio') == '0' ? 'checked' : '' }} style="display: none;">
+            <label for="no">ไม่มี</label>
         </div>
+        <div class="box-btn-have {{ old('name_have_radio', '1') == '1' ? 'active' : '' }}" style="margin-right: 10px;">
+            <input type="radio" id="yes" name="name_have_radio" value="1"
+                {{ old('name_have_radio', '1') == '1' ? 'checked' : '' }} style="display: none;">
+            <label for="yes">มี</label>
+        </div>
+
 
         <div class="input_box2" id="have-no">
             <label style="margin-right: 10px;">มีภาระหนี้กับ <span style="color: red; margin-left: 6px;">
                     *</span></label>
             <div style="display: flex">
                 <input id="name-have" type="text" name="name_have"
-                    class="form-control @error('phone') is-invalid @enderror" autocomplete="phone" maxlength="50"
+                    class="form-control @error('name_have') is-invalid @enderror" autocomplete="phone" maxlength="50"
                     value="{{ old('name_have') }}">
+
                 <span>
                     <img class="img-info" src="{{ URL::asset('/assets/image/welcome/info.png') }}"
                         onclick="messageID('สถาบันการเงิน เช่น ชื่อธนาคารที่ทรัพย์จด จำนองไว้')"
                         style="margin-top: 8px">
                 </span>
             </div>
-            @error('phone')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
+            @error('name_have')
+                <span class="invalid-feedback">
+                    <p>{{ $message }}</p>
                 </span>
             @enderror
+
         </div>
+
     </div>
 </div>
 
