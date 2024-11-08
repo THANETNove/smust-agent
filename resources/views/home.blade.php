@@ -838,13 +838,18 @@
                 </div>
             </div>
     </form>
+
+
     @include('jsHome')
 
 
 
     <script>
-        // รับข้อมูลจาก PHP ไปยัง JavaScript โดยใช้ JSON
-        let requestData = @json($request);
+        @if (isset($data))
+            let requestData = @json($data);
+        @else
+            let requestData = null;
+        @endif
 
         console.log("requestData", requestData);
 

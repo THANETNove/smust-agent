@@ -170,7 +170,7 @@ class CoAgentController extends Controller
 
         $request->validate($rules, $messages);
 
-        dd($request->all());
+
 
 
 
