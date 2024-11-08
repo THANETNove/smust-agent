@@ -149,7 +149,7 @@ class AssetsCustomersWantController extends Controller
             $wantsNotNullStatus = $queryForNotNullStatus->whereNotNull('assets_customers_wants.user_id')->paginate(100)->appends($request->all());
 
 
-
+            //dd($wantsNotNullStatus);
 
 
             return view('assetsCustomer.assets_customer', [

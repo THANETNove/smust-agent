@@ -1718,3 +1718,7 @@ a {
 .text-left {
     text-align: left !important;
 }
+
+.ass-icon-line {
+    cursor: pointer !important;
+}

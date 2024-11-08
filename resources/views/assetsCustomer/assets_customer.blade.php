@@ -680,6 +680,7 @@
 
                                                     </div>
                                                 </div>
+
                                                 <div style="margin-right: 16px">
                                                     @if ($wan2->user_id)
                                                         @php
@@ -703,24 +704,7 @@
                                                             @else
                                                                 <img class="ass-icon-line"
                                                                     src="{{ URL::asset('/assets/image/home/line.png') }}"
-                                                                    onclick="copyLineID()">
-                                                                <script>
-                                                                    function copyLineID() {
-                                                                        var lineName = "{{ $wan2->line_id }}";
-                                                                        Swal.fire({
-                                                                            title: lineName,
-                                                                            text: "Line ID" + "\n\nถูกคัดลอกแล้ว!",
-                                                                            icon: 'success',
-                                                                            showConfirmButton: false,
-                                                                            timer: 2000
-                                                                        });
-                                                                        navigator.clipboard.writeText(lineName).then(function() {
-                                                                            console.log('Line ID ถูกคัดลอกไปยัง clipboard แล้ว');
-                                                                        }, function(err) {
-                                                                            console.error('ไม่สามารถคัดลอกข้อความได้:', err);
-                                                                        });
-                                                                    }
-                                                                </script>
+                                                                    onclick="copyLineID('{{ $wan2->line_id }}')">
                                                             @endif
                                                         @endif
 
@@ -734,24 +718,7 @@
                                                             @else
                                                                 <img class="ass-icon-line"
                                                                     src="{{ URL::asset('/assets/image/home/facbook.png') }}"
-                                                                    onclick="copyFacebookID()">
-                                                                <script>
-                                                                    function copyFacebookID() {
-                                                                        var fbName = "{{ $wan2->facebook_id }}";
-                                                                        Swal.fire({
-                                                                            title: fbName,
-                                                                            text: "Facebook ID" + "\n\nถูกคัดลอกแล้ว!",
-                                                                            icon: 'success',
-                                                                            showConfirmButton: false,
-                                                                            timer: 2000
-                                                                        });
-                                                                        navigator.clipboard.writeText(fbName).then(function() {
-                                                                            console.log('Facebook ID ถูกคัดลอกไปยัง clipboard แล้ว');
-                                                                        }, function(err) {
-                                                                            console.error('ไม่สามารถคัดลอกข้อความได้:', err);
-                                                                        });
-                                                                    }
-                                                                </script>
+                                                                    onclick="copyFacebookID({{ $wan2->facebook_id }})">
                                                             @endif
                                                         @endif
 
@@ -976,24 +943,7 @@
                                                             @else
                                                                 <img class="ass-icon-line"
                                                                     src="{{ URL::asset('/assets/image/home/line.png') }}"
-                                                                    onclick="copyLineID()">
-                                                                <script>
-                                                                    function copyLineID() {
-                                                                        var lineName = "{{ $wan2->line_id }}";
-                                                                        Swal.fire({
-                                                                            title: lineName,
-                                                                            text: "Line ID" + "\n\nถูกคัดลอกแล้ว!",
-                                                                            icon: 'success',
-                                                                            showConfirmButton: false,
-                                                                            timer: 2000
-                                                                        });
-                                                                        navigator.clipboard.writeText(lineName).then(function() {
-                                                                            console.log('Line ID ถูกคัดลอกไปยัง clipboard แล้ว');
-                                                                        }, function(err) {
-                                                                            console.error('ไม่สามารถคัดลอกข้อความได้:', err);
-                                                                        });
-                                                                    }
-                                                                </script>
+                                                                    onclick="copyLineID('{{ $wan2->line_id }}')">
                                                             @endif
                                                         @endif
 
@@ -1007,24 +957,7 @@
                                                             @else
                                                                 <img class="ass-icon-line"
                                                                     src="{{ URL::asset('/assets/image/home/facbook.png') }}"
-                                                                    onclick="copyFacebookID()">
-                                                                <script>
-                                                                    function copyFacebookID() {
-                                                                        var fbName = "{{ $wan2->facebook_id }}";
-                                                                        Swal.fire({
-                                                                            title: fbName,
-                                                                            text: "Facebook ID" + "\n\nถูกคัดลอกแล้ว!",
-                                                                            icon: 'success',
-                                                                            showConfirmButton: false,
-                                                                            timer: 2000
-                                                                        });
-                                                                        navigator.clipboard.writeText(fbName).then(function() {
-                                                                            console.log('Facebook ID ถูกคัดลอกไปยัง clipboard แล้ว');
-                                                                        }, function(err) {
-                                                                            console.error('ไม่สามารถคัดลอกข้อความได้:', err);
-                                                                        });
-                                                                    }
-                                                                </script>
+                                                                    onclick="copyFacebookID({{ $wan2->facebook_id }})">
                                                             @endif
                                                         @endif
 
@@ -1177,4 +1110,39 @@
     </div>
 
     @include('assetsCustomer.js')
+
+    <script>
+        function copyLineID(line_id) {
+
+            var lineName = line_id;
+            Swal.fire({
+                title: lineName,
+                text: "Line ID" + "\n\nถูกคัดลอกแล้ว!",
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 2000
+            });
+            navigator.clipboard.writeText(lineName).then(function() {
+                console.log('Line ID ถูกคัดลอกไปยัง clipboard แล้ว');
+            }, function(err) {
+                console.error('ไม่สามารถคัดลอกข้อความได้:', err);
+            });
+        }
+
+        function copyFacebookID(facebook_id) {
+            var fbName = facebook_id;
+            Swal.fire({
+                title: fbName,
+                text: "Facebook ID" + "\n\nถูกคัดลอกแล้ว!",
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 2000
+            });
+            navigator.clipboard.writeText(fbName).then(function() {
+                console.log('Facebook ID ถูกคัดลอกไปยัง clipboard แล้ว');
+            }, function(err) {
+                console.error('ไม่สามารถคัดลอกข้อความได้:', err);
+            });
+        }
+    </script>
 @endsection
