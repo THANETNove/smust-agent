@@ -135,7 +135,7 @@ class CoAgentController extends Controller
      */
     public function store(Request $request)
     {
-
+        /*  dd($request->all()); */
 
         $rules = [
             'image' => ['required'], // บังคับให้ต้องใส่ภาพอย่างน้อย 1 ภาพ

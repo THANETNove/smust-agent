@@ -51,16 +51,20 @@
         <div class="box-btn-have {{ old('name_have') == 'มี' ? 'active' : 'active' }}" style="margin-right: 10px;">
             มี
         </div> --}}
-        <div class="box-btn-have {{ old('name_have_radio') == '0' ? 'active' : '' }}" style="margin-right: 10px;">
+        <div class="box-btn-have {{ old('name_have_radio', '1') === '0' ? 'active' : '' }}" style="margin-right: 10px;"
+            onclick="document.getElementById('no').click();">
             <input type="radio" id="no" name="name_have_radio" value="0"
-                {{ old('name_have_radio') == '0' ? 'checked' : '' }} style="display: none;">
+                {{ old('name_have_radio', '1') === '0' ? 'checked' : '' }} style="display: none;">
             <label for="no">ไม่มี</label>
         </div>
-        <div class="box-btn-have {{ old('name_have_radio', '1') == '1' ? 'active' : '' }}" style="margin-right: 10px;">
+        <div class="box-btn-have {{ old('name_have_radio', '1') === '1' ? 'active' : '' }}" style="margin-right: 10px;"
+            onclick="document.getElementById('yes').click();">
             <input type="radio" id="yes" name="name_have_radio" value="1"
-                {{ old('name_have_radio', '1') == '1' ? 'checked' : '' }} style="display: none;">
+                {{ old('name_have_radio', '1') === '1' ? 'checked' : '' }} style="display: none;">
             <label for="yes">มี</label>
         </div>
+
+
 
 
         <div class="input_box2" id="have-no">
@@ -609,16 +613,21 @@
             this.classList.add('active');
 
             // อัปเดตค่าใน input ที่ซ่อนอยู่
-            const typeNameInput = document.getElementById('have-no');
-            if (this.textContent.trim() == "มี") {
-                typeNameInput.style.display = 'inline';
-            } else {
-                const idNameHave = document.getElementById('name-have');
-                typeNameInput.style.display = 'none';
-                idNameHave.value = null;
-                //name-have
-            }
 
+            const typeNameInput = document.getElementById('have-no');
+
+
+            const selectedValue = document.querySelector('input[name="name_have_radio"]:checked')
+                .value;
+
+
+            if (selectedValue == "1") { // ถ้าเลือก "มี"
+
+                typeNameInput.style.display = 'inline';
+            } else { // ถ้าเลือก "ไม่มี"
+                typeNameInput.style.display = 'none';
+
+            }
 
         });
     });
@@ -701,5 +710,28 @@
         }
 
         // คุณสามารถเพิ่มโค้ดอื่น ๆ ที่คุณต้องการใช้กับค่า selectedValue ที่นี่
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const radios = document.getElementsByName('name_have_radio');
+        const typeNameInput = document.getElementById('have-no');
+
+        // Function to toggle display based on selected radio value
+        function toggleTypeNameInput() {
+            const selectedValue = document.querySelector('input[name="name_have_radio"]:checked').value;
+            if (selectedValue === "1") { // ถ้าเลือก "มี"
+                typeNameInput.style.display = 'inline';
+            } else { // ถ้าเลือก "ไม่มี"
+                typeNameInput.style.display = 'none';
+            }
+        }
+
+        // Set initial state based on default or selected value
+        toggleTypeNameInput();
+
+        // Add event listeners to the radio buttons
+        radios.forEach(radio => {
+            radio.addEventListener('change', toggleTypeNameInput);
+        });
     });
 </script>
