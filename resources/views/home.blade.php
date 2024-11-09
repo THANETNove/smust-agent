@@ -845,8 +845,8 @@
 
 
     <script>
-        @if (isset($data))
-            let requestData = @json($data);
+        @if (isset($request))
+            let requestData = @json($request);
         @else
             let requestData = null;
         @endif
