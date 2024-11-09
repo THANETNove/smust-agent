@@ -272,11 +272,14 @@ class CoAgentController extends Controller
         }
         $member->save();
 
-        if (Auth::check()) {
+        $countUser = DB::table('users')->count();
+        /*   dd($member); */
+        return view('co-agent.succeed', compact('member', 'countUser'));
+        /*  if (Auth::check()) {
             return redirect('home')->with('message', "บันทึกสำเร็จ");
         } else {
             return redirect('/')->with('message', "บันทึกสำเร็จ");
-        }
+        } */
     }
 
     /**

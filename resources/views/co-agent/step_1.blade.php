@@ -348,8 +348,10 @@
         <input type="number" class="form-control" id="reservation-money-input" placeholder="เงินจอง *"
             value=" {{ old('reservation_money_checkbox') }}" name="reservation_money" style="display: none">
     </div>
-    <p class="text-reservation-money">เงินมัดจำ ค่าเช่าล่วงหน้า และเงินประกัน กฎหมายกำหนดว่ารวม กันต้องไม่เกิน 3
-        เดือนของค่าเช่า</p>
+    <div style="display: flex">
+        <p class="text-reservation-money">เงินมัดจำ ค่าเช่าล่วงหน้า และเงินประกัน กฎหมายกำหนดว่ารวม กันต้องไม่เกิน 3
+            เดือนของค่าเช่า</p>
+    </div>
 
 </div>
 <div id="selling-price" style="display: none">
