@@ -67,7 +67,7 @@ Route::get('/home-login', function () {
 
     return view('welcomeLogin');
 });
-Route::get('/co-agent-succeed', function () {
+/* Route::get('/co-agent-succeed', function () {
     $member = DB::table('rent_sell_home_details')
         ->where('rent_sell_home_details.status_home', 'on')
         ->where('rent_sell_home_details.id', '1892')
@@ -88,7 +88,7 @@ Route::get('/co-agent-succeed', function () {
 });
 
 
-
+ */
 
 
 Auth::routes();
