@@ -32,7 +32,9 @@ class CoAgentController extends Controller
                     'provinces.name_th AS provinces_name_th',
                     'districts.name_th AS districts_name_th',
                     'amphures.name_th AS amphures_name_th'
-                )->get();
+                )
+                ->orderBy('rent_sell_home_details.id', 'DESC')
+                ->get();
 
 
             return view('co-agent.index', compact('dataHomeQuery'));

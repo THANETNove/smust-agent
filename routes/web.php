@@ -67,9 +67,10 @@ Route::get('/home-login', function () {
 
     return view('welcomeLogin');
 });
-/* Route::get('/co-agent-succeed', function () {
+Route::get('/co-agent-succeed', function () {
     $member = DB::table('rent_sell_home_details')
         ->where('rent_sell_home_details.status_home', 'on')
+        ->where('rent_sell_home_details.id', '1892')
         ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
         ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
         ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
@@ -84,7 +85,7 @@ Route::get('/home-login', function () {
 
     $countUser = DB::table('users')->count();
     return view('co-agent.succeed', compact('member', 'countUser'));
-}); */
+});
 
 
 
