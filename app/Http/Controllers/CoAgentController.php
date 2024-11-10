@@ -200,7 +200,7 @@ class CoAgentController extends Controller
         $member->minimum_rent = $request['minimum_rent']; //  เช่าขั้นต่ำ*
         $member->start_date = $request['start_date']; //TODO: add เริ่มให้เช่าได้ตั้งแต่
         $member->address = $request['house_number']; // บ้านเลขที่
-        $member->building_name = $request['house_name']; // โครงการ เช่น ชื่อหมู่บ้าน
+        $member->building_name = $request['announcement_name']; // คำประกาศ
         $member->provinces = $request['provinces']; // จังหวัด
         $member->districts = $request['districts']; // อำเภอ
         $member->amphures = $request['amphures'];  // ตำบล
@@ -229,7 +229,7 @@ class CoAgentController extends Controller
         $member->school = json_encode($request['school']);  //TODO: add สถานศึกษา
         $member->meters_store = $request['meters_store'];  //TODO: add ร้านสะดวกซื้อที่ใกล้ที่สุด
         $member->url_video = $request['url_video'];  //TODO: ลิงค์ video 
-        $member->announcement_name = $request['announcement_name'];  //TODO: ชื่อประกาศ* 
+        $member->announcement_name = $request['house_name'];  //TODO: โครงการ เช่น ชื่อหมู่บ้าน
         $member->url_gps = $request['url_gps'];  // ลิงค์ GPS 
         $member->details = $request['details'];  // details
         $member->user_name = $request['user_name'];  //TODO: add ชื่อ 
