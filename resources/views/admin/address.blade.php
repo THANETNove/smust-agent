@@ -61,31 +61,38 @@
         // เมื่อเลือก "แขวง/ อำเภอ"
         $("#districts").change(function() {
             var selectedDistrictId = $(this).val();
+
             // ตรวจสอบว่าเลือก " เขต/อำเภอ" ให้ค่าไม่ใช่ค่าเริ่มต้น
             if (selectedDistrictId !== "0") {
                 $.ajax({
                     url: "/get-amphures/" + selectedDistrictId,
                     type: "GET",
                     success: function(res) {
-                        // อัปเดตตัวเลือก "แขวง/ อำเภอ"
+                        console.log("res", res);
+                        // Clear existing options and add a default placeholder
                         var amphuresSelect = $("#amphures");
                         amphuresSelect.find("option").remove();
                         amphuresSelect.append(
                             $("<option selected disabled>แขวง/ตำบล</option>")
                         );
 
+                        // Append each option
                         $.each(res, function(index, data) {
-
                             amphuresSelect.append(
                                 $("<option>", {
                                     value: data.id,
-                                    text: data.name_th,
+                                    text: data.name_th
+
                                 })
                             );
-                            if (data.zip_code) {
-                                document.getElementById("zip_code").value =
-                                    data.zip_code;
-                            }
+                        });
+
+                        // Set zip code when an option is selected
+                        amphuresSelect.on("change", function() {
+                            var selectedZip = $(this).find("option:selected").data(
+                                "zip");
+                            document.getElementById("zip_code").value =
+                                selectedZip || "";
                         });
                     },
                     error: function(xhr, status, error) {
