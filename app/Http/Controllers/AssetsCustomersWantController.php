@@ -137,7 +137,7 @@ class AssetsCustomersWantController extends Controller
             $currentDate = Carbon::now(); // วันและเวลาปัจจุบัน
             $userCreatedDate = Carbon::parse(Auth::user()->created_at); // วันที่ของผู้ใช้
             $createdDate = $userCreatedDate->lessThan($currentDate->subDays(3));
-            $authCount = (Auth::user()->plans == 0 && $createdDate) ? 1 : 2;
+            $authCount = (Auth::user()->plans > 0  && $createdDate) ? 2 : 1;
             //dd($authCount);
 
             // สร้างสำเนาของ query สำหรับแยกข้อมูลที่ user_id เป็น NULL
