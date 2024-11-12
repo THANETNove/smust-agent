@@ -1111,6 +1111,11 @@
 
     @include('assetsCustomer.js')
 
+    @if ($authCount == 1)
+        @include('layouts.scrollModel')
+    @endif
+
+
     <script>
         function copyLineID(line_id) {
 

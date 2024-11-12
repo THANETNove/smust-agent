@@ -147,6 +147,8 @@ class AssetsCustomersWantController extends Controller
             // สร้างสำเนาของ query สำหรับแยกข้อมูลที่ user_id ไม่เป็น NULL
             $queryForNotNullStatus = clone $query;
             $wantsNotNullStatus = $queryForNotNullStatus->whereNotNull('assets_customers_wants.user_id')->paginate(100)->appends($request->all());
+            $dataCount2 = $queryForNullStatus->whereNull('assets_customers_wants.user_id')->count();
+            $dataCount =  $queryForNotNullStatus->whereNotNull('assets_customers_wants.user_id')->count();
 
 
             //dd($wantsNotNullStatus);
@@ -155,8 +157,10 @@ class AssetsCustomersWantController extends Controller
             return view('assetsCustomer.assets_customer', [
                 'wants' => $wantsNullStatus,
                 'wants2' => $wantsNotNullStatus,
+                'authCount' => $authCount,
                 'createdDate' => $createdDate,
-                'authCount' => $authCount
+                'dataCount' => $dataCount,
+                'dataCount2' => $dataCount2,
             ]);
         } else {
             return redirect('/login');

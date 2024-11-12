@@ -1757,3 +1757,44 @@ a {
     font-size: 18px;
     font-weight: 400;
 }
+
+.modal-content-scroll {
+    background:
+        linear-gradient(0deg, rgba(1, 65, 88, 0.8), rgba(1, 65, 88, 0.8)),
+        /* สีหลักที่มีความโปร่งใส */
+        linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        /* เลเยอร์โปร่งใส */
+        linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)) !important;
+}
+
+.date-count-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 32px;
+}
+
+.scroll-box-81 {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding-bottom: 84px;
+}
+
+.group-81-scroll {
+    max-width: 153px;
+    width: 100%;
+    height: auto;
+}
+
+.btn-close-2 {
+    filter: invert(1) !important;
+    /* เปลี่ยนสีเป็นสีขาว */
+    background-color: transparent;
+    /* พื้นหลังโปร่งใส */
+    border: none;
+    /* ลบขอบปุ่ม */
+}
