@@ -149,16 +149,16 @@
 
 
                     @if ($home->rent_sell == 'เช่า/ขาย' || $home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
-                        <p class="rent-sell-wel-price">$ {{ number_format($home->rental_price) }}/m</p>
-                        <p class="rent-sell-wel-price" style="margin-top: -8px">$ {{ number_format($home->sell_price) }}
+                        <p class="rent-sell-wel-price">฿ {{ number_format($home->rental_price) }}/m</p>
+                        <p class="rent-sell-wel-price" style="margin-top: -8px">฿ {{ number_format($home->sell_price) }}
                             บาท</p>
                     @else
                         @if ($home->rent_sell == 'เช่า' || $home->rent == 'เช่า')
-                            <p class="rent-sell-wel-price">$ {{ number_format($home->rental_price) }}/m</p>
+                            <p class="rent-sell-wel-price">฿ {{ number_format($home->rental_price) }}/m</p>
                         @endif
                         @if ($home->rent_sell == 'ขาย' || $home->sell == 'ขาย')
                             <p class="rent-sell-wel-price"
-                                @if ($home->rent_sell == 'เช่า' || $home->rent == 'เช่า') style="margin-top: -8px" @endif>$
+                                @if ($home->rent_sell == 'เช่า' || $home->rent == 'เช่า') style="margin-top: -8px" @endif>฿
                                 {{ number_format($home->sell_price) }} บาท</p>
                         @endif
                     @endif
