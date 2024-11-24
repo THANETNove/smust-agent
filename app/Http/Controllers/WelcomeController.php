@@ -294,34 +294,9 @@ class WelcomeController extends Controller
         if ($request->all()) {
 
 
-            // กรณีใช้เงื่อนไขแบบ and
-            $userQuery1 = (clone $userQuery);
-
-            if ($request->has('sale_rent')) {
-                $userQuery1->where('users.contract_type', $request->sale_rent);
-            }
-
-            if ($request->has('property_type')) {
-                $userQuery1->where('users.property_type', $request->property_type);
-            }
-
-            if ($request->has('province')) {
-                $userQuery1->where('users.provinces', $request->province);
-            }
-
-            if ($request->has('characteristics')) {
-                $userQuery1->where('users.characteristics', $request->characteristics);
-            }
-
-            $userQuery1 = $userQuery1->get();
-
-
-            // ดึง id ทั้งหมดจาก $userQuery1 เพื่อไม่แสดงใน $userQuery
-            $idsToExclude = $userQuery1->pluck('id')->toArray();
 
             // กรณีใช้เงื่อนไขแบบ or แต่ไม่เอา id ที่มีอยู่ใน $userQuery1 มาแสดง
             $userQuery = (clone $userQuery)
-                ->whereNotIn('users.id', $idsToExclude)  // ไม่เอา id ที่มีอยู่ใน $userQuery1
                 ->where(function ($query) use ($request) {
                     $query->where('users.contract_type', 'LIKE', "%$request->sale_rent%")
                         ->orWhere('users.property_type',  'LIKE', "%$request->property_type%")
@@ -331,15 +306,22 @@ class WelcomeController extends Controller
                 ->get();
 
             $statusShow = true;
+            $sale_rent = $request->sale_rent;
+            $property_type = $request->property_type;
+            $province =  $request->province;
+            $characteristics = $request->characteristics;
         } else {
             $userQuery = (clone $userQuery)->orderBy('plans', 'DESC')
                 ->get();
-            $userQuery1 = collect();
             $statusShow = false;
+            $sale_rent = null;
+            $property_type = null;
+            $province =  null;
+            $characteristics = null;
         }
 
 
-        return view('contactPremiumAll', compact('userQuery', 'provincesQuery', 'userQuery1', 'statusShow'));
+        return view('contactPremiumAll', compact('userQuery', 'provincesQuery',  'statusShow', 'sale_rent', 'property_type', 'province', 'characteristics'));
     }
     function premiumAgentHome($id)
     {
