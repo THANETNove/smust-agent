@@ -219,157 +219,231 @@
     @include('layouts.footer_welocome')
 
     <script>
-        @if (isset($request))
-            let requestData = @json($request);
-        @else
-            let requestData = null;
-        @endif
+        // เมื่อหน้าถูกโหลดเสร็จสมบูรณ์
+        window.onload = function() {
+            @if (isset($request))
+                let requestData = @json($request);
+            @else
+                let requestData = null;
+            @endif
 
+            if (requestData) {
+                var selecteName = null;
 
-        if (requestData) {
-            // ตรวจสอบว่า element ใดมีคลาส selected และเรียก toggleSelection
-            /*    document.querySelectorAll('.filter-box.selected').forEach(function(element) {
-                   toggleSelection(element);
-               }); */
+                if (requestData.provinces) {
+                    document.querySelector("#provinces-id").value = requestData.provinces;
+                }
 
-
-            //จังหวัด อำเภอ เขต
-            if (requestData.provinces) {
-                document.querySelector("#provinces-id").value = requestData.provinces;
-            }
-
-
-            // เมื่อเลือก "แขวง/ อำเภอ"
-
-            $.ajax({
-                url: "/get-districts/" + requestData.provinces,
-                type: "GET",
-
-                success: function(res) {
-                    // อัปเดตตัวเลือก "เขต/อำเภอ"
-                    var districtsSelect = $("#districts");
-                    districtsSelect.find("option").remove();
-                    districtsSelect.append(
-                        $("<option selected disabled>เขต/อำเภอ</option>")
-                    );
-
-                    $.each(res, function(index, district) {
-
-
+                // เมื่อเลือก "แขวง/ อำเภอ"
+                $.ajax({
+                    url: "/get-districts/" + requestData.provinces,
+                    type: "GET",
+                    success: function(res) {
+                        // อัปเดตตัวเลือก "เขต/อำเภอ"
+                        var districtsSelect = $("#districts");
+                        districtsSelect.find("option").remove();
                         districtsSelect.append(
-                            $("<option>", {
-                                value: district.id,
-                                text: district.name_th,
-                                selected: district.id == requestData.districts
-                            })
+                            $("<option selected disabled>เขต/อำเภอ</option>")
                         );
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                },
-            });
 
+                        $.each(res, function(index, district) {
+                            districtsSelect.append(
+                                $("<option>", {
+                                    value: district.id,
+                                    text: district.name_th,
+                                    selected: district.id == requestData.districts
+                                })
+                            );
+                        });
 
-            $.ajax({
-                url: "/get-amphures/" + requestData.districts,
-                type: "GET",
-                success: function(res) {
-                    // อัปเดตตัวเลือก "แขวง/ อำเภอ"
-                    var amphuresSelect = $("#amphures");
-                    amphuresSelect.find("option").remove();
-                    amphuresSelect.append(
-                        $("<option selected disabled>แขวง/ตำบล</option>")
-                    );
-
-                    $.each(res, function(index, data) {
-
-                        amphuresSelect.append(
-                            $("<option>", {
-                                value: data.id,
-                                text: data.name_th,
-                                selected: data.id == requestData.amphures
-                            })
-                        );
-                        if (data.zip_code) {
-                            document.getElementById("zip_code").value =
-                                data.zip_code;
+                        // ถ้ามีค่า districts ที่ถูกเลือก, ดึง text ของ option ที่ selected
+                        if (requestData.districts) {
+                            var selectedDistrictText = districtsSelect.find("option:selected").text();
+                            updateStations(selectedDistrictText, ''); // ส่งค่าไป updateStations
                         }
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                },
-            });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    },
+                });
 
-            //  ประเภทสัญญา ชื้อ ขาย ทั้งหมด
-            let saleRent = requestData['sale_rent'] ?? '';
+                $.ajax({
+                    url: "/get-amphures/" + requestData.districts,
+                    type: "GET",
+                    success: function(res) {
+                        // อัปเดตตัวเลือก "แขวง/ตำบล"
+                        var amphuresSelect = $("#amphures");
+                        amphuresSelect.find("option").remove();
+                        amphuresSelect.append(
+                            $("<option selected disabled>แขวง/ตำบล</option>")
+                        );
 
-            // ตรวจสอบว่า sale_rent มีค่าเป็น 'sale' และคลิกที่ปุ่ม filterStation อัตโนมัติ
-            if (saleRent == 'sale') {
-                let filterStationButton = document.getElementById('filterStation');
-                console.log("5555");
-                if (filterStationButton) {
-                    console.log("5555");
-                    filterStationButton.click(); // คลิกที่ปุ่ม filterStation
+                        $.each(res, function(index, data) {
+                            amphuresSelect.append(
+                                $("<option>", {
+                                    value: data.id,
+                                    text: data.name_th,
+                                    selected: data.id == requestData.amphures
+                                })
+                            );
+                        });
+
+                        // ถ้ามีค่า amphures ที่ถูกเลือก, ดึง text ของ option ที่ selected
+                        if (requestData.amphures) {
+                            var selectedAmphureText = amphuresSelect.find("option:selected").text();
+
+                            // เรียกฟังก์ชัน updateStations พร้อมส่ง selectedDistrictText และ selectedAmphureText
+                            var selectedDistrictText = $("#districts option:selected")
+                                .text(); // หรือดึงจากค่า requestData.districts ถ้ามี
+                            updateStations(selectedDistrictText,
+                                selectedAmphureText); // ส่งค่าไปยังฟังก์ชัน
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    },
+                });
+
+
+
+                // ฟังก์ชันที่จะอัปเดตค่าใน input "stations"
+                function updateStations(selectedDistrictText, selectedAmphureText) {
+                    // ตรวจสอบกรณีไม่มีค่า
+                    var selectedDistrict = selectedDistrictText || '';
+                    var selectedAmphure = selectedAmphureText || '';
+                    var provincesSelect = document.querySelector("#provinces-id");
+                    var selectedProvinceText = provincesSelect.options[provincesSelect.selectedIndex].text;
+
+                    // รวมข้อความจาก province, district และ amphure
+                    var fullText = selectedProvinceText + ' , ' + selectedDistrict + ' , ' + selectedAmphure;
+
+                    // อัปเดตค่าที่แสดงใน input "stations"
+                    document.getElementById('stations').value = fullText;
+
+
+                }
+                $usable_area = requestData['usable_area'] ?? ''
+                $price_range = requestData['price_range'] ?? ''
+                $date_posted = requestData['date_posted'] ?? ''
+                if (usable_area || price_range || date_posted) { // ถ้ามีค่าใดๆ ก็ให้ทำการดำเนินการ
+                    // ค่าที่เลือกจาก dropdown "usable_area"
+                    const varusableAreaSelect = document.querySelector("#usable_area");
+                    var selectedVarusableAreaText = varusableAreaSelect.options[varusableAreaSelect.selectedIndex].text;
+                    // ถ้า selectedIndex เป็น 0 หรือค่าของ selectedText เป็นค่าปริยาย เช่น "กรุณาเลือก"
+                    if (varusableAreaSelect.selectedIndex === 0 || selectedVarusableAreaText === "กรุณาเลือก") {
+                        selectedVarusableAreaText = null; // ใช้ค่าเป็น null
+                    }
+
+                    // ค่าที่เลือกจาก dropdown "price_range"
+                    const priceRangeSelect = document.querySelector("#price_range");
+                    var selectedPriceRangeText = priceRangeSelect.options[priceRangeSelect.selectedIndex].text;
+                    // ถ้า selectedIndex เป็น 0 หรือค่าของ selectedText เป็นค่าปริยาย เช่น "กรุณาเลือก"
+                    if (priceRangeSelect.selectedIndex === 0 || selectedPriceRangeText === "กรุณาเลือก") {
+                        selectedPriceRangeText = null; // ใช้ค่าเป็น null
+                    }
+
+                    // ค่าที่เลือกจาก dropdown "date_posted"
+                    const datePostedaSelect = document.querySelector("#date_posted");
+                    var selectedDatePostedaText = datePostedaSelect.options[datePostedaSelect.selectedIndex].text;
+                    // ถ้า selectedIndex เป็น 0 หรือค่าของ selectedText เป็นค่าปริยาย เช่น "กรุณาเลือก"
+                    if (datePostedaSelect.selectedIndex === 0 || selectedDatePostedaText === "กรุณาเลือก") {
+                        selectedDatePostedaText = null; // ใช้ค่าเป็น null
+                    }
+
+                    // รวมค่าที่เลือกจากทั้งหมด หากไม่มีค่าให้ใช้ 'null'
+                    var dataText = '';
+
+                    // เช็คค่าของ selectedVarusableAreaText
+                    if (selectedVarusableAreaText) {
+                        dataText += selectedVarusableAreaText;
+                    }
+
+                    // เช็คค่าของ selectedPriceRangeText
+                    if (selectedPriceRangeText) {
+                        // ถ้ามีค่า selectedVarusableAreaText อยู่แล้ว ให้เพิ่ม , ก่อนค่าที่จะใส่
+                        if (dataText) {
+                            dataText += ','; // เพิ่มเครื่องหมาย , ถ้ามีค่าอยู่แล้ว
+                        }
+                        dataText += selectedPriceRangeText;
+                    }
+
+                    // เช็คค่าของ selectedDatePostedaText
+                    if (selectedDatePostedaText) {
+                        // ถ้ามีค่า selectedPriceRangeText อยู่แล้ว ให้เพิ่ม , ก่อนค่าที่จะใส่
+                        if (dataText) {
+                            dataText += ','; // เพิ่มเครื่องหมาย , ถ้ามีค่าอยู่แล้ว
+                        }
+                        dataText += selectedDatePostedaText;
+                    }
+
+
+
+                    document.getElementById('welocome_filter').value = dataText;
+                }
+
+
+
+
+                // ประเภทสัญญา ชื้อ ขาย ทั้งหมด
+                let saleRent = requestData['sale_rent'] ?? '';
+
+                // ตรวจสอบว่า sale_rent มีค่าเป็น 'sale' และคลิกที่ปุ่ม filterStation อัตโนมัติ
+                if (saleRent == 'sale') {
+                    let filterStationButton = document.getElementById('filterStation');
+                    if (filterStationButton) {
+                        filterStationButton.click(); // คลิกที่ปุ่ม filterStation
+                    }
+                }
+                if (saleRent == 'rent') {
+                    const filterStationButton = document.getElementById('filterArea');
+                    if (filterStationButton) {
+                        filterStationButton.click(); // คลิกที่ปุ่ม filterStation
+                    }
+                }
+                if (saleRent == 'sale_rent') {
+                    const filterStationButton = document.getElementById('filterAll');
+                    if (filterStationButton) {
+                        filterStationButton.click(); // คลิกที่ปุ่ม filterStation
+                    }
+                }
+
+                // สถานี้รถไฟ stations
+                let stationsName = requestData['stations'] ?? '';
+                if (stationsName) {
+                    const station_name = document.getElementById('stations-name');
+                    if (station_name) {
+                        station_name.value = stationsName;
+                        document.getElementById('stations').value = stationsName;
+                    }
+                }
+
+                // จัดเรียงตามน้อย - มาก/ มาก-น้อย
+                let tooLittle = requestData['too_little'] ?? '';
+
+                // ราคา
+                if (tooLittle == 'price_min_max') {
+                    document.getElementById('filter1').click();
+                }
+                if (tooLittle == 'price_max_min') {
+                    document.getElementById('filter2').click();
+                }
+
+                // พื้นที่ใช้สอย
+                if (tooLittle == 'area_max_min') {
+                    document.getElementById('filter3').click();
+                }
+                if (tooLittle == 'area_min_max') {
+                    document.getElementById('filter4').click();
+                }
+
+                // จํานวนชั้น / ชั้น
+                if (tooLittle == 'floors_max_min') {
+                    document.getElementById('filter5').click();
+                }
+                if (tooLittle == 'floors_min_max') {
+                    document.getElementById('filter6').click();
                 }
             }
-            if (saleRent == 'rent') {
-                const filterStationButton = document.getElementById('filterArea');
-                console.log("6666");
-                if (filterStationButton) {
-                    filterStationButton.click(); // คลิกที่ปุ่ม filterStation
-                }
-            }
-            if (saleRent == 'sale_rent') {
-                const filterStationButton = document.getElementById('filterAll');
-                if (filterStationButton) {
-                    filterStationButton.click(); // คลิกที่ปุ่ม filterStation
-                }
-            }
-
-
-
-            // สถานี้รถไฟ  stations
-
-            let stationsName = requestData['stations'] ?? '';
-            if (stationsName) {
-                const station_name = document.getElementById('stations-name');
-                if (station_name) {
-                    station_name.value = stationsName;
-                }
-            }
-            // จัดเรียงตามน้อย - มาก/ มาก-น้อย 
-
-            let tooLittle = requestData['too_little'] ?? '';
-
-            // ราคา
-            if (tooLittle == 'price_min_max') {
-                document.getElementById('filter1').click();
-
-            }
-            if (tooLittle == 'price_max_min') {
-                document.getElementById('filter2').click();
-            }
-
-            //พื้นที่ใช้สอย
-            if (tooLittle == 'area_max_min') {
-                document.getElementById('filter3').click();
-
-            }
-            if (tooLittle == 'area_min_max') {
-                document.getElementById('filter4').click();
-            }
-
-            //จํานวนชั้น / ชั้น
-            if (tooLittle == 'floors_max_min') {
-                document.getElementById('filter5').click();
-
-            }
-            if (tooLittle == 'floors_min_max') {
-                document.getElementById('filter6').click();
-            }
-
         }
     </script>
 @endsection

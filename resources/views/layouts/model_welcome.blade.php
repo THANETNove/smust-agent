@@ -40,6 +40,12 @@
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            @php
+
+                $usableArea = $request['usable_area'] ?? null;
+                $priceRange = $request['price_range'] ?? null;
+                $datePosted = $request['date_posted'] ?? null;
+            @endphp
             <form method="POST" action="{{ route('search-data') }}">
                 @csrf
 
@@ -48,40 +54,56 @@
                     <p>กรอง</p>
                     <select class="form-select mb-3" aria-label="Default select example" name="usable_area"
                         id="usable_area">
-                        <option selected disabled>พื้นที่ใช้สอย</option>
-                        <option value="29">น้อยกว่า 30 ตร.ม.</option>
-                        <option value="30-50">30-50 ตร.ม.</option>
-                        <option value="50-100">50-100 ตร.ม.</option>
-                        <option value="100-1000">100-1,000 ตร.ม.</option>
-                        <option value="1000-5000">1,000-5,000 ตร.ม.</option>
-                        <option value="5001">มากกว่า 5,000 ตร.ม.</option>
+                        <option disabled {{ is_null($usableArea) ? 'selected' : '' }}>พื้นที่ใช้สอย</option>
+                        <option value="29" {{ $usableArea == '29' ? 'selected' : '' }}>น้อยกว่า 30 ตร.ม.</option>
+                        <option value="30-50" {{ $usableArea == '30-50' ? 'selected' : '' }}>30-50 ตร.ม.</option>
+                        <option value="50-100" {{ $usableArea == '50-100' ? 'selected' : '' }}>50-100 ตร.ม.</option>
+                        <option value="100-1000" {{ $usableArea == '100-1000' ? 'selected' : '' }}>100-1,000 ตร.ม.
+                        </option>
+                        <option value="1000-5000" {{ $usableArea == '1000-5000' ? 'selected' : '' }}>1,000-5,000
+                            ตร.ม.</option>
+                        <option value="5001" {{ $usableArea == '5001' ? 'selected' : '' }}>มากกว่า 5,000 ตร.ม.
+                        </option>
                     </select>
 
                     <select class="form-select mb-3" aria-label="Default select example" name="price_range"
                         id="price_range">
-                        <option selected disabled>ช่วงราคา</option>
-                        <option value="9999">น้อยกว่า 10,000 บาท</option>
-                        <option value="10000-15000">10,000-15,000 บาท</option>
-                        <option value="15000-20000">15,000-20,000 บาท</option>
-                        <option value="20000-30000">20,000-30,000 บาท</option>
-                        <option value="30000-50000">30,000-50,000 บาท</option>
-                        <option value="50000-100000">50,000-100,000 บาท</option>
-                        <option value="100000-500000">100,000-500,000 บาท</option>
-                        <option value="500000-1000000">500,000-1,000,000 บาท</option>
-                        <option value="1000000-2000000">1-2 ล้าน</option>
-                        <option value="2000000-3000000">2-3 ล้าน</option>
-                        <option value="3000000-5000000">3-5 ล้าน</option>
-                        <option value="5000000-10000000">5-10 ล้าน</option>
-                        <option value="10000001">มากกว่า 10 ล้าน</option>
+                        <option disabled {{ is_null($priceRange) ? 'selected' : '' }}>ช่วงราคา</option>
+                        <option value="9999" {{ $priceRange == '9999' ? 'selected' : '' }}>น้อยกว่า 10,000 บาท
+                        </option>
+                        <option value="10000-15000" {{ $priceRange == '10000-15000' ? 'selected' : '' }}>
+                            10,000-15,000 บาท</option>
+                        <option value="15000-20000" {{ $priceRange == '15000-20000' ? 'selected' : '' }}>
+                            15,000-20,000 บาท</option>
+                        <option value="20000-30000" {{ $priceRange == '20000-30000' ? 'selected' : '' }}>
+                            20,000-30,000 บาท</option>
+                        <option value="30000-50000" {{ $priceRange == '30000-50000' ? 'selected' : '' }}>
+                            30,000-50,000 บาท</option>
+                        <option value="50000-100000" {{ $priceRange == '50000-100000' ? 'selected' : '' }}>
+                            50,000-100,000 บาท</option>
+                        <option value="100000-500000" {{ $priceRange == '100000-500000' ? 'selected' : '' }}>
+                            100,000-500,000 บาท</option>
+                        <option value="500000-1000000" {{ $priceRange == '500000-1000000' ? 'selected' : '' }}>
+                            500,000-1,000,000 บาท</option>
+                        <option value="1000000-2000000" {{ $priceRange == '1000000-2000000' ? 'selected' : '' }}>1-2
+                            ล้าน</option>
+                        <option value="2000000-3000000" {{ $priceRange == '2000000-3000000' ? 'selected' : '' }}>2-3
+                            ล้าน</option>
+                        <option value="3000000-5000000" {{ $priceRange == '3000000-5000000' ? 'selected' : '' }}>3-5
+                            ล้าน</option>
+                        <option value="5000000-10000000" {{ $priceRange == '5000000-10000000' ? 'selected' : '' }}>
+                            5-10 ล้าน</option>
+                        <option value="10000001" {{ $priceRange == '10000001' ? 'selected' : '' }}>มากกว่า 10 ล้าน
+                        </option>
                     </select>
 
                     <select class="form-select" aria-label="Default select example" name="date_posted" id="date_posted">
-                        <option selected disabled>วันที่โพส</option>
-                        <option value="1">วันนี้</option>
-                        <option value="2">สัปดาห์นี้</option>
-                        <option value="3">เดือนนี้</option>
-                        <option value="4">1-6 เดือน</option>
-                        <option value="5">6 เดือนขึ้นไป</option>
+                        <option disabled {{ is_null($datePosted) ? 'selected' : '' }}>วันที่โพส</option>
+                        <option value="1" {{ $datePosted == '1' ? 'selected' : '' }}>วันนี้</option>
+                        <option value="2" {{ $datePosted == '2' ? 'selected' : '' }}>สัปดาห์นี้</option>
+                        <option value="3" {{ $datePosted == '3' ? 'selected' : '' }}>เดือนนี้</option>
+                        <option value="4" {{ $datePosted == '4' ? 'selected' : '' }}>1-6 เดือน</option>
+                        <option value="5" {{ $datePosted == '5' ? 'selected' : '' }}>6 เดือนขึ้นไป</option>
                     </select>
 
                     {{--  <p style="margin-top: 12px">ลักษณะพิเศษ</p>

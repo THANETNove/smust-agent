@@ -58,6 +58,7 @@ class WelcomeController extends Controller
                 }
 
                 if ($request->has('sale_rent')) {
+
                     $priceRange = $request->input('price_range');
 
                     // ตรวจสอบประเภทการขายหรือเช่า
@@ -119,6 +120,7 @@ class WelcomeController extends Controller
 
             //! ช่วงราคา
             if ($request->has('price_range')) {
+                $priceRange = $request->input('price_range');
                 if (strpos($priceRange, '-') !== false) {
                     [$minPrice, $maxPrice] = explode('-', $priceRange);
                     $dataHomeQuery->whereBetween('rent_sell_home_details.rental_price', [$minPrice, $maxPrice]);
