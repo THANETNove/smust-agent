@@ -9,9 +9,7 @@ $(document).ready(function () {
     const captureSaveLink = document.getElementById("link-url");
     const captureBack = document.getElementById("back-home");
 
-    console.log("Script executed");
-    console.log("captureButton:", captureButton);
-    console.log("captureContainer:", captureContainer);
+
     // ... other logs
 
     captureButton.addEventListener("click", () => {

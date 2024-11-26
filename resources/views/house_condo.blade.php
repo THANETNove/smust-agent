@@ -8,31 +8,39 @@
                 @csrf
                 <div class="search-welcome-box mb-3">
                     <div>
-                        <input type="radio" id="rent" name="sale_rent" value="rent" checked>
+                        <input type="radio" name="sale_rent" value="rent" id="filterArea">
                         <label for="rent" class="search-text-head">เช่า</label>
                     </div>
 
                     <div>
-                        <input type="radio" id="buy" name="sale_rent" value="sale">
+                        <input type="radio" name="sale_rent" value="sale" id="filterStation">
                         <label for="buy" class="search-text-head">ซื้อ</label>
                     </div>
 
                     <div>
-                        <input type="radio" id="owner-financing" name="sale_rent" value="ownerFinancing">
+                        <input type="radio" name="sale_rent" value="sale_rent" id="filterAll">
                         <label for="owner-financing" class="search-text-head2 head-new">ผ่อนตรงเจ้าของ
                             <span style="color: #E34234">(NEW)</span>
                         </label>
                     </div>
                 </div>
                 <div class="row">
+                    @php
+                        $characteristics = $request['property_type'] ?? '';
+                        //dd($characteristics);
+                    @endphp
                     <div class="mb-3 col-12 col-sm-2">
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" name="property_type">
                             <option selected disabled>ประเภททรัพย์</option>
-                            <option value="บ้านเดี่ยว">บ้านเดี่ยว</option>
-                            <option value="คอนโด">คอนโด </option>
-                            <option value="ทาวน์เฮ้าส์">ทาวน์เฮ้าส์</option>
-                            <option value="ที่ดิน">ที่ดิน</option>
-                            <option value="พาณิชย์">พาณิชย์</option>
+                            <option value="บ้านเดี่ยว" {{ $characteristics == 'บ้านเดี่ยว' ? 'selected' : '' }}>บ้านเดี่ยว
+                            </option>
+                            <option value="คอนโด" {{ $characteristics == 'คอนโด' ? 'selected' : '' }}>คอนโด </option>
+                            <option value="ทาวน์เฮ้าส์" {{ $characteristics == 'ทาวน์เฮ้าส์' ? 'selected' : '' }}>
+                                ทาวน์เฮ้าส์
+                            </option>
+                            <option value="ที่ดิน" {{ $characteristics == 'ที่ดิน' ? 'selected' : '' }}>ที่ดิน</option>
+                            <option value="พาณิชย์" {{ $characteristics == 'พาณิชย์' ? 'selected' : '' }}>พาณิชย์
+                            </option>
                         </select>
                     </div>
                     <div class="mb-3  col-12 col-sm-3">
@@ -209,4 +217,159 @@
 
 
     @include('layouts.footer_welocome')
+
+    <script>
+        @if (isset($request))
+            let requestData = @json($request);
+        @else
+            let requestData = null;
+        @endif
+
+
+        if (requestData) {
+            // ตรวจสอบว่า element ใดมีคลาส selected และเรียก toggleSelection
+            /*    document.querySelectorAll('.filter-box.selected').forEach(function(element) {
+                   toggleSelection(element);
+               }); */
+
+
+            //จังหวัด อำเภอ เขต
+            if (requestData.provinces) {
+                document.querySelector("#provinces-id").value = requestData.provinces;
+            }
+
+
+            // เมื่อเลือก "แขวง/ อำเภอ"
+
+            $.ajax({
+                url: "/get-districts/" + requestData.provinces,
+                type: "GET",
+
+                success: function(res) {
+                    // อัปเดตตัวเลือก "เขต/อำเภอ"
+                    var districtsSelect = $("#districts");
+                    districtsSelect.find("option").remove();
+                    districtsSelect.append(
+                        $("<option selected disabled>เขต/อำเภอ</option>")
+                    );
+
+                    $.each(res, function(index, district) {
+
+
+                        districtsSelect.append(
+                            $("<option>", {
+                                value: district.id,
+                                text: district.name_th,
+                                selected: district.id == requestData.districts
+                            })
+                        );
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                },
+            });
+
+
+            $.ajax({
+                url: "/get-amphures/" + requestData.districts,
+                type: "GET",
+                success: function(res) {
+                    // อัปเดตตัวเลือก "แขวง/ อำเภอ"
+                    var amphuresSelect = $("#amphures");
+                    amphuresSelect.find("option").remove();
+                    amphuresSelect.append(
+                        $("<option selected disabled>แขวง/ตำบล</option>")
+                    );
+
+                    $.each(res, function(index, data) {
+
+                        amphuresSelect.append(
+                            $("<option>", {
+                                value: data.id,
+                                text: data.name_th,
+                                selected: data.id == requestData.amphures
+                            })
+                        );
+                        if (data.zip_code) {
+                            document.getElementById("zip_code").value =
+                                data.zip_code;
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                },
+            });
+
+            //  ประเภทสัญญา ชื้อ ขาย ทั้งหมด
+            let saleRent = requestData['sale_rent'] ?? '';
+
+            // ตรวจสอบว่า sale_rent มีค่าเป็น 'sale' และคลิกที่ปุ่ม filterStation อัตโนมัติ
+            if (saleRent == 'sale') {
+                let filterStationButton = document.getElementById('filterStation');
+                console.log("5555");
+                if (filterStationButton) {
+                    console.log("5555");
+                    filterStationButton.click(); // คลิกที่ปุ่ม filterStation
+                }
+            }
+            if (saleRent == 'rent') {
+                const filterStationButton = document.getElementById('filterArea');
+                console.log("6666");
+                if (filterStationButton) {
+                    filterStationButton.click(); // คลิกที่ปุ่ม filterStation
+                }
+            }
+            if (saleRent == 'sale_rent') {
+                const filterStationButton = document.getElementById('filterAll');
+                if (filterStationButton) {
+                    filterStationButton.click(); // คลิกที่ปุ่ม filterStation
+                }
+            }
+
+
+
+            // สถานี้รถไฟ  stations
+
+            let stationsName = requestData['stations'] ?? '';
+            if (stationsName) {
+                const station_name = document.getElementById('stations-name');
+                if (station_name) {
+                    station_name.value = stationsName;
+                }
+            }
+            // จัดเรียงตามน้อย - มาก/ มาก-น้อย 
+
+            let tooLittle = requestData['too_little'] ?? '';
+
+            // ราคา
+            if (tooLittle == 'price_min_max') {
+                document.getElementById('filter1').click();
+
+            }
+            if (tooLittle == 'price_max_min') {
+                document.getElementById('filter2').click();
+            }
+
+            //พื้นที่ใช้สอย
+            if (tooLittle == 'area_max_min') {
+                document.getElementById('filter3').click();
+
+            }
+            if (tooLittle == 'area_min_max') {
+                document.getElementById('filter4').click();
+            }
+
+            //จํานวนชั้น / ชั้น
+            if (tooLittle == 'floors_max_min') {
+                document.getElementById('filter5').click();
+
+            }
+            if (tooLittle == 'floors_min_max') {
+                document.getElementById('filter6').click();
+            }
+
+        }
+    </script>
 @endsection

@@ -27,6 +27,7 @@ class WelcomeController extends Controller
                 'amphures.name_th AS amphures_name_th'
             );
 
+        //  dd($request->all());
         // ตรวจสอบค่าที่รับจาก request
         if ($request->all()) {
 
@@ -198,8 +199,9 @@ class WelcomeController extends Controller
 
 
 
+        $request = $request->all();
 
-        return view('house_condo', compact('weData'));
+        return view('house_condo', compact('weData', 'request'));
     }
     function houseCondoDetails($id)
     {

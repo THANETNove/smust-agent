@@ -5,8 +5,11 @@
             var selectedProvinceId = $(this).val();
 
 
-            console.log("selectedProvinceId", selectedProvinceId);
+ 
 
+            if (document.getElementById('stations-name')) {
+                document.getElementById('stations-name').value = null;
+            }
             const stationSelect = document.getElementById('station-select');
 
             if (stationSelect) { // Check if stationSelect exists

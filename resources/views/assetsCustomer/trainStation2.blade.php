@@ -80,6 +80,16 @@
             let selectedValue = this.value;
             document.getElementById('stations-name').value = selectedValue;
 
+            if (document.getElementById('provinces-id')) {
+                document.getElementById('provinces-id').value = null;
+            }
+            if (document.getElementById('districts')) {
+                document.getElementById('districts').value = null;
+            }
+            if (document.getElementById('amphures')) {
+                document.getElementById('amphures').value = null;
+            }
+
             // document.getElementById('station_name_select').innerText = "เลือกสถานี " + selectedValue;
 
 

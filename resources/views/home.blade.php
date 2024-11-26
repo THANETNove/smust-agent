@@ -856,7 +856,7 @@
             let requestData = null;
         @endif
 
-        console.log("requestData", requestData);
+    
 
         if (requestData) {
             // ตรวจสอบว่า element ใดมีคลาส selected และเรียก toggleSelection
