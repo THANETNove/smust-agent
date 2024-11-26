@@ -856,12 +856,13 @@
             let requestData = null;
         @endif
 
-    
+
 
         if (requestData) {
             // ตรวจสอบว่า element ใดมีคลาส selected และเรียก toggleSelection
             document.querySelectorAll('.filter-box.selected').forEach(function(element) {
                 toggleSelection(element);
+
             });
 
 

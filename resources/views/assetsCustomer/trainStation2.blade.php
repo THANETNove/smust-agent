@@ -81,13 +81,13 @@
             document.getElementById('stations-name').value = selectedValue;
 
             if (document.getElementById('provinces-id')) {
-                document.getElementById('provinces-id').value = null;
+                document.getElementById('provinces-id').selectedIndex = 0;
             }
             if (document.getElementById('districts')) {
-                document.getElementById('districts').value = null;
+                document.getElementById('districts').selectedIndex = 0;
             }
             if (document.getElementById('amphures')) {
-                document.getElementById('amphures').value = null;
+                document.getElementById('amphures').selectedIndex = 0;
             }
 
             // document.getElementById('station_name_select').innerText = "เลือกสถานี " + selectedValue;

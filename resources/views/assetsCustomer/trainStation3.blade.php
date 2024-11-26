@@ -81,6 +81,15 @@
             document.getElementById('stations-name').value = selectedValue;
             document.getElementById('stations').value = selectedValue;
             // document.getElementById('station_name_select').innerText = "เลือกสถานี " + selectedValue;
+            if (document.getElementById('provinces-id')) {
+                document.getElementById('provinces-id').selectedIndex = 0;
+            }
+            if (document.getElementById('districts')) {
+                document.getElementById('districts').selectedIndex = 0;
+            }
+            if (document.getElementById('amphures')) {
+                document.getElementById('amphures').selectedIndex = 0;
+            }
 
 
             // Reset all other select elements to default (empty)

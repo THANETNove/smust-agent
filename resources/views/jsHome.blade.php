@@ -44,7 +44,6 @@
 
     function toggleSelection(element) {
         const type = element.getAttribute('data-type');
-
         // If the same element is clicked, deselect it
         if (selectedType === type) {
             element.classList.remove('selected');

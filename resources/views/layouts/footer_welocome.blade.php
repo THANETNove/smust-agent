@@ -42,7 +42,7 @@
 
     function toggleSelection2(element) {
         const type = element.getAttribute('data-type');
-
+        console.log("555555");
         // If the same element is clicked, deselect it
         if (selectedType === type) {
             element.classList.remove('selected');
@@ -83,7 +83,7 @@
 
     // ฟังก์ชันที่ใช้ในการอัปเดตค่า stations
     function updateStations() {
-        console.log("updateStations called with value:", );
+
         document.getElementById('stations').value = name_provinces + name_districts + name_amphures;
     }
 
@@ -93,7 +93,9 @@
         name_provinces = selectedOption.text;
         name_districts = "";
         name_amphures = "";
-
+        if (document.getElementById('stations-name')) {
+            document.getElementById('stations-name').value = null;
+        }
         updateStations();
     });
 
