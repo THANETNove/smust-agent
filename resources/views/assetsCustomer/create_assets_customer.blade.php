@@ -27,16 +27,15 @@
 
                     <p class="contract-type">ประเภทสัญญา <span style="color: red">*</span></p>
                     <div class="row-box">
-                        <div class="filter-box-input2 form-check selected" data-type="sell">
-                            <input {{-- class="form-check-input" --}} type="radio" name="sale_rent" value="sale" id="filterStation"
-                                onclick="toggleSelectionBox(this)" checked>
+                        <div class="filter-box-input2 form-check selected" data-type="sell"
+                            onclick="toggleSelectionBox(this)">
+                            <input {{-- class="form-check-input" --}} type="radio" name="sale_rent" value="sale" id="filterStation">
                             <label class="form-check-label" for="filterStation">
                                 ขาย
                             </label>
                         </div>
-                        <div class="filter-box-input2 form-check" data-type="area">
-                            <input {{-- class="form-check-input" --}} type="radio" name="sale_rent" value="rent" id="filterArea"
-                                onclick="toggleSelectionBox(this)">
+                        <div class="filter-box-input2 form-check" data-type="area" onclick="toggleSelectionBox(this)">
+                            <input {{-- class="form-check-input" --}} type="radio" name="sale_rent" value="rent" id="filterArea">
                             <label class="form-check-label" for="filterArea">
 
                                 เช่า
@@ -226,6 +225,67 @@
                         <p class="price-range mt-3">ข้อความจากลูกค้า</p>
                         <textarea class="form-control mt-3" id="exampleFormControlTextarea1" rows="5" name="message_customer"
                             placeholder="ลูกค้าต่างชาติตามหาคอนโด อยู่ 1 สิงหา - 31 ธันวาคม"></textarea>
+
+                        @if (!Auth::check())
+                            <p class="card_number-setup">ช่องทางติดต่อ</p>
+                            <p class="contact-setup">สำหรับการเสนอทรัพย์ (Facebook จะใส่หรือไม่ก็ได้)</p>
+                            <div class="row mb-3 mt-4">
+                                <div class="col-md-12 input_box">
+                                    <input type="text" name="webName"
+                                        class="form-control @error('webName') is-invalid @enderror" autocomplete="ชื่อ *"
+                                        required>
+                                    <label>ชื่อ * </label>
+                                    @error('webName')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3 mt-4">
+                                <div class="col-md-12 input_box">
+                                    <input type="text" name="webPhone"
+                                        class="form-control @error('webPhone') is-invalid @enderror"
+                                        autocomplete="เบอร์ติดต่อ *" required>
+                                    <label>เบอร์ติดต่อ * </label>
+                                    @error('webPhone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                            <div class="row mb-3 mt-4">
+                                <div class="col-md-12 input_box">
+                                    <input type="text" name="webLine"
+                                        class="form-control @error('webLine') is-invalid @enderror"
+                                        autocomplete="Line ID">
+                                    <label>Line ID </label>
+                                    @error('webLine')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-12 input_box">
+                                    <input type="text" name="webFacebook"
+                                        class="form-control @error('webFacebook') is-invalid @enderror"
+                                        autocomplete="Facebook">
+
+                                    <label>Facebook </label>
+                                    @error('webFacebook')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        @endif
                         <button type="submit" class="btn btn-primary col-12 mt-5 mb-5"> </span>ลงประกาศ</button>
                     </div>
             </form>

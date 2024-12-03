@@ -194,7 +194,7 @@
                                                                 @if ($wan->user_id)
                                                                     {{ $wan->first_name }} {{ $wan->last_name }}
                                                                 @else
-                                                                    Dan
+                                                                    {{ $wan->webName }}
                                                                 @endif
 
                                                             </p>
@@ -227,21 +227,46 @@
                                                     </div>
                                                     <div style="margin-right: 16px">
                                                         @if (is_null($wan->user_id))
+                                                            @php
+                                                                $lineIsUrl = filter_var(
+                                                                    $wan->webLine,
+                                                                    FILTER_VALIDATE_URL,
+                                                                );
+                                                                $facebookIsUrl = filter_var(
+                                                                    $wan->webFacebook,
+                                                                    FILTER_VALIDATE_URL,
+                                                                );
+                                                            @endphp
+
                                                             @if ($wan->webLine)
-                                                                <a href="{{ $wan->webLine }}" class="no-underline"
-                                                                    target="_blank" rel="noopener noreferrer">
+                                                                @if ($lineIsUrl)
+                                                                    <a href="{{ $wan->webLine }}" class="no-underline"
+                                                                        target="_blank" rel="noopener noreferrer">
+                                                                        <img class="ass-icon-line"
+                                                                            src="{{ URL::asset('/assets/image/home/line.png') }}">
+                                                                    </a>
+                                                                @else
                                                                     <img class="ass-icon-line"
-                                                                        src="{{ URL::asset('/assets/image/home/line.png') }}">
-                                                                </a>
+                                                                        src="{{ URL::asset('/assets/image/home/line.png') }}"
+                                                                        onclick="copyLineID('{{ $wan->webLine }}')">
+                                                                @endif
                                                             @endif
 
                                                             @if ($wan->webFacebook)
-                                                                <a href="{{ $wan->webFacebook }}" target="_blank"
-                                                                    rel="noopener noreferrer" class="no-underline">
+                                                                @if ($facebookIsUrl)
+                                                                    <a href="{{ $wan->webFacebook }}" target="_blank"
+                                                                        rel="noopener noreferrer" class="no-underline">
+                                                                        <img class="ass-icon-line"
+                                                                            src="{{ URL::asset('/assets/image/home/facbook.png') }}">
+                                                                    </a>
+                                                                @else
                                                                     <img class="ass-icon-line"
-                                                                        src="{{ URL::asset('/assets/image/home/facbook.png') }}">
-                                                                </a>
+                                                                        src="{{ URL::asset('/assets/image/home/facbook.png') }}"
+                                                                        onclick="copyFacebookID('{{ $wan->webFacebook }}')">
+                                                                @endif
                                                             @endif
+
+
                                                             @if ($wan->webPhone)
                                                                 <a href="tel:{{ $wan->webPhone }}"
                                                                     rel="noopener noreferrer" class="no-underline">
@@ -410,7 +435,7 @@
                                                                 @if ($wan->user_id)
                                                                     {{ $wan->first_name }} {{ $wan->last_name }}
                                                                 @else
-                                                                    Dan
+                                                                    {{ $wan->webName }}
                                                                 @endif
 
                                                             </p>
@@ -443,20 +468,43 @@
                                                     </div>
                                                     <div style="margin-right: 16px">
                                                         @if (is_null($wan->user_id))
+                                                            @php
+                                                                $lineIsUrl = filter_var(
+                                                                    $wan->webLine,
+                                                                    FILTER_VALIDATE_URL,
+                                                                );
+                                                                $facebookIsUrl = filter_var(
+                                                                    $wan->webFacebook,
+                                                                    FILTER_VALIDATE_URL,
+                                                                );
+                                                            @endphp
+
                                                             @if ($wan->webLine)
-                                                                <a href="{{ $wan->webLine }}" class="no-underline"
-                                                                    target="_blank" rel="noopener noreferrer">
+                                                                @if ($lineIsUrl)
+                                                                    <a href="{{ $wan->webLine }}" class="no-underline"
+                                                                        target="_blank" rel="noopener noreferrer">
+                                                                        <img class="ass-icon-line"
+                                                                            src="{{ URL::asset('/assets/image/home/line.png') }}">
+                                                                    </a>
+                                                                @else
                                                                     <img class="ass-icon-line"
-                                                                        src="{{ URL::asset('/assets/image/home/line.png') }}">
-                                                                </a>
+                                                                        src="{{ URL::asset('/assets/image/home/line.png') }}"
+                                                                        onclick="copyLineID('{{ $wan->webLine }}')">
+                                                                @endif
                                                             @endif
 
                                                             @if ($wan->webFacebook)
-                                                                <a href="{{ $wan->webFacebook }}" target="_blank"
-                                                                    rel="noopener noreferrer" class="no-underline">
+                                                                @if ($facebookIsUrl)
+                                                                    <a href="{{ $wan->webFacebook }}" target="_blank"
+                                                                        rel="noopener noreferrer" class="no-underline">
+                                                                        <img class="ass-icon-line"
+                                                                            src="{{ URL::asset('/assets/image/home/facbook.png') }}">
+                                                                    </a>
+                                                                @else
                                                                     <img class="ass-icon-line"
-                                                                        src="{{ URL::asset('/assets/image/home/facbook.png') }}">
-                                                                </a>
+                                                                        src="{{ URL::asset('/assets/image/home/facbook.png') }}"
+                                                                        onclick="copyFacebookID('{{ $wan->webFacebook }}')">
+                                                                @endif
                                                             @endif
                                                             @if ($wan->webPhone)
                                                                 <a href="tel:{{ $wan->webPhone }}"
@@ -649,7 +697,7 @@
                                                             @if ($wan2->user_id)
                                                                 {{ $wan2->first_name }} {{ $wan2->last_name }}
                                                             @else
-                                                                Dan
+                                                                {{ $wan->webName }}
                                                             @endif
 
                                                         </p>
@@ -718,7 +766,7 @@
                                                             @else
                                                                 <img class="ass-icon-line"
                                                                     src="{{ URL::asset('/assets/image/home/facbook.png') }}"
-                                                                    onclick="copyFacebookID({{ $wan2->facebook_id }})">
+                                                                    onclick="copyFacebookID('{{ $wan2->facebook_id }}')">
                                                             @endif
                                                         @endif
 
@@ -888,8 +936,6 @@
                                                         <p class="dan-name">
                                                             @if ($wan2->user_id)
                                                                 {{ $wan2->first_name }} {{ $wan2->last_name }}
-                                                            @else
-                                                                Dan
                                                             @endif
 
                                                         </p>
@@ -957,7 +1003,7 @@
                                                             @else
                                                                 <img class="ass-icon-line"
                                                                     src="{{ URL::asset('/assets/image/home/facbook.png') }}"
-                                                                    onclick="copyFacebookID({{ $wan2->facebook_id }})">
+                                                                    onclick="copyFacebookID('{{ $wan2->facebook_id }}')">
                                                             @endif
                                                         @endif
 
@@ -1135,6 +1181,7 @@
         }
 
         function copyFacebookID(facebook_id) {
+
             var fbName = facebook_id;
             Swal.fire({
                 title: fbName,

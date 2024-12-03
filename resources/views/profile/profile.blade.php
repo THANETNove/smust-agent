@@ -124,7 +124,7 @@
                     <div class="row mb-3 mt-4">
                         <div class="col-md-12 input_box">
                             <input type="text" name="line_id" class="form-control @error('line_id') is-invalid @enderror"
-                                name="line_id" value="{{ Auth::user()->line_id }}" autocomplete="Line id">
+                                value="{{ Auth::user()->line_id }}" autocomplete="Line id">
                             <label>Line ID </label>
                             @error('line_id')
                                 <span class="invalid-feedback" role="alert">
@@ -136,7 +136,7 @@
                     <div class="row mb-3">
                         <div class="col-md-12 input_box">
                             <input type="text" name="facebook"
-                                class="form-control @error('facebook') is-invalid @enderror" name="facebook"
+                                class="form-control @error('facebook') is-invalid @enderror"
                                 value="{{ Auth::user()->facebook_id }}" autocomplete="Facebook">
 
                             <label>Facebook </label>
