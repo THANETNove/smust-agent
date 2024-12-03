@@ -121,10 +121,10 @@
         </div>
     </div>
     <div class="container-box-free">
-        <img class="image-square_1" src="{{ URL::asset('/assets/image/home/square_1.png') }}">
+        <img class="image-square_1" src="{{ URL::asset('/assets/image/home/inagenthub1.webp') }}">
     </div>
     <div class="container-box-free">
-        <img class="image-square_2" src="{{ URL::asset('/assets/image/home/square_2.png') }}">
+        <img class="image-square_2" src="{{ URL::asset('/assets/image/home/inagenthub2.webp') }}">
     </div>
     @include('layouts.footer_welocome')
 @endsection
