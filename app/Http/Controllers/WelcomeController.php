@@ -302,12 +302,22 @@ class WelcomeController extends Controller
             // กรณีใช้เงื่อนไขแบบ or แต่ไม่เอา id ที่มีอยู่ใน $userQuery1 มาแสดง
             $userQuery = (clone $userQuery)
                 ->where(function ($query) use ($request) {
-                    $query->where('users.contract_type', 'LIKE', "%$request->sale_rent%")
-                        ->orWhere('users.property_type',  'LIKE', "%$request->property_type%")
-                        ->orWhere('users.provinces', 'LIKE', "%$request->province%")
-                        ->orWhere('users.characteristics', 'LIKE', "%$request->characteristics%");
+                    // ตรวจสอบและเพิ่มเงื่อนไขทีละตัว
+                    if (!empty($request->sale_rent)) {
+                        $query->orWhere('users.contract_type', 'LIKE', "%$request->sale_rent%");
+                    }
+                    if (!empty($request->property_type)) {
+                        $query->orWhere('users.property_type', 'LIKE', "%$request->property_type%");
+                    }
+                    if (!empty($request->province)) {
+                        $query->orWhere('users.provinces', 'LIKE', "%$request->province%");
+                    }
+                    if (!empty($request->characteristics)) {
+                        $query->orWhere('users.characteristics', 'LIKE', "%$request->characteristics%");
+                    }
                 })
                 ->get();
+
 
             $statusShow = true;
             $sale_rent = $request->sale_rent;
@@ -315,6 +325,7 @@ class WelcomeController extends Controller
             $province =  $request->province;
             $characteristics = $request->characteristics;
         } else {
+
             $userQuery = (clone $userQuery)->orderBy('plans', 'DESC')
                 ->get();
             $statusShow = false;
