@@ -245,7 +245,7 @@
 
                             <div class="row mb-3 mt-4">
                                 <div class="col-md-12 input_box">
-                                    <input type="text" name="webPhone"
+                                    <input type="number" name="webPhone"
                                         class="form-control @error('webPhone') is-invalid @enderror"
                                         autocomplete="เบอร์ติดต่อ *" required>
                                     <label>เบอร์ติดต่อ * </label>
