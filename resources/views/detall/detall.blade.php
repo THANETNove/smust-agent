@@ -347,7 +347,8 @@
                                             </p>
                                         </div>
                                     @endif
-                                    @if ($home->facilities)
+
+                                    @if ($home->facilities != 'null' && $home->facilities != '')
                                         <div class="w-50">
                                             <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
                                                 <img class="icon-content-2"
@@ -360,9 +361,10 @@
 
 
                                 </div>
-                                <p class="head-content">เครื่องใช้ไฟฟ้า </p>
-                                <div class="flex-direction-break-word">
-                                    @if ($home->electricalAppliance)
+                                @if ($home->electricalAppliance != 'null')
+                                    <p class="head-content">เครื่องใช้ไฟฟ้า </p>
+                                    <div class="flex-direction-break-word">
+
                                         <div class="w-50">
                                             <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
                                                 <img class="icon-content-2"
@@ -370,11 +372,13 @@
                                                 {{ $home->electricalAppliance }}
                                             </p>
                                         </div>
-                                    @endif
-                                </div>
-                                <p class="head-content">เฟอร์นิเจอร์ </p>
-                                <div class="flex-direction-break-word">
-                                    @if ($home->furniture)
+
+                                    </div>
+                                @endif
+                                @if ($home->furniture != 'null')
+                                    <p class="head-content">เฟอร์นิเจอร์ </p>
+                                    <div class="flex-direction-break-word">
+
                                         <div class="w-50">
                                             <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
                                                 <img class="icon-content-2"
@@ -382,8 +386,8 @@
                                                 {{ $home->furniture }}
                                             </p>
                                         </div>
-                                    @endif
-                                </div>
+                                    </div>
+                                @endif
                             </div>
                             @if ($home->shopping_center)
                                 <div class="box-highlights">
@@ -405,10 +409,12 @@
                                         ศูนย์การค้า
                                     </p>
                                     @foreach ($shoppingCenters as $shopping_center)
-                                        <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
+                                        @if ($shopping_center)
+                                            <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
 
-                                            {{ $shopping_center }}
-                                        </li>
+                                                {{ $shopping_center }}
+                                            </li>
+                                        @endif
                                     @endforeach
 
                                     {{-- แสดง Schools --}}
@@ -418,9 +424,11 @@
                                         สถานศึกษา
                                     </p>
                                     @foreach ($schools as $school)
-                                        <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
-                                            {{ $school }}
-                                        </li>
+                                        @if ($school)
+                                            <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
+                                                {{ $school }}
+                                            </li>
+                                        @endif
                                     @endforeach
 
 
@@ -430,6 +438,7 @@
                                             src="{{ URL::asset('/assets/image/welcome/storefront.png') }}">
                                         ร้านสะดวกซื้อ
                                     </p>
+
 
                                     @if ($home->meters_store)
                                         <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
