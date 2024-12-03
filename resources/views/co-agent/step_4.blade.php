@@ -59,9 +59,10 @@
 </div>
 <div class="row mb-3">
     <div class="col-md-12 mb-3">
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"
-            placeholder="รายละเอียด เขียนอิสระ เช่น สถานที่สำคัญ ใกล้เคียง หรือรายละเอียดอื่น ๆ ที่ไม่ได้กรอกไว้"
-            name="details">{{ old('details') }}</textarea>
+        <textarea class="form-control" rows="10"
+            placeholder="รายละเอียด เขียนอิสระ เช่น สถานที่สำคัญ ใกล้เคียง หรือรายละเอียดอื่น ๆ ที่ไม่ได้กรอกไว้" id="editor"
+            name="details">{{ old('details') }} </textarea>
+
 
         @error('meters_store')
             <span class="invalid-feedback" role="alert">
@@ -165,4 +166,12 @@
             nextButton.disabled = false; // เปิดการทำงานของปุ่ม 'ถัดไป'
         }
     }
+</script>
+<script>
+    // Initialize CKEditor
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .catch(error => {
+            console.error(error);
+        });
 </script>
