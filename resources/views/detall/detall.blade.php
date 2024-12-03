@@ -347,47 +347,68 @@
                                             </p>
                                         </div>
                                     @endif
-
-                                    @if ($home->facilities != 'null' && $home->facilities != '')
-                                        <div class="w-50">
-                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                                <img class="icon-content-2"
-                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                                {{ $home->facilities }}
-                                            </p>
-                                        </div>
+                                    @php
+                                        $facilities = json_decode($home->facilities, true);
+                                    @endphp
+                                    @if (!empty($facilities))
+                                        @foreach ($facilities as $facility)
+                                            <div class="w-50">
+                                                <p rel="noopener noreferrer"
+                                                    class="text-content-dark_100 margin-bottom-8">
+                                                    <img class="icon-content-2"
+                                                        src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                    {{ $facility }}
+                                                </p>
+                                            </div>
+                                        @endforeach
                                     @endif
 
 
 
+
                                 </div>
-                                @if ($home->electricalAppliance != 'null')
-                                    <p class="head-content">เครื่องใช้ไฟฟ้า </p>
+                                @php
+                                    $electricalAppliances = json_decode($home->electricalAppliance, true);
+                                @endphp
+
+                                @if (!empty($electricalAppliances))
+                                    <p class="head-content">เครื่องใช้ไฟฟ้า</p>
                                     <div class="flex-direction-break-word">
-
-                                        <div class="w-50">
-                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                                <img class="icon-content-2"
-                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                                {{ $home->electricalAppliance }}
-                                            </p>
-                                        </div>
-
+                                        @foreach ($electricalAppliances as $appliance)
+                                            <div class="w-50">
+                                                <p rel="noopener noreferrer"
+                                                    class="text-content-dark_100 margin-bottom-8">
+                                                    <img class="icon-content-2"
+                                                        src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                    {{ $appliance }}
+                                                </p>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 @endif
-                                @if ($home->furniture != 'null')
-                                    <p class="head-content">เฟอร์นิเจอร์ </p>
-                                    <div class="flex-direction-break-word">
 
-                                        <div class="w-50">
-                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                                <img class="icon-content-2"
-                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                                {{ $home->furniture }}
-                                            </p>
-                                        </div>
+
+
+                                @php
+                                    $furnitureItems = json_decode($home->furniture, true);
+                                @endphp
+
+                                @if (!empty($furnitureItems))
+                                    <p class="head-content">เฟอร์นิเจอร์</p>
+                                    <div class="flex-direction-break-word">
+                                        @foreach ($furnitureItems as $item)
+                                            <div class="w-50">
+                                                <p rel="noopener noreferrer"
+                                                    class="text-content-dark_100 margin-bottom-8">
+                                                    <img class="icon-content-2"
+                                                        src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                    {{ $item }}
+                                                </p>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 @endif
+
                             </div>
                             @if ($home->shopping_center)
                                 <div class="box-highlights">
