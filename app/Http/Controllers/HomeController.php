@@ -35,7 +35,7 @@ class HomeController extends Controller
 
 
         // Create base query
-        $dataHomeQuery = DB::table('rent_sell_home_details')
+        /* $dataHomeQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.status_home', 'on')
             ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
             ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
@@ -45,7 +45,22 @@ class HomeController extends Controller
                 'provinces.name_th AS provinces_name_th',
                 'districts.name_th AS districts_name_th',
                 'amphures.name_th AS amphures_name_th'
-            );
+            ); */
+
+        $provinces = Cache::remember('provinces', 60 * 60, function () {
+            return DB::table('provinces')->pluck('name_th', 'id');
+        });
+
+        $amphures = Cache::remember('amphures', 60 * 60, function () {
+            return DB::table('amphures')->pluck('name_th', 'id');
+        });
+
+        $districts = Cache::remember('districts', 60 * 60, function () {
+            return DB::table('districts')->pluck('name_th', 'id');
+        });
+
+        $dataHomeQuery = DB::table('rent_sell_home_details')
+            ->where('status_home', 'on');
 
 
         if ($request->all()) {
@@ -204,8 +219,48 @@ class HomeController extends Controller
         $dataCount2 = (clone $dataHomeQuery)->where('status_admin', 1)->count();
 
         // แยก cache keys สำหรับ $dataHome และ $dataHome2 โดยใช้ query base เดียวกัน
-        $dataHome = (clone $dataHomeQuery)->where('status_admin', 0)->paginate(100)->appends(request()->all());
-        $dataHome2 = (clone $dataHomeQuery)->where('status_admin', 1)->paginate(100)->appends(request()->all());
+        /*   $dataHome = (clone $dataHomeQuery)->where('status_admin', 0)->paginate(100)->appends(request()->all());
+        $dataHome2 = (clone $dataHomeQuery)->where('status_admin', 1)->paginate(100)->appends(request()->all()); */
+
+        // Query สำหรับ status_admin = 0
+        $dataHome = (clone $dataHomeQuery)
+            ->where('status_admin', 0)
+            ->orderBy('id', 'DESC')
+            ->paginate(100);
+
+        // Query สำหรับ status_admin = 1
+        $dataHome2 = (clone $dataHomeQuery)
+            ->where('status_admin', 1)
+            ->orderBy('id', 'DESC')
+            ->paginate(100);
+
+        // ตรวจสอบและปรับข้อมูลสำหรับ $dataHome
+        if ($dataHome instanceof \Illuminate\Pagination\LengthAwarePaginator) {
+            $dataHome->getCollection()->transform(function ($item) use ($provinces, $amphures, $districts) {
+                $item->provinces_name_th = $provinces[$item->provinces] ?? null;
+                $item->amphures_name_th = $amphures[$item->amphures] ?? null;
+                $item->districts_name_th = $districts[$item->districts] ?? null;
+                return $item;
+            });
+        } else {
+            dd("The data for status_admin = 0 is not paginated.");
+        }
+
+        // ตรวจสอบและปรับข้อมูลสำหรับ $dataHome2
+        if ($dataHome2 instanceof \Illuminate\Pagination\LengthAwarePaginator) {
+            $dataHome2->getCollection()->transform(function ($item) use ($provinces, $amphures, $districts) {
+                $item->provinces_name_th = $provinces[$item->provinces] ?? null;
+                $item->amphures_name_th = $amphures[$item->amphures] ?? null;
+                $item->districts_name_th = $districts[$item->districts] ?? null;
+                return $item;
+            });
+        } else {
+            dd("The data for status_admin = 1 is not paginated.");
+        }
+
+        // เพิ่ม Query String สำหรับ Pagination
+        $dataHome->appends($request->except('page'));
+        $dataHome2->appends($request->except('page'));
 
         // Cache provinces and train station data
         $data = DB::table('provinces')->orderBy('name_th', 'ASC')->get();

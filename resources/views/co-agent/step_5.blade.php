@@ -25,7 +25,7 @@
 </div>
 <div class="row mt-3 mb-3">
     <div class="col-md-12 mb-3 input_box">
-        <input id="user_phone" type="text" class="form-control @error('user_phone') is-invalid @enderror"
+        <input id="user_phone" type="number" class="form-control @error('user_phone') is-invalid @enderror"
             name="user_phone" value="{{ old('user_phone') }}" autocomplete="user_phone">
         <label>เบอร์ติดต่อ*</label>
         @error('user_phone')

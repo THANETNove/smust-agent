@@ -18,6 +18,13 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cache;
+
+use App\Models\Province;
+use App\Models\Amphure;
+use App\Models\District;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +39,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
-    $welcomeQuery = DB::table('rent_sell_home_details')
+    /*   $welcomeQuery = DB::table('rent_sell_home_details')
         ->where('rent_sell_home_details.status_home', 'on')
         ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
         ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
@@ -45,7 +52,38 @@ Route::get('/', function () {
         )
         ->orderBy('rent_sell_home_details.id', 'DESC')
         ->limit(13) // จำกัดผลลัพธ์เป็น 12 รายการ
-        ->get();
+        ->get(); */
+
+
+    /* $provinces = Province::pluck('name_th', 'id');
+    $amphures = Amphure::pluck('name_th', 'id');
+    $districts = District::pluck('name_th', 'id');
+ */
+    $provinces = Cache::remember('provinces', 60 * 60, function () {
+        return DB::table('provinces')->pluck('name_th', 'id');
+    });
+
+    $amphures = Cache::remember('amphures', 60 * 60, function () {
+        return DB::table('amphures')->pluck('name_th', 'id');
+    });
+
+    $districts = Cache::remember('districts', 60 * 60, function () {
+        return DB::table('districts')->pluck('name_th', 'id');
+    });
+
+
+    $welcomeQuery = DB::table('rent_sell_home_details')
+        ->where('status_home', 'on')
+        ->orderBy('id', 'DESC')
+        ->limit(13)
+        ->get()
+        ->map(function ($item) use ($provinces, $amphures, $districts) {
+            $item->provinces_name_th = $provinces[$item->provinces] ?? null;
+            $item->amphures_name_th = $amphures[$item->amphures] ?? null;
+            $item->districts_name_th = $districts[$item->districts] ?? null;
+            return $item;
+        });
+
 
     $professionals = DB::table('website_professionals')
         ->first();

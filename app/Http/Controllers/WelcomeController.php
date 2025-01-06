@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
 
+
+use App\Models\Province;
+use App\Models\Amphure;
+use App\Models\District;
+
 class WelcomeController extends Controller
 {
     function houseCondo(Request $request)
@@ -15,7 +20,7 @@ class WelcomeController extends Controller
 
 
         // Create base query
-        $dataHomeQuery = DB::table('rent_sell_home_details')
+        /* $dataHomeQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.status_home', 'on')
             ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
             ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
@@ -25,7 +30,24 @@ class WelcomeController extends Controller
                 'provinces.name_th AS provinces_name_th',
                 'districts.name_th AS districts_name_th',
                 'amphures.name_th AS amphures_name_th'
-            );
+            ); */
+
+        $provinces = Cache::remember('provinces', 60 * 60, function () {
+            return DB::table('provinces')->pluck('name_th', 'id');
+        });
+
+        $amphures = Cache::remember('amphures', 60 * 60, function () {
+            return DB::table('amphures')->pluck('name_th', 'id');
+        });
+
+        $districts = Cache::remember('districts', 60 * 60, function () {
+            return DB::table('districts')->pluck('name_th', 'id');
+        });
+
+        $dataHomeQuery = DB::table('rent_sell_home_details')
+            ->where('status_home', 'on');
+
+
 
         //  dd($request->all());
         // ตรวจสอบค่าที่รับจาก request
@@ -195,13 +217,32 @@ class WelcomeController extends Controller
             $dataHomeQuery->orderBy('rent_sell_home_details.id', 'DESC');
         }
 
+        $weData = $dataHomeQuery
+            ->orderBy('id', 'DESC')
+            ->paginate(100);
 
-        $weData = $dataHomeQuery->paginate(100)->appends(request()->except('page'));
+        // ตรวจสอบว่า $weData เป็น Instance ของ Paginator
+        if ($weData instanceof \Illuminate\Pagination\LengthAwarePaginator) {
+            $weData->getCollection()->transform(function ($item) use ($provinces, $amphures, $districts) {
+                $item->provinces_name_th = $provinces[$item->provinces] ?? null;
+                $item->amphures_name_th = $amphures[$item->amphures] ?? null;
+                $item->districts_name_th = $districts[$item->districts] ?? null;
+                return $item;
+            });
+        } else {
+            // กรณีที่ $weData ไม่ใช่ Paginator อาจต้องแสดงข้อความหรือจัดการข้อมูล
+            dd("The data is not paginated.");
+        }
 
+
+
+        // เพิ่ม Query String สำหรับ Pagination
+        $weData->appends($request->except('page'));
 
 
 
         $request = $request->all();
+
 
         return view('house_condo', compact('weData', 'request'));
     }
