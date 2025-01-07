@@ -33,12 +33,49 @@ class AssetsCustomersWantController extends Controller
     {
         if (Auth::check()) {
 
+            /* $query = DB::table('assets_customers_wants')
+            ->where('assets_customers_wants.status', 1)
+            ->leftJoin('users', 'assets_customers_wants.user_id', '=', 'users.id')
+            ->leftJoin('provinces', 'assets_customers_wants.provinces', '=', 'provinces.id')
+            ->leftJoin('amphures', 'assets_customers_wants.districts', '=', 'amphures.id')
+            ->leftJoin('districts', 'assets_customers_wants.amphures', '=', 'districts.id')
+            ->leftJoin('train_station', 'assets_customers_wants.station', '=', 'train_station.id')
+            ->select(
+                'assets_customers_wants.*',
+                'users.first_name',
+                'users.last_name',
+                'users.phone',
+                'users.image',
+                'users.line_id',
+                'users.facebook_id',
+                'provinces.name_th AS provinces_name_th',
+                'districts.name_th AS districts_name_th',
+                'amphures.name_th AS amphures_name_th',
+                'train_station.line_code',
+                'train_station.station_code',
+                'train_station.station_name_th'
+            )
+            ->orderBy('assets_customers_wants.created_at', 'DESC'); */
+
+            $provinces = Cache::remember('provinces', 60 * 60, function () {
+                return DB::table('provinces')->pluck('name_th', 'id');
+            });
+
+            $amphures = Cache::remember('amphures', 60 * 60, function () {
+                return DB::table('amphures')->pluck('name_th', 'id');
+            });
+
+            $districts = Cache::remember('districts', 60 * 60, function () {
+                return DB::table('districts')->pluck('name_th', 'id');
+            });
+
+
+
+
+            // ดึงข้อมูลหลักจาก assets_customers_wants
             $query = DB::table('assets_customers_wants')
                 ->where('assets_customers_wants.status', 1)
                 ->leftJoin('users', 'assets_customers_wants.user_id', '=', 'users.id')
-                ->leftJoin('provinces', 'assets_customers_wants.provinces', '=', 'provinces.id')
-                ->leftJoin('amphures', 'assets_customers_wants.districts', '=', 'amphures.id')
-                ->leftJoin('districts', 'assets_customers_wants.amphures', '=', 'districts.id')
                 ->leftJoin('train_station', 'assets_customers_wants.station', '=', 'train_station.id')
                 ->select(
                     'assets_customers_wants.*',
@@ -48,46 +85,17 @@ class AssetsCustomersWantController extends Controller
                     'users.image',
                     'users.line_id',
                     'users.facebook_id',
-                    'provinces.name_th AS provinces_name_th',
-                    'districts.name_th AS districts_name_th',
-                    'amphures.name_th AS amphures_name_th',
                     'train_station.line_code',
                     'train_station.station_code',
                     'train_station.station_name_th'
                 )
                 ->orderBy('assets_customers_wants.created_at', 'DESC');
 
-            /*   if ($request->all()) {
+            // ใช้ paginate สำหรับการแสดงผลพร้อมจัดการข้อมูลเพิ่มเติม
+            $data = $query->paginate(100);
 
-                $query->when($request->area_station == "area", function ($query) use ($request) {
-                    // Filter by province, district, and amphure if area is selected
-                    $query->when($request->has('provinces'), function ($q) use ($request) {
-                        $q->where('assets_customers_wants.provinces', $request->input('provinces'));
-                    });
 
-                    $query->when($request->has('districts'), function ($q) use ($request) {
-                        $q->where('assets_customers_wants.districts', $request->input('districts'));
-                    });
 
-                    $query->when($request->has('amphures'), function ($q) use ($request) {
-                        $q->where('assets_customers_wants.amphures', $request->input('amphures'));
-                    });
-                }, function ($query) use ($request) {
-                    $query->when($request->has('stations'), function ($q) use ($request) {
-                        $q->where('assets_customers_wants.station_name', $request->input('stations'));
-                    });
-                });
-
-                $query->when($request->has('sale_rent') && $request->input('sale_rent') !== 'sale_rent', function ($query) use ($request) {
-                    $query->where('assets_customers_wants.sale_rent', $request->input('sale_rent'));
-                });
-
-                if ($request->has('options') && !empty($request->input('options'))) {
-                    foreach ($request->input('options') as $option) {
-                        $query->whereRaw('JSON_CONTAINS(assets_customers_wants.options, ?)', [json_encode($option)]);
-                    }
-                }
-            } */
             if ($request->all()) {
 
 
@@ -142,11 +150,45 @@ class AssetsCustomersWantController extends Controller
 
             // สร้างสำเนาของ query สำหรับแยกข้อมูลที่ user_id เป็น NULL
             $queryForNullStatus = clone $query;
-            $wantsNullStatus = $queryForNullStatus->whereNull('assets_customers_wants.user_id')->paginate(100)->appends($request->all());
+            $wantsNullStatus = $queryForNullStatus->whereNull('assets_customers_wants.user_id')->paginate(100);
+
+
+            if ($wantsNullStatus instanceof \Illuminate\Pagination\LengthAwarePaginator) {
+                $wantsNullStatus->getCollection()->transform(function ($item) use ($provinces, $amphures, $districts) {
+                    $item->provinces_name_th = $provinces[$item->provinces] ?? null;
+                    $item->amphures_name_th = $amphures[$item->amphures] ?? null;
+                    $item->districts_name_th = $districts[$item->districts] ?? null;
+                    return $item;
+                });
+            } else {
+                // กรณีที่ $weData ไม่ใช่ Paginator อาจต้องแสดงข้อความหรือจัดการข้อมูล
+                dd("The data is not paginated.");
+            }
+
+
+            $wantsNullStatus->appends($request->all());
+
 
             // สร้างสำเนาของ query สำหรับแยกข้อมูลที่ user_id ไม่เป็น NULL
             $queryForNotNullStatus = clone $query;
-            $wantsNotNullStatus = $queryForNotNullStatus->whereNotNull('assets_customers_wants.user_id')->paginate(100)->appends($request->all());
+            $wantsNotNullStatus = $queryForNotNullStatus->whereNotNull('assets_customers_wants.user_id')->paginate(100);
+
+            if ($wantsNotNullStatus instanceof \Illuminate\Pagination\LengthAwarePaginator) {
+                $wantsNotNullStatus->getCollection()->transform(function ($item) use ($provinces, $amphures, $districts) {
+                    $item->provinces_name_th = $provinces[$item->provinces] ?? null;
+                    $item->amphures_name_th = $amphures[$item->amphures] ?? null;
+                    $item->districts_name_th = $districts[$item->districts] ?? null;
+                    return $item;
+                });
+            } else {
+                // กรณีที่ $weData ไม่ใช่ Paginator อาจต้องแสดงข้อความหรือจัดการข้อมูล
+                dd("The data is not paginated.");
+            }
+
+
+            $wantsNotNullStatus->appends($request->all());
+
+
             $dataCount2 = $queryForNullStatus->whereNull('assets_customers_wants.user_id')->count();
             $dataCount =  $queryForNotNullStatus->whereNotNull('assets_customers_wants.user_id')->count();
 
