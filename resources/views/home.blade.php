@@ -6,7 +6,8 @@
         $currentDate = Carbon\Carbon::now(); // วันและเวลาปัจจุบัน
         $userCreatedDate = Carbon\Carbon::parse(Auth::user()->created_at); // วันที่ของผู้ใช้
         $createdDate = $userCreatedDate->lessThan($currentDate->subDays(3));
-        $authCount = Auth::user()->plans > 1 && $createdDate ? 2 : 1;
+
+        $authCount = ($createdDate == false ? 3 : Auth::user()->plans >= 1 && $createdDate) ? 2 : 1;
 
     @endphp
 
