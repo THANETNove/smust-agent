@@ -404,21 +404,36 @@ class WelcomeController extends Controller
 
 
 
+        $provinces = Cache::remember('provinces', 60 * 60, function () {
+            return DB::table('provinces')->pluck('name_th', 'id');
+        });
+
+        $amphures = Cache::remember('amphures', 60 * 60, function () {
+            return DB::table('amphures')->pluck('name_th', 'id');
+        });
+
+        $districts = Cache::remember('districts', 60 * 60, function () {
+            return DB::table('districts')->pluck('name_th', 'id');
+        });
+
         $welcomeQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.code_admin', $userQuery[0]->code)
             ->where('rent_sell_home_details.status_home', 'on')
-            ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
+            /*             ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
             ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
-            ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
+            ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id') */
             ->select(
-                'rent_sell_home_details.*',
-                'provinces.name_th AS provinces_name_th',
-                'districts.name_th AS districts_name_th',
-                'amphures.name_th AS amphures_name_th'
+                'rent_sell_home_details.*'
             )
             ->orderBy('rent_sell_home_details.id', 'DESC')
             ->limit(13) // จำกัดผลลัพธ์เป็น 12 รายการ
-            ->get();
+            ->get()
+            ->map(function ($item) use ($provinces, $amphures, $districts) {
+                $item->provinces_name_th = $provinces[$item->provinces] ?? null;
+                $item->amphures_name_th = $amphures[$item->amphures] ?? null;
+                $item->districts_name_th = $districts[$item->districts] ?? null;
+                return $item;
+            });
 
 
         $countRentQuery = DB::table('rent_sell_home_details')
@@ -474,7 +489,17 @@ class WelcomeController extends Controller
                 'personal_websites.details_3',
             )
             ->get();
+        $provinces = Cache::remember('provinces', 60 * 60, function () {
+            return DB::table('provinces')->pluck('name_th', 'id');
+        });
 
+        $amphures = Cache::remember('amphures', 60 * 60, function () {
+            return DB::table('amphures')->pluck('name_th', 'id');
+        });
+
+        $districts = Cache::remember('districts', 60 * 60, function () {
+            return DB::table('districts')->pluck('name_th', 'id');
+        });
 
         $welcomeQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.code_admin', $userQuery[0]->code)
@@ -483,13 +508,16 @@ class WelcomeController extends Controller
             ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
             ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
             ->select(
-                'rent_sell_home_details.*',
-                'provinces.name_th AS provinces_name_th',
-                'districts.name_th AS districts_name_th',
-                'amphures.name_th AS amphures_name_th'
+                'rent_sell_home_details.*'
             )
             ->orderBy('rent_sell_home_details.id', 'DESC')
-            ->get();
+            ->get()
+            ->map(function ($item) use ($provinces, $amphures, $districts) {
+                $item->provinces_name_th = $provinces[$item->provinces] ?? null;
+                $item->amphures_name_th = $amphures[$item->amphures] ?? null;
+                $item->districts_name_th = $districts[$item->districts] ?? null;
+                return $item;
+            });
 
         return view('viewAllAssets', compact('userQuery', 'welcomeQuery'));
     }
