@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Under Maintenance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #72EDF2 80%, #5151E5 80%);
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 3rem;
+            animation: pulse 2s infinite;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            animation: fadeIn 2s ease-in-out;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .loader {
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-top: 8px solid #fff;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            margin: 20px 0;
+            animation: spin 1.5s linear infinite;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        a:hover {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Keyframes for animations */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>เว็บไซต์กำลังอัปเดต</h1>
+    <div class="loader"></div>
+    <p>โปรดรอสักครู่ เรากำลังทำการปรับปรุงเว็บไซต์ของเรา<br>เพื่อให้คุณได้รับประสบการณ์ที่ดีที่สุด</p>
+    <p id="update-time">ช่วงเวลาอัปเดต: 11/01/2025 18:00 - 12/01/2025 23:00</p>
+    <!--  <a href="/">กลับไปยังหน้าแรก</a> -->
+
+    <script>
+        // กำหนดเวลาการอัปเดต
+        const startTime = new Date('2025-01-11T18:00:00');
+        const endTime = new Date('2025-01-12T23:00:00');
+        const updateTimeElement = document.getElementById('update-time');
+
+        // แสดงเวลาที่ตั้งไว้
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+        const formattedStart = startTime.toLocaleString('th-TH', options);
+        const formattedEnd = endTime.toLocaleString('th-TH', options);
+
+        updateTimeElement.innerHTML = `ช่วงเวลาอัปเดต: ${formattedStart} - ${formattedEnd}`;
+    </script>
+</body>
+
+</html>

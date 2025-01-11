@@ -250,12 +250,26 @@ class WelcomeController extends Controller
     {
 
 
+        $provinces = Cache::remember('provinces', 60 * 60, function () {
+            return DB::table('provinces')->pluck('name_th', 'id');
+        });
+
+        $amphures = Cache::remember('amphures', 60 * 60, function () {
+            return DB::table('amphures')->pluck('name_th', 'id');
+        });
+
+        $districts = Cache::remember('districts', 60 * 60, function () {
+            return DB::table('districts')->pluck('name_th', 'id');
+        });
+
+        $dataHomeQuery = DB::table('rent_sell_home_details')
+            ->where('status_home', 'on');
+
+
         // Create base query
         $dataHome = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.id', $id)
-            ->leftJoin('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
-            ->leftJoin('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id') //เขต/ ตำบล
-            ->leftJoin('districts', 'rent_sell_home_details.amphures', '=', 'districts.id') //เขต/ อำเภอ
+
             ->select(
                 'rent_sell_home_details.*',
                 'provinces.name_th AS provinces_name_th',
@@ -263,14 +277,17 @@ class WelcomeController extends Controller
                 'amphures.name_th AS amphures_name_th'
             )
             ->orderBy('rent_sell_home_details.id', 'DESC')
-            ->get();
+            ->get()
+            ->map(function ($item) use ($provinces, $amphures, $districts) {
+                $item->provinces_name_th = $provinces[$item->provinces] ?? null;
+                $item->amphures_name_th = $amphures[$item->amphures] ?? null;
+                $item->districts_name_th = $districts[$item->districts] ?? null;
+                return $item;
+            });
 
         $welcomeQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.status_home', 'on')
             ->where('rent_sell_home_details.provinces', $dataHome[0]->provinces)
-            ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
-            ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
-            ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
             ->select(
                 'rent_sell_home_details.*',
                 'provinces.name_th AS provinces_name_th',
@@ -279,7 +296,13 @@ class WelcomeController extends Controller
             )
             ->orderBy('rent_sell_home_details.id', 'DESC')
             ->limit(13) // จำกัดผลลัพธ์เป็น 12 รายการ
-            ->get();
+            ->get()
+            ->map(function ($item) use ($provinces, $amphures, $districts) {
+                $item->provinces_name_th = $provinces[$item->provinces] ?? null;
+                $item->amphures_name_th = $amphures[$item->amphures] ?? null;
+                $item->districts_name_th = $districts[$item->districts] ?? null;
+                return $item;
+            });
 
         $favoritesQuery = DB::table('favorites')
             ->where('favorites.id_product', $id)
