@@ -271,10 +271,7 @@ class WelcomeController extends Controller
             ->where('rent_sell_home_details.id', $id)
 
             ->select(
-                'rent_sell_home_details.*',
-                'provinces.name_th AS provinces_name_th',
-                'districts.name_th AS districts_name_th',
-                'amphures.name_th AS amphures_name_th'
+                'rent_sell_home_details.*'
             )
             ->orderBy('rent_sell_home_details.id', 'DESC')
             ->get()
@@ -289,10 +286,7 @@ class WelcomeController extends Controller
             ->where('rent_sell_home_details.status_home', 'on')
             ->where('rent_sell_home_details.provinces', $dataHome[0]->provinces)
             ->select(
-                'rent_sell_home_details.*',
-                'provinces.name_th AS provinces_name_th',
-                'districts.name_th AS districts_name_th',
-                'amphures.name_th AS amphures_name_th'
+                'rent_sell_home_details.*'
             )
             ->orderBy('rent_sell_home_details.id', 'DESC')
             ->limit(13) // จำกัดผลลัพธ์เป็น 12 รายการ
@@ -527,9 +521,6 @@ class WelcomeController extends Controller
         $welcomeQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.code_admin', $userQuery[0]->code)
             ->where('rent_sell_home_details.status_home', 'on')
-            ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
-            ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
-            ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id')
             ->select(
                 'rent_sell_home_details.*'
             )

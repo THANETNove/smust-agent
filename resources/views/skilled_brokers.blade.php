@@ -113,6 +113,7 @@
             @endforeach
         </div>
     </div>
+
     <div class="favorites-query">
         <div class="container-box-free">
             <a href="{{ url('contact-premium') }}">
