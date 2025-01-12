@@ -7,7 +7,7 @@
         <div class="col-md-12 col-lg-8">
             <div class="row">
                 <div class="col-md-12 col-lg-5"><img class="icon-user-contact-agent"
-                        @if ($userQuery[0]->image) src="{{ URL::asset($userQuery[0]->image) }}" @else 
+                @if ($userQuery[0]->image) src="{{ URL::asset($userQuery[0]->image) }}" @else 
             src="{{ URL::asset('/assets/image/welcome/usercontact.jpg') }}" @endif>
                 </div>
                 <div class="col-md-12 col-lg-7 mt-lg-agent">
