@@ -455,7 +455,7 @@
                                                     <h5 class="card-title-smust">{!! $word->words_head !!}</h5>
                                                     <img src="{{ URL::asset('/assets/image/welcome/' . $word->words_image) }}"
                                                         class="frame-188" alt="user">
-                                                    <p class="card-text-smust">L{!! $word->words_details !!}</p>
+                                                    <p class="card-text-smust">{!! $word->words_details !!}</p>
                                                     <p class="card-subtitle">{!! $word->words_name !!}</p>
 
                                                 </div>
