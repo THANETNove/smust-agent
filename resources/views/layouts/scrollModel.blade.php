@@ -16,8 +16,14 @@
             <div class="modal-body">
                 <p id="date-count" class="date-count-text"></p>
                 <div class="scroll-box-81">
-                    <img class="group-81-scroll" src="{{ URL::asset('/assets/image/home/group-81.png') }}">
-                    <img class="group-81-scroll" src="{{ URL::asset('/assets/image/home/group-82.png') }}">
+                    <a href="https://forms.gle/oKZ7Zvmt8cfz2Em29" target="_blank" rel="noopener noreferrer">
+                        <img class="group-81-scroll" src="{{ URL::asset('/assets/image/home/group-81.png') }}">
+                    </a>
+                    <a href="https://forms.gle/oKZ7Zvmt8cfz2Em29" target="_blank" rel="noopener noreferrer">
+                        <img class="group-81-scroll" src="{{ URL::asset('/assets/image/home/group-82.png') }}">
+                    </a>
+
+
                 </div>
 
             </div>

@@ -29,7 +29,7 @@
 
 
         <div class="container-pro-premium">
-            <a {{-- href="#" target="_blank" --}} rel="noopener noreferrer">
+            <a href="https://forms.gle/oKZ7Zvmt8cfz2Em29" target="_blank" rel="noopener noreferrer">
 
                 @if (Auth::user()->plans == 0)
                     <img class="plans-pro-premium-img" src="{{ URL::asset('/assets/image/welcome/plans-pro.png') }}">
@@ -40,7 +40,7 @@
                 @endif
 
             </a>
-            <a {{-- href="#" target="_blank" --}} rel="noopener noreferrer">
+            <a href="https://forms.gle/oKZ7Zvmt8cfz2Em29" target="_blank" rel="noopener noreferrer">
                 @if (Auth::user()->plans == 2)
                     <img class="plans-pro-premium-img"
                         src="{{ URL::asset('/assets/image/welcome/plans-premium_user.png') }}">
