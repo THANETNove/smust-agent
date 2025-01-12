@@ -2,12 +2,14 @@
 
 @section('content')
     @include('layouts.navbar_welcome')
-    <div class="img-rectangle-1234"></div>
+    <div class="img-rectangle-1234"
+        style="background-image: url('{{ $userQuery[0]->imageHade ? URL::asset($userQuery[0]->imageHade) : '/assets/image/welcome/Rectangle1234.png' }}');">
+    </div>
     <div class="box-rectangle-profile row">
         <div class="col-md-12 col-lg-8">
             <div class="row">
                 <div class="col-md-12 col-lg-5"><img class="icon-user-contact-agent"
-                @if ($userQuery[0]->image) src="{{ URL::asset($userQuery[0]->image) }}" @else 
+                        @if ($userQuery[0]->image) src="{{ URL::asset($userQuery[0]->image) }}" @else 
             src="{{ URL::asset('/assets/image/welcome/usercontact.jpg') }}" @endif>
                 </div>
                 <div class="col-md-12 col-lg-7 mt-lg-agent">
@@ -21,7 +23,7 @@
             </div>
 
 
-
+            <p class="history-work-text">{{ $userQuery[0]->history_work }}</p>
         </div>
         <div class="col-md-12 col-lg-4  mt-lg-agent-2">
 

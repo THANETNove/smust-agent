@@ -500,6 +500,7 @@ class WelcomeController extends Controller
             ->select(
                 'users.*',
                 'personal_websites.history_work',
+                'personal_websites.imageHade',
                 'personal_websites.image_1',
                 'personal_websites.name_1',
                 'personal_websites.details_1',
