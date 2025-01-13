@@ -489,6 +489,7 @@
             }
 
 
+
             // ตัวแปรสะสมค่า
             let accumulatedText = {
                 selectedDistrictText: "",
@@ -496,37 +497,42 @@
             };
 
             function handleAmphureText(text1, text2) {
-                const provincesSelect = document.querySelector("#provinces-id");
-                // ตรวจสอบและเปลี่ยนค่า text1 และ text2 หากเป็น "เขต/อำเภอ" หรือ "แขวง/ตำบล"
-                if (text1 === "เขต/อำเภอ") text1 = null;
-                if (text2 === "แขวง/ตำบล") text2 = null;
-                // อัปเดตตัวแปรสะสม
-                if (text1) accumulatedText.selectedDistrictText = text1;
-                if (text2) accumulatedText.selectedAmphureText = text2;
+                if (!stationsName) {
 
-                const {
-                    selectedDistrictText,
-                    selectedAmphureText
-                } = accumulatedText;
+                    const provincesSelect = document.querySelector("#provinces-id");
+                    // ตรวจสอบและเปลี่ยนค่า text1 และ text2 หากเป็น "เขต/อำเภอ" หรือ "แขวง/ตำบล"
+                    if (text1 === "เขต/อำเภอ") text1 = null;
+                    if (text2 === "แขวง/ตำบล") text2 = null;
+                    // อัปเดตตัวแปรสะสม
+                    if (text1) accumulatedText.selectedDistrictText = text1;
+                    if (text2) accumulatedText.selectedAmphureText = text2;
 
-                console.log("selectedDistrictText (accumulated):", selectedDistrictText);
-                console.log("selectedAmphureText (accumulated):", selectedAmphureText);
+                    const {
+                        selectedDistrictText,
+                        selectedAmphureText
+                    } = accumulatedText;
 
-                if (provincesSelect) {
-                    const provincesText = provincesSelect.options[provincesSelect.selectedIndex]?.text || "";
-                    console.log("provincesText:", provincesText);
+                    console.log("selectedDistrictText (accumulated):", selectedDistrictText);
+                    console.log("selectedAmphureText (accumulated):", selectedAmphureText);
 
-                    // รวมข้อความทั้งหมด
-                    const text = [provincesText, selectedDistrictText, selectedAmphureText].filter(Boolean).join(" , ");
-                    console.log("Final text (combined):", text);
+                    if (provincesSelect) {
+                        const provincesText = provincesSelect.options[provincesSelect.selectedIndex]?.text || "";
+                        console.log("provincesText:", provincesText);
 
-                    const station_name = document.getElementById('stations');
-                    if (station_name && "value" in station_name) {
-                        station_name.value = text;
-                    } else {
-                        console.error("station_name element not found or not a valid input/textarea");
+                        // รวมข้อความทั้งหมด
+                        const text = [provincesText, selectedDistrictText, selectedAmphureText].filter(Boolean).join(" , ");
+                        console.log("Final text (combined):", text);
+
+                        const station_name = document.getElementById('stations');
+                        if (station_name && "value" in station_name) {
+                            station_name.value = text;
+                        } else {
+                            console.error("station_name element not found or not a valid input/textarea");
+                        }
                     }
+
                 }
+
             }
 
 
