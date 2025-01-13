@@ -190,6 +190,7 @@ Route::get('contact-premium', [WelcomeController::class, 'contactPremium'])->nam
 Route::post('contact-premium', [WelcomeController::class, 'contactPremium'])->name('contact-premium');
 Route::get('premium-agent-home/{id}', [WelcomeController::class, 'premiumAgentHome'])->name('premium-agent-home');
 Route::get('view-all-assets/{id}', [WelcomeController::class, 'viewAllAssets'])->name('view-all-assets');
+Route::post('view-all-assets-id', [WelcomeController::class, 'viewAllAssetsId'])->name('view-all-assets-id');
 Route::get('interested-more', [WelcomeController::class, 'interestedMore'])->name('interested-more');
 
 

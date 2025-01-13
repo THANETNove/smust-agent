@@ -6,11 +6,11 @@
                 <p>เลือกทำเลจาก</p>
 
                 <div class="row-box">
-                    <div class="filter-box selected" data-type="area" onclick="toggleSelection2(this)">
+                    <div class="filter-box selected" data-type="area" onclick="toggleSelection2(this)" id="area2">
                         <img class="icon-location" src="{{ URL::asset('/assets/image/welcome/location_on.png') }}">
                         <p>ย่าน</p>
                     </div>
-                    <div class="filter-box" data-type="station" onclick="toggleSelection2(this)">
+                    <div class="filter-box" data-type="station" onclick="toggleSelection2(this)" id="station2">
                         <img class="icon-location" src="{{ URL::asset('/assets/image/welcome/train.png') }}">
                         <p>สถานีรถไฟฟ้า</p>
                     </div>

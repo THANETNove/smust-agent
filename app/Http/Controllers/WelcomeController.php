@@ -531,15 +531,149 @@ class WelcomeController extends Controller
                 'rent_sell_home_details.*'
             )
             ->orderBy('rent_sell_home_details.id', 'DESC')
-            ->get()
-            ->map(function ($item) use ($provinces, $amphures, $districts) {
+            ->paginate(100);
+        if ($welcomeQuery instanceof \Illuminate\Pagination\LengthAwarePaginator) {
+            $welcomeQuery->getCollection()->transform(function ($item) use ($provinces, $amphures, $districts) {
                 $item->provinces_name_th = $provinces[$item->provinces] ?? null;
                 $item->amphures_name_th = $amphures[$item->amphures] ?? null;
                 $item->districts_name_th = $districts[$item->districts] ?? null;
                 return $item;
             });
+        } else {
+            dd("The data for status_admin = 0 is not paginated.");
+        }
 
-        return view('viewAllAssets', compact('userQuery', 'welcomeQuery'));
+
+
+        return view('viewAllAssets', compact('userQuery', 'welcomeQuery', 'id'));
+    }
+
+
+    function viewAllAssetsId(Request $request)
+    {
+
+
+        $userQuery = DB::table('users')
+            ->where('users.id', $request->id)
+            ->leftJoin('personal_websites', 'users.id', '=', 'personal_websites.user_id')
+            ->select(
+                'users.*',
+                'personal_websites.history_work',
+                'personal_websites.imageHade',
+                'personal_websites.image_1',
+                'personal_websites.name_1',
+                'personal_websites.details_1',
+                'personal_websites.image_2',
+                'personal_websites.name_2',
+                'personal_websites.details_2',
+                'personal_websites.image_3',
+                'personal_websites.name_3',
+                'personal_websites.details_3',
+            )
+            ->get();
+        $provinces = Cache::remember('provinces', 60 * 60, function () {
+            return DB::table('provinces')->pluck('name_th', 'id');
+        });
+
+        $amphures = Cache::remember('amphures', 60 * 60, function () {
+            return DB::table('amphures')->pluck('name_th', 'id');
+        });
+
+        $districts = Cache::remember('districts', 60 * 60, function () {
+            return DB::table('districts')->pluck('name_th', 'id');
+        });
+
+        $welcomeQuery = DB::table('rent_sell_home_details')
+            ->where('rent_sell_home_details.code_admin', $userQuery[0]->code)
+            ->where('rent_sell_home_details.status_home', 'on')
+            ->select(
+                'rent_sell_home_details.*'
+            );
+        if ($request->all()) {
+
+            //! คันหา
+            if ($request->area_station == 'area' || $request->area_station == 'station') {
+
+                if ($request->area_station == 'area') {
+
+                    if ($request->has('provinces')) {
+                        $welcomeQuery->where('rent_sell_home_details.provinces', $request->input('provinces'));
+                    }
+                    if ($request->has('amphures')) {
+                        $welcomeQuery->where('rent_sell_home_details.amphures', $request->input('amphures'));
+                    }
+                    if ($request->has('districts')) {
+                        $welcomeQuery->where('rent_sell_home_details.districts', $request->input('districts'));
+                    }
+                } else {
+                    if ($request->has('stations')) {
+
+                        $welcomeQuery->where('rent_sell_home_details.train_name', $request->input('stations'));
+                    }
+                }
+
+                if ($request->has('property_type')) {
+                    $typeName =   $request->input('property_type');
+                    $welcomeQuery->where('rent_sell_home_details.property_type',   'LIKE', "%$typeName%");
+                }
+
+                if ($request->has('sale_rent')) {
+
+                    $priceRange = $request->input('price_range');
+
+                    // ตรวจสอบประเภทการขายหรือเช่า
+                    if ($request->input('sale_rent') == 'sale') {
+
+                        $welcomeQuery->where(function ($query) {
+                            $nameSale = "ขาย";
+                            $query->where('rent_sell_home_details.rent_sell',   'LIKE', "%$nameSale%")
+                                ->orWhere('rent_sell_home_details.sell', 'LIKE', "%$nameSale%");
+                        });
+                    } elseif ($request->input('sale_rent') == 'rent') {
+                        $welcomeQuery->where(function ($query) {
+
+                            $nameRent = "เช่า";
+                            $query->where('rent_sell_home_details.rent_sell', 'LIKE', "%$nameRent%")
+                                ->orWhere('rent_sell_home_details.sell', 'LIKE', "%$nameRent%");
+                        });
+                    } else {
+                        // กรณีเลือกทั้งการขายและเช่า
+                        if ($request->has('price_range')) {
+                            if (strpos($priceRange, '-') !== false) {
+                                [$minPrice, $maxPrice] = explode('-', $priceRange);
+                                $welcomeQuery->whereBetween('rent_sell_home_details.sell_price', [$minPrice, $maxPrice])
+                                    ->orWhereBetween('rent_sell_home_details.rental_price', [$minPrice, $maxPrice]);
+                            }
+                        }
+                    }
+                }
+                $welcomeQuery->orderBy('rent_sell_home_details.id', 'DESC');
+            }
+        }
+
+
+
+
+        $welcomeQuery = $welcomeQuery->orderBy('rent_sell_home_details.id', 'DESC')
+            ->paginate(100);
+
+        if ($welcomeQuery instanceof \Illuminate\Pagination\LengthAwarePaginator) {
+            $welcomeQuery->getCollection()->transform(function ($item) use ($provinces, $amphures, $districts) {
+                $item->provinces_name_th = $provinces[$item->provinces] ?? null;
+                $item->amphures_name_th = $amphures[$item->amphures] ?? null;
+                $item->districts_name_th = $districts[$item->districts] ?? null;
+                return $item;
+            });
+        } else {
+            dd("The data for status_admin = 0 is not paginated.");
+        }
+
+        $welcomeQuery = $welcomeQuery->appends($request->except('page'));
+        $id =   $request->id;
+
+        $request = $request->all();
+
+        return view('viewAllAssets', compact('userQuery', 'welcomeQuery', 'id', 'request'));
     }
     function interestedMore()
     {

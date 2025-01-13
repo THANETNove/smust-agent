@@ -120,15 +120,17 @@
         </div>
 
     </div>
-    <div class="box-all-assets-head">
+    <div class="box-all-assets-head" id="assets-content">
         <p class="search-for-assets">ค้นหาทรัพย์ได้เลย</p>
         <div class="container-box-free">
             <div class="search-welcome">
-                <form method="POST" action="{{ route('house-condo') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('view-all-assets-id') }}#assets-content"
+                    enctype="multipart/form-data">
                     @csrf
+                    <input type="text" name="id" value="{{ $id }}" style="display: none;">
                     <div class="search-welcome-box mb-3">
                         <div>
-                            <input type="radio" id="rent" name="sale_rent" value="rent" checked>
+                            <input type="radio" id="rent" name="sale_rent" value="rent">
                             <label for="rent" class="search-text-head">เช่า</label>
                         </div>
 
@@ -138,7 +140,7 @@
                         </div>
 
                         <div>
-                            <input type="radio" id="owner-financing" name="sale_rent" value="ownerFinancing">
+                            <input type="radio" id="owner-financing" name="sale_rent" value="sale_rent">
                             <label for="owner-financing" class="search-text-head2 head-new">ผ่อนตรงเจ้าของ
                                 <span style="color: #E34234">(NEW)</span>
                             </label>
@@ -146,7 +148,8 @@
                     </div>
                     <div class="row">
                         <div class="mb-3 col-12 col-sm-4">
-                            <select class="form-select" aria-label="Default select example" name="property_type">
+                            <select class="form-select" aria-label="Default select example" name="property_type"
+                                id="propertyTypeSelect">
                                 <option selected disabled>ประเภททรัพย์</option>
                                 <option value="บ้านเดี่ยว">บ้านเดี่ยว</option>
                                 <option value="คอนโด">คอนโด </option>
@@ -301,6 +304,234 @@
                 </div>
             </a>
         @endforeach
+
+        <div>
+            {!! $welcomeQuery->links() !!}
+
+        </div>
     </div>
     @include('layouts.footer_welocome')
+
+    <script>
+        @if (isset($request))
+            let requestData = @json($request);
+        @else
+            let requestData = null;
+        @endif
+
+        //  console.log("requestData", requestData);
+
+        // ประกาศตัวแปรสำหรับเก็บข้อความ
+        let selectedDistrictText = "";
+        let selectedAmphureText = "";
+
+        // ประกาศตัวแปรสำหรับติดตามการเสร็จสิ้นของ AJAX
+        let ajaxCompleted = {
+            districts: false,
+            amphures: false
+        };
+
+        if (requestData) {
+
+            if (requestData.area_station == 'area') {
+                const areaElement = document.getElementById('area2');
+                areaElement.classList.add('selected');
+                areaElement.click();
+            } else {
+                const stationElement = document.getElementById('station2');
+                stationElement.classList.add('selected');
+                stationElement.click();
+            }
+
+
+
+
+
+            //จังหวัด อำเภอ เขต
+            if (requestData.provinces) {
+                document.querySelector("#provinces-id").value = requestData.provinces;
+
+                /* const provincesText = document.querySelector("#provinces-id").text;
+                console.log("provincesText", provincesText); */
+
+            }
+
+
+            // เมื่อเลือก "แขวง/ อำเภอ"
+
+            $.ajax({
+                url: "/get-districts/" + requestData.provinces,
+                type: "GET",
+
+                success: function(res) {
+                    // อัปเดตตัวเลือก "เขต/อำเภอ"
+                    var districtsSelect = $("#districts");
+                    districtsSelect.find("option").remove();
+                    districtsSelect.append(
+                        $("<option selected disabled>เขต/อำเภอ</option>")
+                    );
+
+                    $.each(res, function(index, district) {
+
+
+                        districtsSelect.append(
+                            $("<option>", {
+                                value: district.id,
+                                text: district.name_th,
+                                selected: district.id == requestData.districts
+                            })
+                        );
+                    });
+                    const selectedDistrictText = districtsSelect.find("option:selected").text();
+
+                    handleAmphureText(selectedDistrictText, null);
+
+
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                },
+            });
+
+
+            $.ajax({
+                url: "/get-amphures/" + requestData.districts,
+                type: "GET",
+                success: function(res) {
+                    // อัปเดตตัวเลือก "แขวง/ อำเภอ"
+                    var amphuresSelect = $("#amphures");
+                    amphuresSelect.find("option").remove();
+                    amphuresSelect.append(
+                        $("<option selected disabled>แขวง/ตำบล</option>")
+                    );
+
+                    $.each(res, function(index, data) {
+
+                        amphuresSelect.append(
+                            $("<option>", {
+                                value: data.id,
+                                text: data.name_th,
+                                selected: data.id == requestData.amphures
+                            })
+                        );
+
+                        /*  if (data.zip_code) {
+                             document.getElementById("zip_code").value =
+                                 data.zip_code;
+                         } */
+                    });
+                    const selectedAmphureText = amphuresSelect.find("option:selected").text();
+
+                    handleAmphureText(null, selectedAmphureText);
+
+
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                },
+            });
+
+            //  ประเภทสัญญา ชื้อ ขาย ทั้งหมด
+            let saleRent = requestData['sale_rent'] ?? '';
+
+
+
+            // ตรวจสอบว่า sale_rent มีค่าเป็น 'sale' และคลิกที่ปุ่ม filterStation อัตโนมัติ
+            if (saleRent == 'sale') {
+                const filterStationButton = document.getElementById('buy');
+                if (filterStationButton) {
+                    filterStationButton.click(); // คลิกที่ปุ่ม filterStation
+                }
+            }
+            if (saleRent == 'rent') {
+                const filterStationButton = document.getElementById('rent');
+
+
+
+                if (filterStationButton) {
+                    filterStationButton.click(); // คลิกที่ปุ่ม filterStation
+                }
+            }
+            if (saleRent == 'sale_rent') {
+                const filterStationButton = document.getElementById('sale_rent');
+                if (filterStationButton) {
+                    filterStationButton.click(); // คลิกที่ปุ่ม filterStation
+                }
+            }
+
+            //  ประเภททรัพย์
+            let propertytypeName = requestData['property_type'] ?? '';
+
+
+            if (propertytypeName) {
+                const selectElement = document.getElementById('propertyTypeSelect');
+
+                // ตรวจสอบค่ากับ <option> และตั้งค่า selected
+                Array.from(selectElement.options).forEach(option => {
+                    if (option.value === propertytypeName) {
+                        option.selected = true;
+                    }
+                });
+
+            }
+
+
+            // สถานี้รถไฟ  stations
+
+            let stationsName = requestData['stations'] ?? '';
+            if (stationsName) {
+                const station_name = document.getElementById('stations');
+                const station_name2 = document.getElementById('stations-name');
+                if (station_name) {
+                    station_name.value = stationsName;
+                    station_name2.value = stationsName;
+                }
+            }
+
+
+            // ตัวแปรสะสมค่า
+            let accumulatedText = {
+                selectedDistrictText: "",
+                selectedAmphureText: ""
+            };
+
+            function handleAmphureText(text1, text2) {
+                const provincesSelect = document.querySelector("#provinces-id");
+                // ตรวจสอบและเปลี่ยนค่า text1 และ text2 หากเป็น "เขต/อำเภอ" หรือ "แขวง/ตำบล"
+                if (text1 === "เขต/อำเภอ") text1 = null;
+                if (text2 === "แขวง/ตำบล") text2 = null;
+                // อัปเดตตัวแปรสะสม
+                if (text1) accumulatedText.selectedDistrictText = text1;
+                if (text2) accumulatedText.selectedAmphureText = text2;
+
+                const {
+                    selectedDistrictText,
+                    selectedAmphureText
+                } = accumulatedText;
+
+                console.log("selectedDistrictText (accumulated):", selectedDistrictText);
+                console.log("selectedAmphureText (accumulated):", selectedAmphureText);
+
+                if (provincesSelect) {
+                    const provincesText = provincesSelect.options[provincesSelect.selectedIndex]?.text || "";
+                    console.log("provincesText:", provincesText);
+
+                    // รวมข้อความทั้งหมด
+                    const text = [provincesText, selectedDistrictText, selectedAmphureText].filter(Boolean).join(" , ");
+                    console.log("Final text (combined):", text);
+
+                    const station_name = document.getElementById('stations');
+                    if (station_name && "value" in station_name) {
+                        station_name.value = text;
+                    } else {
+                        console.error("station_name element not found or not a valid input/textarea");
+                    }
+                }
+            }
+
+
+
+
+        }
+    </script>
 @endsection
