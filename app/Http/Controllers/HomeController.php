@@ -384,20 +384,51 @@ class HomeController extends Controller
 
     public function show($id)
     {
+
+        $provinces = Cache::remember('provinces', 60 * 60, function () {
+            return DB::table('provinces')->pluck('name_th', 'id');
+        });
+
+        $amphures = Cache::remember('amphures', 60 * 60, function () {
+            return DB::table('amphures')->pluck('name_th', 'id');
+        });
+
+        $districts = Cache::remember('districts', 60 * 60, function () {
+            return DB::table('districts')->pluck('name_th', 'id');
+        });
+
+
+
         $dataHome = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.id', $id)
-            ->leftJoin('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
-            ->leftJoin('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id') //เขต/ ตำบล
-            ->leftJoin('districts', 'rent_sell_home_details.amphures', '=', 'districts.id') //เขต/ อำเภอ
             ->select(
                 'rent_sell_home_details.*',
-                'provinces.name_th AS provinces_name_th',
-                'districts.name_th AS districts_name_th',
-                'amphures.name_th AS amphures_name_th'
             )
             ->orderBy('rent_sell_home_details.id', 'DESC')
-            ->get();
+            ->get()
+            ->map(function ($item) use ($provinces, $amphures, $districts) {
+                $item->provinces_name_th = $provinces[$item->provinces] ?? null;
+                $item->amphures_name_th = $amphures[$item->amphures] ?? null;
+                $item->districts_name_th = $districts[$item->districts] ?? null;
+                return $item;
+            });
 
+
+        $user = DB::table('users')
+            ->where('code', $dataHome[0]->code_admin)
+            ->select(
+                'users.line_id',
+                'users.facebook_id',
+                'users.phone',
+            )
+            ->first();
+
+        $dataHome = $dataHome->map(function ($item) use ($user) {
+            $item->line_id = $user->line_id ?? null;
+            $item->facebook_id = $user->facebook_id ?? null;
+            $item->phone = $user->phone ?? null;
+            return $item;
+        });
 
 
         return view('detall.detall', ['dataHome' => $dataHome]);

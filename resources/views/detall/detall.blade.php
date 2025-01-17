@@ -544,19 +544,19 @@
 
                             @if (Auth::check())
                                 @php
-                                    $lineIsUrl = filter_var(Auth::user()->line_id, FILTER_VALIDATE_URL);
-                                    $facebookIsUrl = filter_var(Auth::user()->facebook_id, FILTER_VALIDATE_URL);
+                                    $lineIsUrl = filter_var($home->line_id, FILTER_VALIDATE_URL);
+                                    $facebookIsUrl = filter_var($home->facebook_id, FILTER_VALIDATE_URL);
                                 @endphp
 
-                                @if (Auth::user()->line_id)
+                                @if ($home->line_id)
                                     <div class="input_box">
                                         <input id="down_payment_amount" type="text" class="form-control col-12 r"
-                                            value="{{ Auth::user()->line_id }}">
+                                            value="{{ $home->line_id }}">
                                         <label style="margin-left: -16px">Line ID </label>
                                         <div class="position-contact">
                                             @if ($lineIsUrl)
-                                                <a href="{{ Auth::user()->line_id }}" class="no-underline"
-                                                    target="_blank" rel="noopener noreferrer">
+                                                <a href="{{ $home->line_id }}" class="no-underline" target="_blank"
+                                                    rel="noopener noreferrer">
                                                     <img class="ass-icon-line"
                                                         src="{{ URL::asset('/assets/image/home/line.png') }}">
                                                 </a>
@@ -566,7 +566,7 @@
                                                     onclick="copyLineID()">
                                                 <script>
                                                     function copyLineID() {
-                                                        var lineName = "{{ Auth::user()->line_id }}";
+                                                        var lineName = "{{ $home->line_id }}";
                                                         Swal.fire({
                                                             title: lineName,
                                                             text: "Line ID" + "\n\nถูกคัดลอกแล้ว!",
@@ -591,14 +591,14 @@
                                     </div>
                                 @endif
 
-                                @if (Auth::user()->facebook_id)
+                                @if ($home->facebook_id)
                                     <div class="input_box mt-3">
                                         <input id="down_payment_amount" type="text" class="form-control col-12 r"
-                                            value="{{ Auth::user()->facebook_id }}">
+                                            value="{{ $home->facebook_id }}">
                                         <label style="margin-left: -16px">Facebook </label>
                                         <div class="position-contact">
                                             @if ($facebookIsUrl)
-                                                <a href="{{ Auth::user()->facebook_id }}" target="_blank"
+                                                <a href="{{ $home->facebook_id }}" target="_blank"
                                                     rel="noopener noreferrer" class="no-underline">
                                                     <img class="ass-icon-line"
                                                         src="{{ URL::asset('/assets/image/home/facbook.png') }}">
@@ -609,7 +609,7 @@
                                                     onclick="copyFacebookID()">
                                                 <script>
                                                     function copyFacebookID() {
-                                                        var fbName = "{{ Auth::user()->facebook_id }}";
+                                                        var fbName = "{{ $home->facebook_id }}";
                                                         Swal.fire({
                                                             title: fbName,
                                                             text: "Facebook ID" + "\n\nถูกคัดลอกแล้ว!",
@@ -632,13 +632,13 @@
                                     </div>
                                 @endif
 
-                                @if (Auth::user()->phone)
+                                @if ($home->phone)
                                     <div class="input_box mt-3">
                                         <input id="down_payment_amount" type="text" class="form-control col-12 r"
-                                            value="{{ Auth::user()->phone }}">
+                                            value="{{ $home->phone }}">
                                         <label style="margin-left: -16px">Phone </label>
                                         <div class="position-contact">
-                                            <a href="tel:{{ Auth::user()->phone }}" rel="noopener noreferrer"
+                                            <a href="tel:{{ $home->phone }}" rel="noopener noreferrer"
                                                 class="no-underline">
                                                 <img class="ass-icon-line"
                                                     src="{{ URL::asset('/assets/image/home/thone.png') }}">
@@ -646,7 +646,7 @@
                                         </div>
                                     </div>
 
-                                    @if ($home->user_phone != Auth::user()->phone)
+                                    @if ($home->user_phone != $home->phone && $home->user_phone != null)
                                         <div class="input_box mt-3">
                                             <input id="down_payment_amount" type="text" class="form-control col-12 r"
                                                 value="{{ $home->user_phone }}">
