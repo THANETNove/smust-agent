@@ -414,21 +414,9 @@ class HomeController extends Controller
             });
 
 
-        $user = DB::table('users')
-            ->where('code', $dataHome[0]->code_admin)
-            ->select(
-                'users.line_id',
-                'users.facebook_id',
-                'users.phone',
-            )
-            ->first();
 
-        $dataHome = $dataHome->map(function ($item) use ($user) {
-            $item->line_id = $user->line_id ?? null;
-            $item->facebook_id = $user->facebook_id ?? null;
-            $item->phone = $user->phone ?? null;
-            return $item;
-        });
+
+
 
 
         return view('detall.detall', ['dataHome' => $dataHome]);

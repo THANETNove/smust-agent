@@ -523,10 +523,10 @@
                                 @method('PUT')
                                 <div class="mb-4 position-relative">
                                     <textarea class="form-control" id="caption-textarea" name="details" style="min-height: 196px;height: auto;">
-@if ($dataCap)
+                                    @if ($dataCap)
 {{ $dataCap->details }}
 @endif
-</textarea>
+                                    </textarea>
                                     <img class="icon-edit2" id="edit2-btn"
                                         src="{{ URL::asset('/assets/image/welcome/edit2.png') }}">
                                     <img class="icon-edit3" id="icon-edit3"
@@ -544,18 +544,24 @@
 
                             @if (Auth::check())
                                 @php
-                                    $lineIsUrl = filter_var($home->line_id, FILTER_VALIDATE_URL);
-                                    $facebookIsUrl = filter_var($home->facebook_id, FILTER_VALIDATE_URL);
+
+                                    $line = $home->user_link_id ?? $home->make_appointment_location;
+
+                                    $facebook = $home->user_facebook ?? $home->make_appointment_location;
+                                    $phone = $home->user_phone ?? $home->contact_number;
+
+                                    $lineIsUrl = filter_var($line, FILTER_VALIDATE_URL);
+                                    $facebookIsUrl = filter_var($facebook, FILTER_VALIDATE_URL);
                                 @endphp
 
-                                @if ($home->line_id)
+                                @if ($line)
                                     <div class="input_box">
                                         <input id="down_payment_amount" type="text" class="form-control col-12 r"
-                                            value="{{ $home->line_id }}">
+                                            value="{{ $line }}">
                                         <label style="margin-left: -16px">Line ID </label>
                                         <div class="position-contact">
                                             @if ($lineIsUrl)
-                                                <a href="{{ $home->line_id }}" class="no-underline" target="_blank"
+                                                <a href="{{ $line }}" class="no-underline" target="_blank"
                                                     rel="noopener noreferrer">
                                                     <img class="ass-icon-line"
                                                         src="{{ URL::asset('/assets/image/home/line.png') }}">
@@ -566,7 +572,7 @@
                                                     onclick="copyLineID()">
                                                 <script>
                                                     function copyLineID() {
-                                                        var lineName = "{{ $home->line_id }}";
+                                                        var lineName = "{{ $line }}";
                                                         Swal.fire({
                                                             title: lineName,
                                                             text: "Line ID" + "\n\nถูกคัดลอกแล้ว!",
@@ -591,15 +597,15 @@
                                     </div>
                                 @endif
 
-                                @if ($home->facebook_id)
+                                @if ($facebook && $facebook != $line)
                                     <div class="input_box mt-3">
                                         <input id="down_payment_amount" type="text" class="form-control col-12 r"
-                                            value="{{ $home->facebook_id }}">
+                                            value="{{ $facebook }}">
                                         <label style="margin-left: -16px">Facebook </label>
                                         <div class="position-contact">
                                             @if ($facebookIsUrl)
-                                                <a href="{{ $home->facebook_id }}" target="_blank"
-                                                    rel="noopener noreferrer" class="no-underline">
+                                                <a href="{{ $facebook }}" target="_blank" rel="noopener noreferrer"
+                                                    class="no-underline">
                                                     <img class="ass-icon-line"
                                                         src="{{ URL::asset('/assets/image/home/facbook.png') }}">
                                                 </a>
@@ -609,7 +615,7 @@
                                                     onclick="copyFacebookID()">
                                                 <script>
                                                     function copyFacebookID() {
-                                                        var fbName = "{{ $home->facebook_id }}";
+                                                        var fbName = "{{ $facebook }}";
                                                         Swal.fire({
                                                             title: fbName,
                                                             text: "Facebook ID" + "\n\nถูกคัดลอกแล้ว!",
@@ -632,34 +638,19 @@
                                     </div>
                                 @endif
 
-                                @if ($home->phone)
+                                @if ($phone)
                                     <div class="input_box mt-3">
                                         <input id="down_payment_amount" type="text" class="form-control col-12 r"
-                                            value="{{ $home->phone }}">
+                                            value="{{ $phone }}">
                                         <label style="margin-left: -16px">Phone </label>
                                         <div class="position-contact">
-                                            <a href="tel:{{ $home->phone }}" rel="noopener noreferrer"
+                                            <a href="tel:{{ $phone }}" rel="noopener noreferrer"
                                                 class="no-underline">
                                                 <img class="ass-icon-line"
                                                     src="{{ URL::asset('/assets/image/home/thone.png') }}">
                                             </a>
                                         </div>
                                     </div>
-
-                                    @if ($home->user_phone != $home->phone && $home->user_phone != null)
-                                        <div class="input_box mt-3">
-                                            <input id="down_payment_amount" type="text" class="form-control col-12 r"
-                                                value="{{ $home->user_phone }}">
-                                            <label style="margin-left: -16px">Phone </label>
-                                            <div class="position-contact">
-                                                <a href="tel:{{ $home->user_phone }}" rel="noopener noreferrer"
-                                                    class="no-underline">
-                                                    <img class="ass-icon-line"
-                                                        src="{{ URL::asset('/assets/image/home/thone.png') }}">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    @endif
                                 @endif
                             @else
                             @endif
