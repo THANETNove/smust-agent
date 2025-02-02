@@ -57,6 +57,8 @@ return new class extends Migration
             $table->text('ask_more')->nullable()->comment('ถามเพิ่มเติม');
             $table->string('contact_number')->nullable()->comment('เบอร์ติดต่อ');
             $table->string('status_home')->nullable()->comment('on = เปิดขายหรือเช่า / off ปิด ขายหรือเช่า');
+            $table->string('user_link_id')->nullable()->comment('link id user');
+            $table->string('user_facebook')->nullable()->comment('facebook user');
             $table->timestamps();
         });
     }

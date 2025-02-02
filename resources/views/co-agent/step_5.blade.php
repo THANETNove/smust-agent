@@ -35,6 +35,30 @@
         @enderror
     </div>
 </div>
+<div class="row mt-3 mb-3">
+    <div class="col-md-12 mb-3 input_box">
+        <input id="user_link_id" type="text" class="form-control @error('user_link_id') is-invalid @enderror"
+            name="user_link_id" value="{{ old('user_link_id') }}" autocomplete="link_id">
+        <label>LINE ID*</label>
+        @error('user_link_id')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<div class="row mt-3 mb-3">
+    <div class="col-md-12 mb-3 input_box">
+        <input id="user_facebook" type="text" class="form-control @error('user_facebook') is-invalid @enderror"
+            name="user_facebook" value="{{ old('user_facebook') }}" autocomplete="facebook">
+        <label>Facebook*</label>
+        @error('user_facebook')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
 
 <div class="box-btn-block-center">
     <button type="button" class="btn btn-have-broker-back" onclick="previousStep()">

@@ -70,7 +70,7 @@
         <div class="box-or-agent-we">
             <div class="box-or">
                 <p class="or-text">หรือ</p>
-                <a href="{{ url('co-create') }}">
+                <a href="{{ url('create-assets-customer') }}">
                     <div class="box-agent">ให้สามารถเอเจนท์ (SMUST Agent) ช่วยหาทรัพย์ตรงใจ</div>
                 </a>
 

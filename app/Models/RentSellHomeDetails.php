@@ -80,6 +80,8 @@ class RentSellHomeDetails extends Model
         'user_phone',
         'reservation_amount_baht',
         'product_new',
-        'notifications'
+        'notifications',
+        'user_facebook',
+        'user_link_id',
     ];
 }

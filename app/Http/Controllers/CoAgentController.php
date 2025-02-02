@@ -235,6 +235,8 @@ class CoAgentController extends Controller
         $member->user_name = $request['user_name'];  //TODO: add ชื่อ 
         $member->user_surname = $request['user_surname'];  //TODO: add นาสกุล  
         $member->user_phone = $request['user_phone'];  //TODO: add เบอร์โทร  
+        $member->user_link_id = $request['user_link_id'];  //TODO: add เบอร์โทร  
+        $member->user_facebook = $request['user_facebook'];  //TODO: add เบอร์โทร  
         $member->product_new = 1;  //TODO:  product ใหม่  
         $member->notifications = 1;  //TODO: เเจ้งเตื่อน
 
