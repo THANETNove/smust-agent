@@ -180,10 +180,6 @@
                                         ผู้เชี่ยวชาญให้คำปรึกษาเรื่อง {{ $fav->property_type }}
                                         เชี่ยวชาญในย่าน {{ $fav->provinces }}
                                     </p>
-                                    <p class="text-content-dark_000 ">
-                                        ผู้เชี่ยวชาญให้คำปรึกษาเรื่อง {{ $fav->property_type }}
-                                        เชี่ยวชาญในย่าน {{ $fav->provinces }}
-                                    </p>
                                     <p style="display: flex; align-items: flex-start;"> <img class="contract"
                                             src="{{ URL::asset('/assets/image/welcome/contract.png') }}">
                                         ประเภทสัญญา:
