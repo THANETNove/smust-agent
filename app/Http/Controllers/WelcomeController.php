@@ -18,7 +18,7 @@ class WelcomeController extends Controller
     function houseCondo(Request $request)
     {
 
-
+        $search = $request->input('search_name');
         // Create base query
         /* $dataHomeQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.status_home', 'on')
@@ -45,6 +45,7 @@ class WelcomeController extends Controller
         });
 
         $dataHomeQuery = DB::table('rent_sell_home_details')
+            ->where('rent_sell_home_details.building_name', 'LIKE', "%$search%")
             ->where('status_home', 'on');
 
 

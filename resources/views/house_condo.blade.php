@@ -66,6 +66,25 @@
                     </div>
                 </div>
             </form>
+            <form action="{{ url('/search-house-condo') }}" method="GET" id="searchForm">
+                <div class="box-search-home mb-3">
+                    <img class="icon-search-2" src="{{ URL::asset('/assets/image/welcome/search.png') }}">
+                    <input type="text" name="search_name" class="form-control box-filter_alt-2"
+                        id="exampleFormControlInput1" placeholder="พิมพ์ค้นหา..." onkeyup="doneTyping()">
+                </div>
+            </form>
+            <script>
+                let typingTimer; // ตัวแปรเก็บ timer
+                let doneTypingInterval = 1000; // หน่วงเวลา 1 วินาที (1000 มิลลิวินาที)
+
+                // ฟังก์ชันเรียกใช้เมื่อผู้ใช้พิมพ์
+                function doneTyping() {
+                    clearTimeout(typingTimer); // ยกเลิก timer ถ้ายังไม่ครบกำหนด
+                    typingTimer = setTimeout(function() {
+                        document.getElementById('searchForm').submit(); // ส่งฟอร์มเมื่อหยุดพิมพ์แล้ว 1 วินาที
+                    }, doneTypingInterval);
+                }
+            </script>
         </div>
         <div class="box-or-agent-we">
             <div class="box-or">

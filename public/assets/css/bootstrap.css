@@ -624,6 +624,20 @@ input[autofocus]:focus {
     background-color: var(--white);
 }
 
+.box-filter_alt-2 {
+    width: 100%;
+    height: 36px;
+    border: 1px solid var(--primary_100);
+    color: var(--dark);
+    padding-left: 40px;
+    display: flex;
+    margin-top: 28px;
+    align-items: center;
+    border-radius: 50px !important;
+    cursor: pointer;
+    background-color: var(--white);
+}
+
 .filter_alt-img {
     width: 13px;
     height: auto;

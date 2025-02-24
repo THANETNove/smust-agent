@@ -184,6 +184,7 @@ Route::put('caption-update/{id}', [CaptionController::class, 'update'])->name('c
 Route::get('click-favorite/{id}', [FavoriteController::class, 'update'])->name('click-favorite');
 Route::get('house-condo', [WelcomeController::class, 'houseCondo'])->name('house-condo');
 Route::post('house-condo', [WelcomeController::class, 'houseCondo'])->name('house-condo');
+Route::get('search-house-condo', [WelcomeController::class, 'houseCondo'])->name('search-house-condo');
 Route::get('house-condo-details/{id}', [WelcomeController::class, 'houseCondoDetails'])->name('house-condo-details');
 Route::get('skilled-brokers', [WelcomeController::class, 'skilledBrokers'])->name('skilled-brokers');
 Route::get('contact-premium', [WelcomeController::class, 'contactPremium'])->name('contact-premium');
