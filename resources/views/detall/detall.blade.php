@@ -114,7 +114,7 @@
                             <div class="flex-direction-column">
                                 @if ($home->rental_price > 0)
                                     <div class="flex-direction-row">
-                                        <span class="rent-sell-primary width-rent-sell">
+                                        <span class="rent-sell-primary ">
                                             {{ $home->rent_sell }}
                                         </span>
                                         <p> {{ $rental_price }}</p>
@@ -124,7 +124,7 @@
 
                                 @if ($home->sell_price > 0)
                                     <div class="flex-direction-row">
-                                        <span class="rent-sell-green width-rent-sell">
+                                        <span class="rent-sell-green ">
                                             {{ $home->rent_sell }}
                                         </span>
                                         <p> {{ $price_sell }}</p>
@@ -135,8 +135,8 @@
                             <div class="flex-direction-column">
                                 @if ($home->rental_price > 0)
                                     <div class="flex-direction-row">
-                                        <span class="rent-sell-primary width-rent-sell">
-                                            {{ $home->rent_sell }}
+                                        <span class="rent-sell-primary">
+                                            {{ $home->sell ? $home->sell : 'เช่า' }}
                                         </span>
                                         <p> {{ $rental_price }}</p>
                                     </div>
@@ -145,540 +145,522 @@
 
                                 @if ($home->sell_price > 0)
                                     <div class="flex-direction-row">
-                                        <span class="rent-sell-yellow width-rent-sell">
-                                            {{ $home->rent_sell }}
+                                        <span class="rent-sell-yellow">
+                                            {{ $home->rent ? $home->rent : 'ขาย' }}
                                         </span>
                                         <p> {{ $price_sell }}</p>
                                     </div>
                                 @endif
+                            </div>
                         @endif
 
 
-                        <div class="flex-direction-column">
-                            @if ($home->rent == 'เช่า')
-                                <div class="flex-direction-row">
-                                    <span class="rent-sell-primary width-rent-sell">
-                                        {{ $home->rent }}
-                                    </span>
-                                    <p> {{ number_format($home->rental_price) }}/m</p>
-                                </div>
-                            @endif
-                            @if ($home->sell == 'ขาย')
-                                <div class="flex-direction-row">
-                                    <span class="rent-sell-yellow width-rent-sell">
-                                        {{ $home->sell }}
-                                    </span>
-                                    <p> {{ number_format($home->sell_price) }} บาท</p>
-                                </div>
-                            @endif
-                            @if ($home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
-                                <div class="flex-direction-row ">
-                                    <span class="rent-sell-green width-rent-sell">
-                                        {{ $home->rent_sell }}
-                                    </span>
 
-                                </div>
-                            @endif
+                    </div>
+
+                    <nav class="mt-wealth">
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                                aria-selected="true">รายละเอียดทรัพย์
+                                <span class="box-nav-link"></span>
+                            </button>
+
+                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                                type="button" role="tab" aria-controls="nav-profile" aria-selected="false">ส่วนนายหน้า
+                                <span class="box-nav-link"></span>
+                            </button>
                         </div>
-                    </div>
-                </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
 
-                <nav class="mt-wealth">
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
-                            type="button" role="tab" aria-controls="nav-home" aria-selected="true">รายละเอียดทรัพย์
-                            <span class="box-nav-link"></span>
-                        </button>
-
-                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
-                            type="button" role="tab" aria-controls="nav-profile" aria-selected="false">ส่วนนายหน้า
-                            <span class="box-nav-link"></span>
-                        </button>
-                    </div>
-                </nav>
-                <div class="tab-content" id="nav-tabContent">
-
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
-                        tabindex="0">
-                        @if ($home->url_gps)
-                            <div class="flex-direction-row margin-bottom-8 mt-27">
-                                <img class="icon-content" src="{{ URL::asset('/assets/image/home/map.png') }}">
-                                <a target="_blank" rel="noopener noreferrer" href="{{ $home->url_gps }}"
-                                    class="text-content-dark_100  text-ellipsis">
-                                    {{ $home->url_gps }}
-                                </a>
-                            </div>
-                        @endif
-
-
-                        @if ($home->train_name)
-                            @if ($home->time_arrive < '61')
-                                <p class="text-content-dark_100 margin-bottom-8  text-ellipsis">
-
-                                    <img class="icon-content-2"
-                                        src="{{ URL::asset('/assets/image/home/directions_subway.png') }}">
-                                    {{ $home->time_arrive }} mins to <span
-                                        class="text-decoration">{{ $home->train_name }}
-                                    </span>
-                                </p>
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
+                            tabindex="0">
+                            @if ($home->url_gps)
+                                <div class="flex-direction-row margin-bottom-8 mt-27">
+                                    <img class="icon-content" src="{{ URL::asset('/assets/image/home/map.png') }}">
+                                    <a target="_blank" rel="noopener noreferrer" href="{{ $home->url_gps }}"
+                                        class="text-content-dark_100  text-ellipsis">
+                                        {{ $home->url_gps }}
+                                    </a>
+                                </div>
                             @endif
-                        @endif
 
 
-                        <div class="flex-direction-break-word margin-bottom-8 mt-wealth">
-                            <div class="box-content-icon">
-                                <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/bed_2.png') }}">
-                                <span>{{ $home->bedroom }} ห้องนอน</span>
-                            </div>
-                            <div class="box-content-icon">
-                                <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/shower.png') }}">
-                                <span>{{ $home->bathroom }} ห้องน้ำ</span>
-                            </div>
-                            <div class="box-content-icon">
-                                <img class="icon-content-2"
-                                    src="{{ URL::asset('/assets/image/home/screenshot_frame2.png') }}">
-                                <span>{{ $home->room_width }} ตร.ม.</span>
-                            </div>
-                            @if ($home->studio == 'มี')
+                            @if ($home->train_name)
+                                @if ($home->time_arrive < '61')
+                                    <p class="text-content-dark_100 margin-bottom-8  text-ellipsis">
+
+                                        <img class="icon-content-2"
+                                            src="{{ URL::asset('/assets/image/home/directions_subway.png') }}">
+                                        {{ $home->time_arrive }} mins to <span
+                                            class="text-decoration">{{ $home->train_name }}
+                                        </span>
+                                    </p>
+                                @endif
+                            @endif
+
+
+                            <div class="flex-direction-break-word margin-bottom-8 mt-wealth">
+                                <div class="box-content-icon">
+                                    <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/bed_2.png') }}">
+                                    <span>{{ $home->bedroom }} ห้องนอน</span>
+                                </div>
+                                <div class="box-content-icon">
+                                    <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/shower.png') }}">
+                                    <span>{{ $home->bathroom }} ห้องน้ำ</span>
+                                </div>
                                 <div class="box-content-icon">
                                     <img class="icon-content-2"
-                                        src="{{ URL::asset('/assets/image/home/countertops.png') }}">
-                                    <span>สตูดิโอ</span>
+                                        src="{{ URL::asset('/assets/image/home/screenshot_frame2.png') }}">
+                                    <span>{{ $home->room_width }} ตร.ม.</span>
+                                </div>
+                                @if ($home->studio == 'มี')
+                                    <div class="box-content-icon">
+                                        <img class="icon-content-2"
+                                            src="{{ URL::asset('/assets/image/home/countertops.png') }}">
+                                        <span>สตูดิโอ</span>
+                                    </div>
+                                @endif
+
+                                <div class="box-content-icon">
+                                    <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/floor.png') }}">
+                                    <span>ชั้น {{ $home->number_floors }}</span>
+                                </div>
+                                <div class="box-content-icon">
+                                    <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/weekend.png') }}">
+                                    <span>ตกแต่ง{{ $home->decoration }}</span>
+                                </div>
+                            </div>
+                            @if ($home->address)
+                                <p class="text-content-dark_100 margin-bottom-8">
+                                    <img class="icon-content-2"
+                                        src="{{ URL::asset('/assets/image/home/location_on.png') }}">
+                                    {{ $home->address }} &nbsp; {{ $home->districts_name_th }}&nbsp;
+                                    {{ $home->amphures_name_th }} &nbsp; {{ $home->provinces_name_th }}
+                                    &nbsp;
+                                    {{ $home->zip_code }}
+                                </p>
+                            @endif
+                            @if ($home->url_video)
+                                @php
+                                    // รับ URL ของ YouTube
+                                    $videoUrl = $home->url_video;
+
+                                    // แปลง URL ให้เป็นรูปแบบ embed
+                                    $embedUrl = preg_replace(
+                                        '/^https:\/\/www\.youtube\.com\/watch\?v=/',
+                                        'https://www.youtube.com/embed/',
+                                        $videoUrl,
+                                    );
+                                @endphp
+                                <div class="box-highlights top-highlights">
+                                    <p class="head-content">Video</p>
+                                    <iframe src="{{ $embedUrl }}" height="300" width="100%"
+                                        title="Iframe Example"></iframe>
                                 </div>
                             @endif
 
-                            <div class="box-content-icon">
-                                <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/floor.png') }}">
-                                <span>ชั้น {{ $home->number_floors }}</span>
-                            </div>
-                            <div class="box-content-icon">
-                                <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/weekend.png') }}">
-                                <span>ตกแต่ง{{ $home->decoration }}</span>
-                            </div>
-                        </div>
-                        @if ($home->address)
-                            <p class="text-content-dark_100 margin-bottom-8">
-                                <img class="icon-content-2" src="{{ URL::asset('/assets/image/home/location_on.png') }}">
-                                {{ $home->address }} &nbsp; {{ $home->districts_name_th }}&nbsp;
-                                {{ $home->amphures_name_th }} &nbsp; {{ $home->provinces_name_th }}
-                                &nbsp;
-                                {{ $home->zip_code }}
-                            </p>
-                        @endif
-                        @if ($home->url_video)
-                            @php
-                                // รับ URL ของ YouTube
-                                $videoUrl = $home->url_video;
 
-                                // แปลง URL ให้เป็นรูปแบบ embed
-                                $embedUrl = preg_replace(
-                                    '/^https:\/\/www\.youtube\.com\/watch\?v=/',
-                                    'https://www.youtube.com/embed/',
-                                    $videoUrl,
-                                );
-                            @endphp
+
                             <div class="box-highlights top-highlights">
-                                <p class="head-content">Video</p>
-                                <iframe src="{{ $embedUrl }}" height="300" width="100%"
-                                    title="Iframe Example"></iframe>
-                            </div>
-                        @endif
-
-
-
-                        <div class="box-highlights top-highlights">
-                            <p class="head-content">ไฮไลท์อสังหา</p>
-                            <p class="head-content2">รายละเอียด</p>
-                            @if ($home->announcement_name)
-                                <p class="head-content2">{{ $home->announcement_name }}</p>
-                            @endif
-                            <p class="text-content">{!! $home->details !!}</p>
-
-                            @if ($home->rent_sell == 'เช่า')
-                                @include('detall.reall_detall')
-                            @elseif ($home->rent_sell == 'ขาย')
-                                @include('detall.sell_detall')
-                            @elseif ($home->rent_sell == 'เช่า/ขาย')
-                                @include('detall.reall_detall')
-                                @include('detall.sell_detall')
-                            @endif
-                            @if ($home->rent == 'เช่า' && $home->rent_sell != 'เช่าซื้อ/ขายผ่อน')
-                                @include('detall.reall_detall')
-                            @elseif ($home->sell == 'ขาย' && $home->rent_sell != 'เช่าซื้อ/ขายผ่อน')
-                                @include('detall.sell_detall')
-                            @elseif ($home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
-                                @include('detall.reall_detall')
-                                @include('detall.sell_detall')
-                            @endif
-
-
-
-
-                            <p class="head-content">สิ่งอำนวยความสะดวก</p>
-                            <div class="flex-direction-break-word">
-                                @if ($home->kitchen)
-                                    <div class="w-50">
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            ห้องครัว
-                                        </p>
-                                    </div>
+                                <p class="head-content">ไฮไลท์อสังหา</p>
+                                <p class="head-content2">รายละเอียด</p>
+                                @if ($home->announcement_name)
+                                    <p class="head-content2">{{ $home->announcement_name }}</p>
                                 @endif
+                                <p class="text-content">{!! $home->details !!}</p>
 
-                                @if ($home->fitness)
-                                    <div class="w-50">
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            ฟิตเนส
-                                        </p>
-                                    </div>
+                                @if ($home->rent_sell == 'เช่า')
+                                    @include('detall.reall_detall')
+                                @elseif ($home->rent_sell == 'ขาย')
+                                    @include('detall.sell_detall')
+                                @elseif ($home->rent_sell == 'เช่า/ขาย')
+                                    @include('detall.reall_detall')
+                                    @include('detall.sell_detall')
                                 @endif
-                                @if ($home->parking)
-                                    <div class="w-50">
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            ที่จอดรถ
-                                        </p>
-                                    </div>
-                                @endif
-                                @if ($home->bed)
-                                    <div class="w-50">
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            เตียง
-                                        </p>
-                                    </div>
-                                @endif
-                                @if ($home->wardrobe)
-                                    <div class="w-50">
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            ตู้เสื้อผ้า
-                                        </p>
-                                    </div>
-                                @endif
-                                @if ($home->air_conditioner)
-                                    <div class="w-50">
-                                        <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                            <img class="icon-content-2"
-                                                src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                            เครื่องปรับอากาศ
-                                        </p>
-                                    </div>
-                                @endif
-                                @php
-                                    $facilities = json_decode($home->facilities, true);
-                                @endphp
-                                @if (!empty($facilities))
-                                    @foreach ($facilities as $facility)
-                                        <div class="w-50">
-                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                                <img class="icon-content-2"
-                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                                {{ $facility }}
-                                            </p>
-                                        </div>
-                                    @endforeach
+                                @if ($home->rent == 'เช่า' && $home->rent_sell != 'เช่าซื้อ/ขายผ่อน')
+                                    @include('detall.reall_detall')
+                                @elseif ($home->sell == 'ขาย' && $home->rent_sell != 'เช่าซื้อ/ขายผ่อน')
+                                    @include('detall.sell_detall')
+                                @elseif ($home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
+                                    @include('detall.reall_detall')
+                                    @include('detall.sell_detall')
                                 @endif
 
 
 
 
-                            </div>
-                            @php
-                                $electricalAppliances = json_decode($home->electricalAppliance, true);
-                            @endphp
-
-                            @if (!empty($electricalAppliances))
-                                <p class="head-content">เครื่องใช้ไฟฟ้า</p>
+                                <p class="head-content">สิ่งอำนวยความสะดวก</p>
                                 <div class="flex-direction-break-word">
-                                    @foreach ($electricalAppliances as $appliance)
+                                    @if ($home->kitchen)
                                         <div class="w-50">
                                             <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
                                                 <img class="icon-content-2"
                                                     src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                                {{ $appliance }}
+                                                ห้องครัว
                                             </p>
                                         </div>
+                                    @endif
+
+                                    @if ($home->fitness)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                ฟิตเนส
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->parking)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                ที่จอดรถ
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->bed)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                เตียง
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->wardrobe)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                ตู้เสื้อผ้า
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($home->air_conditioner)
+                                        <div class="w-50">
+                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                                <img class="icon-content-2"
+                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                เครื่องปรับอากาศ
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @php
+                                        $facilities = json_decode($home->facilities, true);
+                                    @endphp
+                                    @if (!empty($facilities))
+                                        @foreach ($facilities as $facility)
+                                            <div class="w-50">
+                                                <p rel="noopener noreferrer"
+                                                    class="text-content-dark_100 margin-bottom-8">
+                                                    <img class="icon-content-2"
+                                                        src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                    {{ $facility }}
+                                                </p>
+                                            </div>
+                                        @endforeach
+                                    @endif
+
+
+
+
+                                </div>
+                                @php
+                                    $electricalAppliances = json_decode($home->electricalAppliance, true);
+                                @endphp
+
+                                @if (!empty($electricalAppliances))
+                                    <p class="head-content">เครื่องใช้ไฟฟ้า</p>
+                                    <div class="flex-direction-break-word">
+                                        @foreach ($electricalAppliances as $appliance)
+                                            <div class="w-50">
+                                                <p rel="noopener noreferrer"
+                                                    class="text-content-dark_100 margin-bottom-8">
+                                                    <img class="icon-content-2"
+                                                        src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                    {{ $appliance }}
+                                                </p>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
+
+
+
+                                @php
+                                    $furnitureItems = json_decode($home->furniture, true);
+                                @endphp
+
+                                @if (!empty($furnitureItems))
+                                    <p class="head-content">เฟอร์นิเจอร์</p>
+                                    <div class="flex-direction-break-word">
+                                        @foreach ($furnitureItems as $item)
+                                            <div class="w-50">
+                                                <p rel="noopener noreferrer"
+                                                    class="text-content-dark_100 margin-bottom-8">
+                                                    <img class="icon-content-2"
+                                                        src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                    {{ $item }}
+                                                </p>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
+
+                            </div>
+                            @if ($home->shopping_center)
+                                <div class="box-highlights">
+                                    <p class="head-content">สถานที่สำคัญใกล้เคียง</p>
+                                    @php
+                                        // ตรวจสอบและแก้ไขข้อมูล
+                                        $shoppingCenters = is_array($home->shopping_center)
+                                            ? $home->shopping_center
+                                            : json_decode(str_replace("\n", '', $home->shopping_center), true);
+                                        $schools = is_array($home->school)
+                                            ? $home->school
+                                            : json_decode(str_replace("\n", '', $home->school), true);
+                                    @endphp
+
+                                    {{-- แสดง Shopping Centers --}}
+                                    <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                        <img class="icon-content-2"
+                                            src="{{ URL::asset('/assets/image/welcome/local_mall.png') }}">
+                                        ศูนย์การค้า
+                                    </p>
+                                    @foreach ($shoppingCenters as $shopping_center)
+                                        @if ($shopping_center)
+                                            <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
+
+                                                {{ $shopping_center }}
+                                            </li>
+                                        @endif
                                     @endforeach
+
+                                    {{-- แสดง Schools --}}
+                                    <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                        <img class="icon-content-2"
+                                            src="{{ URL::asset('/assets/image/welcome/school.png') }}">
+                                        สถานศึกษา
+                                    </p>
+                                    @foreach ($schools as $school)
+                                        @if ($school)
+                                            <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
+                                                {{ $school }}
+                                            </li>
+                                        @endif
+                                    @endforeach
+
+
+
+                                    <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
+                                        <img class="icon-content-2"
+                                            src="{{ URL::asset('/assets/image/welcome/storefront.png') }}">
+                                        ร้านสะดวกซื้อ
+                                    </p>
+
+
+                                    @if ($home->meters_store)
+                                        <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
+                                            {{ $home->meters_store }}
+                                        </li>
+                                    @endif
                                 </div>
                             @endif
 
 
+                            @if ($home->thereVarious)
+                                @php
+                                    $thereVarious = json_decode($home->thereVarious, true);
 
-                            @php
-                                $furnitureItems = json_decode($home->furniture, true);
-                            @endphp
-
-                            @if (!empty($furnitureItems))
-                                <p class="head-content">เฟอร์นิเจอร์</p>
+                                @endphp
                                 <div class="flex-direction-break-word">
-                                    @foreach ($furnitureItems as $item)
-                                        <div class="w-50">
-                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                                <img class="icon-content-2"
-                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                                {{ $item }}
-                                            </p>
-                                        </div>
+
+                                    @foreach ($thereVarious as $key => $value)
+                                        @if (strlen($value) > 1)
+                                            <div class="w-50">
+                                                <p rel="noopener noreferrer"
+                                                    class="text-content-dark_100 margin-bottom-8">
+                                                    <img class="icon-content-2"
+                                                        src="{{ URL::asset('/assets/image/home/check.png') }}">
+                                                    {{ $value }}
+                                                </p>
+                                            </div>
+                                        @endif
                                     @endforeach
+
                                 </div>
                             @endif
-
                         </div>
-                        @if ($home->shopping_center)
-                            <div class="box-highlights">
-                                <p class="head-content">สถานที่สำคัญใกล้เคียง</p>
-                                @php
-                                    // ตรวจสอบและแก้ไขข้อมูล
-                                    $shoppingCenters = is_array($home->shopping_center)
-                                        ? $home->shopping_center
-                                        : json_decode(str_replace("\n", '', $home->shopping_center), true);
-                                    $schools = is_array($home->school)
-                                        ? $home->school
-                                        : json_decode(str_replace("\n", '', $home->school), true);
-                                @endphp
-
-                                {{-- แสดง Shopping Centers --}}
-                                <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                    <img class="icon-content-2"
-                                        src="{{ URL::asset('/assets/image/welcome/local_mall.png') }}">
-                                    ศูนย์การค้า
-                                </p>
-                                @foreach ($shoppingCenters as $shopping_center)
-                                    @if ($shopping_center)
-                                        <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
-
-                                            {{ $shopping_center }}
-                                        </li>
-                                    @endif
-                                @endforeach
-
-                                {{-- แสดง Schools --}}
-                                <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                    <img class="icon-content-2"
-                                        src="{{ URL::asset('/assets/image/welcome/school.png') }}">
-                                    สถานศึกษา
-                                </p>
-                                @foreach ($schools as $school)
-                                    @if ($school)
-                                        <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
-                                            {{ $school }}
-                                        </li>
-                                    @endif
-                                @endforeach
-
-
-
-                                <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                    <img class="icon-content-2"
-                                        src="{{ URL::asset('/assets/image/welcome/storefront.png') }}">
-                                    ร้านสะดวกซื้อ
-                                </p>
-
-
-                                @if ($home->meters_store)
-                                    <li rel="noopener noreferrer" class="text-content-dark_000 margin-bottom-8">
-                                        {{ $home->meters_store }}
-                                    </li>
-                                @endif
-                            </div>
-                        @endif
-
-
-                        @if ($home->thereVarious)
-                            @php
-                                $thereVarious = json_decode($home->thereVarious, true);
-
-                            @endphp
-                            <div class="flex-direction-break-word">
-
-                                @foreach ($thereVarious as $key => $value)
-                                    @if (strlen($value) > 1)
-                                        <div class="w-50">
-                                            <p rel="noopener noreferrer" class="text-content-dark_100 margin-bottom-8">
-                                                <img class="icon-content-2"
-                                                    src="{{ URL::asset('/assets/image/home/check.png') }}">
-                                                {{ $value }}
-                                            </p>
+                        <div class="tab-pane fade " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"
+                            tabindex="0">
+                            <div class="align-items-center mt-27 ">
+                                @if ($home->files)
+                                    <a href="{{ url(asset($home->files)) }}" target="_blank" rel="noopener noreferrer">
+                                        <div class="box-contract">
+                                            <img class="icon-content-3"
+                                                src="{{ URL::asset('/assets/image/welcome/article.png') }}">สัญญา
                                         </div>
-                                    @endif
-                                @endforeach
+                                    </a>
+                                @endif
+                                <div class="box-report-property-sold" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    รายงานทรัพย์ขายแล้ว</div>
+
 
                             </div>
-                        @endif
-                    </div>
-                    <div class="tab-pane fade " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"
-                        tabindex="0">
-                        <div class="align-items-center mt-27 ">
-                            @if ($home->files)
-                                <a href="{{ url(asset($home->files)) }}" target="_blank" rel="noopener noreferrer">
-                                    <div class="box-contract">
-                                        <img class="icon-content-3"
-                                            src="{{ URL::asset('/assets/image/welcome/article.png') }}">สัญญา
-                                    </div>
-                                </a>
-                            @endif
-                            <div class="box-report-property-sold" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                รายงานทรัพย์ขายแล้ว</div>
 
-
-                        </div>
-
-                        <p class="contact-owner">พื้นที่ร่าง caption</p>
-                        @php
-                            $dataCap = DB::table('captions')
-                                ->where('id_product', $home->id)
-                                ->where('user_id', Auth::user()->id)
-                                ->first();
-                        @endphp
-                        <form id="multiStepForm" class="multi-step-form" method="POST"
-                            action="{{ route('caption-update', $home->id) }}" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
-                            <div class="mb-4 position-relative">
-                                <textarea class="form-control" id="caption-textarea" name="details" style="min-height: 196px;height: auto;">
+                            <p class="contact-owner">พื้นที่ร่าง caption</p>
+                            @php
+                                $dataCap = DB::table('captions')
+                                    ->where('id_product', $home->id)
+                                    ->where('user_id', Auth::user()->id)
+                                    ->first();
+                            @endphp
+                            <form id="multiStepForm" class="multi-step-form" method="POST"
+                                action="{{ route('caption-update', $home->id) }}" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="mb-4 position-relative">
+                                    <textarea class="form-control" id="caption-textarea" name="details" style="min-height: 196px;height: auto;">
                                     @if ($dataCap)
 {{ $dataCap->details }}
 @endif
                                     </textarea>
-                                <img class="icon-edit2" id="edit2-btn"
-                                    src="{{ URL::asset('/assets/image/welcome/edit2.png') }}">
-                                <img class="icon-edit3" id="icon-edit3"
-                                    src="{{ URL::asset('/assets/image/welcome/content_copy.png') }}">
-                            </div>
-                            <button type="submit" id="submitBtn-textarea" class=" btn btn-primary mb-3"
-                                style="display: none">
-                                {{ __('บันทึก') }}
-                            </button>
-                        </form>
-
-
-                        <p class="contact-owner mb-3">ติดต่อเจ้าของ</p>
-
-
-                        @if (Auth::check())
-                            @php
-
-                                $line = $home->user_link_id ?? $home->make_appointment_location;
-
-                                $facebook = $home->user_facebook ?? $home->make_appointment_location;
-                                $phone = $home->user_phone ?? $home->contact_number;
-
-                                $lineIsUrl = filter_var($line, FILTER_VALIDATE_URL);
-                                $facebookIsUrl = filter_var($facebook, FILTER_VALIDATE_URL);
-                            @endphp
-
-                            @if ($line)
-                                <div class="input_box">
-                                    <input id="down_payment_amount" type="text" class="form-control col-12 r"
-                                        value="{{ $line }}">
-                                    <label style="margin-left: -16px">Line ID </label>
-                                    <div class="position-contact">
-                                        @if ($lineIsUrl)
-                                            <a href="{{ $line }}" class="no-underline" target="_blank"
-                                                rel="noopener noreferrer">
-                                                <img class="ass-icon-line"
-                                                    src="{{ URL::asset('/assets/image/home/line.png') }}">
-                                            </a>
-                                        @else
-                                            <img class="ass-icon-line"
-                                                src="{{ URL::asset('/assets/image/home/line.png') }}"
-                                                onclick="copyLineID()">
-                                            <script>
-                                                function copyLineID() {
-                                                    var lineName = "{{ $line }}";
-                                                    Swal.fire({
-                                                        title: lineName,
-                                                        text: "Line ID" + "\n\nถูกคัดลอกแล้ว!",
-                                                        icon: 'success',
-                                                        /*   showConfirmButton: false,
-                                                          timer: 2000 */
-                                                        showConfirmButton: true, // ปุ่มยืนยันจะไม่หายไปเอง
-                                                        confirmButtonText: 'ปิด', // ข้อความบนปุ่มยืนยัน
-                                                        customClass: {
-                                                            confirmButton: 'swal-btn-down' // ตั้งชื่อคลาสสำหรับปุ่มยืนยัน
-                                                        }
-                                                    });
-                                                    navigator.clipboard.writeText(lineName).then(function() {
-                                                        console.log('Line ID ถูกคัดลอกไปยัง clipboard แล้ว');
-                                                    }, function(err) {
-                                                        console.error('ไม่สามารถคัดลอกข้อความได้:', err);
-                                                    });
-                                                }
-                                            </script>
-                                        @endif
-                                    </div>
+                                    <img class="icon-edit2" id="edit2-btn"
+                                        src="{{ URL::asset('/assets/image/welcome/edit2.png') }}">
+                                    <img class="icon-edit3" id="icon-edit3"
+                                        src="{{ URL::asset('/assets/image/welcome/content_copy.png') }}">
                                 </div>
-                            @endif
+                                <button type="submit" id="submitBtn-textarea" class=" btn btn-primary mb-3"
+                                    style="display: none">
+                                    {{ __('บันทึก') }}
+                                </button>
+                            </form>
 
-                            @if ($facebook && $facebook != $line)
-                                <div class="input_box mt-3">
-                                    <input id="down_payment_amount" type="text" class="form-control col-12 r"
-                                        value="{{ $facebook }}">
-                                    <label style="margin-left: -16px">Facebook </label>
-                                    <div class="position-contact">
-                                        @if ($facebookIsUrl)
-                                            <a href="{{ $facebook }}" target="_blank" rel="noopener noreferrer"
+
+                            <p class="contact-owner mb-3">ติดต่อเจ้าของ</p>
+
+
+                            @if (Auth::check())
+                                @php
+
+                                    $line = $home->user_link_id ?? $home->make_appointment_location;
+
+                                    $facebook = $home->user_facebook ?? $home->make_appointment_location;
+                                    $phone = $home->user_phone ?? $home->contact_number;
+
+                                    $lineIsUrl = filter_var($line, FILTER_VALIDATE_URL);
+                                    $facebookIsUrl = filter_var($facebook, FILTER_VALIDATE_URL);
+                                @endphp
+
+                                @if ($line)
+                                    <div class="input_box">
+                                        <input id="down_payment_amount" type="text" class="form-control col-12 r"
+                                            value="{{ $line }}">
+                                        <label style="margin-left: -16px">Line ID </label>
+                                        <div class="position-contact">
+                                            @if ($lineIsUrl)
+                                                <a href="{{ $line }}" class="no-underline" target="_blank"
+                                                    rel="noopener noreferrer">
+                                                    <img class="ass-icon-line"
+                                                        src="{{ URL::asset('/assets/image/home/line.png') }}">
+                                                </a>
+                                            @else
+                                                <img class="ass-icon-line"
+                                                    src="{{ URL::asset('/assets/image/home/line.png') }}"
+                                                    onclick="copyLineID()">
+                                                <script>
+                                                    function copyLineID() {
+                                                        var lineName = "{{ $line }}";
+                                                        Swal.fire({
+                                                            title: lineName,
+                                                            text: "Line ID" + "\n\nถูกคัดลอกแล้ว!",
+                                                            icon: 'success',
+                                                            /*   showConfirmButton: false,
+                                                              timer: 2000 */
+                                                            showConfirmButton: true, // ปุ่มยืนยันจะไม่หายไปเอง
+                                                            confirmButtonText: 'ปิด', // ข้อความบนปุ่มยืนยัน
+                                                            customClass: {
+                                                                confirmButton: 'swal-btn-down' // ตั้งชื่อคลาสสำหรับปุ่มยืนยัน
+                                                            }
+                                                        });
+                                                        navigator.clipboard.writeText(lineName).then(function() {
+                                                            console.log('Line ID ถูกคัดลอกไปยัง clipboard แล้ว');
+                                                        }, function(err) {
+                                                            console.error('ไม่สามารถคัดลอกข้อความได้:', err);
+                                                        });
+                                                    }
+                                                </script>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if ($facebook && $facebook != $line)
+                                    <div class="input_box mt-3">
+                                        <input id="down_payment_amount" type="text" class="form-control col-12 r"
+                                            value="{{ $facebook }}">
+                                        <label style="margin-left: -16px">Facebook </label>
+                                        <div class="position-contact">
+                                            @if ($facebookIsUrl)
+                                                <a href="{{ $facebook }}" target="_blank" rel="noopener noreferrer"
+                                                    class="no-underline">
+                                                    <img class="ass-icon-line"
+                                                        src="{{ URL::asset('/assets/image/home/facbook.png') }}">
+                                                </a>
+                                            @else
+                                                <img class="ass-icon-line"
+                                                    src="{{ URL::asset('/assets/image/home/facbook.png') }}"
+                                                    onclick="copyFacebookID()">
+                                                <script>
+                                                    function copyFacebookID() {
+                                                        var fbName = "{{ $facebook }}";
+                                                        Swal.fire({
+                                                            title: fbName,
+                                                            text: "Facebook ID" + "\n\nถูกคัดลอกแล้ว!",
+                                                            icon: 'success',
+                                                            showConfirmButton: true, // ปุ่มยืนยันจะไม่หายไปเอง
+                                                            confirmButtonText: 'ปิด', // ข้อความบนปุ่มยืนยัน
+                                                            customClass: {
+                                                                confirmButton: 'swal-btn-down' // ตั้งชื่อคลาสสำหรับปุ่มยืนยัน
+                                                            }
+                                                        });
+                                                        navigator.clipboard.writeText(fbName).then(function() {
+                                                            console.log('Facebook ID ถูกคัดลอกไปยัง clipboard แล้ว');
+                                                        }, function(err) {
+                                                            console.error('ไม่สามารถคัดลอกข้อความได้:', err);
+                                                        });
+                                                    }
+                                                </script>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if ($phone)
+                                    <div class="input_box mt-3">
+                                        <input id="down_payment_amount" type="text" class="form-control col-12 r"
+                                            value="{{ $phone }}">
+                                        <label style="margin-left: -16px">Phone </label>
+                                        <div class="position-contact">
+                                            <a href="tel:{{ $phone }}" rel="noopener noreferrer"
                                                 class="no-underline">
                                                 <img class="ass-icon-line"
-                                                    src="{{ URL::asset('/assets/image/home/facbook.png') }}">
+                                                    src="{{ URL::asset('/assets/image/home/thone.png') }}">
                                             </a>
-                                        @else
-                                            <img class="ass-icon-line"
-                                                src="{{ URL::asset('/assets/image/home/facbook.png') }}"
-                                                onclick="copyFacebookID()">
-                                            <script>
-                                                function copyFacebookID() {
-                                                    var fbName = "{{ $facebook }}";
-                                                    Swal.fire({
-                                                        title: fbName,
-                                                        text: "Facebook ID" + "\n\nถูกคัดลอกแล้ว!",
-                                                        icon: 'success',
-                                                        showConfirmButton: true, // ปุ่มยืนยันจะไม่หายไปเอง
-                                                        confirmButtonText: 'ปิด', // ข้อความบนปุ่มยืนยัน
-                                                        customClass: {
-                                                            confirmButton: 'swal-btn-down' // ตั้งชื่อคลาสสำหรับปุ่มยืนยัน
-                                                        }
-                                                    });
-                                                    navigator.clipboard.writeText(fbName).then(function() {
-                                                        console.log('Facebook ID ถูกคัดลอกไปยัง clipboard แล้ว');
-                                                    }, function(err) {
-                                                        console.error('ไม่สามารถคัดลอกข้อความได้:', err);
-                                                    });
-                                                }
-                                            </script>
-                                        @endif
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
+                            @else
                             @endif
 
-                            @if ($phone)
-                                <div class="input_box mt-3">
-                                    <input id="down_payment_amount" type="text" class="form-control col-12 r"
-                                        value="{{ $phone }}">
-                                    <label style="margin-left: -16px">Phone </label>
-                                    <div class="position-contact">
-                                        <a href="tel:{{ $phone }}" rel="noopener noreferrer"
-                                            class="no-underline">
-                                            <img class="ass-icon-line"
-                                                src="{{ URL::asset('/assets/image/home/thone.png') }}">
-                                        </a>
-                                    </div>
-                                </div>
-                            @endif
-                        @else
-                        @endif
-
+                        </div>
                     </div>
                 </div>
             </div>
-    </div>
     </div>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
