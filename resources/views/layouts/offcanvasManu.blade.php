@@ -110,8 +110,7 @@
 
     <div class="offcanvas-body">
         <a class="dropdown-item" href="{{ route('logout') }}"
-            onclick="event.preventDefault();
-     document.getElementById('logout-form').submit();">
+            onclick="event.preventDefault(); localStorage.setItem('activeTabHome', 'home-tab'); document.getElementById('logout-form').submit();">
             <img class="icon-account-manu" src="{{ URL::asset('/assets/image/welcome/logout.png') }}">
             {{ __('Logout') }}
         </a>
