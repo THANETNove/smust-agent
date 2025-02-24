@@ -108,7 +108,7 @@
                     $formattedPrice = number_format($priceString / 1000000, 1) . ' ล้าน';
                     $price_sell = $formattedPrice;
                 } else {
-                    $price_sell = number_format($que->sell_price) . ' บาท';
+                    $price_sell = number_format($que->sell_price) . ' /m';
                 }
                 $rental_ = $que->rental_price;
                 $rental_String = (string) $rental_;
@@ -117,7 +117,7 @@
                     $formatted_rental = number_format($rental_String / 1000000, 1) . ' ล้าน';
                     $rental_price = $formatted_rental;
                 } else {
-                    $rental_price = number_format($que->rental_price) . ' บาท';
+                    $rental_price = number_format($que->rental_price) . ' /m';
                 }
 
                 $imgUrl = json_decode(htmlspecialchars_decode($que->image));
@@ -143,7 +143,7 @@
                 </div>
                 <button class="prev-btn2" onclick="changeImage(event, -1)">
                     <span>
-                        < </span>
+                    </span>
                 </button>
                 @foreach ($imgUrl as $index => $image)
                     <img class="sliderImage" src="{{ URL::asset('img/product/' . $image) }}" loading="lazy" alt="Slide"
@@ -160,19 +160,13 @@
 
                     <div class="box-width-rent-sell">
                         <div class="box-price-new-we">
-                            @if (($que->sell_price && $que->rent_sell == 'เช่า/ขาย') || $que->rent_sell == 'เช่าซื้อ/ขายผ่อน')
-                                <p class="price-new-we">฿
-                                    {{ number_format($que->rental_price) }}/m
+
+                            @if ($que->rental_price > 0)
+                                <p class="price-new-we">฿ {{ $rental_price }}
                                 </p>
-                                <p class="price-new-we">฿ {{ $price_sell }}</p>
-                            @else
-                                @if (($que->rental_price && $que->rent_sell == 'เช่า') || $que->rent == 'เช่า')
-                                    <p class="price-new-we">฿ {{ number_format($que->rental_price) }}/m
-                                    </p>
-                                @endif
-                                @if (($que->sell_price && $que->rent_sell == 'ขาย') || $que->sell == 'ขาย')
-                                    <p class="price-new-we">฿{{ $price_sell }}</p>
-                                @endif
+                            @endif
+                            @if ($que->sell_price > 0)
+                                <p class="price-new-we">฿{{ $price_sell }}</p>
                             @endif
                         </div>
                     </div>

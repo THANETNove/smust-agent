@@ -138,6 +138,26 @@
 
                     @php
                         $createdAt = \Carbon\Carbon::parse($home->created_at);
+
+                        $price = $home->sell_price;
+                        $priceString = (string) $price;
+                        if (strlen($priceString) > 6) {
+                            $priceString = str_replace(',', '', $priceString);
+                            $formattedPrice = number_format($priceString / 1000000, 1) . ' ล้าน';
+                            $price_sell = $formattedPrice;
+                        } else {
+                            $price_sell = number_format($home->sell_price) . ' /m';
+                        }
+                        $rental_ = $home->rental_price;
+                        $rental_String = (string) $rental_;
+                        if (strlen($rental_String) > 6) {
+                            $rental_String = str_replace(',', '', $rental_String);
+                            $formatted_rental = number_format($rental_String / 1000000, 1) . ' ล้าน';
+                            $rental_price = $formatted_rental;
+                        } else {
+                            $rental_price = number_format($home->rental_price) . ' /m';
+                        }
+
                     @endphp
                     <p class="period-text mt-align-condo">โพสเมื่อ:
                         @if ($createdAt->isToday())
@@ -148,21 +168,13 @@
                     </p>
 
 
-                    @if ($home->rent_sell == 'เช่า/ขาย' || $home->rent_sell == 'เช่าซื้อ/ขายผ่อน')
-                        <p class="rent-sell-wel-price">฿ {{ number_format($home->rental_price) }}/m</p>
-                        <p class="rent-sell-wel-price" style="margin-top: -8px">฿ {{ number_format($home->sell_price) }}
-                            บาท</p>
-                    @else
-                        @if ($home->rent_sell == 'เช่า' || $home->rent == 'เช่า')
-                            <p class="rent-sell-wel-price">฿ {{ number_format($home->rental_price) }}/m</p>
-                        @endif
-                        @if ($home->rent_sell == 'ขาย' || $home->sell == 'ขาย')
-                            <p class="rent-sell-wel-price"
-                                @if ($home->rent_sell == 'เช่า' || $home->rent == 'เช่า') style="margin-top: -8px" @endif>฿
-                                {{ number_format($home->sell_price) }} บาท</p>
-                        @endif
+                    @if ($home->rental_price > 0)
+                        <p class="rent-sell-wel-price">฿ {{ $rental_price }}</p>
                     @endif
-
+                    @if ($home->sell_price > 0)
+                        <p class="rent-sell-wel-price" @if ($home->sell_price > 0) style="margin-top: -8px" @endif>฿
+                            {{ $price_sell }}</p>
+                    @endif
 
                     <p class="name-details">
                         <img class="img-icon " src="{{ URL::asset('/assets/image/home/location_on.png') }}">

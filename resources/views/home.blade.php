@@ -140,19 +140,12 @@
 
                                             <div class="box-price-new">
 
-                                                @if (($home2->sell_price && $home2->rent_sell == 'เช่า/ขาย') || $home2->rent_sell == 'เช่าซื้อ/ขายผ่อน')
-                                                    <p class="price-new">฿
-                                                        {{ number_format($home2->rental_price) }}/m
+                                                @if ($home2->rental_price > 0)
+                                                    <p class="price-new">฿ {{ $rental_price }}
                                                     </p>
-                                                    <p class="price-new price-top-sell2">฿ {{ $price_sell }}</p>
-                                                @else
-                                                    @if (($home2->rental_price && $home2->rent_sell == 'เช่า') || $home2->rent == 'เช่า')
-                                                        <p class="price-new">฿ {{ number_format($home2->rental_price) }}/m
-                                                        </p>
-                                                    @endif
-                                                    @if (($home2->sell_price && $home2->rent_sell == 'ขาย') || $home2->sell == 'ขาย')
-                                                        <p class="price-new">฿{{ $price_sell }}</p>
-                                                    @endif
+                                                @endif
+                                                @if ($home2->sell_price > 0)
+                                                    <p class="price-new">฿{{ $price_sell }}</p>
                                                 @endif
 
 
@@ -227,7 +220,7 @@
                                                 $formattedPrice = number_format($priceString / 1000000, 1) . ' ล้าน';
                                                 $price_sell = $formattedPrice;
                                             } else {
-                                                $price_sell = number_format($home2->sell_price) . ' บาท';
+                                                $price_sell = number_format($home2->sell_price) . ' /m';
                                             }
                                             $rental_ = $home2->rental_price;
                                             $rental_String = (string) $rental_;
@@ -237,7 +230,7 @@
                                                     number_format($rental_String / 1000000, 1) . ' ล้าน';
                                                 $rental_price = $formatted_rental;
                                             } else {
-                                                $rental_price = number_format($home2->rental_price) . ' บาท';
+                                                $rental_price = number_format($home2->rental_price) . ' /m';
                                             }
                                         @endphp
 
@@ -266,19 +259,12 @@
 
                                             <div class="box-price-new">
 
-                                                @if (($home2->sell_price && $home2->rent_sell == 'เช่า/ขาย') || $home2->rent_sell == 'เช่าซื้อ/ขายผ่อน')
-                                                    <p class="price-new">฿
-                                                        {{ number_format($home2->rental_price) }}/m
+                                                @if ($home2->rental_price > 0)
+                                                    <p class="price-new">฿ {{ $rental_price }}
                                                     </p>
-                                                    <p class="price-new price-top-sell2">฿ {{ $price_sell }}</p>
-                                                @else
-                                                    @if (($home2->rental_price && $home2->rent_sell == 'เช่า') || $home2->rent == 'เช่า')
-                                                        <p class="price-new">฿ {{ number_format($home2->rental_price) }}/m
-                                                        </p>
-                                                    @endif
-                                                    @if (($home2->sell_price && $home2->rent_sell == 'ขาย') || $home2->sell == 'ขาย')
-                                                        <p class="price-new">฿{{ $price_sell }}</p>
-                                                    @endif
+                                                @endif
+                                                @if ($home2->sell_price > 0)
+                                                    <p class="price-new">฿{{ $price_sell }}</p>
                                                 @endif
 
 

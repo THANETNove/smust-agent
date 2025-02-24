@@ -146,11 +146,16 @@ class WelcomeController extends Controller
                 $priceRange = $request->input('price_range');
                 if (strpos($priceRange, '-') !== false) {
                     [$minPrice, $maxPrice] = explode('-', $priceRange);
-                    $dataHomeQuery->whereBetween('rent_sell_home_details.rental_price', [$minPrice, $maxPrice]);
+
+                    $dataHomeQuery->where(function ($query) use ($minPrice, $maxPrice) {
+                        $query->whereBetween('rent_sell_home_details.rent_sell', [$minPrice, $maxPrice])
+                            ->orWhereBetween('rent_sell_home_details.rental_price', [$minPrice, $maxPrice]);
+                    });
                 } elseif ($priceRange == '10000001') {
                     // ราคาเช่าเกิน 10 ล้าน
                     $dataHomeQuery->where('rent_sell_home_details.rental_price', '>', 10000000);
                 } else {
+
                     // น้อยกว่า 10,000 บาท
                     $dataHomeQuery->where('rent_sell_home_details.rental_price', '<', 10000);
                 }
