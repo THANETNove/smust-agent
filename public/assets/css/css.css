@@ -3971,6 +3971,13 @@ button.disabled {
     margin-right: 16px;
 }
 
+.btn-box-profile-icon-line-2 {
+    width: 26px;
+    height: 26px;
+    margin-right: 16px;
+    cursor: pointer;
+}
+
 .interested-contact-pro {
     border: 1px solid #007BA7;
     background: #FAFAFA;

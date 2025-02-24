@@ -173,10 +173,108 @@
                                         src="{{ URL::asset('/assets/image/welcome/explore_nearby-pro.png') }}">
                                     {{ $fav->provinces }}
                                 </p>
-                                <p class="text-content-dark_000 text-center">
-                                    ผู้เชี่ยวชาญให้คำปรึกษาเรื่อง {{ $fav->property_type }}
-                                    เชี่ยวชาญในย่าน {{ $fav->provinces }}
-                                </p>
+
+
+                                <div style="padding-left: 32px;padding-right: 32px;">
+                                    <p class="text-content-dark_000 ">
+                                        ผู้เชี่ยวชาญให้คำปรึกษาเรื่อง {{ $fav->property_type }}
+                                        เชี่ยวชาญในย่าน {{ $fav->provinces }}
+                                    </p>
+                                    <p class="text-content-dark_000 ">
+                                        ผู้เชี่ยวชาญให้คำปรึกษาเรื่อง {{ $fav->property_type }}
+                                        เชี่ยวชาญในย่าน {{ $fav->provinces }}
+                                    </p>
+                                    <p style="display: flex; align-items: flex-start;"> <img class="contract"
+                                            src="{{ URL::asset('/assets/image/welcome/contract.png') }}">
+                                        ประเภทสัญญา:
+                                        {{ $fav->contract_type }}
+                                    </p>
+                                    <p style="display: flex; align-items: flex-start;"> <img class="contract"
+                                            src="{{ URL::asset('/assets/image/welcome/domain.png') }}">
+                                        ประเภททรัพย์: {{ $fav->property_type }}
+                                    </p>
+                                    <p style="display: flex; align-items: flex-start;"> <img class="contract"
+                                            src="{{ URL::asset('/assets/image/welcome/domain.png') }}">
+                                        ลักษณะเฉพาะ: {{ $fav->characteristics }}
+                                    </p>
+
+                                    <div style="margin-top: 16px;">
+                                        @php
+                                            $lineIsUrl = filter_var($fav->line_id, FILTER_VALIDATE_URL);
+                                            $facebookIsUrl = filter_var($fav->facebook_id, FILTER_VALIDATE_URL);
+                                        @endphp
+                                        @if ($fav->line_id)
+                                            <a
+                                                @if ($lineIsUrl) href="{{ $fav->line_id }}"  target="_blank" @else onclick="copyLineID()" @endif>
+                                                <img class="btn-box-profile-icon-line-2"
+                                                    src="{{ URL::asset('/assets/image/home/line.png') }}">
+                                            </a>
+
+
+                                            <script>
+                                                function copyLineID() {
+                                                    var lineName = "{{ $fav->line_id }}";
+                                                    Swal.fire({
+                                                        title: lineName,
+                                                        text: "Line ID" + "\n\nถูกคัดลอกแล้ว!",
+                                                        icon: 'success',
+                                                        /*   showConfirmButton: false,
+                                                          timer: 2000 */
+                                                        showConfirmButton: true, // ปุ่มยืนยันจะไม่หายไปเอง
+                                                        confirmButtonText: 'ปิด', // ข้อความบนปุ่มยืนยัน
+                                                        customClass: {
+                                                            confirmButton: 'swal-btn-down' // ตั้งชื่อคลาสสำหรับปุ่มยืนยัน
+                                                        }
+                                                    });
+                                                    navigator.clipboard.writeText(lineName).then(function() {
+                                                        console.log('Line ID ถูกคัดลอกไปยัง clipboard แล้ว');
+                                                    }, function(err) {
+                                                        console.error('ไม่สามารถคัดลอกข้อความได้:', err);
+                                                    });
+                                                }
+                                            </script>
+                                        @endif
+
+                                        @if ($fav->facebook_id)
+                                            <a
+                                                @if ($facebookIsUrl) href="{{ $fav->facebook_id }}" target="_blank" @else onclick="copyFacebookID()" @endif>
+                                                <img class="btn-box-profile-icon-line-2"
+                                                    src="{{ URL::asset('/assets/image/home/facbook.png') }}">
+                                            </a>
+
+                                            <script>
+                                                function copyFacebookID() {
+                                                    var fbName = "{{ $fav->facebook_id }}";
+                                                    Swal.fire({
+                                                        title: fbName,
+                                                        text: "Facebook ID" + "\n\nถูกคัดลอกแล้ว!",
+                                                        icon: 'success',
+                                                        showConfirmButton: true, // ปุ่มยืนยันจะไม่หายไปเอง
+                                                        confirmButtonText: 'ปิด', // ข้อความบนปุ่มยืนยัน
+                                                        customClass: {
+                                                            confirmButton: 'swal-btn-down' // ตั้งชื่อคลาสสำหรับปุ่มยืนยัน
+                                                        }
+                                                    });
+                                                    navigator.clipboard.writeText(fbName).then(function() {
+                                                        console.log('Facebook ID ถูกคัดลอกไปยัง clipboard แล้ว');
+                                                    }, function(err) {
+                                                        console.error('ไม่สามารถคัดลอกข้อความได้:', err);
+                                                    });
+                                                }
+                                            </script>
+                                        @endif
+
+                                        @if ($fav->phone)
+                                            <a href="tel:{{ $fav->phone }}" target="_blank" rel="noopener noreferrer">
+
+                                                <img class="btn-box-profile-icon-line-2"
+                                                    src="{{ URL::asset('/assets/image/home/call2.png') }}">
+                                                <span style="margin-left: -8px">Tel: {{ $fav->phone }}</span>
+
+                                            </a>
+                                        @endif
+                                    </div>
+                                </div>
                                 <!-- โค้ดเพิ่มเติมสำหรับข้อมูลของ Modal -->
                             </div>
                         </div>

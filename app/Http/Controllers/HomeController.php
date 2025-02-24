@@ -7,11 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
-
-
-
-
-
+use PHPUnit\TextUI\Configuration\Php;
 
 class HomeController extends Controller
 {
@@ -103,8 +99,11 @@ class HomeController extends Controller
                         }
                     }
                 }
-                if ($request->has('sale_rent')) {
+                if ($request->has('sale_rent') || $request->has('price_range')) {
+
+
                     $priceRange = $request->input('price_range');
+
 
                     if ($request->input('sale_rent') == 'sale') {
                         $dataHomeQuery->where(function ($query) {
