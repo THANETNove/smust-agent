@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\RentSellHomeDetails;
 use App\Models\User;
+use App\Models\Favorite;
+
 
 class CoAgentController extends Controller
 {
@@ -275,6 +277,19 @@ class CoAgentController extends Controller
             $member->files = $filePaths;
         }
         $member->save();
+
+        // plans
+
+        if (Auth::check() && Auth::user()->plans == 2) {
+            $newFavorite = new Favorite;
+            $newFavorite->user_id = Auth::user()->id; // add
+
+            $newFavorite->id_product = $member->id;
+            $newFavorite->status_favorites = 1;
+            $newFavorite->status = 0;
+            $newFavorite->save();
+        }
+
 
         $countUser = DB::table('users')->count();
         /*   dd($member); */
