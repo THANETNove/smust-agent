@@ -426,7 +426,6 @@ class WelcomeController extends Controller
 
 
 
-
         $provinces = Cache::remember('provinces', 60 * 60, function () {
             return DB::table('provinces')->pluck('name_th', 'id');
         });
@@ -439,12 +438,33 @@ class WelcomeController extends Controller
             return DB::table('districts')->pluck('name_th', 'id');
         });
 
+        $userId = DB::table('users')->where('code', $userQuery[0]->code)->value('id');
+        $favoritesProductIds = DB::table('favorites')
+            ->where('status_favorites', 1)
+            ->where('user_id', $userId)
+            ->pluck('id_product') // ดึงแค่ค่า id_product
+            ->toArray(); // แปลงเป็น array
+
+
         $welcomeQuery = DB::table('rent_sell_home_details')
-            ->where('rent_sell_home_details.code_admin', $userQuery[0]->code)
             ->where('rent_sell_home_details.status_home', 'on')
-            /*             ->join('provinces', 'rent_sell_home_details.provinces', '=', 'provinces.id')
-            ->join('amphures', 'rent_sell_home_details.districts', '=', 'amphures.id')
-            ->join('districts', 'rent_sell_home_details.amphures', '=', 'districts.id') */
+            ->where(function ($query) use ($favoritesProductIds, $userQuery) {
+                if (!empty($favoritesProductIds)) {
+                    // ดึงเฉพาะรายการที่อยู่ใน Favorites
+                    $query->whereIn('rent_sell_home_details.id', $favoritesProductIds);
+                }
+
+                if (!empty($userQuery[0]->code)) {
+                    // กรอง ID ที่อยู่ใน Favorites ออก ก่อนดึงรายการที่มี code_admin ตรงกัน
+                    $query->orWhere(function ($subQuery) use ($favoritesProductIds, $userQuery) {
+                        $subQuery->where('rent_sell_home_details.code_admin', $userQuery[0]->code);
+
+                        if (!empty($favoritesProductIds)) {
+                            $subQuery->whereNotIn('rent_sell_home_details.id', $favoritesProductIds);
+                        }
+                    });
+                }
+            })
             ->select(
                 'rent_sell_home_details.*'
             )
@@ -460,6 +480,13 @@ class WelcomeController extends Controller
 
 
 
+
+
+
+        // นับเฉพาะรายการที่มี id_product อยู่ใน favorites
+
+
+
         $countSellQuery = DB::table('rent_sell_home_details')
             ->where('rent_sell_home_details.code_admin', $userQuery[0]->code)
             ->where('rent_sell_home_details.status_home', 'on')
@@ -467,6 +494,18 @@ class WelcomeController extends Controller
                 $query->where('rent_sell_home_details.rent_sell', "ขาย")
                     ->orWhere('rent_sell_home_details.sell', "ขาย");
             })
+            ->when(!empty($favoritesProductIds), function ($query) use ($favoritesProductIds) {
+                return $query->whereNotIn('rent_sell_home_details.id', $favoritesProductIds);
+            }) // เอา ID ที่อยู่ใน Favorites ออกไป
+            ->count();
+
+        $countSellQueryFavorites = DB::table('rent_sell_home_details')
+            ->where('rent_sell_home_details.status_home', 'on')
+            ->where(function ($query) {
+                $query->where('rent_sell_home_details.rent_sell', "ขาย")
+                    ->orWhere('rent_sell_home_details.sell', "ขาย");
+            })
+            ->whereIn('rent_sell_home_details.id', $favoritesProductIds) // เช็คว่ามีอยู่ใน favorites หรือไม่
             ->count();
 
         $countRentQuery = DB::table('rent_sell_home_details')
@@ -476,6 +515,17 @@ class WelcomeController extends Controller
                 $query->where('rent_sell_home_details.rent_sell', "เช่า")
                     ->orWhere('rent_sell_home_details.rent', "เช่า");
             })
+            ->when(!empty($favoritesProductIds), function ($query) use ($favoritesProductIds) {
+                return $query->whereNotIn('rent_sell_home_details.id', $favoritesProductIds);
+            }) // เอา ID ที่อยู่ใน Favorites ออกไป
+            ->count();
+        $countRentQueryFavorites = DB::table('rent_sell_home_details')
+            ->where('rent_sell_home_details.status_home', 'on')
+            ->where(function ($query) {
+                $query->where('rent_sell_home_details.rent_sell', "เช่า")
+                    ->orWhere('rent_sell_home_details.rent', "เช่า");
+            })
+            ->whereIn('rent_sell_home_details.id', $favoritesProductIds) // เช็คว่ามีอยู่ใน favorites หรือไม่
             ->count();
 
         $countSellRentQuery = DB::table('rent_sell_home_details')
@@ -485,10 +535,22 @@ class WelcomeController extends Controller
                 $query->where('rent_sell_home_details.rent_sell', "เช่าซื้อ/ขายผ่อน")
                     ->orWhere('rent_sell_home_details.rent_sell', "เช่า/ขาย");
             })
+            ->when(!empty($favoritesProductIds), function ($query) use ($favoritesProductIds) {
+                return $query->whereNotIn('rent_sell_home_details.id', $favoritesProductIds);
+            }) // เอา ID ที่อยู่ใน Favorites ออกไป
             ->count();
 
-        $countRent =  $countRentQuery + $countSellRentQuery;
-        $countSell =  $countSellQuery + $countSellRentQuery;
+        $countSellRentQueryFavorites = DB::table('rent_sell_home_details')
+            ->where('rent_sell_home_details.status_home', 'on')
+            ->where(function ($query) {
+                $query->where('rent_sell_home_details.rent_sell', "เช่าซื้อ/ขายผ่อน")
+                    ->orWhere('rent_sell_home_details.rent_sell', "เช่า/ขาย");
+            })
+            ->whereIn('rent_sell_home_details.id', $favoritesProductIds) // เช็คว่ามีอยู่ใน favorites หรือไม่
+            ->count();
+
+        $countRent =  $countRentQuery + $countSellRentQuery + $countRentQueryFavorites + $countSellRentQueryFavorites;
+        $countSell =  $countSellQuery + $countSellRentQuery + $countSellQueryFavorites + $countSellRentQueryFavorites;
 
         $postQuery = DB::table('post_contents')
             ->where('user_id', $id)
@@ -530,14 +592,39 @@ class WelcomeController extends Controller
             return DB::table('districts')->pluck('name_th', 'id');
         });
 
+        $userId = DB::table('users')->where('code', $userQuery[0]->code)->value('id');
+        $favoritesProductIds = DB::table('favorites')
+            ->where('status_favorites', 1)
+            ->where('user_id', $userId)
+            ->pluck('id_product')
+            ->toArray(); // แปลงเป็น array
+
         $welcomeQuery = DB::table('rent_sell_home_details')
-            ->where('rent_sell_home_details.code_admin', $userQuery[0]->code)
             ->where('rent_sell_home_details.status_home', 'on')
-            ->select(
-                'rent_sell_home_details.*'
-            )
+            ->where(function ($query) use ($favoritesProductIds, $userQuery) {
+                if (!empty($favoritesProductIds)) {
+                    // ดึงเฉพาะรายการที่อยู่ใน Favorites
+                    $query->whereIn('rent_sell_home_details.id', $favoritesProductIds);
+                }
+
+                if (!empty($userQuery[0]->code)) {
+                    // กรอง ID ที่อยู่ใน Favorites ออก ก่อนดึงรายการที่มี code_admin ตรงกัน
+                    $query->orWhere(function ($subQuery) use ($favoritesProductIds, $userQuery) {
+                        $subQuery->where('rent_sell_home_details.code_admin', $userQuery[0]->code);
+
+                        if (!empty($favoritesProductIds)) {
+                            $subQuery->whereNotIn('rent_sell_home_details.id', $favoritesProductIds);
+                        }
+                    });
+                }
+            })
+            ->select('rent_sell_home_details.*')
             ->orderBy('rent_sell_home_details.id', 'DESC')
             ->paginate(100);
+
+
+
+
         if ($welcomeQuery instanceof \Illuminate\Pagination\LengthAwarePaginator) {
             $welcomeQuery->getCollection()->transform(function ($item) use ($provinces, $amphures, $districts) {
                 $item->provinces_name_th = $provinces[$item->provinces] ?? null;
@@ -589,12 +676,22 @@ class WelcomeController extends Controller
             return DB::table('districts')->pluck('name_th', 'id');
         });
 
+        $userId = DB::table('users')->where('code', $userQuery[0]->code)->value('id');
+        $favoritesProductIds = DB::table('favorites')
+            ->where('status_favorites', 1)
+            ->where('user_id', $userId)
+            ->pluck('id_product')
+            ->toArray(); // แปลงเป็น array
+
         $welcomeQuery = DB::table('rent_sell_home_details')
-            ->where('rent_sell_home_details.code_admin', $userQuery[0]->code)
             ->where('rent_sell_home_details.status_home', 'on')
-            ->select(
-                'rent_sell_home_details.*'
-            );
+            ->when(!empty($favoritesProductIds), function ($query) use ($favoritesProductIds) {
+                return $query->whereIn('rent_sell_home_details.id', $favoritesProductIds);
+            }, function ($query) use ($userQuery) {
+                return $query->where('rent_sell_home_details.code_admin', $userQuery[0]->code);
+            })
+            ->select('rent_sell_home_details.*');
+
         if ($request->all()) {
 
             //! คันหา
