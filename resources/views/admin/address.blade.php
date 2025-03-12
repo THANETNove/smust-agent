@@ -4,8 +4,9 @@
         $("#provinces-id").change(function() {
             var selectedProvinceId = $(this).val();
 
+            console.log("selectedProvinceId", selectedProvinceId);
 
- 
+
 
             if (document.getElementById('stations-name')) {
                 document.getElementById('stations-name').value = null;
@@ -13,7 +14,8 @@
             const stationSelect = document.getElementById('station-select');
 
             if (stationSelect) { // Check if stationSelect exists
-                if (selectedProvinceId == '1') {
+                if (selectedProvinceId == '1' || selectedProvinceId == '2' || selectedProvinceId ==
+                    '3' || selectedProvinceId == '4') {
                     stationSelect.style.display = 'block';
                 } else {
                     stationSelect.style.display = 'none';
@@ -24,7 +26,7 @@
                     }
                 }
             }
-
+            // นทบุรี ปทุมธานี สมุทรปราการ
 
 
             // ตรวจสอบว่าเลือก "จังหวัด" ให้ค่าไม่ใช่ค่าเริ่มต้น
